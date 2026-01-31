@@ -1,3 +1,4 @@
+// Synonym/Antonym Hide Mode Implementation
 type HideMode = 'none' | 'word' | 'meaning' | 'synonyms';
 
 interface StudyControlsProps {
