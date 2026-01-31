@@ -24,7 +24,7 @@ export function StudyControls({
         { value: 'none', label: '전체 보기' },
         { value: 'word', label: '단어 가리기' },
         { value: 'meaning', label: '뜻 가리기' },
-        { value: 'synonyms', label: '유의어 가리기' },
+        { value: 'synonyms', label: '유의어/반의어 가리기' },
     ];
 
     const isFirst = currentIndex === 0;
