@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Word } from '../../types';
 
 interface QuizChoiceProps {
@@ -7,18 +7,66 @@ interface QuizChoiceProps {
     onAnswer: (answer: string, isCorrect: boolean) => void;
 }
 
+const TIMER_DURATION = 10; // 10초
+
 export function QuizChoice({ word, options, onAnswer }: QuizChoiceProps) {
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [showResult, setShowResult] = useState(false);
+    const [timeLeft, setTimeLeft] = useState(TIMER_DURATION);
+    const [isTimeout, setIsTimeout] = useState(false);
+    const timerRef = useRef<number | null>(null);
 
+    // 타이머 정리 함수
+    const clearTimer = useCallback(() => {
+        if (timerRef.current) {
+            clearInterval(timerRef.current);
+            timerRef.current = null;
+        }
+    }, []);
+
+    // 시간 초과 처리
+    const handleTimeout = useCallback(() => {
+        clearTimer();
+        setIsTimeout(true);
+        setShowResult(true);
+        playWrongSound();
+
+        setTimeout(() => {
+            onAnswer("", false); // 오답으로 처리
+        }, 1500);
+    }, [clearTimer, onAnswer]);
+
+    // 타이머 시작/리셋
     useEffect(() => {
         setSelectedOption(null);
         setShowResult(false);
-    }, [word.id]);
+        setTimeLeft(TIMER_DURATION);
+        setIsTimeout(false);
+        clearTimer();
+
+        timerRef.current = window.setInterval(() => {
+            setTimeLeft((prev) => {
+                if (prev <= 1) {
+                    return 0;
+                }
+                return prev - 1;
+            });
+        }, 1000);
+
+        return () => clearTimer();
+    }, [word.id, clearTimer]);
+
+    // 시간이 0이 되면 타임아웃 처리
+    useEffect(() => {
+        if (timeLeft === 0 && !showResult) {
+            handleTimeout();
+        }
+    }, [timeLeft, showResult, handleTimeout]);
 
     const handleSelect = (option: string) => {
         if (showResult) return;
 
+        clearTimer(); // 답변 선택 시 타이머 중지
         setSelectedOption(option);
         setShowResult(true);
 
@@ -89,15 +137,43 @@ export function QuizChoice({ word, options, onAnswer }: QuizChoiceProps) {
             return 'correct';
         }
 
-        if (selectedOption === option) {
+        if (selectedOption === option || isTimeout) {
             return 'incorrect';
         }
 
         return 'opacity-50';
     };
 
+    // 타이머 프로그레스 계산
+    const timerProgress = (timeLeft / TIMER_DURATION) * 100;
+    const circumference = 2 * Math.PI * 24; // 반지름 24의 원 둘레
+    const strokeDashoffset = circumference - (timerProgress / 100) * circumference;
+    const timerColorClass = timeLeft <= 3 ? 'danger' : timeLeft <= 5 ? 'warning' : '';
+
     return (
         <div className="p-6">
+            {/* Timer */}
+            {!showResult && (
+                <div className="flex justify-center mb-4">
+                    <div className="quiz-timer">
+                        <svg className="quiz-timer-circle" width="60" height="60">
+                            <circle className="quiz-timer-bg" cx="30" cy="30" r="24" />
+                            <circle
+                                className={`quiz-timer-progress ${timerColorClass}`}
+                                cx="30"
+                                cy="30"
+                                r="24"
+                                strokeDasharray={circumference}
+                                strokeDashoffset={strokeDashoffset}
+                            />
+                        </svg>
+                        <span className={`quiz-timer-text ${timerColorClass}`}>
+                            {timeLeft}
+                        </span>
+                    </div>
+                </div>
+            )}
+
             {/* Question */}
             <div className="text-center mb-8">
                 <p className="text-gray-500 mb-2">다음 단어의 뜻을 고르세요</p>
@@ -135,11 +211,17 @@ export function QuizChoice({ word, options, onAnswer }: QuizChoiceProps) {
             {/* Result Message */}
             {showResult && (
                 <div className={`mt-6 p-4 rounded-xl text-center animate-fade-in ${selectedOption === word.meaning
-                        ? 'bg-green-100 text-green-800'
+                    ? 'bg-green-100 text-green-800'
+                    : isTimeout
+                        ? 'quiz-timeout-message'
                         : 'bg-red-100 text-red-800'
                     }`}>
                     {selectedOption === word.meaning ? (
                         <p className="font-semibold">🎉 정답입니다!</p>
+                    ) : isTimeout ? (
+                        <p className="font-semibold">
+                            ⏰ 시간 초과! 정답: <span className="underline">{word.meaning}</span>
+                        </p>
                     ) : (
                         <p className="font-semibold">
                             😅 틀렸습니다. 정답: <span className="underline">{word.meaning}</span>
