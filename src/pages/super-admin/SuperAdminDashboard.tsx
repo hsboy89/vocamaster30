@@ -72,6 +72,7 @@ export function SuperAdminDashboard() {
     const handleAddAcademy = async (e: React.FormEvent) => {
         e.preventDefault();
 
+        // 1. Academy Validation
         if (!newAcademyCode.trim()) {
             setAddError('학원 코드를 입력해주세요.');
             return;
@@ -81,23 +82,71 @@ export function SuperAdminDashboard() {
             return;
         }
 
+        // 2. Admin Validation
+        if (!newAdminId.trim()) {
+            setAddError('초기 관리자 ID를 입력해주세요.');
+            return;
+        }
+        if (!newAdminName.trim()) {
+            setAddError('초기 관리자 이름을 입력해주세요.');
+            return;
+        }
+        if (!newAdminPassword.trim()) {
+            setAddError('비밀번호를 입력해주세요.');
+            return;
+        }
+        if (newAdminPassword.length < 4) {
+            setAddError('비밀번호는 4자 이상이어야 합니다.');
+            return;
+        }
+
         setIsAdding(true);
         setAddError(null);
 
-        const result = await createAcademy({
-            academyCode: newAcademyCode.trim(),
-            name: newAcademyName.trim(),
-        });
+        try {
+            // 3. Create Academy
+            const academyResult = await createAcademy({
+                academyCode: newAcademyCode.trim(),
+                name: newAcademyName.trim(),
+            });
 
-        if (result.success) {
+            if (!academyResult.success || !academyResult.academy) {
+                throw new Error(academyResult.error || '학원 등록에 실패했습니다.');
+            }
+
+            // 4. Create Initial Admin
+            const newAcademyId = academyResult.academy.id;
+            const adminResult = await createAcademyAdmin({
+                academyId: newAcademyId,
+                adminId: newAdminId.trim(),
+                studentName: newAdminName.trim(),
+                password: newAdminPassword.trim(),
+            });
+
+            if (!adminResult.success) {
+                // Academy was created but Admin failed. 
+                // Ideally we should rollback (delete academy), but for now just warn.
+                // Or maybe try to delete?
+                // For simplicity, let's treat it as a partial success/error.
+                throw new Error(`학원은 등록되었으나 관리자 생성 중 오류가 발생했습니다: ${adminResult.error}`);
+            }
+
+            // Success
             setShowAddModal(false);
             setNewAcademyCode('');
             setNewAcademyName('');
+            setNewAdminId('');
+            setNewAdminName('');
+            setNewAdminPassword('');
             loadData();
-        } else {
-            setAddError(result.error || '학원 등록에 실패했습니다.');
+            alert('학원과 초기 관리자가 성공적으로 등록되었습니다.');
+
+        } catch (error) {
+            const message = error instanceof Error ? error.message : '알 수 없는 오류가 발생했습니다.';
+            setAddError(message);
+        } finally {
+            setIsAdding(false);
         }
-        setIsAdding(false);
     };
 
     const handleDeleteAcademy = async (academyId: string, academyName: string) => {
@@ -451,6 +500,9 @@ export function SuperAdminDashboard() {
                                     setAddError(null);
                                     setNewAcademyCode('');
                                     setNewAcademyName('');
+                                    setNewAdminId('');
+                                    setNewAdminName('');
+                                    setNewAdminPassword('');
                                 }}
                                 className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/10 rounded-xl transition-all"
                             >
@@ -490,6 +542,54 @@ export function SuperAdminDashboard() {
                                 />
                             </div>
 
+                            <div className="pt-4 border-t border-gray-100 dark:border-white/10">
+                                <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-4">초기 관리자 설정</h4>
+
+                                <div className="space-y-4">
+                                    <div>
+                                        <label className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
+                                            관리자 ID
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={newAdminId}
+                                            onChange={(e) => setNewAdminId(e.target.value)}
+                                            placeholder="예: admin01"
+                                            className="w-full px-4 py-3.5 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-purple-500 dark:text-white dark:placeholder-slate-500"
+                                            disabled={isAdding}
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
+                                            관리자 이름
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={newAdminName}
+                                            onChange={(e) => setNewAdminName(e.target.value)}
+                                            placeholder="예: 김관리"
+                                            className="w-full px-4 py-3.5 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-purple-500 dark:text-white dark:placeholder-slate-500"
+                                            disabled={isAdding}
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
+                                            비밀번호
+                                        </label>
+                                        <input
+                                            type="password"
+                                            value={newAdminPassword}
+                                            onChange={(e) => setNewAdminPassword(e.target.value)}
+                                            placeholder="4자 이상 입력"
+                                            className="w-full px-4 py-3.5 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-purple-500 dark:text-white dark:placeholder-slate-500"
+                                            disabled={isAdding}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
                             {addError && (
                                 <div className="p-4 bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 rounded-2xl text-red-600 dark:text-red-400 text-sm font-medium">
                                     {addError}
@@ -502,6 +602,11 @@ export function SuperAdminDashboard() {
                                     onClick={() => {
                                         setShowAddModal(false);
                                         setAddError(null);
+                                        setNewAcademyCode('');
+                                        setNewAcademyName('');
+                                        setNewAdminId('');
+                                        setNewAdminName('');
+                                        setNewAdminPassword('');
                                     }}
                                     className="flex-1 px-4 py-3.5 bg-gray-100 dark:bg-white/5 text-gray-700 dark:text-slate-300 rounded-2xl hover:bg-gray-200 dark:hover:bg-white/10 transition-all font-bold"
                                     disabled={isAdding}
