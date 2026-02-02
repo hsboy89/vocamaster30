@@ -31,9 +31,9 @@ export function Header({ currentLevel, onLevelChange, userName, academyName, onL
                     <div className="flex items-center gap-3">
                         {/* User Info */}
                         {userName && (
-                            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-blue-50 rounded-full">
-                                <span className="text-sm text-gray-600">{academyName}</span>
-                                <span className="text-sm font-medium text-blue-600">{userName}</span>
+                            <div className="hidden sm:flex items-center gap-2 px-4 py-1.5 bg-blue-50 dark:bg-white/5 rounded-full border border-blue-100/50 dark:border-white/10 transition-all">
+                                <span className="text-sm text-slate-500 dark:text-slate-400 font-medium">{academyName}</span>
+                                <span className="text-sm font-bold text-blue-600 dark:text-blue-400">{userName}</span>
                             </div>
                         )}
 
