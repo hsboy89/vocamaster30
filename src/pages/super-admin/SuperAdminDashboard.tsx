@@ -6,6 +6,7 @@ import {
     getAcademyList,
     getSuperAdminStats,
     createAcademy,
+    updateAcademy,
     deleteAcademy,
     createAcademyAdmin,
     AcademyListItem,
@@ -28,6 +29,15 @@ export function SuperAdminDashboard() {
     const [newAcademyName, setNewAcademyName] = useState('');
     const [addError, setAddError] = useState<string | null>(null);
     const [isAdding, setIsAdding] = useState(false);
+
+    // 학원 수정 모달
+    const [showEditModal, setShowEditModal] = useState(false);
+    const [editAcademyId, setEditAcademyId] = useState<string | null>(null);
+    const [editAcademyCode, setEditAcademyCode] = useState('');
+    const [editAcademyName, setEditAcademyName] = useState('');
+    const [editAcademyStatus, setEditAcademyStatus] = useState<'active' | 'suspended' | 'trial'>('active');
+    const [editError, setEditError] = useState<string | null>(null);
+    const [isEditing, setIsEditing] = useState(false);
 
     // 관리자 등록 모달
     const [showAdminModal, setShowAdminModal] = useState(false);
@@ -100,6 +110,43 @@ export function SuperAdminDashboard() {
         } else {
             alert(result.error || '학원 삭제에 실패했습니다.');
         }
+    };
+
+    const openEditModal = (academy: AcademyListItem) => {
+        setEditAcademyId(academy.id);
+        setEditAcademyCode(academy.academyCode);
+        setEditAcademyName(academy.name);
+        setEditAcademyStatus(academy.status);
+        setEditError(null);
+        setShowEditModal(true);
+    };
+
+    const handleEditAcademy = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        if (!editAcademyId) return;
+
+        if (!editAcademyName.trim()) {
+            setEditError('학원명을 입력해주세요.');
+            return;
+        }
+
+        setIsEditing(true);
+        setEditError(null);
+
+        const result = await updateAcademy(editAcademyId, {
+            name: editAcademyName.trim(),
+            status: editAcademyStatus,
+        });
+
+        if (result.success) {
+            setShowEditModal(false);
+            setEditAcademyId(null);
+            loadData();
+        } else {
+            setEditError(result.error || '학원 수정에 실패했습니다.');
+        }
+        setIsEditing(false);
     };
 
     const openAdminModal = (academyId: string, academyName: string) => {
@@ -351,7 +398,13 @@ export function SuperAdminDashboard() {
                                                 {formatDate(academy.createdAt)}
                                             </td>
                                             <td className="px-6 py-4">
-                                                <div className="flex items-center gap-2">
+                                                <div className="flex items-center gap-3">
+                                                    <button
+                                                        onClick={() => openEditModal(academy)}
+                                                        className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium text-sm"
+                                                    >
+                                                        수정
+                                                    </button>
                                                     <button
                                                         onClick={() => openAdminModal(academy.id, academy.name)}
                                                         className="text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300 font-medium text-sm"
@@ -450,6 +503,100 @@ export function SuperAdminDashboard() {
                                     className="flex-1 px-4 py-3.5 bg-gradient-to-r from-purple-600 to-indigo-500 text-white rounded-2xl hover:from-purple-700 hover:to-indigo-600 transition-all font-bold shadow-lg shadow-purple-500/30 disabled:opacity-50"
                                 >
                                     {isAdding ? '등록 중...' : '등록하기'}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
+
+            {/* Edit Academy Modal */}
+            {showEditModal && (
+                <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                    <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl w-full max-w-md p-8 border border-white/10">
+                        <div className="flex items-center justify-between mb-8">
+                            <h3 className="text-2xl font-bold text-gray-900 dark:text-white">학원 수정</h3>
+                            <button
+                                onClick={() => {
+                                    setShowEditModal(false);
+                                    setEditError(null);
+                                }}
+                                className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/10 rounded-xl transition-all"
+                            >
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <form onSubmit={handleEditAcademy} className="space-y-6">
+                            <div>
+                                <label className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
+                                    학원 코드
+                                </label>
+                                <input
+                                    type="text"
+                                    value={editAcademyCode}
+                                    disabled
+                                    className="w-full px-4 py-3.5 bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-2xl text-gray-500 dark:text-slate-500 cursor-not-allowed"
+                                />
+                                <p className="mt-1 text-xs text-gray-500 dark:text-slate-500">학원 코드는 변경할 수 없습니다</p>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
+                                    학원명
+                                </label>
+                                <input
+                                    type="text"
+                                    value={editAcademyName}
+                                    onChange={(e) => setEditAcademyName(e.target.value)}
+                                    placeholder="예: 서울영어학원"
+                                    className="w-full px-4 py-3.5 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white dark:placeholder-slate-500"
+                                    disabled={isEditing}
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
+                                    상태
+                                </label>
+                                <select
+                                    value={editAcademyStatus}
+                                    onChange={(e) => setEditAcademyStatus(e.target.value as 'active' | 'suspended' | 'trial')}
+                                    className="w-full px-4 py-3.5 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
+                                    disabled={isEditing}
+                                >
+                                    <option value="active">활성</option>
+                                    <option value="trial">체험</option>
+                                    <option value="suspended">정지</option>
+                                </select>
+                            </div>
+
+                            {editError && (
+                                <div className="p-4 bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 rounded-2xl text-red-600 dark:text-red-400 text-sm font-medium">
+                                    {editError}
+                                </div>
+                            )}
+
+                            <div className="flex gap-4 pt-2">
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        setShowEditModal(false);
+                                        setEditError(null);
+                                    }}
+                                    className="flex-1 px-4 py-3.5 bg-gray-100 dark:bg-white/5 text-gray-700 dark:text-slate-300 rounded-2xl hover:bg-gray-200 dark:hover:bg-white/10 transition-all font-bold"
+                                    disabled={isEditing}
+                                >
+                                    취소
+                                </button>
+                                <button
+                                    type="submit"
+                                    disabled={isEditing}
+                                    className="flex-1 px-4 py-3.5 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-2xl hover:from-blue-700 hover:to-blue-600 transition-all font-bold shadow-lg shadow-blue-500/30 disabled:opacity-50"
+                                >
+                                    {isEditing ? '수정 중...' : '수정하기'}
                                 </button>
                             </div>
                         </form>
