@@ -42,12 +42,13 @@ export function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-emerald-50 flex items-center justify-center p-4">
-            {/* Background decorations */}
-            <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-blue-100/40 blur-3xl" />
-            <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-emerald-50/60 blur-3xl" />
+        <div className="min-h-screen bg-[#0f172a] flex items-center justify-center p-4 relative overflow-hidden">
+            {/* Background decorations inspired by the second image */}
+            <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-600/10 blur-[120px]" />
+            <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-emerald-600/10 blur-[120px]" />
+            <div className="absolute top-[20%] right-[10%] w-[30%] h-[30%] rounded-full bg-blue-500/5 blur-[100px]" />
 
-            <div className="relative bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden">
+            <div className="relative bg-slate-900/40 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl max-w-md w-full overflow-hidden">
                 {/* Header */}
                 <div className="bg-gradient-to-r from-blue-600 to-emerald-500 p-8 text-center">
                     <h1 className="text-3xl font-bold text-white mb-2">VocaMaster30</h1>
@@ -55,12 +56,12 @@ export function LoginPage() {
                 </div>
 
                 {/* Tabs */}
-                <div className="flex border-b border-gray-200">
+                <div className="flex border-b border-white/5">
                     <button
                         onClick={() => handleTabChange('student')}
                         className={`flex-1 py-4 text-center font-medium transition-all duration-200 ${activeTab === 'student'
-                            ? 'text-blue-600 border-b-2 border-blue-600 bg-blue-50/50'
-                            : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+                            ? 'text-blue-400 border-b-2 border-blue-400 bg-blue-400/5'
+                            : 'text-gray-400 hover:text-gray-200 hover:bg-white/5'
                             }`}
                     >
                         <span className="flex items-center justify-center gap-2">
@@ -73,8 +74,8 @@ export function LoginPage() {
                     <button
                         onClick={() => handleTabChange('admin')}
                         className={`flex-1 py-4 text-center font-medium transition-all duration-200 ${activeTab === 'admin'
-                            ? 'text-emerald-600 border-b-2 border-emerald-600 bg-emerald-50/50'
-                            : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+                            ? 'text-emerald-400 border-b-2 border-emerald-400 bg-emerald-400/5'
+                            : 'text-gray-400 hover:text-gray-200 hover:bg-white/5'
                             }`}
                     >
                         <span className="flex items-center justify-center gap-2">
@@ -91,7 +92,7 @@ export function LoginPage() {
                     {activeTab === 'student' ? (
                         <form onSubmit={handleStudentLogin} className="space-y-5">
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                <label className="block text-sm font-medium text-slate-300 mb-2">
                                     학원명
                                 </label>
                                 <input
@@ -99,12 +100,12 @@ export function LoginPage() {
                                     value={academyName}
                                     onChange={(e) => setAcademyName(e.target.value)}
                                     placeholder="예: 서울영어학원"
-                                    className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none text-gray-800"
+                                    className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all outline-none"
                                     disabled={isLoading}
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                <label className="block text-sm font-medium text-slate-300 mb-2">
                                     이름
                                 </label>
                                 <input
@@ -112,13 +113,13 @@ export function LoginPage() {
                                     value={studentName}
                                     onChange={(e) => setStudentName(e.target.value)}
                                     placeholder="예: 김철수"
-                                    className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none text-gray-800"
+                                    className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all outline-none"
                                     disabled={isLoading}
                                 />
                             </div>
 
                             {error && (
-                                <p className="text-red-500 text-sm font-medium bg-red-50 p-3 rounded-lg">
+                                <p className="text-red-400 text-sm font-medium bg-red-400/10 p-3 rounded-lg border border-red-400/20">
                                     {error}
                                 </p>
                             )}
@@ -126,7 +127,7 @@ export function LoginPage() {
                             <button
                                 type="submit"
                                 disabled={isLoading}
-                                className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-bold py-4 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-blue-500/30"
+                                className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-bold py-4 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-blue-500/20"
                             >
                                 {isLoading ? (
                                     <>
@@ -149,7 +150,7 @@ export function LoginPage() {
                     ) : (
                         <form onSubmit={handleAdminLogin} className="space-y-5">
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                <label className="block text-sm font-medium text-slate-300 mb-2">
                                     아이디
                                 </label>
                                 <input
@@ -158,12 +159,12 @@ export function LoginPage() {
                                     onChange={(e) => setAdminId(e.target.value)}
                                     placeholder="admin"
                                     autoComplete="off"
-                                    className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition-all outline-none text-gray-800"
+                                    className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-slate-500 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all outline-none"
                                     disabled={isLoading}
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                <label className="block text-sm font-medium text-slate-300 mb-2">
                                     비밀번호
                                 </label>
                                 <input
@@ -172,13 +173,13 @@ export function LoginPage() {
                                     onChange={(e) => setPassword(e.target.value)}
                                     placeholder="••••••••"
                                     autoComplete="new-password"
-                                    className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition-all outline-none text-gray-800"
+                                    className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-slate-500 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all outline-none"
                                     disabled={isLoading}
                                 />
                             </div>
 
                             {error && (
-                                <p className="text-red-500 text-sm font-medium bg-red-50 p-3 rounded-lg">
+                                <p className="text-red-400 text-sm font-medium bg-red-400/10 p-3 rounded-lg border border-red-400/20">
                                     {error}
                                 </p>
                             )}
@@ -186,7 +187,7 @@ export function LoginPage() {
                             <button
                                 type="submit"
                                 disabled={isLoading}
-                                className="w-full bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 text-white font-bold py-4 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-emerald-500/30"
+                                className="w-full bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 text-white font-bold py-4 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-emerald-500/20"
                             >
                                 {isLoading ? (
                                     <>
@@ -211,7 +212,7 @@ export function LoginPage() {
 
                 {/* Footer */}
                 <div className="px-8 pb-8 text-center">
-                    <p className="text-xs text-gray-400">
+                    <p className="text-xs text-slate-500">
                         {activeTab === 'student'
                             ? '관리자가 등록한 학생만 로그인할 수 있습니다.'
                             : '관리자 계정이 필요하시면 담당자에게 문의하세요.'}
@@ -220,6 +221,7 @@ export function LoginPage() {
             </div>
         </div>
     );
+
 }
 
 export default LoginPage;
