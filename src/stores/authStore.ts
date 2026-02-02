@@ -128,8 +128,7 @@ export const useAuthStore = create<AuthStore>()(
                     // 1. 슈퍼 관리자 체크 (환경변수 사용)
                     // 슈퍼 관리자는 학원 코드가 없어도 되거나, 특정 코드로 진입
                     if (adminId === ENV_ADMIN_ID && password === ENV_ADMIN_PASSWORD) {
-                        // 슈퍼 관리자용 조회 (role='super_admin' OR 'admin')
-                        // 마이그레이션 전후 호환성을 위해 둘 다 체크하거나 마이그레이션 된 role 사용
+                        // 슈퍼 관리자 - 환경변수 인증 성공 시 super_admin으로 처리
                         const { data: adminUser } = await supabase
                             .from('users')
                             .select('*')
@@ -139,6 +138,8 @@ export const useAuthStore = create<AuthStore>()(
 
                         if (adminUser) {
                             const user = dbUserToUser(adminUser as DbUser);
+                            // 환경변수 인증 성공 = 슈퍼관리자로 강제 설정
+                            user.role = 'super_admin';
                             set({ user, academy: null, isAuthenticated: true, isLoading: false });
                             return true;
                         }
