@@ -189,6 +189,7 @@ export interface AcademyAdminInput {
     academyId: string;
     adminId: string;  // 로그인용 ID
     studentName: string;  // 관리자 이름
+    password?: string; // 비밀번호
 }
 
 export async function createAcademyAdmin(input: AcademyAdminInput): Promise<{ success: boolean; error?: string }> {
@@ -222,6 +223,7 @@ export async function createAcademyAdmin(input: AcademyAdminInput): Promise<{ su
             academy_name: academy.name,
             student_name: input.studentName,
             admin_id: input.adminId,
+            password_hash: input.password,
             role: 'academy_admin',
         });
 

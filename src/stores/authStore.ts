@@ -153,16 +153,7 @@ export const useAuthStore = create<AuthStore>()(
                         throw new Error('존재하지 않는 학원 코드입니다.');
                     }
 
-                    // 비밀번호 체크 로직 (임시: 학원관리자도 ENV 비번 공유하거나, 추후 DB 비번 필드 추가 필요)
-                    // 현재는 편의상 ENV 비번 통일 또는 '1234' 같은 임시 정책 사용
-                    // 여기서는 "사용자 이름"이 일치하는지 확인하는 수준으로 구현하고
-                    // 실제 비밀번호 검증은 Supabase Auth나 별도 컬럼이 필요함.
-                    // -> 사용자 요청에 따라 "DB설계"에 집중했으므로, 여기선 admin_id 일치만 확인 (개발 모드)
-                    // TODO: production 환경에서는 반드시 비밀번호 검증 로직 추가 필요
-                    if (password !== ENV_ADMIN_PASSWORD) {
-                        throw new Error('비밀번호가 올바르지 않습니다.');
-                    }
-
+                    // 3. 관리자 정보 조회 (비밀번호 검증 전)
                     const { data: academyAdmin, error: adminError } = await supabase
                         .from('users')
                         .select('*')
@@ -173,6 +164,20 @@ export const useAuthStore = create<AuthStore>()(
 
                     if (adminError || !academyAdmin) {
                         throw new Error('해당 학원에 등록된 관리자가 아닙니다.');
+                    }
+
+                    // 4. 비밀번호 검증
+                    // DB에 password_hash가 있으면 그것과 비교, 없으면(기존 계정) 환경변수와 비교
+                    if (academyAdmin.password_hash) {
+                        // TODO: 실제 배포 시에는 bcrypt 등으로 해시 비교 필요
+                        if (password !== academyAdmin.password_hash) {
+                            throw new Error('비밀번호가 일치하지 않습니다.');
+                        }
+                    } else {
+                        // 기존 계정 호환성 (환경변수 비밀번호 사용)
+                        if (password !== ENV_ADMIN_PASSWORD) {
+                            throw new Error('비밀번호가 올바르지 않습니다.');
+                        }
                     }
 
                     // 로그인 성공

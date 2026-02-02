@@ -94,6 +94,7 @@ export interface DbUser {
     student_name: string;
     role: UserRole;
     admin_id?: string;
+    password_hash?: string; // 학원 관리자 비밀번호
     email?: string;
     created_at?: string;
     last_login_at?: string;

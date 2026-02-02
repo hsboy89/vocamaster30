@@ -45,6 +45,7 @@ export function SuperAdminDashboard() {
     const [selectedAcademyName, setSelectedAcademyName] = useState<string>('');
     const [newAdminId, setNewAdminId] = useState('');
     const [newAdminName, setNewAdminName] = useState('');
+    const [newAdminPassword, setNewAdminPassword] = useState('');
     const [adminError, setAdminError] = useState<string | null>(null);
     const [isAddingAdmin, setIsAddingAdmin] = useState(false);
 
@@ -168,6 +169,14 @@ export function SuperAdminDashboard() {
             setAdminError('관리자 이름을 입력해주세요.');
             return;
         }
+        if (!newAdminPassword.trim()) {
+            setAdminError('비밀번호를 입력해주세요.');
+            return;
+        }
+        if (newAdminPassword.length < 4) {
+            setAdminError('비밀번호는 4자 이상이어야 합니다.');
+            return;
+        }
 
         setIsAddingAdmin(true);
         setAdminError(null);
@@ -176,12 +185,14 @@ export function SuperAdminDashboard() {
             academyId: selectedAcademyId,
             adminId: newAdminId.trim(),
             studentName: newAdminName.trim(),
+            password: newAdminPassword.trim(),
         });
 
         if (result.success) {
             setShowAdminModal(false);
             setNewAdminId('');
             setNewAdminName('');
+            setNewAdminPassword('');
             setSelectedAcademyId(null);
             alert('관리자 계정이 생성되었습니다.');
         } else {
@@ -619,6 +630,7 @@ export function SuperAdminDashboard() {
                                     setAdminError(null);
                                     setNewAdminId('');
                                     setNewAdminName('');
+                                    setNewAdminPassword('');
                                 }}
                                 className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/10 rounded-xl transition-all"
                             >
@@ -656,6 +668,21 @@ export function SuperAdminDashboard() {
                                     className="w-full px-4 py-3.5 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-purple-500 dark:text-white dark:placeholder-slate-500"
                                     disabled={isAddingAdmin}
                                 />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
+                                    비밀번호
+                                </label>
+                                <input
+                                    type="password"
+                                    value={newAdminPassword}
+                                    onChange={(e) => setNewAdminPassword(e.target.value)}
+                                    placeholder="4자 이상 입력"
+                                    className="w-full px-4 py-3.5 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-purple-500 dark:text-white dark:placeholder-slate-500"
+                                    disabled={isAddingAdmin}
+                                />
+                                <p className="mt-1 text-xs text-gray-500 dark:text-slate-500">관리자 로그인 시 사용하는 비밀번호</p>
                             </div>
 
                             {adminError && (
