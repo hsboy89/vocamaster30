@@ -5,11 +5,14 @@ import {
     getDashboardStats,
     getStudentList,
     getDayProgressStats,
+    getAtRiskStudents,
+    getGlobalTopWrongWords,
     createStudent,
     deleteStudent,
     DashboardStats,
     StudentListItem,
-    DayProgress
+    DayProgress,
+    WrongWordStat
 } from '../../services/admin';
 import { Level } from '../../types';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
@@ -23,6 +26,8 @@ export function AdminDashboard() {
     const [selectedLevel, setSelectedLevel] = useState<Level>('middle');
     const [searchTerm, setSearchTerm] = useState('');
     const [isLoading, setIsLoading] = useState(true);
+    const [topWrongWords, setTopWrongWords] = useState<WrongWordStat[]>([]);
+    const [atRiskIds, setAtRiskIds] = useState<Set<string>>(new Set());
 
     // 학생 등록 모달 상태
     const [showAddModal, setShowAddModal] = useState(false);
@@ -42,12 +47,16 @@ export function AdminDashboard() {
     const loadDashboardData = async () => {
         setIsLoading(true);
         try {
-            const [statsData, studentsData] = await Promise.all([
+            const [statsData, studentsData, wrongWordsData, atRiskStudentsData] = await Promise.all([
                 getDashboardStats(),
                 getStudentList(),
+                getGlobalTopWrongWords(),
+                getAtRiskStudents(),
             ]);
             setStats(statsData);
             setStudents(studentsData);
+            setTopWrongWords(wrongWordsData);
+            setAtRiskIds(new Set(atRiskStudentsData.map(s => s.id)));
         } catch (error) {
             console.error('Failed to load dashboard data:', error);
         }
@@ -177,26 +186,14 @@ export function AdminDashboard() {
                     <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-sm text-gray-500 mb-1">총 학생 수</p>
-                                <p className="text-3xl font-bold text-gray-900">{stats?.totalStudents || 0}</p>
+                                <p className="text-sm text-gray-500 mb-1">오늘의 학습 성실도</p>
+                                <p className="text-3xl font-bold text-gray-900">
+                                    {stats?.todayAttendance.active || 0}
+                                    <span className="text-lg text-gray-400 font-normal ml-1">/ {stats?.todayAttendance.total || 0}</span>
+                                </p>
                             </div>
                             <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
                                 <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
-                        <div className="flex items-center justify-between">
-                            <div>
-                                <p className="text-sm text-gray-500 mb-1">활성 학생</p>
-                                <p className="text-3xl font-bold text-emerald-600">{stats?.activeStudents || 0}</p>
-                                <p className="text-xs text-gray-400 mt-1">최근 7일</p>
-                            </div>
-                            <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center">
-                                <svg className="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                             </div>
@@ -206,12 +203,27 @@ export function AdminDashboard() {
                     <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-sm text-gray-500 mb-1">평균 진도</p>
-                                <p className="text-3xl font-bold text-purple-600">Day {stats?.averageProgress || 0}</p>
+                                <p className="text-sm text-gray-500 mb-1">누적 마스터 단어</p>
+                                <p className="text-3xl font-bold text-emerald-600">{(stats?.totalMastery || 0).toLocaleString()}</p>
                             </div>
-                            <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-                                <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center">
+                                <svg className="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100 ring-2 ring-red-500/20">
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <p className="text-sm text-gray-500 mb-1">중단 위험 학생</p>
+                                <p className="text-3xl font-bold text-red-600">{stats?.atRiskCount || 0}명</p>
+                                <p className="text-xs text-red-400 mt-1">3일 이상 미접속</p>
+                            </div>
+                            <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
+                                <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                                 </svg>
                             </div>
                         </div>
@@ -220,7 +232,7 @@ export function AdminDashboard() {
                     <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-sm text-gray-500 mb-1">평균 점수</p>
+                                <p className="text-sm text-gray-500 mb-1">평균 퀴즈 점수</p>
                                 <p className="text-3xl font-bold text-orange-600">{stats?.averageScore || 0}점</p>
                             </div>
                             <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
@@ -232,52 +244,87 @@ export function AdminDashboard() {
                     </div>
                 </div>
 
-                {/* Day Progress Chart */}
-                <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100 mb-8">
-                    <div className="flex items-center justify-between mb-6">
-                        <h2 className="text-lg font-bold text-gray-900">Day별 학습 진행률</h2>
-                        <div className="flex gap-2">
-                            {(['middle', 'high', 'advanced'] as Level[]).map((level) => (
-                                <button
-                                    key={level}
-                                    onClick={() => setSelectedLevel(level)}
-                                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${selectedLevel === level
-                                        ? 'bg-blue-600 text-white'
-                                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                                        }`}
-                                >
-                                    {levelNames[level]}
-                                </button>
-                            ))}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+                    {/* Day Progress Chart */}
+                    <div className="lg:col-span-2 bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+                        <div className="flex items-center justify-between mb-6">
+                            <h2 className="text-lg font-bold text-gray-900">Day별 학습 진행률</h2>
+                            <div className="flex gap-2">
+                                {(['middle', 'high', 'advanced'] as Level[]).map((level) => (
+                                    <button
+                                        key={level}
+                                        onClick={() => setSelectedLevel(level)}
+                                        className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${selectedLevel === level
+                                            ? 'bg-blue-600 text-white'
+                                            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                            }`}
+                                    >
+                                        {levelNames[level].split(' ')[0]}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="h-64">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <BarChart data={dayProgress}>
+                                    <XAxis
+                                        dataKey="day"
+                                        tick={{ fontSize: 12 }}
+                                        tickFormatter={(value) => `D${value}`}
+                                    />
+                                    <YAxis
+                                        tick={{ fontSize: 12 }}
+                                        tickFormatter={(value) => `${value}%`}
+                                        domain={[0, 100]}
+                                    />
+                                    <Tooltip
+                                        formatter={(value) => [`${value ?? 0}%`, '완료율']}
+                                        labelFormatter={(label) => `Day ${label}`}
+                                    />
+                                    <Bar dataKey="percentage" radius={[4, 4, 0, 0]}>
+                                        {dayProgress.map((entry, index) => (
+                                            <Cell
+                                                key={`cell-${index}`}
+                                                fill={entry.percentage >= 70 ? '#10b981' : entry.percentage >= 40 ? '#f59e0b' : '#ef4444'}
+                                            />
+                                        ))}
+                                    </Bar>
+                                </BarChart>
+                            </ResponsiveContainer>
                         </div>
                     </div>
-                    <div className="h-64">
-                        <ResponsiveContainer width="100%" height="100%">
-                            <BarChart data={dayProgress}>
-                                <XAxis
-                                    dataKey="day"
-                                    tick={{ fontSize: 12 }}
-                                    tickFormatter={(value) => `D${value}`}
-                                />
-                                <YAxis
-                                    tick={{ fontSize: 12 }}
-                                    tickFormatter={(value) => `${value}%`}
-                                    domain={[0, 100]}
-                                />
-                                <Tooltip
-                                    formatter={(value) => [`${value ?? 0}%`, '완료율']}
-                                    labelFormatter={(label) => `Day ${label}`}
-                                />
-                                <Bar dataKey="percentage" radius={[4, 4, 0, 0]}>
-                                    {dayProgress.map((entry, index) => (
-                                        <Cell
-                                            key={`cell-${index}`}
-                                            fill={entry.percentage >= 70 ? '#10b981' : entry.percentage >= 40 ? '#f59e0b' : '#ef4444'}
-                                        />
-                                    ))}
-                                </Bar>
-                            </BarChart>
-                        </ResponsiveContainer>
+
+                    {/* Critical Words Top 10 */}
+                    <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+                        <h2 className="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+                            <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                            학원 전체 오답 Top 10
+                        </h2>
+                        <div className="space-y-4">
+                            {topWrongWords.length === 0 ? (
+                                <p className="text-center text-gray-500 py-10">데이터가 없습니다.</p>
+                            ) : (
+                                topWrongWords.map((word, index) => (
+                                    <div key={index} className="flex items-center justify-between">
+                                        <div className="flex items-center gap-3">
+                                            <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${index < 3 ? 'bg-red-100 text-red-600' : 'bg-gray-100 text-gray-500'
+                                                }`}>
+                                                {index + 1}
+                                            </span>
+                                            <div>
+                                                <p className="text-sm font-bold text-gray-900">{word.word}</p>
+                                                <p className="text-xs text-gray-500">{word.meaning}</p>
+                                            </div>
+                                        </div>
+                                        <span className="text-xs font-medium text-red-500 bg-red-50 px-2 py-1 rounded-md">
+                                            {word.wrongCount}회
+                                        </span>
+                                    </div>
+                                ))
+                            )}
+                        </div>
                     </div>
                 </div>
 
@@ -333,11 +380,18 @@ export function AdminDashboard() {
                                     </tr>
                                 ) : (
                                     filteredStudents.map((student) => (
-                                        <tr key={student.id} className="hover:bg-gray-50 transition-colors">
+                                        <tr key={student.id} className={`hover:bg-gray-50 transition-colors ${atRiskIds.has(student.id) ? 'bg-red-50/50' : ''}`}>
                                             <td className="px-6 py-4">
-                                                <div>
-                                                    <p className="font-medium text-gray-900">{student.studentName}</p>
-                                                    <p className="text-sm text-gray-500">{student.academyName}</p>
+                                                <div className="flex items-center gap-3">
+                                                    <div>
+                                                        <div className="flex items-center gap-2">
+                                                            <p className="font-medium text-gray-900">{student.studentName}</p>
+                                                            {atRiskIds.has(student.id) && (
+                                                                <span className="px-1.5 py-0.5 bg-red-100 text-red-600 text-[10px] font-bold rounded uppercase">At Risk</span>
+                                                            )}
+                                                        </div>
+                                                        <p className="text-sm text-gray-500">{student.academyName}</p>
+                                                    </div>
                                                 </div>
                                             </td>
                                             <td className="px-6 py-4">
@@ -354,7 +408,9 @@ export function AdminDashboard() {
                                                 </span>
                                             </td>
                                             <td className="px-6 py-4 text-sm text-gray-500">
-                                                {formatLastLogin(student.lastLoginAt)}
+                                                <span className={atRiskIds.has(student.id) ? 'text-red-600 font-medium' : ''}>
+                                                    {formatLastLogin(student.lastLoginAt)}
+                                                </span>
                                             </td>
                                             <td className="px-6 py-4">
                                                 <div className="flex items-center gap-2">

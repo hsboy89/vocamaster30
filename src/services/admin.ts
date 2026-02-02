@@ -4,9 +4,19 @@ import { DbUser, dbUserToUser, User } from '../types';
 // 전체 통계 타입
 export interface DashboardStats {
     totalStudents: number;
-    activeStudents: number;  // 최근 7일 내 접속한 학생
-    averageProgress: number; // 평균 완료 Day
-    averageScore: number;    // 평균 퀴즈 점수
+    todayAttendance: {
+        active: number;
+        total: number;
+    };
+    totalMastery: number;
+    atRiskCount: number;
+    averageScore: number;
+}
+
+export interface WrongWordStat {
+    word: string;
+    meaning: string;
+    wrongCount: number;
 }
 
 // 학생 목록 아이템 타입
@@ -53,38 +63,46 @@ export interface StudentDetail {
 // 전체 통계 조회
 export async function getDashboardStats(): Promise<DashboardStats> {
     try {
-        // 전체 학생 수
+        // 1. 전체 학생 수
         const { count: totalStudents } = await supabase
             .from('users')
             .select('*', { count: 'exact', head: true })
             .eq('role', 'student');
 
-        // 최근 7일 내 접속한 학생 수
-        const sevenDaysAgo = new Date();
-        sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+        const totalCount = totalStudents || 0;
 
-        const { count: activeStudents } = await supabase
+        // 2. 오늘의 학습 성실도 (오늘 공부한 고유 학생 수)
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const { data: todayActivity } = await supabase
+            .from('student_progress')
+            .select('user_id')
+            .gte('last_studied_at', today.toISOString());
+
+        // 고유 학생 수 계산
+        const activeTodaySet = new Set(todayActivity?.map(a => a.user_id));
+        const activeTodayCount = activeTodaySet.size;
+
+        // 3. 누적 암기 단어 합계
+        const { data: progressData } = await supabase
+            .from('student_progress')
+            .select('memorized_words');
+
+        const totalMastery = progressData?.reduce((sum, p) =>
+            sum + (p.memorized_words?.length || 0), 0) || 0;
+
+        // 4. 중단 위험 학생 수 (3일 이상 미접속)
+        const threeDaysAgo = new Date();
+        threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
+
+        const { count: atRiskCount } = await supabase
             .from('users')
             .select('*', { count: 'exact', head: true })
             .eq('role', 'student')
-            .gte('last_login_at', sevenDaysAgo.toISOString());
+            .lt('last_login_at', threeDaysAgo.toISOString());
 
-        // 평균 완료 Day (completed 상태인 progress 수 / 학생 수)
-        const { data: progressData } = await supabase
-            .from('student_progress')
-            .select('user_id, status')
-            .eq('status', 'completed');
-
-        const completedByUser: Record<string, number> = {};
-        progressData?.forEach(p => {
-            completedByUser[p.user_id] = (completedByUser[p.user_id] || 0) + 1;
-        });
-
-        const userCount = Object.keys(completedByUser).length || 1;
-        const totalCompleted = Object.values(completedByUser).reduce((a, b) => a + b, 0);
-        const averageProgress = Math.round(totalCompleted / userCount);
-
-        // 평균 퀴즈 점수
+        // 5. 평균 퀴즈 점수
         const { data: quizData } = await supabase
             .from('quiz_history')
             .select('correct_answers, total_questions');
@@ -100,19 +118,107 @@ export async function getDashboardStats(): Promise<DashboardStats> {
         const averageScore = quizCount > 0 ? Math.round(totalScore / quizCount) : 0;
 
         return {
-            totalStudents: totalStudents || 0,
-            activeStudents: activeStudents || 0,
-            averageProgress,
+            totalStudents: totalCount,
+            todayAttendance: {
+                active: activeTodayCount,
+                total: totalCount
+            },
+            totalMastery,
+            atRiskCount: atRiskCount || 0,
             averageScore,
         };
     } catch (error) {
         console.error('Failed to get dashboard stats:', error);
         return {
             totalStudents: 0,
-            activeStudents: 0,
-            averageProgress: 0,
+            todayAttendance: { active: 0, total: 0 },
+            totalMastery: 0,
+            atRiskCount: 0,
             averageScore: 0,
         };
+    }
+}
+
+// 중단 위험 학생 목록 조회
+export async function getAtRiskStudents(): Promise<StudentListItem[]> {
+    try {
+        const threeDaysAgo = new Date();
+        threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
+
+        const { data: users, error } = await supabase
+            .from('users')
+            .select('*')
+            .eq('role', 'student')
+            .lt('last_login_at', threeDaysAgo.toISOString())
+            .order('last_login_at', { ascending: true });
+
+        if (error || !users) return [];
+
+        return Promise.all(
+            users.map(async (user) => {
+                const { data: progress } = await supabase
+                    .from('student_progress')
+                    .select('day, status')
+                    .eq('user_id', user.id);
+
+                const completedDays = progress?.filter(p => p.status === 'completed').length || 0;
+                const currentDay = progress?.reduce((max, p) => Math.max(max, p.day), 0) || 0;
+
+                return {
+                    id: user.id,
+                    academyName: user.academy_name,
+                    studentName: user.student_name,
+                    currentDay,
+                    completedDays,
+                    lastLoginAt: user.last_login_at || null,
+                    averageScore: 0, // 상세 페이지에서 확인
+                };
+            })
+        );
+    } catch (error) {
+        console.error('Failed to get at-risk students:', error);
+        return [];
+    }
+}
+
+// 학원 전체 오답 Top 10 조회
+export async function getGlobalTopWrongWords(): Promise<WrongWordStat[]> {
+    try {
+        const { data: wrongAnswers, error } = await supabase
+            .from('wrong_answers')
+            .select('word_data, wrong_count')
+            .order('wrong_count', { ascending: false })
+            .limit(10);
+
+        if (error || !wrongAnswers) return [];
+
+        // 동일한 단어들 합산 (여러 학생이 틀린 경우)
+        const wordMap = new Map<string, { meaning: string, count: number }>();
+
+        wrongAnswers.forEach(w => {
+            if (!w.word_data) return;
+            const word = w.word_data.word;
+            const meaning = w.word_data.meaning;
+            const existing = wordMap.get(word);
+
+            if (existing) {
+                wordMap.set(word, { meaning, count: existing.count + w.wrong_count });
+            } else {
+                wordMap.set(word, { meaning, count: w.wrong_count });
+            }
+        });
+
+        return Array.from(wordMap.entries())
+            .map(([word, data]) => ({
+                word,
+                meaning: data.meaning,
+                wrongCount: data.count
+            }))
+            .sort((a, b) => b.wrongCount - a.wrongCount)
+            .slice(0, 10);
+    } catch (error) {
+        console.error('Failed to get global top wrong words:', error);
+        return [];
     }
 }
 
