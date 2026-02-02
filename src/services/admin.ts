@@ -61,13 +61,19 @@ export interface StudentDetail {
 }
 
 // 전체 통계 조회
-export async function getDashboardStats(): Promise<DashboardStats> {
+export async function getDashboardStats(academyId?: string): Promise<DashboardStats> {
     try {
         // 1. 전체 학생 수
-        const { count: totalStudents } = await supabase
+        let query = supabase
             .from('users')
             .select('*', { count: 'exact', head: true })
             .eq('role', 'student');
+
+        if (academyId) {
+            query = query.eq('academy_id', academyId);
+        }
+
+        const { count: totalStudents } = await query;
 
         const totalCount = totalStudents || 0;
 
@@ -75,19 +81,32 @@ export async function getDashboardStats(): Promise<DashboardStats> {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-        const { data: todayActivity } = await supabase
+        // 학습 기록 테이블도 academy_id로 필터링 (조인 필요 없음, 컬럼 추가됨)
+        let progressQuery = supabase
             .from('student_progress')
             .select('user_id')
             .gte('last_studied_at', today.toISOString());
+
+        if (academyId) {
+            progressQuery = progressQuery.eq('academy_id', academyId);
+        }
+
+        const { data: todayActivity } = await progressQuery;
 
         // 고유 학생 수 계산
         const activeTodaySet = new Set(todayActivity?.map(a => a.user_id));
         const activeTodayCount = activeTodaySet.size;
 
         // 3. 누적 암기 단어 합계
-        const { data: progressData } = await supabase
+        let masteryQuery = supabase
             .from('student_progress')
             .select('memorized_words');
+
+        if (academyId) {
+            masteryQuery = masteryQuery.eq('academy_id', academyId);
+        }
+
+        const { data: progressData } = await masteryQuery;
 
         const totalMastery = progressData?.reduce((sum, p) =>
             sum + (p.memorized_words?.length || 0), 0) || 0;
@@ -96,16 +115,28 @@ export async function getDashboardStats(): Promise<DashboardStats> {
         const threeDaysAgo = new Date();
         threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
 
-        const { count: atRiskCount } = await supabase
+        let riskQuery = supabase
             .from('users')
             .select('*', { count: 'exact', head: true })
             .eq('role', 'student')
             .lt('last_login_at', threeDaysAgo.toISOString());
 
+        if (academyId) {
+            riskQuery = riskQuery.eq('academy_id', academyId);
+        }
+
+        const { count: atRiskCount } = await riskQuery;
+
         // 5. 평균 퀴즈 점수
-        const { data: quizData } = await supabase
+        let quizQuery = supabase
             .from('quiz_history')
             .select('correct_answers, total_questions');
+
+        if (academyId) {
+            quizQuery = quizQuery.eq('academy_id', academyId);
+        }
+
+        const { data: quizData } = await quizQuery;
 
         let totalScore = 0;
         let quizCount = 0;
@@ -140,17 +171,23 @@ export async function getDashboardStats(): Promise<DashboardStats> {
 }
 
 // 중단 위험 학생 목록 조회
-export async function getAtRiskStudents(): Promise<StudentListItem[]> {
+export async function getAtRiskStudents(academyId?: string): Promise<StudentListItem[]> {
     try {
         const threeDaysAgo = new Date();
         threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
 
-        const { data: users, error } = await supabase
+        let query = supabase
             .from('users')
             .select('*')
             .eq('role', 'student')
             .lt('last_login_at', threeDaysAgo.toISOString())
             .order('last_login_at', { ascending: true });
+
+        if (academyId) {
+            query = query.eq('academy_id', academyId);
+        }
+
+        const { data: users, error } = await query;
 
         if (error || !users) return [];
 
@@ -166,7 +203,7 @@ export async function getAtRiskStudents(): Promise<StudentListItem[]> {
 
                 return {
                     id: user.id,
-                    academyName: user.academy_name,
+                    academyName: user.academy_name || 'Unknown',
                     studentName: user.student_name,
                     currentDay,
                     completedDays,
@@ -182,13 +219,18 @@ export async function getAtRiskStudents(): Promise<StudentListItem[]> {
 }
 
 // 학원 전체 오답 Top 10 조회
-export async function getGlobalTopWrongWords(): Promise<WrongWordStat[]> {
+export async function getGlobalTopWrongWords(academyId?: string): Promise<WrongWordStat[]> {
     try {
-        const { data: wrongAnswers, error } = await supabase
+        let query = supabase
             .from('wrong_answers')
             .select('word_data, wrong_count')
-            .order('wrong_count', { ascending: false })
-            .limit(10);
+            .order('wrong_count', { ascending: false });
+
+        if (academyId) {
+            query = query.eq('academy_id', academyId);
+        }
+
+        const { data: wrongAnswers, error } = await query.limit(50); // 충분한 데이터를 가져와서 합산
 
         if (error || !wrongAnswers) return [];
 
@@ -223,14 +265,20 @@ export async function getGlobalTopWrongWords(): Promise<WrongWordStat[]> {
 }
 
 // 학생 목록 조회
-export async function getStudentList(): Promise<StudentListItem[]> {
+export async function getStudentList(academyId?: string): Promise<StudentListItem[]> {
     try {
         // 모든 학생 조회
-        const { data: users, error } = await supabase
+        let query = supabase
             .from('users')
             .select('*')
             .eq('role', 'student')
             .order('last_login_at', { ascending: false });
+
+        if (academyId) {
+            query = query.eq('academy_id', academyId);
+        }
+
+        const { data: users, error } = await query;
 
         if (error) throw error;
         if (!users) return [];
@@ -262,7 +310,7 @@ export async function getStudentList(): Promise<StudentListItem[]> {
 
                 return {
                     id: user.id,
-                    academyName: user.academy_name,
+                    academyName: user.academy_name || 'Unknown',
                     studentName: user.student_name,
                     currentDay,
                     completedDays,
@@ -280,18 +328,32 @@ export async function getStudentList(): Promise<StudentListItem[]> {
 }
 
 // Day별 진행률 조회 (전체 학생 대상)
-export async function getDayProgressStats(level: string = 'middle'): Promise<DayProgress[]> {
+export async function getDayProgressStats(level: string = 'middle', academyId?: string): Promise<DayProgress[]> {
     try {
-        const { count: totalStudents } = await supabase
+        // 전체 학생 수
+        let studentQuery = supabase
             .from('users')
             .select('*', { count: 'exact', head: true })
             .eq('role', 'student');
 
-        const { data: progress } = await supabase
+        if (academyId) {
+            studentQuery = studentQuery.eq('academy_id', academyId);
+        }
+
+        const { count: totalStudents } = await studentQuery;
+
+        // 완료된 진도 데이터
+        let progressQuery = supabase
             .from('student_progress')
             .select('day, status')
             .eq('level', level)
             .eq('status', 'completed');
+
+        if (academyId) {
+            progressQuery = progressQuery.eq('academy_id', academyId);
+        }
+
+        const { data: progress } = await progressQuery;
 
         const dayStats: Record<number, number> = {};
         progress?.forEach(p => {
@@ -396,30 +458,45 @@ export async function getStudentDetail(userId: string): Promise<StudentDetail | 
 // =====================================================
 
 export interface CreateStudentInput {
-    academyName: string;
+    academyId?: string;       // 신규
+    academyName?: string;     // [호환용] 슈퍼관리자용 or 기존
     studentName: string;
 }
 
 // 학생 등록
 export async function createStudent(input: CreateStudentInput): Promise<{ success: boolean; error?: string; student?: User }> {
     try {
-        // 이미 존재하는지 확인
-        const { data: existing } = await supabase
-            .from('users')
-            .select('id')
-            .eq('academy_name', input.academyName)
-            .eq('student_name', input.studentName)
-            .single();
+        if (!input.academyId && !input.academyName) {
+            return { success: false, error: '학원 정보가 필요합니다.' };
+        }
+
+        // 중복 체크 쿼리
+        let checkQuery = supabase.from('users').select('id');
+
+        if (input.academyId) {
+            checkQuery = checkQuery.eq('academy_id', input.academyId);
+        } else {
+            // academyId가 없을 때만 이름으로 체크 (기존)
+            checkQuery = checkQuery.eq('academy_name', input.academyName!);
+        }
+
+        const { data: existing } = await checkQuery.eq('student_name', input.studentName).maybeSingle();
 
         if (existing) {
-            return { success: false, error: '이미 등록된 학생입니다.' };
+            return { success: false, error: '해당 학원에 이미 등록된 학생입니다.' };
         }
 
         // 새 학생 등록
+        // academyName이 제공되지 않은 경우, academyId로 이름을 조회하거나 생략
+        // 여기서는 academy_name 컬럼이 NOT NULL이 아닐 수 있음 (스키마 변경됨)
+        // 하지만 호환상을 위해 academyName이 없으면 빈 문자열이라도 넣어야 할지?
+        // -> 스키마에서 academy_name DROP NOT NULL 처리했으므로 괜찮음.
+
         const { data: newStudent, error } = await supabase
             .from('users')
             .insert({
-                academy_name: input.academyName,
+                academy_id: input.academyId,
+                academy_name: input.academyName, // 호환용
                 student_name: input.studentName,
                 role: 'student',
             })
@@ -471,6 +548,7 @@ export async function updateStudent(
         const updateData: Record<string, string> = {};
         if (input.academyName) updateData.academy_name = input.academyName;
         if (input.studentName) updateData.student_name = input.studentName;
+        if (input.academyId) updateData.academy_id = input.academyId;
 
         const { error } = await supabase
             .from('users')
@@ -516,4 +594,5 @@ export async function checkStudentExists(
         return { exists: false };
     }
 }
+
 

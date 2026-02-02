@@ -39,21 +39,27 @@ export function AdminDashboard() {
     const [isAdding, setIsAdding] = useState(false);
 
     useEffect(() => {
-        loadDashboardData();
-    }, []);
+        if (user) {
+            loadDashboardData();
+        }
+    }, [user]);
 
     useEffect(() => {
-        loadDayProgress();
-    }, [selectedLevel]);
+        if (user) {
+            loadDayProgress();
+        }
+    }, [selectedLevel, user]);
 
     const loadDashboardData = async () => {
+        if (!user) return;
         setIsLoading(true);
         try {
+            const academyId = user.academyId; // Multi-tenant scoping
             const [statsData, studentsData, wrongWordsData, atRiskStudentsData] = await Promise.all([
-                getDashboardStats(),
-                getStudentList(),
-                getGlobalTopWrongWords(),
-                getAtRiskStudents(),
+                getDashboardStats(academyId),
+                getStudentList(academyId),
+                getGlobalTopWrongWords(academyId),
+                getAtRiskStudents(academyId),
             ]);
             setStats(statsData);
             setStudents(studentsData);
@@ -66,7 +72,8 @@ export function AdminDashboard() {
     };
 
     const loadDayProgress = async () => {
-        const progress = await getDayProgressStats(selectedLevel);
+        if (!user) return;
+        const progress = await getDayProgressStats(selectedLevel, user.academyId);
         setDayProgress(progress);
     };
 
@@ -82,8 +89,19 @@ export function AdminDashboard() {
     // 학생 등록 핸들러
     const handleAddStudent = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!newAcademyName.trim() || !newStudentName.trim()) {
-            setAddError('학원명과 학생 이름을 입력해주세요.');
+
+        const isSuperAdmin = user?.role === 'super_admin';
+        const targetAcademyId = user?.academyId;
+        const targetAcademyName = newAcademyName.trim();
+
+        // 유효성 검사
+        if (isSuperAdmin && !targetAcademyName) {
+            setAddError('학원명을 입력해주세요.');
+            return;
+        }
+
+        if (!newStudentName.trim()) {
+            setAddError('학생 이름을 입력해주세요.');
             return;
         }
 
@@ -91,7 +109,8 @@ export function AdminDashboard() {
         setAddError(null);
 
         const result = await createStudent({
-            academyName: newAcademyName.trim(),
+            academyId: targetAcademyId,
+            academyName: isSuperAdmin ? targetAcademyName : undefined,
             studentName: newStudentName.trim(),
         });
 
@@ -143,7 +162,7 @@ export function AdminDashboard() {
         advanced: '수능 심화',
     };
 
-    if (isLoading) {
+    if (isLoading && !stats) { // 초기 로딩만 표시
         return (
             <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex items-center justify-center">
                 <div className="text-center">
@@ -167,7 +186,9 @@ export function AdminDashboard() {
                         </div>
                         <div>
                             <h1 className="text-xl font-bold text-gray-900 dark:text-white">관리자 대시보드</h1>
-                            <p className="text-sm text-gray-500 dark:text-slate-400">{user?.academyName} - {user?.studentName}</p>
+                            <p className="text-sm text-gray-500 dark:text-slate-400">
+                                {user?.academySettings?.name || user?.academyName} - {user?.role === 'super_admin' ? '최고 관리자' : '관리자'}
+                            </p>
                         </div>
                     </div>
 
@@ -493,19 +514,21 @@ export function AdminDashboard() {
                         </div>
 
                         <form onSubmit={handleAddStudent} className="space-y-6">
-                            <div>
-                                <label className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
-                                    학원명
-                                </label>
-                                <input
-                                    type="text"
-                                    value={newAcademyName}
-                                    onChange={(e) => setNewAcademyName(e.target.value)}
-                                    placeholder="예: 서울학원"
-                                    className="w-full px-4 py-3.5 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:text-white dark:placeholder-slate-500 transition-all"
-                                    disabled={isAdding}
-                                />
-                            </div>
+                            {user?.role === 'super_admin' && (
+                                <div>
+                                    <label className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
+                                        학원명
+                                    </label>
+                                    <input
+                                        type="text"
+                                        value={newAcademyName}
+                                        onChange={(e) => setNewAcademyName(e.target.value)}
+                                        placeholder="예: 서울학원"
+                                        className="w-full px-4 py-3.5 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:text-white dark:placeholder-slate-500 transition-all"
+                                        disabled={isAdding}
+                                    />
+                                </div>
+                            )}
 
                             <div>
                                 <label className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
@@ -556,4 +579,3 @@ export function AdminDashboard() {
 }
 
 export default AdminDashboard;
-

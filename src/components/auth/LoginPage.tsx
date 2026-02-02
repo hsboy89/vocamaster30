@@ -1,27 +1,53 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuthStore } from '../../stores';
+import { Academy } from '../../types';
 
 type LoginTab = 'student' | 'admin';
 
 export function LoginPage() {
     const [activeTab, setActiveTab] = useState<LoginTab>('student');
-    const [academyName, setAcademyName] = useState('');
+    const [academyCode, setAcademyCode] = useState('');
     const [studentName, setStudentName] = useState('');
     const [adminId, setAdminId] = useState('');
     const [password, setPassword] = useState('');
 
-    const { login, adminLogin, isLoading, error, setError } = useAuthStore();
+    // 학원 정보 조회를 위한 상태
+    const [currentAcademy, setCurrentAcademy] = useState<Academy | null>(null);
+
+    const { login, adminLogin, fetchAcademy, isLoading, error, setError } = useAuthStore();
+
+    // 테마 색상 동적 적용
+    const primaryColor = currentAcademy?.settings?.theme?.primary || '#2563eb'; // 기본 blue-600
+
+    useEffect(() => {
+        // 학원 코드가 입력되면 정보 조회 (디바운싱 적용 가능, 여기선 간단히 blur나 버튼 등의 트리거 없이 입력 길이 체크 또는 별도 로직)
+        // 실제로는 사용자가 입력을 마치고 포커스를 옮길 때(onBlur)나 3글자 이상일 때 조회하는 것이 좋음
+        // 여기서는 UX 단순화를 위해 onBlur에서 처리하도록 input에 핸들러 추가 예정
+    }, [academyCode]);
+
+    const handleAcademyCodeBlur = async () => {
+        if (academyCode.trim().length >= 2) {
+            const academy = await fetchAcademy(academyCode.trim());
+            if (academy) {
+                setCurrentAcademy(academy);
+                // 학원별 테마 적용 (CSS 변수 활용 가능)
+                document.documentElement.style.setProperty('--primary-color', academy.settings.theme.primary);
+            } else {
+                setCurrentAcademy(null);
+            }
+        }
+    };
 
     const handleStudentLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         setError(null);
 
-        if (!academyName.trim() || !studentName.trim()) {
-            setError('학원명과 이름을 모두 입력해주세요.');
+        if (!academyCode.trim() || !studentName.trim()) {
+            setError('학원 코드와 이름을 모두 입력해주세요.');
             return;
         }
 
-        await login({ academyName: academyName.trim(), studentName: studentName.trim() });
+        await login({ academyCode: academyCode.trim(), studentName: studentName.trim() });
     };
 
     const handleAdminLogin = async (e: React.FormEvent) => {
@@ -33,7 +59,12 @@ export function LoginPage() {
             return;
         }
 
-        await adminLogin(adminId.trim(), password);
+        // 슈퍼 관리자인 경우 academyCode가 없을 수 있음
+        await adminLogin({
+            academyCode: academyCode.trim(),
+            adminId: adminId.trim(),
+            password
+        });
     };
 
     const handleTabChange = (tab: LoginTab) => {
@@ -42,17 +73,29 @@ export function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen bg-[#020617] flex items-center justify-center p-4 relative overflow-hidden">
-            {/* Background decorations - slightly brightened for contrast */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-blue-600/10 blur-[120px]" />
+        <div className="min-h-screen bg-[#020617] flex items-center justify-center p-4 relative overflow-hidden transition-colors duration-500">
+            {/* Background decorations - dynamic color based on academy theme */}
+            <div
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[120px] opacity-10 transition-colors duration-500"
+                style={{ backgroundColor: primaryColor }}
+            />
             <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-500/5 blur-[120px]" />
             <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-emerald-500/5 blur-[120px]" />
 
             <div className="relative bg-slate-900/80 backdrop-blur-2xl border border-white/20 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] max-w-md w-full overflow-hidden">
                 {/* Header */}
-                <div className="bg-gradient-to-r from-blue-600 to-emerald-500 p-8 text-center">
-                    <h1 className="text-3xl font-bold text-white mb-2">VocaMaster30</h1>
-                    <p className="text-blue-100 text-sm">하루 10분, 완벽한 어휘 루틴</p>
+                <div
+                    className="p-8 text-center transition-all duration-500"
+                    style={{
+                        background: `linear-gradient(to right, ${primaryColor}, ${activeTab === 'admin' ? '#10b981' : primaryColor})`
+                    }}
+                >
+                    <h1 className="text-3xl font-bold text-white mb-2">
+                        {currentAcademy ? currentAcademy.name : 'VocaMaster30'}
+                    </h1>
+                    <p className="text-white/80 text-sm">
+                        {currentAcademy ? '학생 전용 학습 공간' : '하루 10분, 완벽한 어휘 루틴'}
+                    </p>
                 </div>
 
                 {/* Tabs */}
@@ -60,9 +103,10 @@ export function LoginPage() {
                     <button
                         onClick={() => handleTabChange('student')}
                         className={`flex-1 py-4 text-center font-medium transition-all duration-200 ${activeTab === 'student'
-                            ? 'text-blue-400 border-b-2 border-blue-400 bg-blue-400/5'
+                            ? 'text-white border-b-2 bg-white/5'
                             : 'text-gray-400 hover:text-gray-200 hover:bg-white/5'
                             }`}
+                        style={{ borderColor: activeTab === 'student' ? primaryColor : 'transparent' }}
                     >
                         <span className="flex items-center justify-center gap-2">
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -93,16 +137,35 @@ export function LoginPage() {
                         <form onSubmit={handleStudentLogin} className="space-y-5">
                             <div>
                                 <label className="block text-sm font-medium text-slate-300 mb-2">
-                                    학원명
+                                    학원 코드 <span className="text-xs text-slate-500 ml-1">(학원에서 발급받은 코드)</span>
                                 </label>
-                                <input
-                                    type="text"
-                                    value={academyName}
-                                    onChange={(e) => setAcademyName(e.target.value)}
-                                    placeholder="예: 서울영어학원"
-                                    className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all outline-none"
-                                    disabled={isLoading}
-                                />
+                                <div className="relative">
+                                    <input
+                                        type="text"
+                                        value={academyCode}
+                                        onChange={(e) => setAcademyCode(e.target.value)}
+                                        onBlur={handleAcademyCodeBlur}
+                                        placeholder="예: seoul01"
+                                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-slate-500 focus:ring-2 transition-all outline-none"
+                                        style={{
+                                            borderColor: currentAcademy ? primaryColor : 'rgba(255,255,255,0.1)',
+                                            ['--tw-ring-color' as any]: primaryColor
+                                        }}
+                                        disabled={isLoading}
+                                    />
+                                    {currentAcademy && (
+                                        <div className="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-500">
+                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                            </svg>
+                                        </div>
+                                    )}
+                                </div>
+                                {currentAcademy && (
+                                    <p className="text-xs text-emerald-400 mt-1 ml-1">
+                                        ✨ {currentAcademy.name}에 오신 것을 환영합니다!
+                                    </p>
+                                )}
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-slate-300 mb-2">
@@ -113,7 +176,8 @@ export function LoginPage() {
                                     value={studentName}
                                     onChange={(e) => setStudentName(e.target.value)}
                                     placeholder="예: 김철수"
-                                    className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all outline-none"
+                                    className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-slate-500 focus:ring-2 transition-all outline-none"
+                                    style={{ ['--tw-ring-color' as any]: primaryColor }}
                                     disabled={isLoading}
                                 />
                             </div>
@@ -127,7 +191,11 @@ export function LoginPage() {
                             <button
                                 type="submit"
                                 disabled={isLoading}
-                                className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-bold py-4 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-blue-500/20"
+                                className="w-full text-white font-bold py-4 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+                                style={{
+                                    backgroundColor: primaryColor,
+                                    boxShadow: `0 10px 15px -3px ${primaryColor}40`
+                                }}
                             >
                                 {isLoading ? (
                                     <>
@@ -151,7 +219,20 @@ export function LoginPage() {
                         <form onSubmit={handleAdminLogin} className="space-y-5">
                             <div>
                                 <label className="block text-sm font-medium text-slate-300 mb-2">
-                                    아이디
+                                    학원 코드 <span className="text-xs text-slate-500 ml-1">(슈퍼관리자는 생략 가능)</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    value={academyCode}
+                                    onChange={(e) => setAcademyCode(e.target.value)}
+                                    placeholder="예: seoul01"
+                                    className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-slate-500 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all outline-none"
+                                    disabled={isLoading}
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-slate-300 mb-2">
+                                    관리자 아이디
                                 </label>
                                 <input
                                     type="text"
@@ -214,14 +295,13 @@ export function LoginPage() {
                 <div className="px-8 pb-8 text-center">
                     <p className="text-xs text-slate-500">
                         {activeTab === 'student'
-                            ? '관리자가 등록한 학생만 로그인할 수 있습니다.'
-                            : '관리자 계정이 필요하시면 담당자에게 문의하세요.'}
+                            ? '학원에서 발급받은 코드를 입력하여 로그인하세요.'
+                            : '서비스 관리자 및 학원장 전용 로그인입니다.'}
                     </p>
                 </div>
             </div>
         </div>
     );
-
 }
 
 export default LoginPage;
