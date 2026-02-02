@@ -126,23 +126,16 @@ export const useAuthStore = create<AuthStore>()(
                     const ENV_ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
 
                     // 1. 슈퍼 관리자 체크 (환경변수 사용)
-                    // 슈퍼 관리자는 학원 코드가 없어도 되거나, 특정 코드로 진입
                     if (adminId === ENV_ADMIN_ID && password === ENV_ADMIN_PASSWORD) {
-                        // 슈퍼 관리자 - 환경변수 인증 성공 시 super_admin으로 처리
-                        const { data: adminUser } = await supabase
-                            .from('users')
-                            .select('*')
-                            .in('role', ['admin', 'super_admin'])
-                            .limit(1)
-                            .single();
-
-                        if (adminUser) {
-                            const user = dbUserToUser(adminUser as DbUser);
-                            // 환경변수 인증 성공 = 슈퍼관리자로 강제 설정
-                            user.role = 'super_admin';
-                            set({ user, academy: null, isAuthenticated: true, isLoading: false });
-                            return true;
-                        }
+                        // 환경변수 인증 성공 = 슈퍼관리자로 처리 (DB 조회 불필요)
+                        const superAdminUser: User = {
+                            id: 'super-admin',
+                            studentName: '슈퍼관리자',
+                            role: 'super_admin',
+                            adminId: ENV_ADMIN_ID,
+                        };
+                        set({ user: superAdminUser, academy: null, isAuthenticated: true, isLoading: false });
+                        return true;
                     }
 
                     // 2. 학원 관리자 체크
