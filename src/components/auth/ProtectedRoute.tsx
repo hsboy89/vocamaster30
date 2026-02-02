@@ -10,7 +10,7 @@ interface ProtectedRouteProps {
 
 export function ProtectedRoute({
     children,
-    allowedRoles = ['student', 'academy_admin', 'super_admin'],
+    allowedRoles = ['student', 'academy_admin', 'super_admin', 'admin'],
     redirectTo = '/login'
 }: ProtectedRouteProps) {
     const { isAuthenticated, user } = useAuthStore();

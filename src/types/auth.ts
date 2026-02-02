@@ -1,7 +1,8 @@
 // Authentication Types for VocaMaster30 (Multi-Tenant SaaS)
 
 // 사용자 역할: 학생, 학원관리자, 슈퍼관리자
-export type UserRole = 'student' | 'academy_admin' | 'super_admin';
+// 'admin'은 레거시 호환용 (기존 DB 데이터)
+export type UserRole = 'student' | 'academy_admin' | 'super_admin' | 'admin';
 
 // =====================================================
 // Academy (학원) 관련 타입

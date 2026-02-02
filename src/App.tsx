@@ -94,8 +94,8 @@ function StudentApp() {
 function AppRouter() {
   const { isAuthenticated, user } = useAuthStore();
 
-  // Helper to check if user is admin
-  const isAdmin = user?.role === 'academy_admin' || user?.role === 'super_admin';
+  // Helper to check if user is admin (including legacy 'admin' role for compatibility)
+  const isAdmin = user?.role === 'academy_admin' || user?.role === 'super_admin' || user?.role === 'admin';
 
   return (
     <Routes>
@@ -123,7 +123,7 @@ function AppRouter() {
       <Route
         path="/admin"
         element={
-          <ProtectedRoute allowedRoles={['academy_admin', 'super_admin']}>
+          <ProtectedRoute allowedRoles={['academy_admin', 'super_admin', 'admin']}>
             <AdminDashboard />
           </ProtectedRoute>
         }
@@ -131,7 +131,7 @@ function AppRouter() {
       <Route
         path="/admin/student/:studentId"
         element={
-          <ProtectedRoute allowedRoles={['academy_admin', 'super_admin']}>
+          <ProtectedRoute allowedRoles={['academy_admin', 'super_admin', 'admin']}>
             <StudentDetailPage />
           </ProtectedRoute>
         }
