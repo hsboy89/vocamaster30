@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Level, Word, QuizType } from './types';
 import { Header, LoginPage, ProtectedRoute } from './components';
-import { HomePage, StudyPage, QuizPage, AdminDashboard, StudentDetailPage } from './pages';
+import { HomePage, StudyPage, QuizPage, AdminDashboard, StudentDetailPage, SuperAdminDashboard } from './pages';
 import { useAuthStore } from './stores';
 import './index.css';
 
@@ -94,8 +94,16 @@ function StudentApp() {
 function AppRouter() {
   const { isAuthenticated, user } = useAuthStore();
 
-  // Helper to check if user is admin (including legacy 'admin' role for compatibility)
+  // Helper to check user roles
+  const isSuperAdmin = user?.role === 'super_admin';
   const isAdmin = user?.role === 'academy_admin' || user?.role === 'super_admin' || user?.role === 'admin';
+
+  // Get redirect path based on role
+  const getRedirectPath = () => {
+    if (isSuperAdmin) return '/super-admin';
+    if (isAdmin) return '/admin';
+    return '/student';
+  };
 
   return (
     <Routes>
@@ -104,7 +112,7 @@ function AppRouter() {
         path="/login"
         element={
           isAuthenticated
-            ? <Navigate to={isAdmin ? '/admin' : '/student'} replace />
+            ? <Navigate to={getRedirectPath()} replace />
             : <LoginPage />
         }
       />
@@ -115,6 +123,16 @@ function AppRouter() {
         element={
           <ProtectedRoute allowedRoles={['student']}>
             <StudentApp />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Super Admin Routes */}
+      <Route
+        path="/super-admin"
+        element={
+          <ProtectedRoute allowedRoles={['super_admin']}>
+            <SuperAdminDashboard />
           </ProtectedRoute>
         }
       />
@@ -142,7 +160,7 @@ function AppRouter() {
         path="*"
         element={
           isAuthenticated
-            ? <Navigate to={isAdmin ? '/admin' : '/student'} replace />
+            ? <Navigate to={getRedirectPath()} replace />
             : <Navigate to="/login" replace />
         }
       />
