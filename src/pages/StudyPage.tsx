@@ -6,6 +6,8 @@ import { StudyCard, StudyControls } from '../components';
 
 type HideMode = 'none' | 'word' | 'meaning' | 'synonyms';
 
+const AUTO_SPEAK_STORAGE_KEY = 'vocamaster-auto-speak';
+
 interface StudyPageProps {
     level: Level;
     day: number;
@@ -17,7 +19,16 @@ export function StudyPage({ level, day, onBack, onQuizStart }: StudyPageProps) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [hideMode, setHideMode] = useState<HideMode>('none');
     const [words, setWords] = useState<Word[]>([]);
+    const [autoSpeak, setAutoSpeak] = useState<boolean>(() => {
+        const stored = localStorage.getItem(AUTO_SPEAK_STORAGE_KEY);
+        return stored === 'true';
+    });
     const { getStatus, setStatus, addMemorizedWord } = useProgress();
+
+    // Save autoSpeak preference
+    useEffect(() => {
+        localStorage.setItem(AUTO_SPEAK_STORAGE_KEY, String(autoSpeak));
+    }, [autoSpeak]);
 
     useEffect(() => {
         const vocab = getVocabulary(level, day);
@@ -92,6 +103,7 @@ export function StudyPage({ level, day, onBack, onQuizStart }: StudyPageProps) {
                     hideMode={hideMode}
                     level={level}
                     day={day}
+                    autoSpeak={autoSpeak}
                     onMemorized={handleMemorized}
                 />
 
@@ -100,7 +112,9 @@ export function StudyPage({ level, day, onBack, onQuizStart }: StudyPageProps) {
                     currentIndex={currentIndex}
                     totalWords={words.length}
                     hideMode={hideMode}
+                    autoSpeak={autoSpeak}
                     onHideModeChange={setHideMode}
+                    onAutoSpeakChange={setAutoSpeak}
                     onPrevious={handlePrevious}
                     onNext={handleNext}
                     onQuizStart={handleQuizStart}
@@ -111,3 +125,4 @@ export function StudyPage({ level, day, onBack, onQuizStart }: StudyPageProps) {
 }
 
 export default StudyPage;
+

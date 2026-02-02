@@ -10,10 +10,11 @@ interface StudyCardProps {
     hideMode: HideMode;
     level?: Level;
     day?: number;
+    autoSpeak?: boolean;
     onMemorized?: () => void;
 }
 
-export function StudyCard({ word, hideMode, level, day, onMemorized }: StudyCardProps) {
+export function StudyCard({ word, hideMode, level, day, autoSpeak = false, onMemorized }: StudyCardProps) {
     const { speak } = useTTS();
     const [isFlipped, setIsFlipped] = useState(false);
     const [isMemorized, setIsMemorized] = useState(false);
@@ -36,6 +37,20 @@ export function StudyCard({ word, hideMode, level, day, onMemorized }: StudyCard
             setIsMemorized(false);
         }
     }, [word.id, level, day]);
+
+    // Auto speak when word changes - simple and direct approach
+    useEffect(() => {
+        // Only speak if autoSpeak is ON
+        if (!autoSpeak) return;
+
+        // Speak the current word with a delay for TTS initialization
+        const timer = setTimeout(() => {
+            speak(word.word);
+        }, 300);
+
+        return () => clearTimeout(timer);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [word.id, autoSpeak]); // Trigger on word change or autoSpeak toggle
 
     const handleSpeak = () => {
         speak(word.word);

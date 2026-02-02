@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 interface UseTTSReturn {
     speak: (text: string, lang?: string) => void;
@@ -7,8 +7,30 @@ interface UseTTSReturn {
 }
 
 export function useTTS(): UseTTSReturn {
+    const voicesLoaded = useRef(false);
+
+    // Ensure voices are loaded
+    useEffect(() => {
+        const loadVoices = () => {
+            const voices = window.speechSynthesis.getVoices();
+            if (voices.length > 0) {
+                voicesLoaded.current = true;
+            }
+        };
+
+        // Load immediately if available
+        loadVoices();
+
+        // Also listen for voiceschanged event (async loading in some browsers)
+        window.speechSynthesis.addEventListener('voiceschanged', loadVoices);
+
+        return () => {
+            window.speechSynthesis.removeEventListener('voiceschanged', loadVoices);
+        };
+    }, []);
+
     const speak = useCallback((text: string, lang: string = 'en-US') => {
-        // 이전 음성 중지
+        // Cancel any ongoing speech
         window.speechSynthesis.cancel();
 
         const utterance = new SpeechSynthesisUtterance(text);
@@ -17,7 +39,7 @@ export function useTTS(): UseTTSReturn {
         utterance.pitch = 1;
         utterance.volume = 1;
 
-        // 영어 보이스 선택 시도
+        // Get voices and select English voice
         const voices = window.speechSynthesis.getVoices();
         const englishVoice = voices.find(
             (voice) => voice.lang.startsWith('en') && voice.name.includes('Google')
@@ -27,7 +49,10 @@ export function useTTS(): UseTTSReturn {
             utterance.voice = englishVoice;
         }
 
-        window.speechSynthesis.speak(utterance);
+        // Workaround for Chrome bug where speech doesn't work after cancel
+        setTimeout(() => {
+            window.speechSynthesis.speak(utterance);
+        }, 10);
     }, []);
 
     const stop = useCallback(() => {
@@ -42,3 +67,4 @@ export function useTTS(): UseTTSReturn {
 }
 
 export default useTTS;
+
