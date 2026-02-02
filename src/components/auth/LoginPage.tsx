@@ -42,13 +42,13 @@ export function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen bg-[#0f172a] flex items-center justify-center p-4 relative overflow-hidden">
-            {/* Background decorations inspired by the second image */}
-            <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-600/10 blur-[120px]" />
-            <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-emerald-600/10 blur-[120px]" />
-            <div className="absolute top-[20%] right-[10%] w-[30%] h-[30%] rounded-full bg-blue-500/5 blur-[100px]" />
+        <div className="min-h-screen bg-[#020617] flex items-center justify-center p-4 relative overflow-hidden">
+            {/* Background decorations - slightly brightened for contrast */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-blue-600/10 blur-[120px]" />
+            <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-500/5 blur-[120px]" />
+            <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-emerald-500/5 blur-[120px]" />
 
-            <div className="relative bg-slate-900/40 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl max-w-md w-full overflow-hidden">
+            <div className="relative bg-slate-900/80 backdrop-blur-2xl border border-white/20 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] max-w-md w-full overflow-hidden">
                 {/* Header */}
                 <div className="bg-gradient-to-r from-blue-600 to-emerald-500 p-8 text-center">
                     <h1 className="text-3xl font-bold text-white mb-2">VocaMaster30</h1>
