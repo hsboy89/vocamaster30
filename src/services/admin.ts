@@ -470,6 +470,20 @@ export async function createStudent(input: CreateStudentInput): Promise<{ succes
             return { success: false, error: '학원 정보가 필요합니다.' };
         }
 
+        // academyId가 있지만 academyName이 없으면 조회
+        let academyName = input.academyName;
+        if (input.academyId && !academyName) {
+            const { data: academy } = await supabase
+                .from('academies')
+                .select('name')
+                .eq('id', input.academyId)
+                .single();
+
+            if (academy) {
+                academyName = academy.name;
+            }
+        }
+
         // 중복 체크 쿼리
         let checkQuery = supabase.from('users').select('id');
 
@@ -477,7 +491,7 @@ export async function createStudent(input: CreateStudentInput): Promise<{ succes
             checkQuery = checkQuery.eq('academy_id', input.academyId);
         } else {
             // academyId가 없을 때만 이름으로 체크 (기존)
-            checkQuery = checkQuery.eq('academy_name', input.academyName!);
+            checkQuery = checkQuery.eq('academy_name', academyName!);
         }
 
         const { data: existing } = await checkQuery.eq('student_name', input.studentName).maybeSingle();
@@ -487,16 +501,11 @@ export async function createStudent(input: CreateStudentInput): Promise<{ succes
         }
 
         // 새 학생 등록
-        // academyName이 제공되지 않은 경우, academyId로 이름을 조회하거나 생략
-        // 여기서는 academy_name 컬럼이 NOT NULL이 아닐 수 있음 (스키마 변경됨)
-        // 하지만 호환상을 위해 academyName이 없으면 빈 문자열이라도 넣어야 할지?
-        // -> 스키마에서 academy_name DROP NOT NULL 처리했으므로 괜찮음.
-
         const { data: newStudent, error } = await supabase
             .from('users')
             .insert({
                 academy_id: input.academyId,
-                academy_name: input.academyName, // 호환용
+                academy_name: academyName, // 조회된 이름 또는 입력된 이름
                 student_name: input.studentName,
                 role: 'student',
             })
