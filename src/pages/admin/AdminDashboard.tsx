@@ -187,7 +187,7 @@ export function AdminDashboard() {
                         <div>
                             <h1 className="text-xl font-bold text-gray-900 dark:text-white">관리자 대시보드</h1>
                             <p className="text-sm text-gray-500 dark:text-slate-400">
-                                {user?.academySettings?.name || user?.academyName} - {user?.role === 'super_admin' ? '최고 관리자' : '관리자'}
+                                {user?.academyName} - {user?.role === 'super_admin' ? '최고 관리자' : '관리자'}
                             </p>
                         </div>
                     </div>

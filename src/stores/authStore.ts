@@ -130,7 +130,7 @@ export const useAuthStore = create<AuthStore>()(
                     if (adminId === ENV_ADMIN_ID && password === ENV_ADMIN_PASSWORD) {
                         // 슈퍼 관리자용 조회 (role='super_admin' OR 'admin')
                         // 마이그레이션 전후 호환성을 위해 둘 다 체크하거나 마이그레이션 된 role 사용
-                        const { data: adminUser, error: fetchError } = await supabase
+                        const { data: adminUser } = await supabase
                             .from('users')
                             .select('*')
                             .in('role', ['admin', 'super_admin'])
