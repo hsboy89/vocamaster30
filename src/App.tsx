@@ -1,9 +1,15 @@
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { Level, Word, QuizType } from './types';
-import { Header, LoginPage, ProtectedRoute } from './components';
-import { HomePage, StudyPage, QuizPage, AdminDashboard, StudentDetailPage, SuperAdminDashboard } from './pages';
+// Shared Types & Components
+import { Level, Word, QuizType } from './shared/types';
+import { Header, LoginPage, ProtectedRoute } from './shared/components';
+import { AdminLoginLayout } from './shared/components/layout/AdminLoginLayout';
+import { StudentLoginModal } from './shared/components/auth/StudentLoginModal';
 import { useAuthStore } from './stores';
+// Apps
+import { HomePage, StudyPage, QuizPage } from './apps/student/pages';
+import { AdminDashboard, StudentDetailPage } from './apps/admin/pages';
+import { SuperAdminDashboard } from './apps/super-admin/pages';
 import './index.css';
 
 type StudentView = 'home' | 'study' | 'quiz';
@@ -13,13 +19,18 @@ interface QuizState {
   quizType: QuizType;
 }
 
-// Student App Component (contains the original app logic)
+// Student App Component
 function StudentApp() {
   const [currentLevel, setCurrentLevel] = useState<Level>('middle');
   const [currentView, setCurrentView] = useState<StudentView>('home');
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
   const [quizState, setQuizState] = useState<QuizState | null>(null);
+
+  // Login Modal State
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
   const { user, logout } = useAuthStore();
+  const isGuest = !user;
 
   const handleLevelChange = (level: Level) => {
     setCurrentLevel(level);
@@ -65,6 +76,8 @@ function StudentApp() {
         <HomePage
           level={currentLevel}
           onDaySelect={handleDaySelect}
+          isGuest={isGuest}
+          onLockedClick={() => setIsLoginModalOpen(true)}
         />
       )}
 
@@ -86,83 +99,75 @@ function StudentApp() {
           onBack={handleBack}
         />
       )}
+
+      {/* Guest Login Modal */}
+      <StudentLoginModal
+        isOpen={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+        onSuccess={() => setIsLoginModalOpen(false)}
+      />
     </div>
   );
 }
 
 // Root Router Component
 function AppRouter() {
-  const { isAuthenticated, user } = useAuthStore();
-
-  // Helper to check user roles
-  const isSuperAdmin = user?.role === 'super_admin';
-  const isAdmin = user?.role === 'academy_admin' || user?.role === 'super_admin' || user?.role === 'admin';
-
-  // Get redirect path based on role
-  const getRedirectPath = () => {
-    if (isSuperAdmin) return '/super-admin';
-    if (isAdmin) return '/admin';
-    return '/student';
-  };
-
   return (
     <Routes>
-      {/* Login Route */}
+      {/* Redirect root to student */}
+      <Route path="/" element={<Navigate to="/student" replace />} />
+
+      {/* Login Route (Still available for direct access if needed, redirects if logged in) */}
       <Route
         path="/login"
         element={
-          isAuthenticated
-            ? <Navigate to={getRedirectPath()} replace />
-            : <LoginPage />
+          <LoginPage />
         }
       />
 
-      {/* Student Routes */}
+      {/* Student Routes - Open to everyone (Guest Mode enabled) */}
       <Route
         path="/student/*"
-        element={
-          <ProtectedRoute allowedRoles={['student']}>
-            <StudentApp />
-          </ProtectedRoute>
-        }
+        element={<StudentApp />}
       />
 
-      {/* Super Admin Routes */}
+      {/* Super Admin Routes - Blurred Login Overlay */}
       <Route
         path="/super-admin"
         element={
-          <ProtectedRoute allowedRoles={['super_admin']}>
-            <SuperAdminDashboard />
-          </ProtectedRoute>
+          <AdminLoginLayout>
+            <ProtectedRoute allowedRoles={['super_admin']}>
+              <SuperAdminDashboard />
+            </ProtectedRoute>
+          </AdminLoginLayout>
         }
       />
 
-      {/* Admin Routes */}
+      {/* Admin Routes - Blurred Login Overlay */}
       <Route
-        path="/admin"
+        path="/admin/*"
         element={
-          <ProtectedRoute allowedRoles={['academy_admin', 'super_admin', 'admin']}>
-            <AdminDashboard />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/admin/student/:studentId"
-        element={
-          <ProtectedRoute allowedRoles={['academy_admin', 'super_admin', 'admin']}>
-            <StudentDetailPage />
-          </ProtectedRoute>
+          <AdminLoginLayout>
+            <Routes>
+              <Route index element={
+                <ProtectedRoute allowedRoles={['academy_admin', 'super_admin', 'admin']}>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              } />
+              <Route path="student/:studentId" element={
+                <ProtectedRoute allowedRoles={['academy_admin', 'super_admin', 'admin']}>
+                  <StudentDetailPage />
+                </ProtectedRoute>
+              } />
+            </Routes>
+          </AdminLoginLayout>
         }
       />
 
-      {/* Default Redirect */}
+      {/* Fallback */}
       <Route
         path="*"
-        element={
-          isAuthenticated
-            ? <Navigate to={getRedirectPath()} replace />
-            : <Navigate to="/login" replace />
-        }
+        element={<Navigate to="/student" replace />}
       />
     </Routes>
   );

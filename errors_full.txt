@@ -1,0 +1,17 @@
+src/apps/admin/pages/AdminDashboard.tsx(3,10): error TS6133: 'Academy' is declared but its value is never read.
+src/apps/admin/pages/AdminDashboard.tsx(3,19): error TS6133: 'User' is declared but its value is never read.
+src/apps/admin/pages/AdminDashboard.tsx(3,32): error TS6133: 'StudyStatus' is declared but its value is never read.
+src/apps/admin/pages/AdminDashboard.tsx(3,45): error TS6133: 'UserProgress' is declared but its value is never read.
+src/apps/admin/pages/AdminDashboard.tsx(3,59): error TS6133: 'Word' is declared but its value is never read.
+src/apps/admin/pages/AdminDashboard.tsx(19,1): error TS6133: 'Header' is declared but its value is never read.
+src/apps/admin/pages/StudentDetailPage.tsx(4,1): error TS6192: All imports in import declaration are unused.
+src/apps/student/components/quiz/QuizChoice.tsx(2,22): error TS2307: Cannot find module '../../types' or its corresponding type declarations.
+src/apps/student/components/quiz/QuizResult.tsx(1,26): error TS2307: Cannot find module '../../types' or its corresponding type declarations.
+src/apps/student/components/quiz/QuizSpelling.tsx(2,22): error TS2307: Cannot find module '../../types' or its corresponding type declarations.
+src/apps/student/components/study/StudyControls.tsx(2,1): error TS6133: 'useEffect' is declared but its value is never read.
+src/apps/student/components/study/StudyControls.tsx(3,1): error TS6133: 'useTTS' is declared but its value is never read.
+src/apps/super-admin/pages/SuperAdminDashboard.tsx(3,1): error TS6192: All imports in import declaration are unused.
+src/apps/super-admin/pages/SuperAdminDashboard.tsx(6,1): error TS6133: 'superAdminService' is declared but its value is never read.
+src/apps/super-admin/pages/SuperAdminDashboard.tsx(7,1): error TS6133: 'Header' is declared but its value is never read.
+src/shared/components/auth/ProtectedRoute.tsx(2,30): error TS2307: Cannot find module '../../stores' or its corresponding type declarations.
+src/shared/components/layout/index.ts(2,25): error TS2307: Cannot find module './DayGrid' or its corresponding type declarations.

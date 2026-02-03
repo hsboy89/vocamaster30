@@ -1,0 +1,2 @@
+src/apps/admin/pages/StudentDetailPage.tsx(4,1): error TS6192: All imports in import declaration are unused.
+src/apps/student/pages/QuizPage.tsx(133,22): error TS2739: Type '{ score: number; totalQuestions: number; wrongCount: number; quizType: QuizType; onRetry: () => void; onClose: () => void; onReviewWrong: () => void; }' is missing the following properties from type 'QuizResultProps': quizResult, words

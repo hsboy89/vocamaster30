@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { supabase } from '../lib';
-import { User, Academy, DbUser, DbAcademy, dbUserToUser, dbAcademyToAcademy, StudentLoginCredentials, AdminLoginCredentials } from '../types';
+import { supabase } from '../shared/lib';
+import { User, Academy, DbUser, DbAcademy, dbUserToUser, dbAcademyToAcademy, StudentLoginCredentials, AdminLoginCredentials } from '../shared/types';
 
 interface AuthStore {
     user: User | null;
@@ -10,9 +10,12 @@ interface AuthStore {
     isLoading: boolean;
     error: string | null;
 
+    isGuest: boolean; // 게스트 모드 여부
+
     // Actions
     fetchAcademy: (code: string) => Promise<Academy | null>;
     login: (credentials: StudentLoginCredentials) => Promise<boolean>;
+    loginAsGuest: () => void;
     adminLogin: (credentials: AdminLoginCredentials) => Promise<boolean>;
     logout: () => void;
     setLoading: (loading: boolean) => void;
@@ -26,6 +29,7 @@ export const useAuthStore = create<AuthStore>()(
             user: null,
             academy: null,
             isAuthenticated: false,
+            isGuest: false,
             isLoading: false,
             error: null,
 
@@ -102,7 +106,7 @@ export const useAuthStore = create<AuthStore>()(
                     // User 객체에 학원 설정 주입 (편의성)
                     user.academySettings = currentAcademy.settings;
 
-                    set({ user, isAuthenticated: true, isLoading: false });
+                    set({ user, isAuthenticated: true, isGuest: false, isLoading: false });
                     return true;
 
                 } catch (error) {
@@ -113,6 +117,23 @@ export const useAuthStore = create<AuthStore>()(
                     });
                     return false;
                 }
+            },
+
+            loginAsGuest: () => {
+                const guestUser: User = {
+                    id: 'guest',
+                    studentName: '체험 사용자',
+                    role: 'student',
+                    academyId: 'guest-academy',
+                    academyName: 'VocaMaster 체험',
+                };
+                set({
+                    user: guestUser,
+                    academy: null,
+                    isAuthenticated: true,
+                    isGuest: true,
+                    error: null
+                });
             },
 
             adminLogin: async (credentials: AdminLoginCredentials) => {
@@ -134,7 +155,7 @@ export const useAuthStore = create<AuthStore>()(
                             role: 'super_admin',
                             adminId: ENV_ADMIN_ID,
                         };
-                        set({ user: superAdminUser, academy: null, isAuthenticated: true, isLoading: false });
+                        set({ user: superAdminUser, academy: null, isAuthenticated: true, isGuest: false, isLoading: false });
                         return true;
                     }
 
@@ -189,7 +210,7 @@ export const useAuthStore = create<AuthStore>()(
                     const user = dbUserToUser(academyAdmin as DbUser);
                     user.academySettings = currentAcademy.settings;
 
-                    set({ user, academy: currentAcademy, isAuthenticated: true, isLoading: false });
+                    set({ user, academy: currentAcademy, isAuthenticated: true, isGuest: false, isLoading: false });
                     return true;
 
                 } catch (error) {
@@ -201,7 +222,7 @@ export const useAuthStore = create<AuthStore>()(
             },
 
             logout: () => {
-                set({ user: null, academy: null, isAuthenticated: false, error: null });
+                set({ user: null, academy: null, isAuthenticated: false, isGuest: false, error: null });
             },
 
             setLoading: (loading: boolean) => set({ isLoading: loading }),
@@ -220,7 +241,8 @@ export const useAuthStore = create<AuthStore>()(
             partialize: (state) => ({
                 user: state.user,
                 academy: state.academy,
-                isAuthenticated: state.isAuthenticated
+                isAuthenticated: state.isAuthenticated,
+                isGuest: state.isGuest
             }),
         }
     )

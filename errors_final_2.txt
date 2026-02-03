@@ -1,0 +1,2 @@
+src/apps/admin/pages/StudentDetailPage.tsx(4,1): error TS6133: 'Level' is declared but its value is never read.
+src/apps/student/pages/QuizPage.tsx(2,59): error TS6133: 'QuizResultType' is declared but its value is never read.
