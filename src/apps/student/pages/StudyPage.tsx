@@ -142,8 +142,7 @@ export function StudyPage({ level, day, onBack, onQuizStart }: StudyPageProps) {
                         <StudyCard
                             word={words[0]} // Show first word blurred
                             hideMode="none"
-                            level={level}
-                            day={day}
+                            isMemorized={false}
                         />
                     </div>
 
@@ -234,8 +233,6 @@ export function StudyPage({ level, day, onBack, onQuizStart }: StudyPageProps) {
                     <StudyCard
                         word={currentWord}
                         hideMode={hideMode}
-                        level={level}
-                        day={day}
                         autoSpeak={autoSpeak}
                         isMemorized={memorizedWordIds.has(currentWord.id)}
                         onMemorized={handleMemorized}
