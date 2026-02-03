@@ -7,9 +7,10 @@ interface HeaderProps {
     userName?: string;
     academyName?: string;
     onLogout?: () => void;
+    onLogin?: () => void;
 }
 
-export function Header({ currentLevel, onLevelChange, userName, academyName, onLogout }: HeaderProps) {
+export function Header({ currentLevel, onLevelChange, userName, academyName, onLogout, onLogin }: HeaderProps) {
     const levels: Level[] = ['middle', 'high', 'advanced'];
     const { isDark, toggle } = useDarkMode();
 
@@ -37,12 +38,7 @@ export function Header({ currentLevel, onLevelChange, userName, academyName, onL
                             </div>
                         ) : (
                             <button
-                                onClick={onLogout} // Reusing onLogout prop to trigger login modal in guest mode if passed appropriately, or we need a new prop? Actually app handles onLogout which currently just logs out. We might need a onLoginClick prop or handle valid logout for guest. 
-                                // Wait, the Header usage in App.tsx maps onLogout to handleLogout. 
-                                // For Guest, we want a "Login" button. 
-                                // Let's check App.tsx again. If user is null, we are Guest.
-                                // We can change the button text based on userName existence.
-                                // If no userName, it's a "Login" button.
+                                onClick={onLogin}
                                 className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-lg transition-colors shadow-lg shadow-blue-500/20"
                             >
                                 로그인

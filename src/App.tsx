@@ -68,6 +68,7 @@ function StudentApp() {
           userName={user?.studentName}
           academyName={user?.academyName}
           onLogout={handleLogout}
+          onLogin={() => setIsLoginModalOpen(true)}
         />
       )}
 
