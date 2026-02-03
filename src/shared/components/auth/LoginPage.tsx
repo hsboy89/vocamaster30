@@ -171,7 +171,7 @@ export function LoginPage({
                             {!useSimplifiedAdminLogin && (
                                 <div>
                                     <label className="block text-sm font-medium text-slate-300 mb-2">
-                                        학원 코드 <span className="text-xs text-slate-500 ml-1">(학원에서 발급받은 코드)</span>
+                                        발급 코드 <span className="text-xs text-slate-500 ml-1">(학원에서 발급받은 코드)</span>
                                     </label>
                                     <div className="relative">
                                         <input
@@ -250,22 +250,7 @@ export function LoginPage({
                                 )}
                             </button>
 
-                            <div className="relative my-6">
-                                <div className="absolute inset-0 flex items-center">
-                                    <div className="w-full border-t border-white/10"></div>
-                                </div>
-                                <div className="relative flex justify-center text-sm">
-                                    <span className="px-2 bg-[#0d1425] text-slate-500">또는</span>
-                                </div>
-                            </div>
 
-                            <button
-                                type="button"
-                                onClick={() => useAuthStore.getState().loginAsGuest()}
-                                className="w-full bg-white/5 hover:bg-white/10 text-slate-300 font-medium py-3 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 border border-white/10 hover:border-white/20"
-                            >
-                                <span>🚀 3일 무료 체험하기 (Guest)</span>
-                            </button>
                         </form>
                     ) : (
                         <form onSubmit={handleAdminLogin} className="space-y-5">
@@ -349,7 +334,7 @@ export function LoginPage({
                 <div className="px-8 pb-8 text-center">
                     <p className="text-xs text-slate-500">
                         {activeTab === 'student'
-                            ? '학원에서 발급받은 코드를 입력하여 로그인하세요.'
+                            ? '발급받은 코드를 입력하여 로그인하세요.'
                             : '서비스 관리자 및 학원장 전용 로그인입니다.'}
                     </p>
                 </div>
