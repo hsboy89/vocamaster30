@@ -70,10 +70,17 @@ export function StudyCard({ word, hideMode, autoSpeak = false, isMemorized, onMe
             <div className="flex items-center justify-between mb-8 relative z-10">
                 <div className="flex items-center gap-2">
                     {isMemorized && (
-                        <div className="flex items-center gap-1.5 bg-emerald-500/20 text-emerald-400 text-xs font-bold px-3 py-1.5 rounded-full border border-emerald-500/30 animate-fade-in shadow-lg shadow-emerald-500/10">
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                handleMemorize();
+                            }}
+                            className="flex items-center gap-1.5 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 text-xs font-bold px-3 py-1.5 rounded-full border border-emerald-500/30 animate-fade-in shadow-lg shadow-emerald-500/10 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+                            title="암기 취소"
+                        >
                             <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
                             암기 완료
-                        </div>
+                        </button>
                     )}
                 </div>
                 <div className="flex items-center gap-3">
@@ -88,21 +95,6 @@ export function StudyCard({ word, hideMode, autoSpeak = false, isMemorized, onMe
                         <svg className="w-6 h-6 transform group-hover/speak:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                         </svg>
-                    </button>
-                    <button
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            handleMemorize();
-                        }}
-                        className={`px-4 py-2 rounded-xl text-sm font-bold transition-all flex items-center gap-2 border shadow-lg ${isMemorized
-                            ? 'bg-emerald-500 text-white border-emerald-400 shadow-emerald-500/20'
-                            : 'bg-slate-700/50 text-slate-300 border-white/10 hover:bg-slate-700 hover:text-white'
-                            }`}
-                    >
-                        <svg className="w-4 h-4" fill={isMemorized ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                        </svg>
-                        {isMemorized ? '외웠어요!' : '외웠어요'}
                     </button>
                 </div>
             </div>
