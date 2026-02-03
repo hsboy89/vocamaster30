@@ -9,9 +9,10 @@ interface LoginPageProps {
     onSuccess?: () => void;
     isEmbedded?: boolean;
     hideAdminTab?: boolean;
+    hideStudentTab?: boolean;
 }
 
-export function LoginPage({ initialTab = 'student', onSuccess, isEmbedded = false, hideAdminTab = false }: LoginPageProps) {
+export function LoginPage({ initialTab = 'student', onSuccess, isEmbedded = false, hideAdminTab = false, hideStudentTab = false }: LoginPageProps) {
     const [activeTab, setActiveTab] = useState<LoginTab>(initialTab);
     const [academyCode, setAcademyCode] = useState('');
     const [studentName, setStudentName] = useState('');
@@ -120,7 +121,7 @@ export function LoginPage({ initialTab = 'student', onSuccess, isEmbedded = fals
                 </div>
 
                 {/* Tabs */}
-                {!hideAdminTab && (
+                {(!hideAdminTab && !hideStudentTab) && (
                     <div className="flex border-b border-white/5">
                         <button
                             onClick={() => handleTabChange('student')}

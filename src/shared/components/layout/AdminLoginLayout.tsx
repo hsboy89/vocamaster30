@@ -27,7 +27,7 @@ export function AdminLoginLayout({ children }: AdminLoginLayoutProps) {
             {/* Login Overlay */}
             <div className="absolute inset-0 z-50 flex items-center justify-center">
                 <div className="w-full max-w-md p-4">
-                    <LoginPage initialTab="admin" isEmbedded={true} />
+                    <LoginPage initialTab="admin" isEmbedded={true} hideStudentTab={true} />
                 </div>
             </div>
         </div>
