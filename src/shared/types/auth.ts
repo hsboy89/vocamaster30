@@ -53,6 +53,12 @@ export interface User {
     createdAt?: string;
     lastLoginAt?: string;
 
+    // 학생 인적사항 추가
+    school?: string;
+    phone?: string;
+    grade?: string;
+    targetUniversity?: string;
+
     // 런타임에 로드되는 학원 설정 (로그인 시 불러옴)
     academySettings?: AcademySettings;
 }
@@ -98,6 +104,10 @@ export interface DbUser {
     email?: string;
     created_at?: string;
     last_login_at?: string;
+    school?: string;
+    phone?: string;
+    grade?: string;
+    target_university?: string;
 }
 
 // =====================================================
@@ -114,6 +124,10 @@ export function dbUserToUser(dbUser: DbUser): User {
         email: dbUser.email,
         createdAt: dbUser.created_at,
         lastLoginAt: dbUser.last_login_at,
+        school: dbUser.school,
+        phone: dbUser.phone,
+        grade: dbUser.grade,
+        targetUniversity: dbUser.target_university,
     };
 }
 

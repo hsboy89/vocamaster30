@@ -316,6 +316,20 @@ export function StudentDetailPage() {
                                     <span className="font-bold text-gray-900 dark:text-white">{student.user.studentName}</span>
                                 </div>
                                 <div className="flex justify-between items-center py-2 border-b border-gray-50 dark:border-white/5">
+                                    <span className="text-sm text-gray-500 dark:text-slate-400">학교 / 학년</span>
+                                    <span className="font-bold text-gray-900 dark:text-white">
+                                        {student.user.school || '-'} {student.user.grade ? `(${student.user.grade})` : ''}
+                                    </span>
+                                </div>
+                                <div className="flex justify-between items-center py-2 border-b border-gray-50 dark:border-white/5">
+                                    <span className="text-sm text-gray-500 dark:text-slate-400">전화번호</span>
+                                    <span className="font-bold text-gray-900 dark:text-white">{student.user.phone || '-'}</span>
+                                </div>
+                                <div className="flex justify-between items-center py-2 border-b border-gray-50 dark:border-white/5">
+                                    <span className="text-sm text-gray-500 dark:text-slate-400">목표 대학</span>
+                                    <span className="font-bold text-blue-600 dark:text-blue-400">{student.user.targetUniversity || '-'}</span>
+                                </div>
+                                <div className="flex justify-between items-center py-2 border-b border-gray-50 dark:border-white/5">
                                     <span className="text-sm text-gray-500 dark:text-slate-400">가입일</span>
                                     <span className="font-bold text-gray-900 dark:text-white lowercase">
                                         {student.user.createdAt

@@ -461,6 +461,10 @@ export interface CreateStudentInput {
     academyId?: string;       // 신규
     academyName?: string;     // [호환용] 슈퍼관리자용 or 기존
     studentName: string;
+    school?: string;
+    phone?: string;
+    grade?: string;
+    targetUniversity?: string;
 }
 
 // 학생 등록
@@ -508,6 +512,10 @@ export async function createStudent(input: CreateStudentInput): Promise<{ succes
                 academy_name: academyName, // 조회된 이름 또는 입력된 이름
                 student_name: input.studentName,
                 role: 'student',
+                school: input.school,
+                phone: input.phone,
+                grade: input.grade,
+                target_university: input.targetUniversity,
             })
             .select()
             .single();
@@ -558,6 +566,10 @@ export async function updateStudent(
         if (input.academyName) updateData.academy_name = input.academyName;
         if (input.studentName) updateData.student_name = input.studentName;
         if (input.academyId) updateData.academy_id = input.academyId;
+        if (input.school) updateData.school = input.school;
+        if (input.phone) updateData.phone = input.phone;
+        if (input.grade) updateData.grade = input.grade;
+        if (input.targetUniversity) updateData.target_university = input.targetUniversity;
 
         const { error } = await supabase
             .from('users')

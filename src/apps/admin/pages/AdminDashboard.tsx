@@ -36,6 +36,10 @@ export function AdminDashboard() {
     const [showAddModal, setShowAddModal] = useState(false);
     const [newAcademyName, setNewAcademyName] = useState('');
     const [newStudentName, setNewStudentName] = useState('');
+    const [newSchool, setNewSchool] = useState('');
+    const [newPhone, setNewPhone] = useState('');
+    const [newGrade, setNewGrade] = useState('');
+    const [newTargetUniversity, setNewTargetUniversity] = useState('');
     const [addError, setAddError] = useState<string | null>(null);
     const [isAdding, setIsAdding] = useState(false);
 
@@ -112,12 +116,20 @@ export function AdminDashboard() {
             academyId: targetAcademyId,
             academyName: isSuperAdmin ? targetAcademyName : undefined,
             studentName: newStudentName.trim(),
+            school: newSchool.trim(),
+            phone: newPhone.trim(),
+            grade: newGrade.trim(),
+            targetUniversity: newTargetUniversity.trim(),
         });
 
         if (result.success) {
             setShowAddModal(false);
             setNewAcademyName('');
             setNewStudentName('');
+            setNewSchool('');
+            setNewPhone('');
+            setNewGrade('');
+            setNewTargetUniversity('');
             loadDashboardData(); // 목록 새로고침
         } else {
             setAddError(result.error || '학생 등록에 실패했습니다.');
@@ -509,6 +521,10 @@ export function AdminDashboard() {
                                     setAddError(null);
                                     setNewAcademyName('');
                                     setNewStudentName('');
+                                    setNewSchool('');
+                                    setNewPhone('');
+                                    setNewGrade('');
+                                    setNewTargetUniversity('');
                                 }}
                                 className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/10 rounded-xl transition-all"
                             >
@@ -545,6 +561,63 @@ export function AdminDashboard() {
                                     onChange={(e) => setNewStudentName(e.target.value)}
                                     placeholder="예: 김철수"
                                     className="w-full px-4 py-3.5 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:text-white dark:placeholder-slate-500 transition-all"
+                                    disabled={isAdding}
+                                />
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
+                                        학교
+                                    </label>
+                                    <input
+                                        type="text"
+                                        value={newSchool}
+                                        onChange={(e) => setNewSchool(e.target.value)}
+                                        placeholder="예: 서울고"
+                                        className="w-full px-4 py-3 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:text-white dark:placeholder-slate-500 transition-all"
+                                        disabled={isAdding}
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
+                                        학년
+                                    </label>
+                                    <input
+                                        type="text"
+                                        value={newGrade}
+                                        onChange={(e) => setNewGrade(e.target.value)}
+                                        placeholder="예: 고1"
+                                        className="w-full px-4 py-3 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:text-white dark:placeholder-slate-500 transition-all"
+                                        disabled={isAdding}
+                                    />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
+                                    전화번호
+                                </label>
+                                <input
+                                    type="text"
+                                    value={newPhone}
+                                    onChange={(e) => setNewPhone(e.target.value)}
+                                    placeholder="010-0000-0000"
+                                    className="w-full px-4 py-3 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:text-white dark:placeholder-slate-500 transition-all"
+                                    disabled={isAdding}
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
+                                    목표 대학
+                                </label>
+                                <input
+                                    type="text"
+                                    value={newTargetUniversity}
+                                    onChange={(e) => setNewTargetUniversity(e.target.value)}
+                                    placeholder="예: 서울대학교"
+                                    className="w-full px-4 py-3 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:text-white dark:placeholder-slate-500 transition-all"
                                     disabled={isAdding}
                                 />
                             </div>
