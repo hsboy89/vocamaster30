@@ -72,11 +72,11 @@ export function SuperAdminDashboard() {
 
         // 1. Academy Validation
         if (!newAcademyCode.trim()) {
-            setAddError('학원 코드를 입력해주세요.');
+            setAddError('아이디를 확인해주세요.');
             return;
         }
         if (!newAcademyName.trim()) {
-            setAddError('학원명을 입력해주세요.');
+            setAddError('아이디를 확인해주세요.');
             return;
         }
 

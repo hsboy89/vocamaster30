@@ -125,7 +125,7 @@ export function LoginPage({
                         {currentAcademy ? currentAcademy.name : 'VocaMaster30'}
                     </h1>
                     <p className="text-white/80 text-sm">
-                        {currentAcademy ? '학생 전용 학습 공간' : '하루 10분, 완벽한 어휘 루틴'}
+                        {currentAcademy ? '학생 관리 대시보드' : '하루 10분, 완벽한 어휘 루틴'}
                     </p>
                 </div>
 
