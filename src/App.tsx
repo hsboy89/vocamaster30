@@ -122,7 +122,7 @@ function AppRouter() {
       <Route
         path="/login"
         element={
-          <LoginPage />
+          <LoginPage hideAdminTab={true} />
         }
       />
 
