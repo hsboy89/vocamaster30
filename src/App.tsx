@@ -148,7 +148,7 @@ function AppRouter() {
       <Route
         path="/admin/*"
         element={
-          <AdminLoginLayout hideAdminId={true}>
+          <AdminLoginLayout useSimplifiedAdminLogin={true}>
             <Routes>
               <Route index element={
                 <ProtectedRoute allowedRoles={['academy_admin', 'super_admin', 'admin']}>

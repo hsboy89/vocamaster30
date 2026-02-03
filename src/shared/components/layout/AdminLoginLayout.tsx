@@ -5,10 +5,10 @@ import BackgroundModeContext from '../auth/BackgroundModeContext';
 
 interface AdminLoginLayoutProps {
     children: ReactNode;
-    hideAdminId?: boolean;
+    useSimplifiedAdminLogin?: boolean;
 }
 
-export function AdminLoginLayout({ children, hideAdminId = false }: AdminLoginLayoutProps) {
+export function AdminLoginLayout({ children, useSimplifiedAdminLogin = false }: AdminLoginLayoutProps) {
     const { isAuthenticated } = useAuthStore();
 
     if (isAuthenticated) {
@@ -32,7 +32,7 @@ export function AdminLoginLayout({ children, hideAdminId = false }: AdminLoginLa
                         initialTab="admin"
                         isEmbedded={true}
                         hideStudentTab={true}
-                        hideAdminId={hideAdminId}
+                        useSimplifiedAdminLogin={useSimplifiedAdminLogin}
                     />
                 </div>
             </div>

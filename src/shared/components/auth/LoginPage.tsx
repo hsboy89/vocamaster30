@@ -10,7 +10,7 @@ interface LoginPageProps {
     isEmbedded?: boolean;
     hideAdminTab?: boolean;
     hideStudentTab?: boolean;
-    hideAdminId?: boolean;
+    useSimplifiedAdminLogin?: boolean;
 }
 
 export function LoginPage({
@@ -19,7 +19,7 @@ export function LoginPage({
     isEmbedded = false,
     hideAdminTab = false,
     hideStudentTab = false,
-    hideAdminId = false
+    useSimplifiedAdminLogin = false
 }: LoginPageProps) {
     const [activeTab, setActiveTab] = useState<LoginTab>(initialTab);
     const [academyCode, setAcademyCode] = useState('');
@@ -41,9 +41,10 @@ export function LoginPage({
         // 여기서는 UX 단순화를 위해 onBlur에서 처리하도록 input에 핸들러 추가 예정
     }, [academyCode]);
 
-    const handleAcademyCodeBlur = async () => {
-        if (academyCode.trim().length >= 2) {
-            const academy = await fetchAcademy(academyCode.trim());
+    const handleAcademyCodeBlur = async (val?: string) => {
+        const codeToFetch = (val || academyCode).trim();
+        if (codeToFetch.length >= 2) {
+            const academy = await fetchAcademy(codeToFetch);
             if (academy) {
                 setCurrentAcademy(academy);
                 // 학원별 테마 적용 (CSS 변수 활용 가능)
@@ -80,8 +81,8 @@ export function LoginPage({
 
         // 슈퍼 관리자인 경우 academyCode가 없을 수 있음
         const result = await adminLogin({
-            academyCode: academyCode.trim(),
-            adminId: hideAdminId ? academyCode.trim() : adminId.trim(),
+            academyCode: useSimplifiedAdminLogin ? adminId.trim() : academyCode.trim(),
+            adminId: adminId.trim(),
             password
         });
         if (result && onSuccess) {
@@ -167,38 +168,40 @@ export function LoginPage({
                 <div className="p-8">
                     {activeTab === 'student' ? (
                         <form onSubmit={handleStudentLogin} className="space-y-5">
-                            <div>
-                                <label className="block text-sm font-medium text-slate-300 mb-2">
-                                    학원 코드 <span className="text-xs text-slate-500 ml-1">(학원에서 발급받은 코드)</span>
-                                </label>
-                                <div className="relative">
-                                    <input
-                                        type="text"
-                                        value={academyCode}
-                                        onChange={(e) => setAcademyCode(e.target.value)}
-                                        onBlur={handleAcademyCodeBlur}
-                                        placeholder="예: seoul01"
-                                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-slate-500 focus:ring-2 transition-all outline-none"
-                                        style={{
-                                            borderColor: currentAcademy ? primaryColor : 'rgba(255,255,255,0.1)',
-                                            ['--tw-ring-color' as any]: primaryColor
-                                        }}
-                                        disabled={isLoading}
-                                    />
+                            {!useSimplifiedAdminLogin && (
+                                <div>
+                                    <label className="block text-sm font-medium text-slate-300 mb-2">
+                                        학원 코드 <span className="text-xs text-slate-500 ml-1">(학원에서 발급받은 코드)</span>
+                                    </label>
+                                    <div className="relative">
+                                        <input
+                                            type="text"
+                                            value={academyCode}
+                                            onChange={(e) => setAcademyCode(e.target.value)}
+                                            onBlur={() => handleAcademyCodeBlur()}
+                                            placeholder="예: seoul01"
+                                            className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-slate-500 focus:ring-2 transition-all outline-none"
+                                            style={{
+                                                borderColor: currentAcademy ? primaryColor : 'rgba(255,255,255,0.1)',
+                                                ['--tw-ring-color' as any]: primaryColor
+                                            }}
+                                            disabled={isLoading}
+                                        />
+                                        {currentAcademy && (
+                                            <div className="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-500">
+                                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                </svg>
+                                            </div>
+                                        )}
+                                    </div>
                                     {currentAcademy && (
-                                        <div className="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-500">
-                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                            </svg>
-                                        </div>
+                                        <p className="text-xs text-emerald-400 mt-1 ml-1">
+                                            ✨ {currentAcademy.name}에 오신 것을 환영합니다!
+                                        </p>
                                     )}
                                 </div>
-                                {currentAcademy && (
-                                    <p className="text-xs text-emerald-400 mt-1 ml-1">
-                                        ✨ {currentAcademy.name}에 오신 것을 환영합니다!
-                                    </p>
-                                )}
-                            </div>
+                            )}
                             <div>
                                 <label className="block text-sm font-medium text-slate-300 mb-2">
                                     이름
@@ -268,33 +271,33 @@ export function LoginPage({
                         <form onSubmit={handleAdminLogin} className="space-y-5">
                             <div>
                                 <label className="block text-sm font-medium text-slate-300 mb-2">
-                                    학원 코드 <span className="text-xs text-slate-500 ml-1">(슈퍼관리자는 생략 가능)</span>
+                                    {useSimplifiedAdminLogin ? '학원 코드 (ID)' : '관리자 아이디'}
                                 </label>
-                                <input
-                                    type="text"
-                                    value={academyCode}
-                                    onChange={(e) => setAcademyCode(e.target.value)}
-                                    placeholder="예: seoul01"
-                                    className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-slate-500 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all outline-none"
-                                    disabled={isLoading}
-                                />
-                            </div>
-                            {!hideAdminId && (
-                                <div>
-                                    <label className="block text-sm font-medium text-slate-300 mb-2">
-                                        관리자 아이디
-                                    </label>
+                                <div className="relative">
                                     <input
                                         type="text"
                                         value={adminId}
                                         onChange={(e) => setAdminId(e.target.value)}
-                                        placeholder="admin"
+                                        onBlur={() => useSimplifiedAdminLogin && handleAcademyCodeBlur(adminId)}
+                                        placeholder={useSimplifiedAdminLogin ? "학원 코드를 입력하세요" : "admin"}
                                         autoComplete="off"
                                         className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-slate-500 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all outline-none"
                                         disabled={isLoading}
                                     />
+                                    {useSimplifiedAdminLogin && currentAcademy && (
+                                        <div className="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-500">
+                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                            </svg>
+                                        </div>
+                                    )}
                                 </div>
-                            )}
+                                {useSimplifiedAdminLogin && currentAcademy && (
+                                    <p className="text-xs text-emerald-400 mt-1 ml-1">
+                                        ✨ {currentAcademy.name} 관리자님 안녕하세요!
+                                    </p>
+                                )}
+                            </div>
                             <div>
                                 <label className="block text-sm font-medium text-slate-300 mb-2">
                                     비밀번호
