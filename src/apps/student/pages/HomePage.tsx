@@ -62,7 +62,7 @@ export function HomePage({ level, onDaySelect, isGuest, onLockedClick }: HomePag
                                 <span className="inline-block px-4 py-1.5 rounded-full bg-white border border-blue-100 text-blue-600 text-sm font-semibold shadow-sm">
                                     {LEVEL_INFO[level].nameKo} 과정
                                 </span>
-                                <span className="inline-block px-4 py-1.5 rounded-full bg-orange-50 border border-orange-100 text-orange-600 text-sm font-semibold shadow-sm animate-pulse-gentle">
+                                <span className="inline-block px-4 py-1.5 rounded-full bg-orange-50 dark:bg-orange-500/10 border border-orange-100 dark:border-orange-500/20 text-orange-600 dark:text-orange-400 text-sm font-semibold shadow-sm">
                                     ✨ 30일마다 단어 업데이트
                                 </span>
                             </div>
@@ -72,7 +72,7 @@ export function HomePage({ level, onDaySelect, isGuest, onLockedClick }: HomePag
                                     완벽한 어휘 루틴
                                 </span>
                             </h1>
-                            <p className="text-lg text-slate-600 mb-8 leading-relaxed max-w-lg mx-auto md:mx-0">
+                            <p className="text-lg text-slate-600 dark:text-slate-300 mb-8 leading-relaxed max-w-lg mx-auto md:mx-0">
                                 {LEVEL_INFO[level].description}
                                 <br className="hidden sm:block" />
                                 매일 10분 투자로 30일 뒤 달라진 실력을 경험하세요.

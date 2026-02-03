@@ -7,6 +7,7 @@ interface UseProgressReturn {
     getStatus: (level: Level, day: number) => StudyStatus;
     setStatus: (level: Level, day: number, status: StudyStatus) => void;
     addMemorizedWord: (level: Level, day: number, wordId: string, totalWords?: number) => void;
+    removeMemorizedWord: (level: Level, day: number, wordId: string) => void;
     getCompletionRate: (level: Level) => number;
     isLoading: boolean;
 }
@@ -82,6 +83,31 @@ export function useProgress(): UseProgressReturn {
         [progress]
     );
 
+    const removeMemorizedWord = useCallback(
+        (level: Level, day: number, wordId: string) => {
+            const existing = progress.find((p) => p.level === level && p.day === day);
+            if (existing) {
+                const newMemorized = existing.memorizedWords.filter(id => id !== wordId);
+                const newStatus: StudyStatus = 'in-progress';
+
+                storage.setProgress(level, day, newStatus, newMemorized);
+
+                setProgress((prev) => {
+                    const newProgress = prev.filter((p) => !(p.level === level && p.day === day));
+                    newProgress.push({
+                        level,
+                        day,
+                        status: newStatus,
+                        memorizedWords: newMemorized,
+                        lastStudied: new Date().toISOString(),
+                    });
+                    return newProgress;
+                });
+            }
+        },
+        [progress]
+    );
+
     const getCompletionRate = useCallback(
         (level: Level): number => {
             const levelProgress = progress.filter((p) => p.level === level);
@@ -96,6 +122,7 @@ export function useProgress(): UseProgressReturn {
         getStatus,
         setStatus,
         addMemorizedWord,
+        removeMemorizedWord,
         getCompletionRate,
         isLoading,
     };

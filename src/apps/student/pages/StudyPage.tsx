@@ -4,6 +4,7 @@ import { getVocabulary } from '../../../shared/data';
 import { useProgress } from '../../../shared/hooks';
 import { StudyCard, StudyControls } from '../components';
 import { useAuthStore } from '../../../stores';
+import * as storage from '../../../shared/services/storage';
 
 type HideMode = 'none' | 'word' | 'meaning' | 'synonyms';
 
@@ -24,7 +25,8 @@ export function StudyPage({ level, day, onBack, onQuizStart }: StudyPageProps) {
         const stored = localStorage.getItem(AUTO_SPEAK_STORAGE_KEY);
         return stored === 'true';
     });
-    const { getStatus, setStatus, addMemorizedWord } = useProgress();
+    const [memorizedWordIds, setMemorizedWordIds] = useState<Set<string>>(new Set());
+    const { getStatus, setStatus, addMemorizedWord, removeMemorizedWord } = useProgress();
     const { isGuest } = useAuthStore();
 
     // Save autoSpeak preference
@@ -40,6 +42,14 @@ export function StudyPage({ level, day, onBack, onQuizStart }: StudyPageProps) {
             if (currentStatus === 'not-started') {
                 setStatus(level, day, 'in-progress');
             }
+
+            // Load memorized words for this day
+            const progress = storage.getProgress(level, day);
+            if (progress) {
+                setMemorizedWordIds(new Set(progress.memorizedWords));
+            } else {
+                setMemorizedWordIds(new Set());
+            }
         }
     }, [level, day, setStatus, getStatus]);
 
@@ -51,12 +61,29 @@ export function StudyPage({ level, day, onBack, onQuizStart }: StudyPageProps) {
 
     const handleNext = () => {
         if (currentIndex < words.length - 1) {
+            // "Next(>)" = Confidence. Automatically mark current word as memorized.
+            const currentWordId = words[currentIndex].id;
+            if (!memorizedWordIds.has(currentWordId)) {
+                addMemorizedWord(level, day, currentWordId, words.length);
+                setMemorizedWordIds(prev => new Set(Array.from(prev).concat(currentWordId)));
+            }
             setCurrentIndex(currentIndex + 1);
         }
     };
 
     const handleMemorized = () => {
-        addMemorizedWord(level, day, words[currentIndex].id, words.length);
+        const currentWordId = words[currentIndex].id;
+        if (memorizedWordIds.has(currentWordId)) {
+            removeMemorizedWord(level, day, currentWordId);
+            setMemorizedWordIds(prev => {
+                const next = new Set(prev);
+                next.delete(currentWordId);
+                return next;
+            });
+        } else {
+            addMemorizedWord(level, day, currentWordId, words.length);
+            setMemorizedWordIds(prev => new Set(Array.from(prev).concat(currentWordId)));
+        }
     };
 
     const handleQuizStart = () => {
@@ -210,6 +237,7 @@ export function StudyPage({ level, day, onBack, onQuizStart }: StudyPageProps) {
                         level={level}
                         day={day}
                         autoSpeak={autoSpeak}
+                        isMemorized={memorizedWordIds.has(currentWord.id)}
                         onMemorized={handleMemorized}
                     />
                 </div>
