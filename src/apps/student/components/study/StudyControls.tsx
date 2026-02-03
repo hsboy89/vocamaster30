@@ -36,116 +36,135 @@ export function StudyControls({
     const progress = ((currentIndex + 1) / totalWords) * 100;
 
     return (
-        <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6">
-            {/* Progress */}
-            <div className="mb-4">
-                <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm text-gray-500">학습 진도</span>
-                    <span className="text-sm font-semibold text-gray-700">
-                        {currentIndex + 1} / {totalWords}
-                    </span>
+        <div
+            className="rounded-3xl shadow-2xl p-6 sm:p-8 relative overflow-hidden"
+            style={{
+                background: 'rgba(30, 41, 59, 0.4)',
+                backdropFilter: 'blur(16px)',
+                border: '1px solid rgba(255, 255, 255, 0.05)'
+            }}
+        >
+            {/* Ambient Background Glow */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 blur-[50px] rounded-full pointer-events-none" />
+
+            {/* Progress Section */}
+            <div className="mb-10 relative z-10">
+                <div className="flex justify-between items-end mb-3">
+                    <div className="space-y-1">
+                        <span className="text-xs font-bold text-blue-400 uppercase tracking-widest">Learning Progress</span>
+                        <h3 className="text-sm font-medium text-slate-400">학습 진행도</h3>
+                    </div>
+                    <div className="flex items-baseline gap-1">
+                        <span className="text-2xl font-black text-white">{currentIndex + 1}</span>
+                        <span className="text-sm font-bold text-slate-600">/ {totalWords}</span>
+                    </div>
                 </div>
-                <div className="bg-gray-100 rounded-full h-2 overflow-hidden">
+                <div className="bg-slate-800/50 rounded-full h-3 p-0.5 border border-white/5 overflow-hidden">
                     <div
-                        className="h-full bg-blue-500 transition-all duration-300 rounded-full"
+                        className="h-full bg-gradient-to-r from-blue-600 to-blue-400 transition-all duration-700 rounded-full shadow-[0_0_15px_rgba(59,130,246,0.5)]"
                         style={{ width: `${progress}%` }}
                     />
                 </div>
             </div>
 
-            {/* Navigation */}
-            <div className="flex items-center justify-center gap-4 mb-6">
+            {/* Navigation & Pagination */}
+            <div className="flex flex-col items-center gap-8 mb-10 relative z-10">
+                <div className="flex items-center gap-6">
+                    <button
+                        onClick={onPrevious}
+                        disabled={isFirst}
+                        className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 border ${isFirst
+                            ? 'bg-slate-800/30 text-slate-700 border-transparent cursor-not-allowed'
+                            : 'bg-slate-800/80 text-white border-white/10 hover:bg-slate-700 hover:scale-105 active:scale-95 shadow-lg'
+                            }`}
+                    >
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+
+                    <div className="flex items-center gap-2 px-4 py-3 bg-slate-900/40 rounded-2xl border border-white/5">
+                        {Array.from({ length: Math.min(totalWords, 10) }).map((_, i) => (
+                            <div
+                                key={i}
+                                className={`h-1.5 rounded-full transition-all duration-500 ${i === currentIndex % 10
+                                    ? 'bg-blue-400 w-6 shadow-[0_0_10px_rgba(96,165,250,0.5)]'
+                                    : 'bg-slate-700 w-1.5'
+                                    }`}
+                            />
+                        ))}
+                    </div>
+
+                    <button
+                        onClick={onNext}
+                        disabled={isLast}
+                        className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 border ${isLast
+                            ? 'bg-slate-800/30 text-slate-700 border-transparent cursor-not-allowed'
+                            : 'bg-blue-600 text-white border-blue-400/30 hover:bg-blue-500 hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(37,99,235,0.3)]'
+                            }`}
+                    >
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+
+                {/* Auto Speak Toggle */}
                 <button
-                    onClick={onPrevious}
-                    disabled={isFirst}
-                    className={`p-3 rounded-full transition-all ${isFirst
-                        ? 'bg-gray-100 text-gray-300 cursor-not-allowed'
-                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    onClick={() => onAutoSpeakChange(!autoSpeak)}
+                    className={`group flex items-center gap-3 px-6 py-3 rounded-2xl transition-all duration-300 border ${autoSpeak
+                        ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30 shadow-[0_0_20px_rgba(16,185,129,0.1)]'
+                        : 'bg-slate-800/50 text-slate-400 border-white/5 hover:border-white/10'
                         }`}
                 >
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                    </svg>
+                    <div className={`p-1 rounded-lg transition-colors ${autoSpeak ? 'bg-emerald-500/20' : 'bg-slate-700'}`}>
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            {autoSpeak ? (
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                            ) : (
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+                            )}
+                        </svg>
+                    </div>
+                    <span className="text-sm font-bold tracking-tight">
+                        자동 발음 {autoSpeak ? 'ON' : 'OFF'}
+                    </span>
+                    <div className={`w-8 h-4 rounded-full relative transition-colors duration-500 ${autoSpeak ? 'bg-emerald-500' : 'bg-slate-600'}`}>
+                        <div className={`absolute top-1 w-2 h-2 bg-white rounded-full transition-all duration-300 ${autoSpeak ? 'left-5' : 'left-1'}`} />
+                    </div>
                 </button>
+            </div>
 
-                <div className="flex items-center gap-1">
-                    {Array.from({ length: Math.min(totalWords, 10) }).map((_, i) => (
-                        <div
-                            key={i}
-                            className={`w-2 h-2 rounded-full transition-all ${i === currentIndex % 10 ? 'bg-blue-500 w-4' : 'bg-gray-200'
+            {/* Filter Modes */}
+            <div className="space-y-4 relative z-10">
+                <div className="flex flex-wrap justify-center gap-2">
+                    {hideModes.map((mode) => (
+                        <button
+                            key={mode.value}
+                            onClick={() => onHideModeChange(mode.value)}
+                            className={`px-4 py-2.5 text-xs font-black rounded-xl transition-all duration-300 border uppercase tracking-widest ${hideMode === mode.value
+                                ? 'bg-white text-slate-900 border-white shadow-xl scale-105'
+                                : 'bg-slate-800/40 text-slate-400 border-white/5 hover:border-white/10 hover:text-slate-200'
                                 }`}
-                        />
+                        >
+                            {mode.label}
+                        </button>
                     ))}
                 </div>
 
-                <button
-                    onClick={onNext}
-                    disabled={isLast}
-                    className={`p-3 rounded-full transition-all ${isLast
-                        ? 'bg-gray-100 text-gray-300 cursor-not-allowed'
-                        : 'bg-blue-500 text-white hover:bg-blue-600'
-                        }`}
-                >
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                </button>
-            </div>
-
-            {/* Auto Speak Toggle */}
-            <div className="flex justify-center mb-4">
-                <button
-                    onClick={() => onAutoSpeakChange(!autoSpeak)}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all ${autoSpeak
-                        ? 'bg-green-100 text-green-700 ring-2 ring-green-400'
-                        : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
-                        }`}
-                >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        {autoSpeak ? (
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"
-                            />
-                        ) : (
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"
-                            />
-                        )}
-                    </svg>
-                    <span className="text-sm font-medium">
-                        자동 발음 {autoSpeak ? 'ON' : 'OFF'}
-                    </span>
-                </button>
-            </div>
-
-            {/* Hide Mode */}
-            <div className="flex flex-wrap justify-center gap-2 mb-6">
-                {hideModes.map((mode) => (
+                {/* Main Action */}
+                <div className="pt-4 flex justify-center">
                     <button
-                        key={mode.value}
-                        onClick={() => onHideModeChange(mode.value)}
-                        className={`px-3 py-2 text-sm rounded-lg transition-all ${hideMode === mode.value
-                            ? 'bg-blue-500 text-white'
-                            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                            }`}
+                        onClick={onQuizStart}
+                        className="group relative px-10 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-black text-lg transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_10px_30px_rgba(37,99,235,0.4)] overflow-hidden"
                     >
-                        {mode.label}
+                        <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:animate-shimmer" />
+                        <div className="flex items-center gap-3 relative z-10">
+                            <span className="text-2xl group-hover:rotate-12 transition-transform">📝</span>
+                            <span>테스트 시작하기</span>
+                        </div>
                     </button>
-                ))}
-            </div>
-
-            {/* Actions */}
-            <div className="flex justify-center">
-                <button onClick={onQuizStart} className="btn btn-primary px-8">
-                    <span className="mr-2">📝</span>
-                    퀴즈 풀기
-                </button>
+                </div>
             </div>
         </div>
     );

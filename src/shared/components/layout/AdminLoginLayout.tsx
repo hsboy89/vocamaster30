@@ -15,9 +15,10 @@ export function AdminLoginLayout({ children }: AdminLoginLayoutProps) {
     }
 
     return (
-        <div className="relative min-h-screen bg-slate-900">
+        <div className="relative min-h-screen bg-slate-950">
             {/* Blurred Background Content - Render real children in background with suppressed redirects */}
-            <div className="absolute inset-0 filter blur-lg opacity-40 pointer-events-none overflow-hidden bg-slate-900">
+            {/* Using very slight blur (3px) and higher opacity (75%) for maximum clarity as requested */}
+            <div className="absolute inset-0 filter blur-[3px] opacity-75 pointer-events-none overflow-hidden bg-slate-950">
                 <BackgroundModeContext.Provider value={true}>
                     {children}
                 </BackgroundModeContext.Provider>

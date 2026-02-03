@@ -16,7 +16,7 @@ import {
 
 export function SuperAdminDashboard() {
     const navigate = useNavigate();
-    const { logout } = useAuthStore();
+    const { logout, isAuthenticated } = useAuthStore();
     const { isDark, toggle: toggleDarkMode } = useDarkMode();
 
     const [stats, setStats] = useState<SuperAdminStats | null>(null);
