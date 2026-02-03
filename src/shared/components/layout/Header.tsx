@@ -24,8 +24,8 @@ export function Header({ currentLevel, onLevelChange, userName, academyName, onL
                             <span className="text-white text-xl">📚</span>
                         </div>
                         <div>
-                            <h1 className="text-xl font-bold text-gray-900">Voca Master 30</h1>
-                            <p className="text-xs text-gray-500">하루 10분, 30일 완성</p>
+                            <h1 className="text-xl font-bold text-gray-900 dark:text-white">Voca Master 30</h1>
+                            <p className="text-xs text-gray-400 dark:text-slate-300 font-medium">하루 10분, 30일 완성</p>
                         </div>
                     </div>
 
