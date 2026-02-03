@@ -66,7 +66,7 @@ export function HomePage({ level, onDaySelect, isGuest, onLockedClick }: HomePag
                                     ✨ 30일마다 단어 업데이트
                                 </span>
                             </div>
-                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-6 leading-tight tracking-tight">
+                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white mb-6 leading-tight tracking-tight">
                                 하루 10분,<br />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-emerald-500">
                                     완벽한 어휘 루틴
