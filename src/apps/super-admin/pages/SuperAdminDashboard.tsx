@@ -21,7 +21,7 @@ export function SuperAdminDashboard() {
 
     const [stats, setStats] = useState<SuperAdminStats | null>(null);
     const [academies, setAcademies] = useState<AcademyListItem[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false); // Default to false for background mode
     const [searchTerm, setSearchTerm] = useState('');
 
     // 학원 등록 모달
@@ -267,7 +267,7 @@ export function SuperAdminDashboard() {
         trial: { text: '체험', color: 'bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-400' },
     };
 
-    if (isLoading && !stats) {
+    if (isLoading && isAuthenticated && !stats) {
         return (
             <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex items-center justify-center">
                 <div className="text-center">

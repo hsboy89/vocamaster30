@@ -1,6 +1,7 @@
 import { Navigate } from 'react-router-dom';
 import { useAuthStore } from '../../../stores';
 import { UserRole } from '../../types';
+import { useBackgroundMode } from './BackgroundModeContext';
 
 interface ProtectedRouteProps {
     children: React.ReactNode;
@@ -14,8 +15,10 @@ export function ProtectedRoute({
     redirectTo = '/login'
 }: ProtectedRouteProps) {
     const { isAuthenticated, user } = useAuthStore();
+    const isBackground = useBackgroundMode();
 
     if (!isAuthenticated || !user) {
+        if (isBackground) return <>{children}</>;
         return <Navigate to={redirectTo} replace />;
     }
 

@@ -28,7 +28,7 @@ export function AdminDashboard() {
     const [dayProgress, setDayProgress] = useState<DayProgress[]>([]);
     const [selectedLevel, setSelectedLevel] = useState<Level>('middle');
     const [searchTerm, setSearchTerm] = useState('');
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false); // Default to false to show UI structure in background mode
     const [topWrongWords, setTopWrongWords] = useState<WrongWordStat[]>([]);
     const [atRiskIds, setAtRiskIds] = useState<Set<string>>(new Set());
 
@@ -163,7 +163,8 @@ export function AdminDashboard() {
         advanced: '수능 심화',
     };
 
-    if (isLoading && !stats) { // 초기 로딩만 표시
+    // Only show loading if we have a user and are actually fetching
+    if (isLoading && user && !stats) {
         return (
             <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex items-center justify-center">
                 <div className="text-center">
