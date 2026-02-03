@@ -7,9 +7,10 @@ type LoginTab = 'student' | 'admin';
 interface LoginPageProps {
     initialTab?: LoginTab;
     onSuccess?: () => void;
+    isEmbedded?: boolean;
 }
 
-export function LoginPage({ initialTab = 'student', onSuccess }: LoginPageProps) {
+export function LoginPage({ initialTab = 'student', onSuccess, isEmbedded = false }: LoginPageProps) {
     const [activeTab, setActiveTab] = useState<LoginTab>(initialTab);
     const [academyCode, setAcademyCode] = useState('');
     const [studentName, setStudentName] = useState('');
@@ -83,17 +84,25 @@ export function LoginPage({ initialTab = 'student', onSuccess }: LoginPageProps)
         setError(null);
     };
 
-    return (
-        <div className="min-h-screen bg-[#020617] flex items-center justify-center p-4 relative overflow-hidden transition-colors duration-500">
-            {/* Background decorations - dynamic color based on academy theme */}
-            <div
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[120px] opacity-10 transition-colors duration-500"
-                style={{ backgroundColor: primaryColor }}
-            />
-            <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-500/5 blur-[120px]" />
-            <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-emerald-500/5 blur-[120px]" />
+    const containerClasses = isEmbedded
+        ? "w-full"
+        : "min-h-screen bg-[#020617] flex items-center justify-center p-4 relative overflow-hidden transition-colors duration-500";
 
-            <div className="relative bg-slate-900/80 backdrop-blur-2xl border border-white/20 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] max-w-md w-full overflow-hidden">
+    return (
+        <div className={containerClasses}>
+            {/* Background decorations - dynamic color based on academy theme (Only for non-embedded) */}
+            {!isEmbedded && (
+                <>
+                    <div
+                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[120px] opacity-10 transition-colors duration-500"
+                        style={{ backgroundColor: primaryColor }}
+                    />
+                    <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-500/5 blur-[120px]" />
+                    <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-emerald-500/5 blur-[120px]" />
+                </>
+            )}
+
+            <div className={`relative bg-slate-900/80 backdrop-blur-2xl border border-white/20 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] w-full overflow-hidden ${!isEmbedded ? 'max-w-md' : ''}`}>
                 {/* Header */}
                 <div
                     className="p-8 text-center transition-all duration-500"
