@@ -81,14 +81,6 @@ export function SuperAdminDashboard() {
         }
 
         // 2. Admin Validation
-        if (!newAdminId.trim()) {
-            setAddError('초기 관리자 ID를 입력해주세요.');
-            return;
-        }
-        if (!newAdminName.trim()) {
-            setAddError('초기 관리자 이름을 입력해주세요.');
-            return;
-        }
         if (!newAdminPassword.trim()) {
             setAddError('비밀번호를 입력해주세요.');
             return;
@@ -116,8 +108,8 @@ export function SuperAdminDashboard() {
             const newAcademyId = academyResult.academy.id;
             const adminResult = await createAcademyAdmin({
                 academyId: newAcademyId,
-                adminId: newAdminId.trim(),
-                studentName: newAdminName.trim(),
+                adminId: newAcademyCode.trim(), // Use Academy Code as Admin ID
+                studentName: '관리자', // Default admin name
                 password: newAdminPassword.trim(),
             });
 
@@ -545,40 +537,12 @@ export function SuperAdminDashboard() {
                             </div>
 
                             <div className="pt-4 border-t border-gray-100 dark:border-white/10">
-                                <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-4">초기 관리자 설정</h4>
+                                <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-4">관리자 비밀번호 설정</h4>
 
                                 <div className="space-y-4">
                                     <div>
                                         <label className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
-                                            관리자 ID
-                                        </label>
-                                        <input
-                                            type="text"
-                                            value={newAdminId}
-                                            onChange={(e) => setNewAdminId(e.target.value)}
-                                            placeholder="예: admin01"
-                                            className="w-full px-4 py-3.5 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-purple-500 dark:text-white dark:placeholder-slate-500"
-                                            disabled={isAdding}
-                                        />
-                                    </div>
-
-                                    <div>
-                                        <label className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
-                                            관리자 이름
-                                        </label>
-                                        <input
-                                            type="text"
-                                            value={newAdminName}
-                                            onChange={(e) => setNewAdminName(e.target.value)}
-                                            placeholder="예: 김관리"
-                                            className="w-full px-4 py-3.5 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-purple-500 dark:text-white dark:placeholder-slate-500"
-                                            disabled={isAdding}
-                                        />
-                                    </div>
-
-                                    <div>
-                                        <label className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
-                                            비밀번호
+                                            초기 비밀번호
                                         </label>
                                         <input
                                             type="password"
@@ -588,6 +552,7 @@ export function SuperAdminDashboard() {
                                             className="w-full px-4 py-3.5 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-purple-500 dark:text-white dark:placeholder-slate-500"
                                             disabled={isAdding}
                                         />
+                                        <p className="mt-1 text-xs text-gray-500 dark:text-slate-500">생성된 관리자 계정의 ID는 학원 코드와 동일하게 설정됩니다.</p>
                                     </div>
                                 </div>
                             </div>

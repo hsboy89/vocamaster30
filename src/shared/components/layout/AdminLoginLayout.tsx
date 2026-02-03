@@ -5,9 +5,10 @@ import BackgroundModeContext from '../auth/BackgroundModeContext';
 
 interface AdminLoginLayoutProps {
     children: ReactNode;
+    hideAdminId?: boolean;
 }
 
-export function AdminLoginLayout({ children }: AdminLoginLayoutProps) {
+export function AdminLoginLayout({ children, hideAdminId = false }: AdminLoginLayoutProps) {
     const { isAuthenticated } = useAuthStore();
 
     if (isAuthenticated) {
@@ -27,7 +28,12 @@ export function AdminLoginLayout({ children }: AdminLoginLayoutProps) {
             {/* Login Overlay */}
             <div className="absolute inset-0 z-50 flex items-center justify-center">
                 <div className="w-full max-w-md p-4">
-                    <LoginPage initialTab="admin" isEmbedded={true} hideStudentTab={true} />
+                    <LoginPage
+                        initialTab="admin"
+                        isEmbedded={true}
+                        hideStudentTab={true}
+                        hideAdminId={hideAdminId}
+                    />
                 </div>
             </div>
         </div>

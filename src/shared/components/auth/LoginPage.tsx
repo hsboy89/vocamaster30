@@ -10,9 +10,17 @@ interface LoginPageProps {
     isEmbedded?: boolean;
     hideAdminTab?: boolean;
     hideStudentTab?: boolean;
+    hideAdminId?: boolean;
 }
 
-export function LoginPage({ initialTab = 'student', onSuccess, isEmbedded = false, hideAdminTab = false, hideStudentTab = false }: LoginPageProps) {
+export function LoginPage({
+    initialTab = 'student',
+    onSuccess,
+    isEmbedded = false,
+    hideAdminTab = false,
+    hideStudentTab = false,
+    hideAdminId = false
+}: LoginPageProps) {
     const [activeTab, setActiveTab] = useState<LoginTab>(initialTab);
     const [academyCode, setAcademyCode] = useState('');
     const [studentName, setStudentName] = useState('');
@@ -73,7 +81,7 @@ export function LoginPage({ initialTab = 'student', onSuccess, isEmbedded = fals
         // 슈퍼 관리자인 경우 academyCode가 없을 수 있음
         const result = await adminLogin({
             academyCode: academyCode.trim(),
-            adminId: adminId.trim(),
+            adminId: hideAdminId ? academyCode.trim() : adminId.trim(),
             password
         });
         if (result && onSuccess) {
@@ -271,20 +279,22 @@ export function LoginPage({ initialTab = 'student', onSuccess, isEmbedded = fals
                                     disabled={isLoading}
                                 />
                             </div>
-                            <div>
-                                <label className="block text-sm font-medium text-slate-300 mb-2">
-                                    관리자 아이디
-                                </label>
-                                <input
-                                    type="text"
-                                    value={adminId}
-                                    onChange={(e) => setAdminId(e.target.value)}
-                                    placeholder="admin"
-                                    autoComplete="off"
-                                    className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-slate-500 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all outline-none"
-                                    disabled={isLoading}
-                                />
-                            </div>
+                            {!hideAdminId && (
+                                <div>
+                                    <label className="block text-sm font-medium text-slate-300 mb-2">
+                                        관리자 아이디
+                                    </label>
+                                    <input
+                                        type="text"
+                                        value={adminId}
+                                        onChange={(e) => setAdminId(e.target.value)}
+                                        placeholder="admin"
+                                        autoComplete="off"
+                                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-slate-500 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all outline-none"
+                                        disabled={isLoading}
+                                    />
+                                </div>
+                            )}
                             <div>
                                 <label className="block text-sm font-medium text-slate-300 mb-2">
                                     비밀번호
