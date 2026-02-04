@@ -171,7 +171,7 @@ export function LoginPage({
                             {!useSimplifiedAdminLogin && (
                                 <div>
                                     <label className="block text-sm font-medium text-slate-300 mb-2">
-                                        발급 코드 <span className="text-xs text-slate-500 ml-1">(학원에서 발급받은 코드)</span>
+                                        발급 코드
                                     </label>
                                     <div className="relative">
                                         <input
