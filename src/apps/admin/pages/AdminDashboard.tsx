@@ -40,6 +40,7 @@ export function AdminDashboard() {
     const [newPhone, setNewPhone] = useState('');
     const [newGrade, setNewGrade] = useState('');
     const [newTargetUniversity, setNewTargetUniversity] = useState('');
+    const [newPassword, setNewPassword] = useState('');
     const [addError, setAddError] = useState<string | null>(null);
     const [isAdding, setIsAdding] = useState(false);
 
@@ -120,6 +121,7 @@ export function AdminDashboard() {
             phone: newPhone.trim(),
             grade: newGrade.trim(),
             targetUniversity: newTargetUniversity.trim(),
+            password: newPassword.trim() || undefined,
         });
 
         if (result.success) {
@@ -130,6 +132,7 @@ export function AdminDashboard() {
             setNewPhone('');
             setNewGrade('');
             setNewTargetUniversity('');
+            setNewPassword('');
             loadDashboardData(); // 목록 새로고침
         } else {
             setAddError(result.error || '학생 등록에 실패했습니다.');
@@ -525,6 +528,7 @@ export function AdminDashboard() {
                                     setNewPhone('');
                                     setNewGrade('');
                                     setNewTargetUniversity('');
+                                    setNewPassword('');
                                 }}
                                 className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/10 rounded-xl transition-all"
                             >
@@ -563,6 +567,22 @@ export function AdminDashboard() {
                                     className="w-full px-4 py-3.5 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:text-white dark:placeholder-slate-500 transition-all"
                                     disabled={isAdding}
                                 />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
+                                    비밀번호
+                                </label>
+                                <input
+                                    type="text"
+                                    value={newPassword}
+                                    onChange={(e) => setNewPassword(e.target.value)}
+                                    placeholder="로그인 비밀번호 (선택사항)"
+                                    className="w-full px-4 py-3.5 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:text-white dark:placeholder-slate-500 transition-all font-mono"
+                                    disabled={isAdding}
+                                    autoComplete="new-password"
+                                />
+                                <p className="text-xs text-gray-400 mt-1">입력하지 않으면 비밀번호 없이 로그인할 수 있습니다.</p>
                             </div>
 
                             <div className="grid grid-cols-2 gap-4">

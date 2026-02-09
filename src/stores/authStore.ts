@@ -95,6 +95,27 @@ export const useAuthStore = create<AuthStore>()(
                         return false;
                     }
 
+                    // 2.5 비밀번호 검증 (credentials.password)
+                    // 기존 학생(비밀번호 없음)은 통과, 비밀번호가 설정된 학생은 검증
+                    if (existingUser.password_hash) {
+                        if (!credentials.password) {
+                            set({
+                                error: '비밀번호를 입력해주세요.',
+                                isLoading: false
+                            });
+                            return false;
+                        }
+
+                        // 단순 문자열 비교 (암호화 적용 시 수정 필요)
+                        if (credentials.password !== existingUser.password_hash) {
+                            set({
+                                error: '비밀번호가 일치하지 않습니다.',
+                                isLoading: false
+                            });
+                            return false;
+                        }
+                    }
+
                     // 3. 마지막 로그인 시간 업데이트
                     await supabase
                         .from('users')

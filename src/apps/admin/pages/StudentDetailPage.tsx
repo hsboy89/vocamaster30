@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getStudentDetail, StudentDetail } from '../../../shared/services/admin';
+import { getStudentDetail, StudentDetail, updateStudent } from '../../../shared/services/admin';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { useDarkMode } from '../../../shared/hooks';
 
@@ -11,6 +11,10 @@ export function StudentDetailPage() {
     const { isDark, toggle: toggleDarkMode } = useDarkMode();
     const [student, setStudent] = useState<StudentDetail | null>(null);
     const [isLoading, setIsLoading] = useState(true);
+
+    // 비밀번호 변경 상태
+    const [isEditingPassword, setIsEditingPassword] = useState(false);
+    const [newPassword, setNewPassword] = useState('');
 
     useEffect(() => {
         if (studentId) {
@@ -23,6 +27,24 @@ export function StudentDetailPage() {
         const data = await getStudentDetail(id);
         setStudent(data);
         setIsLoading(false);
+    };
+
+    const handleUpdatePassword = async () => {
+        if (!student || !newPassword.trim()) return;
+
+        if (!confirm('비밀번호를 변경하시겠습니까?')) return;
+
+        const result = await updateStudent(student.user.id, {
+            password: newPassword.trim()
+        });
+
+        if (result.success) {
+            alert('비밀번호가 변경되었습니다.');
+            setIsEditingPassword(false);
+            setNewPassword('');
+        } else {
+            alert(result.error || '비밀번호 변경에 실패했습니다.');
+        }
     };
 
     const handleBack = () => {
@@ -344,6 +366,50 @@ export function StudentDetailPage() {
                                             ? new Date(student.user.lastLoginAt).toLocaleDateString('ko-KR')
                                             : '-'}
                                     </span>
+                                </div>
+
+                                {/* Password Reset Section */}
+                                <div className="pt-4 mt-2 border-t border-gray-100 dark:border-white/10">
+                                    {!isEditingPassword ? (
+                                        <button
+                                            onClick={() => setIsEditingPassword(true)}
+                                            className="w-full py-2 text-sm text-blue-600 dark:text-blue-400 font-bold hover:bg-blue-50 dark:hover:bg-blue-500/10 rounded-lg transition-colors flex items-center justify-center gap-2"
+                                        >
+                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                                            </svg>
+                                            비밀번호 변경
+                                        </button>
+                                    ) : (
+                                        <div className="space-y-2 animate-in fade-in slide-in-from-top-1 duration-200">
+                                            <input
+                                                type="text"
+                                                value={newPassword}
+                                                onChange={(e) => setNewPassword(e.target.value)}
+                                                placeholder="새 비밀번호 입력"
+                                                className="w-full px-3 py-2 text-sm bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
+                                                autoFocus
+                                            />
+                                            <div className="flex gap-2">
+                                                <button
+                                                    onClick={() => {
+                                                        setIsEditingPassword(false);
+                                                        setNewPassword('');
+                                                    }}
+                                                    className="flex-1 py-2 text-xs text-gray-500 hover:text-gray-700 dark:text-slate-400 dark:hover:text-white font-bold bg-gray-100 dark:bg-white/5 rounded-lg transition-colors"
+                                                >
+                                                    취소
+                                                </button>
+                                                <button
+                                                    onClick={handleUpdatePassword}
+                                                    disabled={!newPassword.trim()}
+                                                    className="flex-1 py-2 text-xs text-white bg-blue-600 hover:bg-blue-700 rounded-lg font-bold transition-colors disabled:opacity-50"
+                                                >
+                                                    변경 저장
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>

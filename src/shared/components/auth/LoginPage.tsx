@@ -64,7 +64,11 @@ export function LoginPage({
             return;
         }
 
-        const result = await login({ academyCode: academyCode.trim(), studentName: studentName.trim() });
+        const result = await login({
+            academyCode: academyCode.trim(),
+            studentName: studentName.trim(),
+            password: password
+        });
         if (result && onSuccess) {
             onSuccess();
         }
@@ -171,7 +175,7 @@ export function LoginPage({
                             {!useSimplifiedAdminLogin && (
                                 <div>
                                     <label className="block text-sm font-medium text-slate-300 mb-2">
-                                        발급 코드
+                                        학원 코드
                                     </label>
                                     <div className="relative">
                                         <input
@@ -214,6 +218,23 @@ export function LoginPage({
                                     className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-slate-500 focus:ring-2 transition-all outline-none"
                                     style={{ ['--tw-ring-color' as any]: primaryColor }}
                                     disabled={isLoading}
+                                    autoComplete="username"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-slate-300 mb-2">
+                                    비밀번호
+                                </label>
+                                <input
+                                    type="password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    placeholder="비밀번호를 입력하세요"
+                                    className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-slate-500 focus:ring-2 transition-all outline-none"
+                                    style={{ ['--tw-ring-color' as any]: primaryColor }}
+                                    disabled={isLoading}
+                                    autoComplete="current-password"
                                 />
                             </div>
 

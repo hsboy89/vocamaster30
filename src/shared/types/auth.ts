@@ -75,6 +75,7 @@ export interface AuthState {
 export interface StudentLoginCredentials {
     academyCode: string;
     studentName: string;
+    password?: string; // 기존 학생 호환성을 위해 우선 옵셔널, UI에서는 필수 처리
 }
 
 // 관리자 로그인: 학원코드 + 관리자ID + 비밀번호
