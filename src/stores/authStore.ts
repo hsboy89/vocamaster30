@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, PersistStorage, StorageValue } from 'zustand/middleware';
 import { supabase } from '../shared/lib';
 import { User, Academy, DbUser, DbAcademy, dbUserToUser, dbAcademyToAcademy, StudentLoginCredentials, AdminLoginCredentials } from '../shared/types';
 
@@ -14,14 +14,42 @@ interface AuthStore {
 
     // Actions
     fetchAcademy: (code: string) => Promise<Academy | null>;
-    login: (credentials: StudentLoginCredentials) => Promise<boolean>;
+    login: (credentials: StudentLoginCredentials & { rememberMe?: boolean }) => Promise<boolean>;
     loginAsGuest: () => void;
-    adminLogin: (credentials: AdminLoginCredentials) => Promise<boolean>;
+    adminLogin: (credentials: AdminLoginCredentials & { rememberMe?: boolean }) => Promise<boolean>;
     logout: () => void;
     setLoading: (loading: boolean) => void;
     setError: (error: string | null) => void;
     checkSession: () => void;
 }
+
+// Custom storage adapter to handle both localStorage and sessionStorage
+// Explicitly typed to satisfy PersistStorage interface
+const customStorage: PersistStorage<any> = {
+    getItem: (name: string): StorageValue<any> | null => {
+        // Try localStorage first (persistent), then sessionStorage (session only)
+        const value = localStorage.getItem(name) || sessionStorage.getItem(name);
+        if (!value) return null;
+        try {
+            return JSON.parse(value);
+        } catch {
+            return null;
+        }
+    },
+    setItem: (name: string, value: StorageValue<any>) => {
+        // We need to know which storage to use based on user preference
+        const strValue = JSON.stringify(value);
+        if (sessionStorage.getItem(name)) {
+            sessionStorage.setItem(name, strValue);
+        } else {
+            localStorage.setItem(name, strValue);
+        }
+    },
+    removeItem: (name: string) => {
+        localStorage.removeItem(name);
+        sessionStorage.removeItem(name);
+    },
+};
 
 export const useAuthStore = create<AuthStore>()(
     persist(
@@ -58,11 +86,11 @@ export const useAuthStore = create<AuthStore>()(
                 }
             },
 
-            login: async (credentials: StudentLoginCredentials) => {
+            login: async (credentials: StudentLoginCredentials & { rememberMe?: boolean }) => {
                 set({ isLoading: true, error: null });
 
                 try {
-                    const { academyCode, studentName } = credentials;
+                    const { academyCode, studentName, rememberMe } = credentials;
 
                     // 1. 학원 정보 확인 (현재 상태에 없으면 조회)
                     let currentAcademy = get().academy;
@@ -95,8 +123,7 @@ export const useAuthStore = create<AuthStore>()(
                         return false;
                     }
 
-                    // 2.5 비밀번호 검증 (credentials.password)
-                    // 기존 학생(비밀번호 없음)은 통과, 비밀번호가 설정된 학생은 검증
+                    // 2.5 비밀번호 검증
                     if (existingUser.password_hash) {
                         if (!credentials.password) {
                             set({
@@ -106,7 +133,6 @@ export const useAuthStore = create<AuthStore>()(
                             return false;
                         }
 
-                        // 단순 문자열 비교 (암호화 적용 시 수정 필요)
                         if (credentials.password !== existingUser.password_hash) {
                             set({
                                 error: '비밀번호가 일치하지 않습니다.',
@@ -123,9 +149,27 @@ export const useAuthStore = create<AuthStore>()(
                         .eq('id', existingUser.id);
 
                     const user = dbUserToUser(existingUser as DbUser);
-
-                    // User 객체에 학원 설정 주입 (편의성)
                     user.academySettings = currentAcademy.settings;
+
+                    // Storage handling based on rememberMe
+                    const storageKey = 'vocamaster-auth';
+                    const stateToSave = JSON.stringify({
+                        state: {
+                            user,
+                            academy: currentAcademy,
+                            isAuthenticated: true,
+                            isGuest: false
+                        },
+                        version: 0
+                    });
+
+                    if (rememberMe) {
+                        localStorage.setItem(storageKey, stateToSave);
+                        sessionStorage.removeItem(storageKey);
+                    } else {
+                        sessionStorage.setItem(storageKey, stateToSave);
+                        localStorage.removeItem(storageKey);
+                    }
 
                     set({ user, isAuthenticated: true, isGuest: false, isLoading: false });
                     return true;
@@ -148,6 +192,12 @@ export const useAuthStore = create<AuthStore>()(
                     academyId: 'guest-academy',
                     academyName: 'VocaMaster 체험',
                 };
+
+                // Guest mainly uses sessionStorage
+                const storageKey = 'vocamaster-auth';
+                sessionStorage.removeItem(storageKey); // Clear any existing
+                // We rely on Zustand to set state, and the custom adapter to pick it up later or simple state update
+
                 set({
                     user: guestUser,
                     academy: null,
@@ -157,45 +207,57 @@ export const useAuthStore = create<AuthStore>()(
                 });
             },
 
-            adminLogin: async (credentials: AdminLoginCredentials) => {
+            adminLogin: async (credentials: AdminLoginCredentials & { rememberMe?: boolean }) => {
                 set({ isLoading: true, error: null });
-                const { academyCode, adminId, password } = credentials;
+                const { academyCode, adminId, password, rememberMe } = credentials;
 
                 try {
-                    // 환경변수에서 마스터 관리자 비밀번호 확인 (간편 구현)
-                    // 실제 서비스에서는 DB에 해시된 비밀번호를 저장해야 함
-                    const ENV_ADMIN_ID = import.meta.env.VITE_ADMIN_ID; // 구 'admin'
+                    const ENV_ADMIN_ID = import.meta.env.VITE_ADMIN_ID;
                     const ENV_ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
 
-                    // 1. 슈퍼 관리자 체크 (환경변수 사용)
+                    // 1. 슈퍼 관리자 체크
                     if (adminId === ENV_ADMIN_ID && password === ENV_ADMIN_PASSWORD) {
-                        // 환경변수 인증 성공 = 슈퍼관리자로 처리 (DB 조회 불필요)
                         const superAdminUser: User = {
                             id: 'super-admin',
                             studentName: '슈퍼관리자',
                             role: 'super_admin',
                             adminId: ENV_ADMIN_ID,
                         };
+
+                        // Storage handling
+                        const storageKey = 'vocamaster-auth';
+                        const stateToSave = JSON.stringify({
+                            state: {
+                                user: superAdminUser,
+                                academy: null,
+                                isAuthenticated: true,
+                                isGuest: false
+                            },
+                            version: 0
+                        });
+
+                        if (rememberMe) {
+                            localStorage.setItem(storageKey, stateToSave);
+                            sessionStorage.removeItem(storageKey);
+                        } else {
+                            sessionStorage.setItem(storageKey, stateToSave);
+                            localStorage.removeItem(storageKey);
+                        }
+
                         set({ user: superAdminUser, academy: null, isAuthenticated: true, isGuest: false, isLoading: false });
                         return true;
                     }
 
                     // 2. 학원 관리자 체크
-                    if (!academyCode) {
-                        throw new Error('학원 코드를 입력해주세요.');
-                    }
+                    if (!academyCode) throw new Error('학원 코드를 입력해주세요.');
 
-                    // 학원 조회
                     let currentAcademy = get().academy;
                     if (!currentAcademy || currentAcademy.academyCode !== academyCode) {
                         currentAcademy = await get().fetchAcademy(academyCode);
                     }
 
-                    if (!currentAcademy) {
-                        throw new Error('존재하지 않는 학원 코드입니다.');
-                    }
+                    if (!currentAcademy) throw new Error('존재하지 않는 학원 코드입니다.');
 
-                    // 3. 관리자 정보 조회 (비밀번호 검증 전)
                     const { data: academyAdmin, error: adminError } = await supabase
                         .from('users')
                         .select('*')
@@ -204,25 +266,14 @@ export const useAuthStore = create<AuthStore>()(
                         .eq('role', 'academy_admin')
                         .single();
 
-                    if (adminError || !academyAdmin) {
-                        throw new Error('해당 학원에 등록된 관리자가 아닙니다.');
-                    }
+                    if (adminError || !academyAdmin) throw new Error('해당 학원에 등록된 관리자가 아닙니다.');
 
-                    // 4. 비밀번호 검증
-                    // DB에 password_hash가 있으면 그것과 비교, 없으면(기존 계정) 환경변수와 비교
                     if (academyAdmin.password_hash) {
-                        // TODO: 실제 배포 시에는 bcrypt 등으로 해시 비교 필요
-                        if (password !== academyAdmin.password_hash) {
-                            throw new Error('비밀번호가 일치하지 않습니다.');
-                        }
+                        if (password !== academyAdmin.password_hash) throw new Error('비밀번호가 일치하지 않습니다.');
                     } else {
-                        // 기존 계정 호환성 (환경변수 비밀번호 사용)
-                        if (password !== ENV_ADMIN_PASSWORD) {
-                            throw new Error('비밀번호가 올바르지 않습니다.');
-                        }
+                        if (password !== ENV_ADMIN_PASSWORD) throw new Error('비밀번호가 올바르지 않습니다.');
                     }
 
-                    // 로그인 성공
                     await supabase
                         .from('users')
                         .update({ last_login_at: new Date().toISOString() })
@@ -230,6 +281,26 @@ export const useAuthStore = create<AuthStore>()(
 
                     const user = dbUserToUser(academyAdmin as DbUser);
                     user.academySettings = currentAcademy.settings;
+
+                    // Storage handling
+                    const storageKey = 'vocamaster-auth';
+                    const stateToSave = JSON.stringify({
+                        state: {
+                            user,
+                            academy: currentAcademy,
+                            isAuthenticated: true,
+                            isGuest: false
+                        },
+                        version: 0
+                    });
+
+                    if (rememberMe) {
+                        localStorage.setItem(storageKey, stateToSave);
+                        sessionStorage.removeItem(storageKey);
+                    } else {
+                        sessionStorage.setItem(storageKey, stateToSave);
+                        localStorage.removeItem(storageKey);
+                    }
 
                     set({ user, academy: currentAcademy, isAuthenticated: true, isGuest: false, isLoading: false });
                     return true;
@@ -244,13 +315,14 @@ export const useAuthStore = create<AuthStore>()(
 
             logout: () => {
                 set({ user: null, academy: null, isAuthenticated: false, isGuest: false, error: null });
+                localStorage.removeItem('vocamaster-auth');
+                sessionStorage.removeItem('vocamaster-auth');
             },
 
             setLoading: (loading: boolean) => set({ isLoading: loading }),
             setError: (error: string | null) => set({ error }),
 
             checkSession: () => {
-                // persist middleware가 자동으로 세션 복원
                 const { user } = get();
                 if (user) {
                     set({ isAuthenticated: true });
@@ -259,6 +331,7 @@ export const useAuthStore = create<AuthStore>()(
         }),
         {
             name: 'vocamaster-auth',
+            storage: customStorage, // Custom storage adapter
             partialize: (state) => ({
                 user: state.user,
                 academy: state.academy,
