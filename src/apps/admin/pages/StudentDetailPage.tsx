@@ -352,6 +352,12 @@ export function StudentDetailPage() {
                                     <span className="font-bold text-blue-600 dark:text-blue-400">{student.user.targetUniversity || '-'}</span>
                                 </div>
                                 <div className="flex justify-between items-center py-2 border-b border-gray-50 dark:border-white/5">
+                                    <span className="text-sm text-gray-500 dark:text-slate-400">목표 학습 기간</span>
+                                    <span className="font-bold text-gray-900 dark:text-white">
+                                        {student.user.goalDuration ? `${student.user.goalDuration}일` : '-'}
+                                    </span>
+                                </div>
+                                <div className="flex justify-between items-center py-2 border-b border-gray-50 dark:border-white/5">
                                     <span className="text-sm text-gray-500 dark:text-slate-400">가입일</span>
                                     <span className="font-bold text-gray-900 dark:text-white lowercase">
                                         {student.user.createdAt

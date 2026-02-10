@@ -428,7 +428,7 @@ export async function getStudentDetail(userId: string): Promise<StudentDetail | 
             level: q.level,
             quizType: q.quiz_type,
             score: q.total_questions > 0
-                ? Math.round((q.correct_answers / q.total_questions) * 100)
+                ? Math.min(Math.round((q.correct_answers / q.total_questions) * 100), 100)
                 : 0,
             completedAt: q.completed_at,
         })) || [];
