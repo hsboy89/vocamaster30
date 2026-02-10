@@ -313,19 +313,6 @@ export function StudentDetailPage() {
                         <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-100 dark:border-white/5 overflow-hidden">
                             <div className="p-6 border-b border-gray-100 dark:border-white/5 flex items-center justify-between">
                                 <h2 className="text-lg font-bold text-gray-900 dark:text-white">최근 퀴즈 결과</h2>
-                                <button
-                                    onClick={() => handleShare()}
-                                    className="flex items-center gap-2 px-3 py-1.5 bg-yellow-400 text-black text-sm font-bold rounded-lg hover:bg-yellow-500 transition-all shadow-sm"
-                                >
-                                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM11.29 16.29L8.7 13.7C8.31 13.31 8.31 12.68 8.7 12.29C9.09 11.9 9.72 11.9 10.11 12.29L12 14.17L16.88 9.29C17.27 8.9 17.9 8.9 18.29 9.29C18.68 9.68 18.68 10.31 18.29 10.7L12.7 16.29C12.32 16.68 11.69 16.68 11.29 16.29Z" />
-                                        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 4C16.42 4 20 7.58 20 12C20 16.42 16.42 20 12 20C7.58 20 4 16.42 4 12C4 7.58 7.58 4 12 4Z" opacity="0.3" />
-                                        <path d="M19.07 10.59l-5-5c-0.38-0.38-1.02-0.38-1.41 0l-5 5c-0.39 0.39-0.39 1.02 0 1.41 0.39 0.39 1.02 0.39 1.41 0L12 9.41l2.93 2.93c0.39 0.39 1.02 0.39 1.41 0 0.39-0.38 0.39-1.02 0-1.75z" fill="none" />
-                                        {/* Kakao-like icon simply represented or share icon */}
-                                        <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" />
-                                    </svg>
-                                    학부모 공유
-                                </button>
                             </div>
                             <div className="overflow-x-auto">
                                 <table className="w-full text-sm">
@@ -336,7 +323,7 @@ export function StudentDetailPage() {
                                             <th className="px-6 py-4 text-left font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">유형</th>
                                             <th className="px-6 py-4 text-left font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">점수</th>
                                             <th className="px-6 py-4 text-left font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">일시</th>
-                                            <th className="px-6 py-4 text-left font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">관리</th>
+                                            <th className="px-6 py-4 text-center font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">학부모 공유</th>
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-gray-100 dark:divide-white/5">
@@ -372,15 +359,12 @@ export function StudentDetailPage() {
                                                     <td className="px-6 py-4 text-gray-500 dark:text-slate-500">
                                                         {new Date(quiz.completedAt).toLocaleDateString('ko-KR')}
                                                     </td>
-                                                    <td className="px-6 py-4">
+                                                    <td className="px-6 py-4 text-center">
                                                         <button
                                                             onClick={() => handleShare(quiz)}
-                                                            className="p-2 text-gray-400 hover:text-yellow-500 dark:hover:text-yellow-400 hover:bg-yellow-50 dark:hover:bg-yellow-500/10 rounded-lg transition-all"
-                                                            title="성적 공유"
+                                                            className="px-3 py-1.5 text-xs font-bold text-gray-700 dark:text-white bg-gray-100 dark:bg-white/10 hover:bg-yellow-400 dark:hover:bg-yellow-500 hover:text-black dark:hover:text-black rounded-lg transition-all"
                                                         >
-                                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
-                                                            </svg>
+                                                            전송
                                                         </button>
                                                     </td>
                                                 </tr>
