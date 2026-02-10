@@ -11,33 +11,50 @@ export function shuffle<T>(array: T[]): T[] {
     return arr;
 }
 
-export function createStudyPlan(level: Level, duration: number): StudyPlan {
+export function createStudyPlan(
+    level: Level,
+    duration: number,
+    memorizedWordIds: string[] = [],
+    targetDailyCount?: number
+): StudyPlan {
     const allWords = getAllWords(level);
-    const shuffledWords = shuffle(allWords);
 
-    // 마지막 날짜에 남은 단어가 너무 적으면 분배 로직 조정 필요할 수 있으나,
-    // Math.ceil을 사용하면 앞쪽 날짜들이 꽉 차고 마지막 날짜가 조금 적거나 같아짐.
-    // 1000단어 / 30일 = 33.33 -> 34단어씩.
-    // 34 * 29 = 986. 나머지 14단어.
-    // 이렇게 되면 분배는 되지만 마지막 날이 좀 적음. 
-    // 사용자 요청은 "꽉 채워달라"는 것이었으므로 acceptable.
+    // 1. 이미 외운 단어 제외
+    const availableWords = allWords.filter(w => !memorizedWordIds.includes(w.id));
 
-    const wordsPerDay = Math.ceil(allWords.length / duration);
+    const shuffledWords = shuffle(availableWords);
+
+    // 2. 이번 플랜의 목표 단어 수 계산
+    let planWords: string[] = [];
+    let wordsPerDay = 0;
+
+    if (targetDailyCount) {
+        // 목표량 * 기간 만큼만 할당 (단, 남은 단어 수보다 클 수 없음)
+        const targetTotal = Math.min(availableWords.length, duration * targetDailyCount);
+        planWords = shuffledWords.slice(0, targetTotal).map(w => w.id);
+        wordsPerDay = targetDailyCount;
+    } else {
+        // 남은 단어 전체를 기간 내에 분배
+        planWords = shuffledWords.map(w => w.id);
+        wordsPerDay = Math.ceil(planWords.length / duration);
+    }
+
     const schedule: Record<number, string[]> = {};
 
     for (let i = 0; i < duration; i++) {
         const day = i + 1;
         const start = i * wordsPerDay;
-        const end = Math.min(start + wordsPerDay, allWords.length);
-        const dayWords = shuffledWords.slice(start, end);
+        // targetDailyCount 모드일 때도 slice 범위가 planWords 길이를 넘지 않으므로 안전
+        const end = Math.min(start + wordsPerDay, planWords.length);
+        const dayWordIds = planWords.slice(start, end);
 
-        if (dayWords.length > 0) {
-            schedule[day] = dayWords.map(w => w.id);
+        if (dayWordIds.length > 0) {
+            schedule[day] = dayWordIds;
         }
     }
 
     return {
-        id: Date.now().toString(), // Simple ID generation
+        id: Date.now().toString(),
         level,
         wordsPerDay,
         schedule

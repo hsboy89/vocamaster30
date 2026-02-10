@@ -409,6 +409,39 @@ export function calculateCompletionRate(level: Level): number {
     return Math.round((completed / 30) * 100);
 }
 
+export function getAllMemorizedWordIds(level: Level): string[] {
+    const progress = getProgressByLevel(level);
+    return progress.flatMap(p => p.memorizedWords || []);
+}
+
+export async function resetLevelProgress(level: Level): Promise<void> {
+    const userId = getUserId();
+
+    // 1. Local Reset
+    try {
+        const allProgress = getAllProgressLocal();
+        const filtered = allProgress.filter(p => p.level !== level);
+        localStorage.setItem(STORAGE_KEYS.PROGRESS, JSON.stringify(filtered));
+
+        // Settings 등 다른 정보는 유지. Plan은 GoalSetting에서 별도 처리.
+    } catch (e) {
+        console.error("Failed to reset local progress", e);
+    }
+
+    // 2. Cloud Reset (Soft Delete or Hard Delete)
+    if (userId) {
+        try {
+            await supabase
+                .from('student_progress')
+                .delete()
+                .eq('user_id', userId)
+                .eq('level', level);
+        } catch (e) {
+            console.error("Failed to reset cloud progress", e);
+        }
+    }
+}
+
 export function getWrongAnswers(): WrongAnswer[] {
     return getWrongAnswersLocal();
 }

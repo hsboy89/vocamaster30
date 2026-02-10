@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { GoalDuration, GOAL_OPTIONS, Level, LEVEL_INFO, StudyGoal, StudyPlan } from '../../../shared/types';
 import { createStudyPlan } from '../../../shared/utils/study-planner';
+import { getAllMemorizedWordIds, resetLevelProgress } from '../../../shared/services/storage';
 
 const GOAL_STORAGE_KEY = 'vocamaster-study-goal';
 const PLAN_STORAGE_KEY = 'vocamaster-study-plan';
@@ -51,26 +52,43 @@ function getDaysElapsed(startDate: string): number {
 export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
     const [goal, setGoal] = useState<StudyGoal | null>(null);
     const [isSettingGoal, setIsSettingGoal] = useState(false);
+    const [dailyCount, setDailyCount] = useState<number>(30); // 기본 30단어
+    const [availableCount, setAvailableCount] = useState<number>(0);
+    const [totalCount, setTotalCount] = useState<number>(0);
+
+    const DAILY_OPTIONS = [30, 50, 70, 100];
 
     useEffect(() => {
-        const stored = getStoredGoal();
-        if (stored && stored.level === level) {
-            const remaining = getDaysRemaining(stored.startDate, stored.duration);
-            if (remaining > 0) {
-                setGoal(stored);
-                onGoalChange?.(stored.duration);
+        const loadInfo = () => {
+            const memorized = getAllMemorizedWordIds(level);
+            const total = LEVEL_INFO[level].totalWords; // 혹은 data/index.ts의 getAllWords(level).length
+            setTotalCount(total);
+            setAvailableCount(Math.max(0, total - memorized.length));
+
+            const stored = getStoredGoal();
+            if (stored && stored.level === level) {
+                const remaining = getDaysRemaining(stored.startDate, stored.duration);
+                if (remaining > 0) {
+                    setGoal(stored);
+                    onGoalChange?.(stored.duration);
+                } else {
+                    clearGoal();
+                    onGoalChange?.(null);
+                }
             } else {
-                clearGoal();
                 onGoalChange?.(null);
             }
-        } else {
-            onGoalChange?.(null);
-        }
+        };
+
+        loadInfo();
+        // 포커스 될 때 업데이트되면 좋겠지만, 일단 level 변경 시 수행
     }, [level]);
 
     const handleSetGoal = (duration: GoalDuration) => {
-        // 1. 단어 분배 플랜 생성
-        const plan = createStudyPlan(level, duration);
+        const memorized = getAllMemorizedWordIds(level);
+
+        // 1. 단어 분배 플랜 생성 (이번 회차)
+        const plan = createStudyPlan(level, duration, memorized, dailyCount);
         savePlan(plan);
 
         // 2. 목표 정보 저장
@@ -78,7 +96,7 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
             duration,
             startDate: new Date().toISOString(),
             level,
-            wordsPerDay: plan.wordsPerDay, // 플랜에서 계산된 값 사용
+            wordsPerDay: plan.wordsPerDay,
         };
         saveGoal(newGoal);
 
@@ -93,6 +111,42 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
         onGoalChange?.(null);
     };
 
+    const handleResetProgress = async () => {
+        if (confirm('모든 학습 기록이 초기화됩니다. 정말 다시 시작하시겠습니까?')) {
+            await resetLevelProgress(level);
+            // 새로고침하여 상태 반영
+            window.location.reload();
+        }
+    };
+
+    // 1회독 완료 축하 메시지
+    if (availableCount === 0 && totalCount > 0) {
+        return (
+            <div className="max-w-6xl mx-auto px-4 py-4">
+                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-yellow-500 to-amber-600 p-8 text-white shadow-xl text-center">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full -mr-20 -mt-20 blur-3xl animate-pulse" />
+
+                    <div className="relative z-10 space-y-6">
+                        <div className="text-6xl mb-2">🏆</div>
+                        <div>
+                            <h3 className="text-3xl font-black mb-2">1회독 완료! 축하합니다!</h3>
+                            <p className="text-white/90 text-lg">
+                                {LEVEL_INFO[level].nameKo}의 모든 단어를 학습하셨습니다.
+                            </p>
+                        </div>
+
+                        <button
+                            onClick={handleResetProgress}
+                            className="bg-white text-amber-600 px-8 py-3 rounded-xl font-bold text-lg hover:bg-amber-50 hover:scale-105 transition-all shadow-lg"
+                        >
+                            처음부터 다시 시작하기
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     // 목표가 설정되어 있을 때
     if (goal) {
         const daysRemaining = getDaysRemaining(goal.startDate, goal.duration);
@@ -103,7 +157,6 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
         return (
             <div className="max-w-6xl mx-auto px-4 py-4">
                 <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-600 to-emerald-500 p-6 text-white shadow-xl">
-                    {/* 배경 장식 */}
                     <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -mr-10 -mt-10 blur-2xl" />
                     <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full -ml-8 -mb-8 blur-xl" />
 
@@ -145,7 +198,7 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
         );
     }
 
-    // 목표 설정 UI (다크 모드 스타일 적용)
+    // 목표 설정 UI
     return (
         <div className="max-w-6xl mx-auto px-4 py-4">
             {!isSettingGoal ? (
@@ -156,17 +209,27 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
                     <div className="flex items-center justify-center gap-3">
                         <span className="text-2xl group-hover:scale-110 transition-transform">🎯</span>
                         <div>
-                            <h3 className="font-bold text-gray-100 text-base group-hover:text-blue-400 transition-colors">단기 목표 설정하기</h3>
-                            <p className="text-sm text-gray-400">5일~30일 단기 집중 학습 목표를 세워보세요</p>
+                            <div className="flex items-center gap-2">
+                                <h3 className="font-bold text-gray-100 text-base group-hover:text-blue-400 transition-colors">맞춤 학습 플랜 만들기</h3>
+                                <span className="text-[10px] bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full">New</span>
+                            </div>
+                            <p className="text-sm text-gray-400 mt-1">
+                                남은 <span className="text-white font-bold">{availableCount}</span>단어를 내 속도에 맞춰 계획해드려요
+                            </p>
                         </div>
                     </div>
                 </button>
             ) : (
-                <div className="rounded-2xl border border-white/10 bg-slate-800/90 backdrop-blur-sm p-6 shadow-xl animate-in fade-in zoom-in-95 duration-200">
-                    <div className="flex items-center justify-between mb-5">
-                        <h3 className="font-bold text-white text-lg flex items-center gap-2">
-                            <span>🎯</span> 학습 기간을 선택하세요
-                        </h3>
+                <div className="rounded-2xl border border-white/10 bg-slate-800/90 backdrop-blur-sm p-6 shadow-xl animate-in fade-in zoom-in-95 duration-200 space-y-6">
+                    <div className="flex items-center justify-between">
+                        <div>
+                            <h3 className="font-bold text-white text-lg flex items-center gap-2">
+                                <span>🎯</span> 학습 플랜 설정
+                            </h3>
+                            <p className="text-slate-400 text-sm mt-1">
+                                남은 <span className="text-white font-bold">{availableCount}</span>단어 학습을 위한 계획을 세웁니다.
+                            </p>
+                        </div>
                         <button
                             onClick={() => setIsSettingGoal(false)}
                             className="text-gray-400 hover:text-white p-1.5 hover:bg-white/10 rounded-lg transition-all"
@@ -177,25 +240,54 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
                         </button>
                     </div>
 
-                    <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
-                        {GOAL_OPTIONS.map((option) => {
-                            const wordsPerDay = Math.ceil(LEVEL_INFO[level].totalWords / option.duration);
-                            return (
+                    {/* Step 1: 하루 목표량 선택 */}
+                    <div className="space-y-3">
+                        <label className="text-sm font-bold text-slate-300 block">하루 학습량 목표</label>
+                        <div className="grid grid-cols-4 gap-2">
+                            {DAILY_OPTIONS.map((count) => (
                                 <button
-                                    key={option.duration}
-                                    onClick={() => handleSetGoal(option.duration)}
-                                    className="group relative rounded-xl border border-white/10 bg-white/5 hover:bg-blue-600/20 hover:border-blue-500/50 p-4 text-center transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
+                                    key={count}
+                                    onClick={() => setDailyCount(count)}
+                                    className={`py-2 px-1 rounded-xl text-sm font-bold transition-all border ${dailyCount === count
+                                            ? 'bg-blue-600 text-white border-blue-500 shadow-lg scale-105'
+                                            : 'bg-slate-700/50 text-slate-400 border-white/5 hover:bg-slate-700 hover:text-white'
+                                        }`}
                                 >
-                                    <p className="text-2xl font-bold text-white group-hover:text-blue-400 mb-1 transition-colors">
-                                        {option.label}
-                                    </p>
-                                    <p className="text-xs text-slate-400 group-hover:text-slate-300 mb-2 transition-colors">{option.description}</p>
-                                    <p className="text-[11px] font-medium text-blue-400 bg-blue-500/10 group-hover:bg-blue-500/20 px-2 py-0.5 rounded-full inline-block transition-colors">
-                                        하루 {wordsPerDay}단어
-                                    </p>
+                                    {count}개
                                 </button>
-                            );
-                        })}
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="h-px bg-white/10" />
+
+                    {/* Step 2: 기간 선택 */}
+                    <div className="space-y-3">
+                        <label className="text-sm font-bold text-slate-300 block">이번 회차 학습 기간</label>
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            {GOAL_OPTIONS.map((option) => {
+                                // 예상 학습량 계산
+                                const targetTotal = Math.min(availableCount, option.duration * dailyCount);
+
+                                return (
+                                    <button
+                                        key={option.duration}
+                                        onClick={() => handleSetGoal(option.duration)}
+                                        className="group relative rounded-xl border border-white/10 bg-white/5 hover:bg-blue-600/20 hover:border-blue-500/50 p-4 text-center transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
+                                    >
+                                        <p className="text-xl font-bold text-white group-hover:text-blue-400 mb-1 transition-colors">
+                                            {option.label}
+                                        </p>
+                                        <p className="text-xs text-slate-400 group-hover:text-slate-300 mb-2 transition-colors">
+                                            총 {targetTotal}단어 예정
+                                        </p>
+                                        <p className="text-[10px] font-medium text-blue-400 bg-blue-500/10 group-hover:bg-blue-500/20 px-2 py-0.5 rounded-full inline-block transition-colors">
+                                            {option.duration * dailyCount >= availableCount ? '회독 가능' : '부분 학습'}
+                                        </p>
+                                    </button>
+                                );
+                            })}
+                        </div>
                     </div>
                 </div>
             )}
