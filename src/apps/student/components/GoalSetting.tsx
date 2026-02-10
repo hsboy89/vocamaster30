@@ -5,6 +5,7 @@ const GOAL_STORAGE_KEY = 'vocamaster-study-goal';
 
 interface GoalSettingProps {
     level: Level;
+    onGoalChange?: (days: number | null) => void;
 }
 
 function getStoredGoal(): StudyGoal | null {
@@ -40,20 +41,23 @@ function getDaysElapsed(startDate: string): number {
     return Math.max(0, Math.ceil((now.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)));
 }
 
-export function GoalSetting({ level }: GoalSettingProps) {
+export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
     const [goal, setGoal] = useState<StudyGoal | null>(null);
     const [isSettingGoal, setIsSettingGoal] = useState(false);
 
     useEffect(() => {
         const stored = getStoredGoal();
         if (stored && stored.level === level) {
-            // 목표가 만료되었는지 확인
             const remaining = getDaysRemaining(stored.startDate, stored.duration);
             if (remaining > 0) {
                 setGoal(stored);
+                onGoalChange?.(stored.duration);
             } else {
                 clearGoal();
+                onGoalChange?.(null);
             }
+        } else {
+            onGoalChange?.(null);
         }
     }, [level]);
 
@@ -69,11 +73,13 @@ export function GoalSetting({ level }: GoalSettingProps) {
         saveGoal(newGoal);
         setGoal(newGoal);
         setIsSettingGoal(false);
+        onGoalChange?.(duration);
     };
 
     const handleClearGoal = () => {
         clearGoal();
         setGoal(null);
+        onGoalChange?.(null);
     };
 
     // 목표가 설정되어 있을 때
@@ -140,7 +146,7 @@ export function GoalSetting({ level }: GoalSettingProps) {
                         <span className="text-2xl group-hover:scale-110 transition-transform">🎯</span>
                         <div>
                             <h3 className="font-bold text-gray-700 text-base">단기 목표 설정하기</h3>
-                            <p className="text-sm text-gray-400">5일~14일 단기 집중 학습 목표를 세워보세요</p>
+                            <p className="text-sm text-gray-400">5일~30일 단기 집중 학습 목표를 세워보세요</p>
                         </div>
                     </div>
                 </button>
@@ -160,7 +166,7 @@ export function GoalSetting({ level }: GoalSettingProps) {
                         </button>
                     </div>
 
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
                         {GOAL_OPTIONS.map((option) => {
                             const wordsPerDay = Math.ceil(LEVEL_INFO[level].totalWords / option.duration);
                             return (

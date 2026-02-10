@@ -7,11 +7,12 @@ interface DayGridProps {
     onOpenWrongNote?: () => void;
     isGuest?: boolean;
     onLockedClick?: () => void;
+    maxDays?: number;
 }
 
-export function DayGrid({ level, onDaySelect, isGuest = false, onLockedClick }: DayGridProps) {
+export function DayGrid({ level, onDaySelect, isGuest = false, onLockedClick, maxDays = 30 }: DayGridProps) {
     const { getStatus } = useProgress();
-    const days = Array.from({ length: 30 }, (_, i) => i + 1);
+    const days = Array.from({ length: maxDays }, (_, i) => i + 1);
 
 
 

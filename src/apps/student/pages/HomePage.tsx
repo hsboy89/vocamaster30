@@ -18,6 +18,7 @@ export function HomePage({ level, onDaySelect, onCategorySelect, isGuest, onLock
     const { getCompletionRate, getStatus } = useProgress();
     const [showWrongNote, setShowWrongNote] = useState(false);
     const [wrongAnswers, setWrongAnswers] = useState<WrongAnswer[]>([]);
+    const [goalDays, setGoalDays] = useState<number | null>(null);
 
     const handleOpenWrongNote = () => {
         const data = storage.getWrongAnswers();
@@ -139,7 +140,7 @@ export function HomePage({ level, onDaySelect, onCategorySelect, isGuest, onLock
             </section>
 
             {/* 단기 목표 설정 */}
-            <GoalSetting level={level} />
+            <GoalSetting level={level} onGoalChange={(days) => setGoalDays(days)} />
 
             {/* 분야별 카테고리 그리드 */}
             <CategoryGrid
@@ -152,7 +153,9 @@ export function HomePage({ level, onDaySelect, onCategorySelect, isGuest, onLock
             <div className="border-t border-gray-100 mt-4">
                 <div className="max-w-6xl mx-auto px-4 pt-6 pb-2">
                     <h2 className="text-xl font-bold text-gray-900 mb-1">📅 일별 학습</h2>
-                    <p className="text-sm text-gray-500 mb-4">30일 과정으로 체계적으로 학습하세요</p>
+                    <p className="text-sm text-gray-500 mb-4">
+                        {goalDays ? `${goalDays}일 목표 학습` : '30일 과정으로 체계적으로 학습하세요'}
+                    </p>
                 </div>
                 <DayGrid
                     level={level}
@@ -160,6 +163,7 @@ export function HomePage({ level, onDaySelect, onCategorySelect, isGuest, onLock
                     onOpenWrongNote={handleOpenWrongNote}
                     isGuest={isGuest}
                     onLockedClick={onLockedClick}
+                    maxDays={goalDays || 30}
                 />
             </div>
         </div>

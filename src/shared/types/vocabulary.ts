@@ -90,7 +90,7 @@ export interface LevelInfo {
 }
 
 // 단기 목표 옵션
-export type GoalDuration = 5 | 7 | 10 | 14;
+export type GoalDuration = 5 | 7 | 10 | 14 | 30;
 
 export interface StudyGoal {
     duration: GoalDuration;
@@ -105,6 +105,7 @@ export const GOAL_OPTIONS: { duration: GoalDuration; label: string; description:
     { duration: 7, label: '7일', description: '1주 완성' },
     { duration: 10, label: '10일', description: '탄탄한 기초' },
     { duration: 14, label: '14일', description: '심화 마스터' },
+    { duration: 30, label: '30일', description: '전체 완성' },
 ];
 
 export const LEVEL_INFO: Record<Level, LevelInfo> = {
