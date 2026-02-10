@@ -4,11 +4,12 @@ interface CategoryGridProps {
     level: Level;
     onCategorySelect: (category: Category) => void;
     getCategoryProgress?: (category: Category) => number; // 0-100
+    categoryWordCounts?: Record<string, number>;
 }
 
-export function CategoryGrid({ level, onCategorySelect, getCategoryProgress }: CategoryGridProps) {
+export function CategoryGrid({ level, onCategorySelect, getCategoryProgress, categoryWordCounts }: CategoryGridProps) {
     const levelInfo = LEVEL_INFO[level];
-    const wordsPerCategory = Math.floor(levelInfo.totalWords / CATEGORIES.length);
+    const defaultPerCat = Math.floor(levelInfo.totalWords / CATEGORIES.length);
 
     return (
         <div className="max-w-6xl mx-auto px-4 py-6">
@@ -16,7 +17,7 @@ export function CategoryGrid({ level, onCategorySelect, getCategoryProgress }: C
             <div className="mb-6">
                 <h2 className="text-xl font-bold text-gray-900 mb-1">📂 분야별 학습</h2>
                 <p className="text-sm text-gray-500">
-                    총 <span className="font-semibold text-blue-600">{levelInfo.totalWords.toLocaleString()}</span>개 단어 · 분야별 약 <span className="font-semibold">{wordsPerCategory}</span>개
+                    총 <span className="font-semibold text-blue-600">{levelInfo.totalWords.toLocaleString()}</span>개 단어 · 8개 분야
                 </p>
             </div>
 
@@ -25,6 +26,7 @@ export function CategoryGrid({ level, onCategorySelect, getCategoryProgress }: C
                 {CATEGORIES.map((catId) => {
                     const cat = CATEGORY_INFO[catId];
                     const progress = getCategoryProgress ? getCategoryProgress(catId) : 0;
+                    const wordCount = categoryWordCounts?.[catId] || defaultPerCat;
 
                     return (
                         <button
@@ -52,7 +54,7 @@ export function CategoryGrid({ level, onCategorySelect, getCategoryProgress }: C
 
                             {/* Word Count */}
                             <p className="text-xs text-gray-500">
-                                {wordsPerCategory}단어
+                                {wordCount}단어
                             </p>
 
                             {/* Progress */}

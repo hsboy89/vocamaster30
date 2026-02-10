@@ -1,11 +1,11 @@
-import { DayVocabulary, Level } from '../types';
+import { DayVocabulary, Level, Category, Word } from '../types';
 import { generateVocabularyData } from './vocabulary-generator';
 
 // 모든 레벨의 30일치 데이터 생성
 export const allVocabulary: Record<Level, DayVocabulary[]> = {
-    middle: generateVocabularyData('middle', 30),
-    high: generateVocabularyData('high', 30),
-    advanced: generateVocabularyData('advanced', 30),
+    middle: generateVocabularyData('middle'),
+    high: generateVocabularyData('high'),
+    advanced: generateVocabularyData('advanced'),
 };
 
 export function getVocabulary(level: Level, day: number): DayVocabulary | undefined {
@@ -18,4 +18,29 @@ export function getDaysList(level: Level): number[] {
 
 export function getTotalDays(level: Level): number {
     return allVocabulary[level].length;
+}
+
+/** 특정 레벨 + 카테고리의 모든 단어를 반환 */
+export function getCategoryWords(level: Level, category: Category): Word[] {
+    const words: Word[] = [];
+    allVocabulary[level].forEach(dayVocab => {
+        dayVocab.words.forEach(w => {
+            if ((w as any).category === category) {
+                words.push(w);
+            }
+        });
+    });
+    return words;
+}
+
+/** 특정 레벨의 각 카테고리별 단어 수를 반환 */
+export function getCategoryWordCounts(level: Level): Record<string, number> {
+    const counts: Record<string, number> = {};
+    allVocabulary[level].forEach(dayVocab => {
+        dayVocab.words.forEach(w => {
+            const cat = (w as any).category || 'unknown';
+            counts[cat] = (counts[cat] || 0) + 1;
+        });
+    });
+    return counts;
 }

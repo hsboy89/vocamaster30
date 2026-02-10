@@ -4,15 +4,17 @@ import { DayGrid, CategoryGrid, GoalSetting } from '../components';
 import { WrongAnswerNote } from '../../../shared/components';
 import { useProgress } from '../../../shared/hooks';
 import * as storage from '../../../shared/services/storage';
+import { getCategoryWordCounts } from '../../../shared/data';
 
 interface HomePageProps {
     level: Level;
     onDaySelect: (day: number) => void;
+    onCategorySelect: (category: Category) => void;
     isGuest?: boolean;
     onLockedClick?: () => void;
 }
 
-export function HomePage({ level, onDaySelect, isGuest, onLockedClick }: HomePageProps) {
+export function HomePage({ level, onDaySelect, onCategorySelect, isGuest, onLockedClick }: HomePageProps) {
     const { getCompletionRate, getStatus } = useProgress();
     const [showWrongNote, setShowWrongNote] = useState(false);
     const [wrongAnswers, setWrongAnswers] = useState<WrongAnswer[]>([]);
@@ -28,10 +30,8 @@ export function HomePage({ level, onDaySelect, isGuest, onLockedClick }: HomePag
         setWrongAnswers(data);
     }, []);
 
-    const handleCategorySelect = (_category: Category) => {
-        // 카테고리 선택 시 해당 분야의 첫 날로 이동
-        // 추후 카테고리별 학습 플로우가 구현되면 변경
-        onDaySelect(1);
+    const handleCategorySelect = (category: Category) => {
+        onCategorySelect(category);
     };
 
     const handleStartToday = () => {
@@ -145,6 +145,7 @@ export function HomePage({ level, onDaySelect, isGuest, onLockedClick }: HomePag
             <CategoryGrid
                 level={level}
                 onCategorySelect={handleCategorySelect}
+                categoryWordCounts={getCategoryWordCounts(level)}
             />
 
             {/* 기존 30일 Day Grid (하단에 유지) */}

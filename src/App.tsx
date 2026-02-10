@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 // Shared Types & Components
-import { Level, Word, QuizType } from './shared/types';
+import { Level, Word, QuizType, Category } from './shared/types';
 import { Header, LoginPage, ProtectedRoute } from './shared/components';
 import { AdminLoginLayout } from './shared/components/layout/AdminLoginLayout';
 import { StudentLoginModal } from './shared/components/auth/StudentLoginModal';
@@ -25,6 +25,7 @@ function StudentApp() {
   const [currentView, setCurrentView] = useState<StudentView>('home');
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
   const [quizState, setQuizState] = useState<QuizState | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
 
   // Login Modal State
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -36,16 +37,25 @@ function StudentApp() {
     setCurrentLevel(level);
     setCurrentView('home');
     setSelectedDay(null);
+    setSelectedCategory(null);
   };
 
   const handleDaySelect = (day: number) => {
     setSelectedDay(day);
+    setSelectedCategory(null);
+    setCurrentView('study');
+  };
+
+  const handleCategorySelect = (category: Category) => {
+    setSelectedCategory(category);
+    setSelectedDay(0); // 카테고리 모드 (day=0)
     setCurrentView('study');
   };
 
   const handleBack = () => {
     setCurrentView('home');
     setSelectedDay(null);
+    setSelectedCategory(null);
     setQuizState(null);
   };
 
@@ -77,6 +87,7 @@ function StudentApp() {
         <HomePage
           level={currentLevel}
           onDaySelect={handleDaySelect}
+          onCategorySelect={handleCategorySelect}
           isGuest={isGuest}
           onLockedClick={() => setIsLoginModalOpen(true)}
         />
@@ -86,6 +97,7 @@ function StudentApp() {
         <StudyPage
           level={currentLevel}
           day={selectedDay}
+          category={selectedCategory}
           onBack={handleBack}
           onQuizStart={handleQuizStart}
         />

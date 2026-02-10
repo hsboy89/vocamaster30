@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Level, Word, QuizType, LEVEL_INFO } from '../../../shared/types';
-import { getVocabulary } from '../../../shared/data';
+import { Level, Word, QuizType, Category, LEVEL_INFO, CATEGORY_INFO } from '../../../shared/types';
+import { getVocabulary, getCategoryWords } from '../../../shared/data';
 import { useProgress } from '../../../shared/hooks';
 import { StudyCard, StudyControls } from '../components';
 import { useAuthStore } from '../../../stores';
@@ -13,11 +13,12 @@ const AUTO_SPEAK_STORAGE_KEY = 'vocamaster-auto-speak';
 interface StudyPageProps {
     level: Level;
     day: number;
+    category?: Category | null;
     onBack: () => void;
     onQuizStart: (words: Word[], quizType: QuizType) => void;
 }
 
-export function StudyPage({ level, day, onBack, onQuizStart }: StudyPageProps) {
+export function StudyPage({ level, day, category, onBack, onQuizStart }: StudyPageProps) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [hideMode, setHideMode] = useState<HideMode>('none');
     const [words, setWords] = useState<Word[]>([]);
@@ -35,23 +36,34 @@ export function StudyPage({ level, day, onBack, onQuizStart }: StudyPageProps) {
     }, [autoSpeak]);
 
     useEffect(() => {
-        const vocab = getVocabulary(level, day);
-        if (vocab) {
-            setWords(vocab.words);
-            const currentStatus = getStatus(level, day);
-            if (currentStatus === 'not-started') {
-                setStatus(level, day, 'in-progress');
-            }
+        let loadedWords: Word[] = [];
+        if (category) {
+            // 카테고리 모드: 해당 분야 전체 단어
+            loadedWords = getCategoryWords(level, category);
+        } else {
+            // 일별 모드: 해당 일의 단어
+            const vocab = getVocabulary(level, day);
+            if (vocab) loadedWords = vocab.words;
+        }
 
-            // Load memorized words for this day
-            const progress = storage.getProgress(level, day);
-            if (progress) {
-                setMemorizedWordIds(new Set(progress.memorizedWords));
+        if (loadedWords.length > 0) {
+            setWords(loadedWords);
+            if (!category) {
+                const currentStatus = getStatus(level, day);
+                if (currentStatus === 'not-started') {
+                    setStatus(level, day, 'in-progress');
+                }
+                const progress = storage.getProgress(level, day);
+                if (progress) {
+                    setMemorizedWordIds(new Set(progress.memorizedWords));
+                } else {
+                    setMemorizedWordIds(new Set());
+                }
             } else {
                 setMemorizedWordIds(new Set());
             }
         }
-    }, [level, day, setStatus, getStatus]);
+    }, [level, day, category, setStatus, getStatus]);
 
     const handlePrevious = () => {
         if (currentIndex > 0) {
@@ -130,7 +142,9 @@ export function StudyPage({ level, day, onBack, onQuizStart }: StudyPageProps) {
                             <h1 className="font-black text-white tracking-tight">
                                 {LEVEL_INFO[level].nameKo}
                             </h1>
-                            <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-1">Day {day.toString().padStart(2, '0')}</p>
+                            <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-1">
+                                {category ? CATEGORY_INFO[category].nameKo : `Day ${day.toString().padStart(2, '0')}`}
+                            </p>
                         </div>
                         <div className="w-20" />
                     </div>
@@ -218,7 +232,7 @@ export function StudyPage({ level, day, onBack, onQuizStart }: StudyPageProps) {
                         </h1>
                         <div className="flex items-center justify-center gap-2 mt-1">
                             <span className="w-1 h-1 bg-blue-500 rounded-full animate-pulse" />
-                            <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">Day {day.toString().padStart(2, '0')}</p>
+                            <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">{category ? CATEGORY_INFO[category].nameKo : `Day ${day.toString().padStart(2, '0')}`}</p>
                             <span className="w-1 h-1 bg-blue-500 rounded-full animate-pulse" />
                         </div>
                     </div>
