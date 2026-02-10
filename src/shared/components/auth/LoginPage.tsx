@@ -26,7 +26,7 @@ export function LoginPage({
     const [studentName, setStudentName] = useState('');
     const [adminId, setAdminId] = useState('');
     const [password, setPassword] = useState('');
-    const rememberMe = true;
+    const [rememberMe, setRememberMe] = useState(true);
 
     // 학원 정보 조회를 위한 상태
     const [currentAcademy, setCurrentAcademy] = useState<Academy | null>(null);
@@ -247,7 +247,18 @@ export function LoginPage({
                                 </p>
                             )}
 
-
+                            <div className="flex items-center">
+                                <input
+                                    id="remember-me-student"
+                                    type="checkbox"
+                                    checked={rememberMe}
+                                    onChange={(e) => setRememberMe(e.target.checked)}
+                                    className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 bg-white/5 border-white/10"
+                                />
+                                <label htmlFor="remember-me-student" className="ml-2 block text-sm text-slate-400 cursor-pointer select-none">
+                                    자동 로그인
+                                </label>
+                            </div>
 
 
                             <button
