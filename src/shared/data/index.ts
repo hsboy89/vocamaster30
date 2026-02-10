@@ -43,4 +43,17 @@ export function getCategoryWordCounts(level: Level): Record<string, number> {
         });
     });
     return counts;
+    return counts;
+}
+
+/** 특정 레벨의 전체 단어를 반환 */
+export function getAllWords(level: Level): Word[] {
+    return allVocabulary[level].flatMap(vocab => vocab.words);
+}
+
+/** ID 목록에 해당하는 단어 객체들을 반환 */
+export function getWordsByIds(level: Level, ids: string[]): Word[] {
+    const allWords = getAllWords(level);
+    const wordMap = new Map(allWords.map(w => [w.id, w]));
+    return ids.map(id => wordMap.get(id)).filter((w): w is Word => w !== undefined);
 }

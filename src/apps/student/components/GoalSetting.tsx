@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
-import { GoalDuration, GOAL_OPTIONS, Level, LEVEL_INFO, StudyGoal } from '../../../shared/types';
+import { GoalDuration, GOAL_OPTIONS, Level, LEVEL_INFO, StudyGoal, StudyPlan } from '../../../shared/types';
+import { createStudyPlan } from '../../../shared/utils/study-planner';
 
 const GOAL_STORAGE_KEY = 'vocamaster-study-goal';
+const PLAN_STORAGE_KEY = 'vocamaster-study-plan';
 
 interface GoalSettingProps {
     level: Level;
@@ -22,8 +24,13 @@ function saveGoal(goal: StudyGoal) {
     localStorage.setItem(GOAL_STORAGE_KEY, JSON.stringify(goal));
 }
 
+function savePlan(plan: StudyPlan) {
+    localStorage.setItem(PLAN_STORAGE_KEY, JSON.stringify(plan));
+}
+
 function clearGoal() {
     localStorage.removeItem(GOAL_STORAGE_KEY);
+    localStorage.removeItem(PLAN_STORAGE_KEY);
 }
 
 function getDaysRemaining(startDate: string, duration: GoalDuration): number {
@@ -63,14 +70,19 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
 
     const handleSetGoal = (duration: GoalDuration) => {
         const levelInfo = LEVEL_INFO[level];
-        const wordsPerDay = Math.ceil(levelInfo.totalWords / duration);
+        // 1. 단어 분배 플랜 생성
+        const plan = createStudyPlan(level, duration);
+        savePlan(plan);
+
+        // 2. 목표 정보 저장
         const newGoal: StudyGoal = {
             duration,
             startDate: new Date().toISOString(),
             level,
-            wordsPerDay,
+            wordsPerDay: plan.wordsPerDay, // 플랜에서 계산된 값 사용
         };
         saveGoal(newGoal);
+
         setGoal(newGoal);
         setIsSettingGoal(false);
         onGoalChange?.(duration);

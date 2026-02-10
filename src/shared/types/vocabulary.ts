@@ -108,6 +108,13 @@ export const GOAL_OPTIONS: { duration: GoalDuration; label: string; description:
     { duration: 30, label: '30일', description: '전체 완성' },
 ];
 
+export interface StudyPlan {
+    id: string;
+    level: Level;
+    wordsPerDay: number;
+    schedule: Record<number, string[]>; // day -> list of word IDs
+}
+
 export const LEVEL_INFO: Record<Level, LevelInfo> = {
     middle: {
         id: 'middle',

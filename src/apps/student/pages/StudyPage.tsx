@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Level, Word, QuizType, Category, LEVEL_INFO, CATEGORY_INFO } from '../../../shared/types';
-import { getVocabulary, getCategoryWords } from '../../../shared/data';
+import { Level, Word, QuizType, Category, LEVEL_INFO, CATEGORY_INFO, StudyPlan } from '../../../shared/types';
+import { getVocabulary, getCategoryWords, getWordsByIds } from '../../../shared/data';
 import { useProgress } from '../../../shared/hooks';
 import { StudyCard, StudyControls } from '../components';
 import { useAuthStore } from '../../../stores';
@@ -9,6 +9,7 @@ import * as storage from '../../../shared/services/storage';
 type HideMode = 'none' | 'word' | 'meaning' | 'synonyms';
 
 const AUTO_SPEAK_STORAGE_KEY = 'vocamaster-auto-speak';
+const PLAN_STORAGE_KEY = 'vocamaster-study-plan';
 
 interface StudyPageProps {
     level: Level;
@@ -29,6 +30,7 @@ export function StudyPage({ level, day, category, onBack, onQuizStart }: StudyPa
     const [memorizedWordIds, setMemorizedWordIds] = useState<Set<string>>(new Set());
     const { getStatus, setStatus, addMemorizedWord, removeMemorizedWord } = useProgress();
     const { isGuest } = useAuthStore();
+    const [isPlanMode, setIsPlanMode] = useState(false); // 플랜 모드 여부
 
     // Save autoSpeak preference
     useEffect(() => {
@@ -37,22 +39,54 @@ export function StudyPage({ level, day, category, onBack, onQuizStart }: StudyPa
 
     useEffect(() => {
         let loadedWords: Word[] = [];
+        let isUsingPlan = false;
+
         if (category) {
             // 카테고리 모드: 해당 분야 전체 단어
             loadedWords = getCategoryWords(level, category);
         } else {
-            // 일별 모드: 해당 일의 단어
-            const vocab = getVocabulary(level, day);
-            if (vocab) loadedWords = vocab.words;
+            // 일별 모드
+            // 1. 단기 목표 플랜 확인
+            try {
+                const storedPlan = localStorage.getItem(PLAN_STORAGE_KEY);
+                if (storedPlan) {
+                    const plan: StudyPlan = JSON.parse(storedPlan);
+                    // 현재 레벨과 플랜 레벨이 같고, 해당 Day에 할당된 단어가 있는지 확인
+                    if (plan.level === level && plan.schedule[day]) {
+                        const wordIds = plan.schedule[day];
+                        loadedWords = getWordsByIds(level, wordIds);
+                        isUsingPlan = true;
+                    }
+                }
+            } catch (e) {
+                console.error("Failed to load study plan", e);
+            }
+
+            // 2. 플랜이 없거나 실패했으면 기본 로직 사용
+            if (!isUsingPlan) {
+                const vocab = getVocabulary(level, day);
+                if (vocab) loadedWords = vocab.words;
+            }
         }
+
+        setIsPlanMode(isUsingPlan);
 
         if (loadedWords.length > 0) {
             setWords(loadedWords);
             if (!category) {
+                // 플랜 모드일 때는 '학습 시작' 상태만 업데이트하고, 
+                // 기존 useProgress는 30일 고정이라 Day 매핑이 안 맞을 수 있음.
+                // 일단은 상태 업데이트는 하되, 암기 단어 불러오기는 '단어 ID' 기반이므로 호환됨.
+
                 const currentStatus = getStatus(level, day);
                 if (currentStatus === 'not-started') {
                     setStatus(level, day, 'in-progress');
                 }
+
+                // 암기한 단어 ID 목록 불러오기 (이건 전역적으로 ID 기반이라 Plan 써도 호환됨)
+                // 다만 Day별 'progress' 객체가 30일치만 저장되므로, 
+                // Plan 모드일 때 Day 1에 200단어를 학습하면, Day 1의 progress 데이터가 매우 커짐.
+                // storage.getProgress는 day별로 저장하므로 문제없음.
                 const progress = storage.getProgress(level, day);
                 if (progress) {
                     setMemorizedWordIds(new Set(progress.memorizedWords));
@@ -232,7 +266,16 @@ export function StudyPage({ level, day, category, onBack, onQuizStart }: StudyPa
                         </h1>
                         <div className="flex items-center justify-center gap-2 mt-1">
                             <span className="w-1 h-1 bg-blue-500 rounded-full animate-pulse" />
-                            <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">{category ? CATEGORY_INFO[category].nameKo : `Day ${day.toString().padStart(2, '0')}`}</p>
+                            <div className="flex flex-col items-center">
+                                <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">
+                                    {category ? CATEGORY_INFO[category].nameKo : `Day ${day.toString().padStart(2, '0')}`}
+                                </p>
+                                {isPlanMode && !category && (
+                                    <span className="text-[10px] text-blue-400 font-bold tracking-tight bg-blue-500/10 px-2 py-0.5 rounded-full mt-1">
+                                        ✨ 스마트 코스
+                                    </span>
+                                )}
+                            </div>
                             <span className="w-1 h-1 bg-blue-500 rounded-full animate-pulse" />
                         </div>
                     </div>
