@@ -123,7 +123,7 @@ export function LoginPage({
             <div className={`relative bg-slate-900/80 backdrop-blur-2xl border border-white/20 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] w-full overflow-hidden ${!isEmbedded ? 'max-w-md' : ''}`}>
                 {/* Header */}
                 <div
-                    className="p-8 text-center transition-all duration-500"
+                    className="py-4 px-8 text-center transition-all duration-500"
                     style={{
                         background: `linear-gradient(to right, ${primaryColor}, ${activeTab === 'admin' ? '#10b981' : primaryColor})`
                     }}
