@@ -1,4 +1,4 @@
-import { Level, StudyStatus, LEVEL_INFO } from '../../../shared/types';
+import { Level, StudyStatus } from '../../../shared/types';
 import { useProgress } from '../../../shared/hooks';
 
 interface DayGridProps {
@@ -9,10 +9,9 @@ interface DayGridProps {
     onLockedClick?: () => void;
 }
 
-export function DayGrid({ level, onDaySelect, onOpenWrongNote, isGuest = false, onLockedClick }: DayGridProps) {
-    const { getStatus, getCompletionRate } = useProgress();
+export function DayGrid({ level, onDaySelect, isGuest = false, onLockedClick }: DayGridProps) {
+    const { getStatus } = useProgress();
     const days = Array.from({ length: 30 }, (_, i) => i + 1);
-    const completionRate = getCompletionRate(level);
 
 
 
@@ -29,52 +28,6 @@ export function DayGrid({ level, onDaySelect, onOpenWrongNote, isGuest = false, 
 
     return (
         <div className="max-w-6xl mx-auto px-4 py-6">
-            {/* Level Info */}
-            <div className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                    {LEVEL_INFO[level].nameKo}
-                </h2>
-                <p className="text-gray-600 mb-4">{LEVEL_INFO[level].description}</p>
-
-                {/* Quick Actions - Moved to top for better visibility */}
-                <div className="mb-6 flex flex-wrap gap-4">
-                    <button
-                        className="btn btn-primary flex-1 sm:flex-none py-3 px-6 text-base shadow-lg hover:shadow-xl transition-all"
-                        onClick={() => {
-                            // 아직 완료하지 않은 가장 낮은 Day 찾기
-                            for (let day = 1; day <= 30; day++) {
-                                if (getStatus(level, day) !== 'completed') {
-                                    onDaySelect(day);
-                                    return;
-                                }
-                            }
-                            onDaySelect(1);
-                        }}
-                    >
-                        <span className="mr-2">🚀</span>
-                        오늘의 학습 시작
-                    </button>
-                    <button
-                        onClick={onOpenWrongNote}
-                        className="btn btn-outline flex-1 sm:flex-none py-3 px-6 text-base"
-                    >
-                        <span className="mr-2">📝</span>
-                        오답노트 복습
-                    </button>
-                </div>
-
-                {/* Progress Bar */}
-                <div className="bg-gray-100 rounded-full h-3 overflow-hidden">
-                    <div
-                        className="h-full gradient-success transition-all duration-500 rounded-full"
-                        style={{ width: `${completionRate}%` }}
-                    />
-                </div>
-                <p className="text-sm text-gray-500 mt-2">
-                    진도율: <span className="font-semibold text-green-600">{completionRate}%</span> 완료
-                </p>
-            </div>
-
             {/* Day Grid */}
             <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4">
                 {days.map((day) => {
