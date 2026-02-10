@@ -69,7 +69,6 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
     }, [level]);
 
     const handleSetGoal = (duration: GoalDuration) => {
-        const levelInfo = LEVEL_INFO[level];
         // 1. 단어 분배 플랜 생성
         const plan = createStudyPlan(level, duration);
         savePlan(plan);
