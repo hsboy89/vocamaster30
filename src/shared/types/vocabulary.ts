@@ -114,8 +114,8 @@ export const LEVEL_INFO: Record<Level, LevelInfo> = {
         nameKo: '중등 필수',
         description: '교과서 필수 어휘 및 기초 회화 단어',
         totalDays: 30,
-        wordsPerDay: 30,
-        totalWords: 1000,
+        wordsPerDay: 33,
+        totalWords: 979,
     },
     high: {
         id: 'high',
@@ -123,8 +123,8 @@ export const LEVEL_INFO: Record<Level, LevelInfo> = {
         nameKo: '고등 기초',
         description: '내신 대비 및 수능 기초 어휘',
         totalDays: 30,
-        wordsPerDay: 30,
-        totalWords: 1000,
+        wordsPerDay: 36,
+        totalWords: 1072,
     },
     advanced: {
         id: 'advanced',
@@ -132,7 +132,7 @@ export const LEVEL_INFO: Record<Level, LevelInfo> = {
         nameKo: '수능 심화',
         description: '수능 빈출 어휘 및 심화 유의어/반의어',
         totalDays: 30,
-        wordsPerDay: 30,
-        totalWords: 1000,
+        wordsPerDay: 38,
+        totalWords: 1112,
     },
 };
