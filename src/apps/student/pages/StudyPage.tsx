@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Level, Word, QuizType, Category, LEVEL_INFO, CATEGORY_INFO, StudyPlan } from '../../../shared/types';
 import { getVocabulary, getCategoryWords, getWordsByIds } from '../../../shared/data';
+import { shuffle } from '../../../shared/utils/study-planner';
 import { useProgress } from '../../../shared/hooks';
-import { StudyCard, StudyControls } from '../components';
+import { StudyCard, StudyHeaderControls, StudyFooterControls } from '../components';
 import { useAuthStore } from '../../../stores';
 import * as storage from '../../../shared/services/storage';
 
@@ -133,7 +134,7 @@ export function StudyPage({ level, day, category, onBack, onQuizStart }: StudyPa
     };
 
     const handleQuizStart = () => {
-        onQuizStart(words, 'choice');
+        onQuizStart(shuffle(words), 'choice');
     };
 
     if (words.length === 0) {
@@ -284,9 +285,19 @@ export function StudyPage({ level, day, category, onBack, onQuizStart }: StudyPa
             </header>
 
             {/* Content Container */}
-            <div className="max-w-2xl mx-auto px-4 py-8 space-y-8 relative z-10">
-                {/* Study Card */}
+            <div className="max-w-2xl mx-auto px-4 py-8 space-y-6 relative z-10">
+                {/* Header Controls (Progress & Nav) - Moved to top for better UX */}
                 <div className="animate-fade-in-up">
+                    <StudyHeaderControls
+                        currentIndex={currentIndex}
+                        totalWords={words.length}
+                        onPrevious={handlePrevious}
+                        onNext={handleNext}
+                    />
+                </div>
+
+                {/* Study Card */}
+                <div className="animate-fade-in-up [animation-delay:100ms]">
                     <StudyCard
                         word={currentWord}
                         hideMode={hideMode}
@@ -296,17 +307,13 @@ export function StudyPage({ level, day, category, onBack, onQuizStart }: StudyPa
                     />
                 </div>
 
-                {/* Controls */}
+                {/* Footer Controls (Options & Quiz) */}
                 <div className="animate-fade-in-up [animation-delay:200ms]">
-                    <StudyControls
-                        currentIndex={currentIndex}
-                        totalWords={words.length}
+                    <StudyFooterControls
                         hideMode={hideMode}
                         autoSpeak={autoSpeak}
                         onHideModeChange={setHideMode}
                         onAutoSpeakChange={setAutoSpeak}
-                        onPrevious={handlePrevious}
-                        onNext={handleNext}
                         onQuizStart={handleQuizStart}
                     />
                 </div>
