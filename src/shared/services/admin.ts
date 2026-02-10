@@ -305,9 +305,12 @@ export async function getStudentList(academyId?: string): Promise<StudentListIte
                 let avgScore = 0;
                 if (quizzes && quizzes.length > 0) {
                     const total = quizzes.reduce((sum, q) => {
-                        let score = (q.total_questions > 0 ? (q.correct_answers / q.total_questions) * 100 : 0);
-                        // 기존 잘못된 데이터 방어 로직
-                        if (score > 100) score = 100;
+                        let correctCount = q.correct_answers;
+                        // 과거 데이터 보정: 정답 수가 전체 문제 수보다 크면 점수(5배수)로 저장된 것으로 간주
+                        if (correctCount > q.total_questions) {
+                            correctCount = Math.round(correctCount / 5);
+                        }
+                        let score = (q.total_questions > 0 ? (correctCount / q.total_questions) * 100 : 0);
                         return sum + score;
                     }, 0);
                     avgScore = Math.round(total / quizzes.length);
@@ -428,7 +431,10 @@ export async function getStudentDetail(userId: string): Promise<StudentDetail | 
             level: q.level,
             quizType: q.quiz_type,
             score: q.total_questions > 0
-                ? Math.min(Math.round((q.correct_answers / q.total_questions) * 100), 100)
+                ? Math.round((
+                    (q.correct_answers > q.total_questions ? Math.round(q.correct_answers / 5) : q.correct_answers)
+                    / q.total_questions
+                ) * 100)
                 : 0,
             completedAt: q.completed_at,
         })) || [];
