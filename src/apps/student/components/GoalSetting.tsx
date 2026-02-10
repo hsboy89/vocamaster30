@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { GoalDuration, GOAL_OPTIONS, Level, LEVEL_INFO, StudyGoal, StudyPlan } from '../../../shared/types';
 import { createStudyPlan } from '../../../shared/utils/study-planner';
 import { getAllMemorizedWordIds, resetLevelProgress } from '../../../shared/services/storage';
+import { useAuthStore } from '../../../stores';
+import { supabase } from '../../../shared/lib';
 
 const GOAL_STORAGE_KEY = 'vocamaster-study-goal';
 const PLAN_STORAGE_KEY = 'vocamaster-study-plan';
@@ -55,6 +57,7 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
     const [dailyCount, setDailyCount] = useState<number>(30); // 기본 30단어
     const [availableCount, setAvailableCount] = useState<number>(0);
     const [totalCount, setTotalCount] = useState<number>(0);
+    const { user } = useAuthStore();
 
     const DAILY_OPTIONS = [30, 50, 70, 100];
 
@@ -99,6 +102,19 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
             wordsPerDay: plan.wordsPerDay,
         };
         saveGoal(newGoal);
+
+        // Sync to DB
+        if (user) {
+            supabase.from('users')
+                .update({
+                    goal_duration: duration,
+                    // 필요 시 daily_word_count 등 추가 가능
+                })
+                .eq('id', user.id)
+                .then(({ error }) => {
+                    if (error) console.error('Failed to sync goal to DB', error);
+                });
+        }
 
         setGoal(newGoal);
         setIsSettingGoal(false);
@@ -249,8 +265,8 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
                                     key={count}
                                     onClick={() => setDailyCount(count)}
                                     className={`py-2 px-1 rounded-xl text-sm font-bold transition-all border ${dailyCount === count
-                                            ? 'bg-blue-600 text-white border-blue-500 shadow-lg scale-105'
-                                            : 'bg-slate-700/50 text-slate-400 border-white/5 hover:bg-slate-700 hover:text-white'
+                                        ? 'bg-blue-600 text-white border-blue-500 shadow-lg scale-105'
+                                        : 'bg-slate-700/50 text-slate-400 border-white/5 hover:bg-slate-700 hover:text-white'
                                         }`}
                                 >
                                     {count}개

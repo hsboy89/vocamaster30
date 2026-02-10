@@ -74,12 +74,15 @@ function generateMatchingQuestion(word: Word): QuizQuestion {
 export function useQuiz(): UseQuizReturn {
     const [questions, setQuestions] = useState<QuizQuestion[]>([]);
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [score, setScore] = useState(0);
+    const [correctCount, setCorrectCount] = useState(0);
     const [wrongWords, setWrongWords] = useState<Word[]>([]);
     const [isComplete, setIsComplete] = useState(false);
 
     const currentQuestion = questions[currentIndex] || null;
     const totalQuestions = questions.length;
+
+    // 점수는 맞춘 개수 * 5 (기존 UI 호환성)
+    const score = correctCount * 5;
 
     const startQuiz = useCallback((words: Word[], type: QuizType) => {
         const shuffledWords = shuffleArray(words);
@@ -111,7 +114,7 @@ export function useQuiz(): UseQuizReturn {
 
         setQuestions(generatedQuestions);
         setCurrentIndex(0);
-        setScore(0);
+        setCorrectCount(0);
         setWrongWords([]);
         setIsComplete(false);
     }, []);
@@ -125,7 +128,7 @@ export function useQuiz(): UseQuizReturn {
                 currentQuestion.correctAnswer.toLowerCase().trim();
 
             if (isCorrect) {
-                setScore((prev) => prev + 5);
+                setCorrectCount((prev) => prev + 1);
             } else {
                 setWrongWords((prev) => [...prev, currentQuestion.word]);
             }
@@ -146,7 +149,7 @@ export function useQuiz(): UseQuizReturn {
     const resetQuiz = useCallback(() => {
         setQuestions([]);
         setCurrentIndex(0);
-        setScore(0);
+        setCorrectCount(0);
         setWrongWords([]);
         setIsComplete(false);
     }, []);
@@ -164,14 +167,14 @@ export function useQuiz(): UseQuizReturn {
                 level,
                 day,
                 totalQuestions,
-                correctAnswers: score,
+                correctAnswers: correctCount, // 실제 정답 개수 저장
                 wrongWordIds: wrongWords.map((w) => w.id),
                 completedAt: new Date().toISOString(),
             };
 
             storage.saveQuizResult(result);
         },
-        [wrongWords, currentQuestion?.type, totalQuestions, score]
+        [wrongWords, currentQuestion?.type, totalQuestions, correctCount]
     );
 
     return {

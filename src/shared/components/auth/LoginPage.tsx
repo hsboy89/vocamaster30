@@ -342,6 +342,19 @@ export function LoginPage({
                                 </p>
                             )}
 
+                            <div className="flex items-center">
+                                <input
+                                    id="remember-me-admin"
+                                    type="checkbox"
+                                    checked={rememberMe}
+                                    onChange={(e) => setRememberMe(e.target.checked)}
+                                    className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 bg-white/5 border-white/10"
+                                />
+                                <label htmlFor="remember-me-admin" className="ml-2 block text-sm text-slate-400 cursor-pointer select-none">
+                                    자동 로그인
+                                </label>
+                            </div>
+
                             <button
                                 type="submit"
                                 disabled={isLoading}

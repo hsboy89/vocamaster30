@@ -474,7 +474,14 @@ export function AdminDashboard() {
                                                     Day {student.currentDay}
                                                 </span>
                                             </td>
-                                            <td className="px-6 py-4 text-gray-900 dark:text-slate-300">{student.completedDays}/30</td>
+                                            <td className="px-6 py-4 text-gray-900 dark:text-slate-300">
+                                                {student.completedDays}/{student.goalDuration || 30}
+                                                {student.goalDuration && (
+                                                    <span className="ml-1 text-[10px] bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 px-1 py-0.5 rounded">
+                                                        목표
+                                                    </span>
+                                                )}
+                                            </td>
                                             <td className="px-6 py-4">
                                                 <span className={`font-medium ${student.averageScore >= 80 ? 'text-emerald-600 dark:text-emerald-400' :
                                                     student.averageScore >= 60 ? 'text-orange-600 dark:text-orange-400' : 'text-red-600 dark:text-red-400'

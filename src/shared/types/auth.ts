@@ -61,6 +61,9 @@ export interface User {
 
     // 런타임에 로드되는 학원 설정 (로그인 시 불러옴)
     academySettings?: AcademySettings;
+
+    // 학습 목표 (일 단위)
+    goalDuration?: number;
 }
 
 export interface AuthState {
@@ -109,6 +112,7 @@ export interface DbUser {
     phone?: string;
     grade?: string;
     target_university?: string;
+    goal_duration?: number;
 }
 
 // =====================================================
@@ -129,6 +133,7 @@ export function dbUserToUser(dbUser: DbUser): User {
         phone: dbUser.phone,
         grade: dbUser.grade,
         targetUniversity: dbUser.target_university,
+        goalDuration: dbUser.goal_duration,
     };
 }
 

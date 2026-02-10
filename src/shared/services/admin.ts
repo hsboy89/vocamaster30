@@ -28,6 +28,7 @@ export interface StudentListItem {
     completedDays: number;   // 완료한 Day 수
     lastLoginAt: string | null;
     averageScore: number;
+    goalDuration?: number;   // 목표 기간 (일)
 }
 
 // Day별 진행률 타입
@@ -303,8 +304,12 @@ export async function getStudentList(academyId?: string): Promise<StudentListIte
 
                 let avgScore = 0;
                 if (quizzes && quizzes.length > 0) {
-                    const total = quizzes.reduce((sum, q) =>
-                        sum + (q.total_questions > 0 ? (q.correct_answers / q.total_questions) * 100 : 0), 0);
+                    const total = quizzes.reduce((sum, q) => {
+                        let score = (q.total_questions > 0 ? (q.correct_answers / q.total_questions) * 100 : 0);
+                        // 기존 잘못된 데이터 방어 로직
+                        if (score > 100) score = 100;
+                        return sum + score;
+                    }, 0);
                     avgScore = Math.round(total / quizzes.length);
                 }
 
@@ -316,6 +321,7 @@ export async function getStudentList(academyId?: string): Promise<StudentListIte
                     completedDays,
                     lastLoginAt: user.last_login_at || null,
                     averageScore: avgScore,
+                    goalDuration: user.goal_duration,
                 };
             })
         );
