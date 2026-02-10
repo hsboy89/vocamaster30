@@ -147,6 +147,8 @@ export function HomePage({ level, onDaySelect, onCategorySelect, isGuest, onLock
                 level={level}
                 onCategorySelect={handleCategorySelect}
                 categoryWordCounts={getCategoryWordCounts(level)}
+                isGuest={isGuest}
+                onLockedClick={onLockedClick}
             />
 
             {/* 기존 30일 Day Grid (하단에 유지) */}
