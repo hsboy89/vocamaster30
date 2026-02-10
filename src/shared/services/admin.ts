@@ -477,6 +477,7 @@ export interface CreateStudentInput {
     phone?: string;
     grade?: string;
     targetUniversity?: string;
+    parentPhone?: string;
     password?: string; // 신규: 초기 비밀번호
 }
 
@@ -529,6 +530,7 @@ export async function createStudent(input: CreateStudentInput): Promise<{ succes
                 phone: input.phone,
                 grade: input.grade,
                 target_university: input.targetUniversity,
+                parent_phone: input.parentPhone,
                 password_hash: input.password, // 평문 저장 (추후 해시 적용 권장)
             })
             .select()
@@ -584,6 +586,7 @@ export async function updateStudent(
         if (input.phone) updateData.phone = input.phone;
         if (input.grade) updateData.grade = input.grade;
         if (input.targetUniversity) updateData.target_university = input.targetUniversity;
+        if (input.parentPhone) updateData.parent_phone = input.parentPhone;
         if (input.password) updateData.password_hash = input.password;
 
         const { error } = await supabase

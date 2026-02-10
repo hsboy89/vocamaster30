@@ -38,6 +38,7 @@ export function AdminDashboard() {
     const [newStudentName, setNewStudentName] = useState('');
     const [newSchool, setNewSchool] = useState('');
     const [newPhone, setNewPhone] = useState('');
+    const [newParentPhone, setNewParentPhone] = useState('');
     const [newGrade, setNewGrade] = useState('');
     const [newTargetUniversity, setNewTargetUniversity] = useState('');
     const [newPassword, setNewPassword] = useState('');
@@ -119,6 +120,7 @@ export function AdminDashboard() {
             studentName: newStudentName.trim(),
             school: newSchool.trim(),
             phone: newPhone.trim(),
+            parentPhone: newParentPhone.trim(),
             grade: newGrade.trim(),
             targetUniversity: newTargetUniversity.trim(),
             password: newPassword.trim() || undefined,
@@ -130,6 +132,7 @@ export function AdminDashboard() {
             setNewStudentName('');
             setNewSchool('');
             setNewPhone('');
+            setNewParentPhone('');
             setNewGrade('');
             setNewTargetUniversity('');
             setNewPassword('');
@@ -533,6 +536,7 @@ export function AdminDashboard() {
                                     setNewStudentName('');
                                     setNewSchool('');
                                     setNewPhone('');
+                                    setNewParentPhone('');
                                     setNewGrade('');
                                     setNewTargetUniversity('');
                                     setNewPassword('');
@@ -629,6 +633,20 @@ export function AdminDashboard() {
                                     type="text"
                                     value={newPhone}
                                     onChange={(e) => setNewPhone(e.target.value)}
+                                    placeholder="010-0000-0000"
+                                    className="w-full px-4 py-3 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:text-white dark:placeholder-slate-500 transition-all"
+                                    disabled={isAdding}
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
+                                    학부모 연락처
+                                </label>
+                                <input
+                                    type="text"
+                                    value={newParentPhone}
+                                    onChange={(e) => setNewParentPhone(e.target.value)}
                                     placeholder="010-0000-0000"
                                     className="w-full px-4 py-3 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:text-white dark:placeholder-slate-500 transition-all"
                                     disabled={isAdding}

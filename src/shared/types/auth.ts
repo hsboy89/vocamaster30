@@ -58,6 +58,7 @@ export interface User {
     phone?: string;
     grade?: string;
     targetUniversity?: string;
+    parentPhone?: string; // 학부모 연락처
 
     // 런타임에 로드되는 학원 설정 (로그인 시 불러옴)
     academySettings?: AcademySettings;
@@ -112,6 +113,7 @@ export interface DbUser {
     phone?: string;
     grade?: string;
     target_university?: string;
+    parent_phone?: string;
     goal_duration?: number;
 }
 
@@ -133,6 +135,7 @@ export function dbUserToUser(dbUser: DbUser): User {
         phone: dbUser.phone,
         grade: dbUser.grade,
         targetUniversity: dbUser.target_university,
+        parentPhone: dbUser.parent_phone,
         goalDuration: dbUser.goal_duration,
     };
 }
