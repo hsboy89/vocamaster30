@@ -61,14 +61,24 @@ export function StudentDetailPage() {
         };
 
         try {
-            if (navigator.share) {
+            // 모바일 환경에서만 Web Share API 사용 (PC에서는 클립보드 복사 유도)
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+            if (isMobile && navigator.share) {
                 await navigator.share(shareData);
             } else {
                 await navigator.clipboard.writeText(`${shareData.text}\n${shareData.url}`);
-                alert('학습 리포트 내용이 복사되었습니다. 학부모님께 메시지로 전달해주세요.');
+                alert('학습 리포트 내용이 클립보드에 복사되었습니다.\n학부모님 카카오톡이나 메시지에 [붙여넣기] 하여 전송해주세요.');
             }
         } catch (err) {
             console.error('Share failed:', err);
+            // 공유 실패 시에도 클립보드 복사 시도
+            try {
+                await navigator.clipboard.writeText(`${shareData.text}\n${shareData.url}`);
+                alert('공유하기가 지원되지 않아 내용이 복사되었습니다. 메시지에 붙여넣어 주세요.');
+            } catch (copyErr) {
+                alert('공유하기 기능을 사용할 수 없습니다.');
+            }
         }
     };
 
