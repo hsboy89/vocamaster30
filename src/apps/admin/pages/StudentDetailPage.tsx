@@ -16,6 +16,16 @@ export function StudentDetailPage() {
     const [isEditingPassword, setIsEditingPassword] = useState(false);
     const [newPassword, setNewPassword] = useState('');
 
+    // 학생 정보 수정 상태
+    const [isEditingInfo, setIsEditingInfo] = useState(false);
+    const [editForm, setEditForm] = useState({
+        school: '',
+        phone: '',
+        parentPhone: '',
+        targetUniversity: '',
+        goalDuration: ''
+    });
+
     useEffect(() => {
         if (studentId) {
             loadStudentDetail(studentId);
@@ -26,6 +36,15 @@ export function StudentDetailPage() {
         setIsLoading(true);
         const data = await getStudentDetail(id);
         setStudent(data);
+        if (data) {
+            setEditForm({
+                school: data.user.school || '',
+                phone: data.user.phone || '',
+                parentPhone: data.user.parentPhone || '',
+                targetUniversity: data.user.targetUniversity || '',
+                goalDuration: data.user.goalDuration?.toString() || ''
+            });
+        }
         setIsLoading(false);
     };
 
@@ -47,16 +66,48 @@ export function StudentDetailPage() {
         }
     };
 
-    const handleShare = async () => {
+    const handleUpdateInfo = async () => {
         if (!student) return;
 
-        const averageScore = student.recentQuizzes.length > 0
-            ? (student.recentQuizzes.reduce((a, b) => a + b.score, 0) / student.recentQuizzes.length).toFixed(1)
-            : 0;
+        const result = await updateStudent(student.user.id, {
+            school: editForm.school,
+            phone: editForm.phone,
+            parentPhone: editForm.parentPhone,
+            targetUniversity: editForm.targetUniversity,
+            // goalDuration은 현재 updateStudent에서 지원하지 않으므로 제외하거나 admin.ts 업데이트 필요
+            // 여기서는 제외하고 진행 (필요 시 admin.ts 수정)
+        });
+
+        if (result.success) {
+            alert('학생 정보가 수정되었습니다.');
+            setIsEditingInfo(false);
+            loadStudentDetail(student.user.id);
+        } else {
+            alert(result.error || '학생 정보 수정에 실패했습니다.');
+        }
+    };
+
+    const handleShare = async (quizData?: any) => {
+        if (!student) return;
+
+        let shareTitle = `${student.user.studentName} 학생 학습 리포트`;
+        let shareText = '';
+
+        if (quizData) {
+            // 특정 Quiz 공유
+            shareTitle = `${student.user.studentName} 학생 Day ${quizData.day} 학습 결과`;
+            shareText = `[VocaMaster] ${student.user.studentName} 학생의 Day ${quizData.day} 학습 결과입니다.\n- 레벨: ${levelNames[quizData.level]}\n- 점수: ${quizData.score}점 (${quizData.quizType === 'choice' ? '객관식' : quizData.quizType === 'spelling' ? '철자' : '매칭'})\n- 일시: ${new Date(quizData.completedAt).toLocaleDateString()}`;
+        } else {
+            // 전체 리포트 공유
+            const averageScore = student.recentQuizzes.length > 0
+                ? (student.recentQuizzes.reduce((a, b) => a + b.score, 0) / student.recentQuizzes.length).toFixed(1)
+                : 0;
+            shareText = `[VocaMaster] ${student.user.studentName} 학생의 최근 학습 현황입니다.\n- 평균 점수: ${averageScore}점\n- 완료 Day: ${student.progressByLevel.reduce((sum, p) => sum + p.completedDays, 0)}일`;
+        }
 
         const shareData = {
-            title: `${student.user.studentName} 학생 학습 리포트`,
-            text: `[VocaMaster] ${student.user.studentName} 학생의 최근 학습 현황입니다.\n- 평균 점수: ${averageScore}점\n- 완료 Day: ${student.progressByLevel.reduce((sum, p) => sum + p.completedDays, 0)}일`,
+            title: shareTitle,
+            text: shareText,
             url: window.location.href
         };
 
@@ -263,7 +314,7 @@ export function StudentDetailPage() {
                             <div className="p-6 border-b border-gray-100 dark:border-white/5 flex items-center justify-between">
                                 <h2 className="text-lg font-bold text-gray-900 dark:text-white">최근 퀴즈 결과</h2>
                                 <button
-                                    onClick={handleShare}
+                                    onClick={() => handleShare()}
                                     className="flex items-center gap-2 px-3 py-1.5 bg-yellow-400 text-black text-sm font-bold rounded-lg hover:bg-yellow-500 transition-all shadow-sm"
                                 >
                                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -285,12 +336,13 @@ export function StudentDetailPage() {
                                             <th className="px-6 py-4 text-left font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">유형</th>
                                             <th className="px-6 py-4 text-left font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">점수</th>
                                             <th className="px-6 py-4 text-left font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">일시</th>
+                                            <th className="px-6 py-4 text-left font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">관리</th>
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-gray-100 dark:divide-white/5">
                                         {student.recentQuizzes.length === 0 ? (
                                             <tr>
-                                                <td colSpan={5} className="px-6 py-12 text-center text-gray-400 dark:text-slate-500">
+                                                <td colSpan={6} className="px-6 py-12 text-center text-gray-400 dark:text-slate-500">
                                                     아직 퀴즈 기록이 없습니다.
                                                 </td>
                                             </tr>
@@ -319,6 +371,17 @@ export function StudentDetailPage() {
                                                     </td>
                                                     <td className="px-6 py-4 text-gray-500 dark:text-slate-500">
                                                         {new Date(quiz.completedAt).toLocaleDateString('ko-KR')}
+                                                    </td>
+                                                    <td className="px-6 py-4">
+                                                        <button
+                                                            onClick={() => handleShare(quiz)}
+                                                            className="p-2 text-gray-400 hover:text-yellow-500 dark:hover:text-yellow-400 hover:bg-yellow-50 dark:hover:bg-yellow-500/10 rounded-lg transition-all"
+                                                            title="성적 공유"
+                                                        >
+                                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                                                            </svg>
+                                                        </button>
                                                     </td>
                                                 </tr>
                                             ))
@@ -370,12 +433,38 @@ export function StudentDetailPage() {
 
                         {/* Student Info */}
                         <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm p-6 border border-gray-100 dark:border-white/5">
-                            <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-                                <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                </svg>
-                                학생 상세 정보
-                            </h2>
+                            <div className="flex items-center justify-between mb-6">
+                                <h2 className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                                    <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                    </svg>
+                                    학생 상세 정보
+                                </h2>
+                                {!isEditingInfo ? (
+                                    <button
+                                        onClick={() => setIsEditingInfo(true)}
+                                        className="text-xs font-bold text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-500/10 px-2 py-1 rounded transition-colors"
+                                    >
+                                        수정
+                                    </button>
+                                ) : (
+                                    <div className="flex gap-2">
+                                        <button
+                                            onClick={() => setIsEditingInfo(false)}
+                                            className="text-xs font-bold text-gray-500 hover:bg-gray-100 px-2 py-1 rounded transition-colors"
+                                        >
+                                            취소
+                                        </button>
+                                        <button
+                                            onClick={handleUpdateInfo}
+                                            className="text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 px-2 py-1 rounded transition-colors"
+                                        >
+                                            저장
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+
                             <div className="space-y-4">
                                 <div className="flex justify-between items-center py-2 border-b border-gray-50 dark:border-white/5">
                                     <span className="text-sm text-gray-500 dark:text-slate-400">학원명</span>
@@ -386,35 +475,71 @@ export function StudentDetailPage() {
                                     <span className="font-bold text-gray-900 dark:text-white">{student.user.studentName}</span>
                                 </div>
                                 <div className="flex justify-between items-center py-2 border-b border-gray-50 dark:border-white/5">
-                                    <span className="text-sm text-gray-500 dark:text-slate-400">학교 / 학년</span>
-                                    <span className="font-bold text-gray-900 dark:text-white">
-                                        {student.user.school || '-'} {student.user.grade ? `(${student.user.grade})` : ''}
-                                    </span>
+                                    <span className="text-sm text-gray-500 dark:text-slate-400">학교</span>
+                                    {isEditingInfo ? (
+                                        <input
+                                            type="text"
+                                            value={editForm.school}
+                                            onChange={(e) => setEditForm(prev => ({ ...prev, school: e.target.value }))}
+                                            className="w-40 text-right text-sm bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:text-white"
+                                        />
+                                    ) : (
+                                        <span className="font-bold text-gray-900 dark:text-white">
+                                            {student.user.school || '-'} {student.user.grade ? `(${student.user.grade})` : ''}
+                                        </span>
+                                    )}
                                 </div>
                                 <div className="flex justify-between items-center py-2 border-b border-gray-50 dark:border-white/5">
                                     <span className="text-sm text-gray-500 dark:text-slate-400">전화번호</span>
-                                    <span className="font-bold text-gray-900 dark:text-white">{student.user.phone || '-'}</span>
+                                    {isEditingInfo ? (
+                                        <input
+                                            type="text"
+                                            value={editForm.phone}
+                                            onChange={(e) => setEditForm(prev => ({ ...prev, phone: e.target.value }))}
+                                            className="w-40 text-right text-sm bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:text-white"
+                                        />
+                                    ) : (
+                                        <span className="font-bold text-gray-900 dark:text-white">{student.user.phone || '-'}</span>
+                                    )}
                                 </div>
                                 <div className="flex justify-between items-center py-2 border-b border-gray-50 dark:border-white/5">
                                     <span className="text-sm text-gray-500 dark:text-slate-400">학부모 연락처</span>
-                                    <div className="flex items-center gap-2">
-                                        <span className="font-bold text-gray-900 dark:text-white">{student.user.parentPhone || '-'}</span>
-                                        {student.user.parentPhone && (
-                                            <a
-                                                href={`sms:${student.user.parentPhone}`}
-                                                className="p-1 text-blue-500 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-500/10 rounded-lg transition-all"
-                                                title="문자 보내기"
-                                            >
-                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                                                </svg>
-                                            </a>
-                                        )}
-                                    </div>
+                                    {isEditingInfo ? (
+                                        <input
+                                            type="text"
+                                            value={editForm.parentPhone}
+                                            onChange={(e) => setEditForm(prev => ({ ...prev, parentPhone: e.target.value }))}
+                                            className="w-40 text-right text-sm bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:text-white"
+                                        />
+                                    ) : (
+                                        <div className="flex items-center gap-2">
+                                            <span className="font-bold text-gray-900 dark:text-white">{student.user.parentPhone || '-'}</span>
+                                            {student.user.parentPhone && (
+                                                <a
+                                                    href={`sms:${student.user.parentPhone}`}
+                                                    className="p-1 text-blue-500 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-500/10 rounded-lg transition-all"
+                                                    title="문자 보내기"
+                                                >
+                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                                                    </svg>
+                                                </a>
+                                            )}
+                                        </div>
+                                    )}
                                 </div>
                                 <div className="flex justify-between items-center py-2 border-b border-gray-50 dark:border-white/5">
                                     <span className="text-sm text-gray-500 dark:text-slate-400">목표 대학</span>
-                                    <span className="font-bold text-blue-600 dark:text-blue-400">{student.user.targetUniversity || '-'}</span>
+                                    {isEditingInfo ? (
+                                        <input
+                                            type="text"
+                                            value={editForm.targetUniversity}
+                                            onChange={(e) => setEditForm(prev => ({ ...prev, targetUniversity: e.target.value }))}
+                                            className="w-40 text-right text-sm bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:text-white"
+                                        />
+                                    ) : (
+                                        <span className="font-bold text-blue-600 dark:text-blue-400">{student.user.targetUniversity || '-'}</span>
+                                    )}
                                 </div>
                                 <div className="flex justify-between items-center py-2 border-b border-gray-50 dark:border-white/5">
                                     <span className="text-sm text-gray-500 dark:text-slate-400">목표 학습 기간</span>
