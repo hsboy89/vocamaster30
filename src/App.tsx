@@ -21,7 +21,7 @@ interface QuizState {
 
 // Student App Component
 function StudentApp() {
-  const [currentLevel, setCurrentLevel] = useState<Level>('middle');
+  const [currentLevel, setCurrentLevel] = useState<Level>('middle_1');
   const [currentView, setCurrentView] = useState<StudentView>('home');
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
   const [quizState, setQuizState] = useState<QuizState | null>(null);
@@ -46,11 +46,7 @@ function StudentApp() {
     setCurrentView('study');
   };
 
-  const handleCategorySelect = (category: Category) => {
-    setSelectedCategory(category);
-    setSelectedDay(0); // 카테고리 모드 (day=0)
-    setCurrentView('study');
-  };
+
 
   const handleBack = () => {
     setCurrentView('home');
@@ -87,7 +83,6 @@ function StudentApp() {
         <HomePage
           level={currentLevel}
           onDaySelect={handleDaySelect}
-          onCategorySelect={handleCategorySelect}
           isGuest={isGuest}
           onLockedClick={() => setIsLoginModalOpen(true)}
         />

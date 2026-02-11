@@ -11,7 +11,7 @@ interface HeaderProps {
 }
 
 export function Header({ currentLevel, onLevelChange, userName, academyName, onLogout, onLogin }: HeaderProps) {
-    const levels: Level[] = ['middle', 'high', 'advanced'];
+    const levels: Level[] = ['middle_1', 'middle_2', 'high_1', 'high_2', 'csat'];
     const { isDark, toggle } = useDarkMode();
 
     return (
@@ -89,18 +89,15 @@ export function Header({ currentLevel, onLevelChange, userName, academyName, onL
                 </div>
 
                 {/* Level Tabs */}
-                <nav className="flex justify-center sm:justify-start gap-2 bg-slate-100/50 p-1.5 rounded-full backdrop-blur-sm inline-flex">
+                <nav className="flex justify-center sm:justify-start gap-2 bg-slate-100/50 p-1.5 rounded-full backdrop-blur-sm overflow-x-auto">
                     {levels.map((level) => (
                         <button
                             key={level}
                             onClick={() => onLevelChange(level)}
-                            className={`tab text-sm sm:text-base ${currentLevel === level ? 'active' : ''
+                            className={`tab text-xs sm:text-sm px-3 py-1.5 whitespace-nowrap ${currentLevel === level ? 'active' : ''
                                 }`}
                         >
-                            <span className="hidden sm:inline">{LEVEL_INFO[level].nameKo}</span>
-                            <span className="sm:hidden">
-                                {level === 'middle' ? '중등' : level === 'high' ? '고등' : '수능'}
-                            </span>
+                            {LEVEL_INFO[level].nameKo}
                         </button>
                     ))}
                 </nav>

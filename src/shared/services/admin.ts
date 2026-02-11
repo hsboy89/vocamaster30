@@ -337,7 +337,7 @@ export async function getStudentList(academyId?: string): Promise<StudentListIte
 }
 
 // Day별 진행률 조회 (전체 학생 대상)
-export async function getDayProgressStats(level: string = 'middle', academyId?: string): Promise<DayProgress[]> {
+export async function getDayProgressStats(level: string = 'middle_1', academyId?: string): Promise<DayProgress[]> {
     try {
         // 전체 학생 수
         let studentQuery = supabase
@@ -407,7 +407,7 @@ export async function getStudentDetail(userId: string): Promise<StudentDetail | 
             .select('level, status')
             .eq('user_id', userId);
 
-        const levels = ['middle', 'high', 'advanced'];
+        const levels = ['middle_1', 'middle_2', 'high_1', 'high_2', 'csat'];
         const progressByLevel = levels.map(level => {
             const levelProgress = progress?.filter(p => p.level === level) || [];
             const completedDays = levelProgress.filter(p => p.status === 'completed').length;

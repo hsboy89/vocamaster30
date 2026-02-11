@@ -26,7 +26,7 @@ export function AdminDashboard() {
     const [stats, setStats] = useState<DashboardStats | null>(null);
     const [students, setStudents] = useState<StudentListItem[]>([]);
     const [dayProgress, setDayProgress] = useState<DayProgress[]>([]);
-    const [selectedLevel, setSelectedLevel] = useState<Level>('middle');
+    const [selectedLevel, setSelectedLevel] = useState<Level>('middle_1');
     const [searchTerm, setSearchTerm] = useState('');
     const [isLoading, setIsLoading] = useState(false); // Default to false to show UI structure in background mode
     const [topWrongWords, setTopWrongWords] = useState<WrongWordStat[]>([]);
@@ -175,9 +175,11 @@ export function AdminDashboard() {
     };
 
     const levelNames: Record<Level, string> = {
-        middle: '중등 필수',
-        high: '고등 기초',
-        advanced: '수능 심화',
+        middle_1: '중등 필수',
+        middle_2: '중등 심화',
+        high_1: '고등 필수',
+        high_2: '고등 심화',
+        csat: '수능 빈출',
     };
 
     // Only show loading if we have a user and are actually fetching
@@ -316,7 +318,7 @@ export function AdminDashboard() {
                         <div className="flex items-center justify-between mb-6">
                             <h2 className="text-lg font-bold text-gray-900 dark:text-white">Day별 학습 진행률</h2>
                             <div className="flex gap-2">
-                                {(['middle', 'high', 'advanced'] as Level[]).map((level) => (
+                                {(['middle_1', 'middle_2', 'high_1', 'high_2', 'csat'] as Level[]).map((level) => (
                                     <button
                                         key={level}
                                         onClick={() => setSelectedLevel(level)}

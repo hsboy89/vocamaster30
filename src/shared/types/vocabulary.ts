@@ -1,6 +1,6 @@
 // Vocabulary Types
 
-export type Level = 'middle' | 'high' | 'advanced';
+export type Level = 'middle_1' | 'middle_2' | 'high_1' | 'high_2' | 'csat';
 export type StudyStatus = 'not-started' | 'in-progress' | 'completed';
 export type QuizType = 'choice' | 'matching' | 'spelling';
 export type Category = 'society' | 'economy' | 'nature' | 'science' | 'culture' | 'education' | 'health' | 'global';
@@ -116,31 +116,49 @@ export interface StudyPlan {
 }
 
 export const LEVEL_INFO: Record<Level, LevelInfo> = {
-    middle: {
-        id: 'middle',
-        name: 'Middle School',
+    middle_1: {
+        id: 'middle_1',
+        name: 'Middle School 1',
         nameKo: '중등 필수',
         description: '교과서 필수 어휘 및 기초 회화 단어',
         totalDays: 30,
-        wordsPerDay: 33,
-        totalWords: 979,
+        wordsPerDay: 30,
+        totalWords: 900,
     },
-    high: {
-        id: 'high',
-        name: 'High School',
-        nameKo: '고등 기초',
-        description: '내신 대비 및 수능 기초 어휘',
+    middle_2: {
+        id: 'middle_2',
+        name: 'Middle School 2',
+        nameKo: '중등 심화',
+        description: '중등 고난도 어휘 및 예비 고등 단어',
         totalDays: 30,
-        wordsPerDay: 36,
-        totalWords: 1072,
+        wordsPerDay: 30,
+        totalWords: 900,
     },
-    advanced: {
-        id: 'advanced',
-        name: 'Advanced',
-        nameKo: '수능 심화',
-        description: '수능 빈출 어휘 및 심화 유의어/반의어',
+    high_1: {
+        id: 'high_1',
+        name: 'High School 1',
+        nameKo: '고등 필수',
+        description: '고등 내신 및 수능 기초 어휘',
         totalDays: 30,
-        wordsPerDay: 38,
-        totalWords: 1112,
+        wordsPerDay: 40,
+        totalWords: 1200,
+    },
+    high_2: {
+        id: 'high_2',
+        name: 'High School 2',
+        nameKo: '고등 심화',
+        description: '고난도 독해 및 심화 어휘',
+        totalDays: 30,
+        wordsPerDay: 40,
+        totalWords: 1200,
+    },
+    csat: {
+        id: 'csat',
+        name: 'CSAT',
+        nameKo: '수능 빈출',
+        description: '수능 기출 및 빈출 심화 어휘',
+        totalDays: 30,
+        wordsPerDay: 50,
+        totalWords: 1500,
     },
 };

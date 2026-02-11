@@ -138,9 +138,11 @@ export function StudentDetailPage() {
     };
 
     const levelNames: Record<string, string> = {
-        middle: '중등 필수',
-        high: '고등 기초',
-        advanced: '수능 심화',
+        middle_1: '중등 필수',
+        middle_2: '중등 심화',
+        high_1: '고등 필수',
+        high_2: '고등 심화',
+        csat: '수능 빈출',
     };
 
     if (isLoading) {

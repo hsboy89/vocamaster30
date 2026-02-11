@@ -1,7 +1,7 @@
 {
   "monthly_version": "2026-02",
   "data": {
-    "middle": [
+    "middle_1": [
       {
         "day": 1,
         "words": [
@@ -22597,7 +22597,8 @@
         ]
       }
     ],
-    "high": [
+    "middle_2": [],
+    "high_1": [
       {
         "day": 1,
         "words": [
@@ -44519,7 +44520,8 @@
         ]
       }
     ],
-    "advanced": [
+    "high_2": [],
+    "csat": [
       {
         "day": 1,
         "words": [

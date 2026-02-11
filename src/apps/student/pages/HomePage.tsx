@@ -1,20 +1,19 @@
 import { useState, useCallback } from 'react';
-import { Level, Category, LEVEL_INFO, WrongAnswer } from '../../../shared/types';
-import { DayGrid, CategoryGrid, GoalSetting } from '../components';
+import { Level, LEVEL_INFO, WrongAnswer } from '../../../shared/types';
+import { DayGrid, GoalSetting } from '../components';
 import { WrongAnswerNote } from '../../../shared/components';
 import { useProgress } from '../../../shared/hooks';
 import * as storage from '../../../shared/services/storage';
-import { getCategoryWordCounts } from '../../../shared/data';
+
 
 interface HomePageProps {
     level: Level;
     onDaySelect: (day: number) => void;
-    onCategorySelect: (category: Category) => void;
     isGuest?: boolean;
     onLockedClick?: () => void;
 }
 
-export function HomePage({ level, onDaySelect, onCategorySelect, isGuest, onLockedClick }: HomePageProps) {
+export function HomePage({ level, onDaySelect, isGuest, onLockedClick }: HomePageProps) {
     const { getCompletionRate, getStatus } = useProgress();
     const [showWrongNote, setShowWrongNote] = useState(false);
     const [wrongAnswers, setWrongAnswers] = useState<WrongAnswer[]>([]);
@@ -31,9 +30,7 @@ export function HomePage({ level, onDaySelect, onCategorySelect, isGuest, onLock
         setWrongAnswers(data);
     }, []);
 
-    const handleCategorySelect = (category: Category) => {
-        onCategorySelect(category);
-    };
+
 
     const handleStartToday = () => {
         for (let day = 1; day <= 30; day++) {
@@ -138,15 +135,6 @@ export function HomePage({ level, onDaySelect, onCategorySelect, isGuest, onLock
 
             {/* 단기 목표 설정 */}
             <GoalSetting level={level} onGoalChange={(days) => setGoalDays(days)} />
-
-            {/* 분야별 카테고리 그리드 */}
-            <CategoryGrid
-                level={level}
-                onCategorySelect={handleCategorySelect}
-                categoryWordCounts={getCategoryWordCounts(level)}
-                isGuest={isGuest}
-                onLockedClick={onLockedClick}
-            />
 
             {/* 기존 30일 Day Grid (하단에 유지) */}
             <div className="border-t border-gray-100 mt-4">

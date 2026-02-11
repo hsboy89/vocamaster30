@@ -1,4 +1,4 @@
-// Authentication Types for VocaMaster30 (Multi-Tenant SaaS)
+import { Level } from './vocabulary';
 
 // 사용자 역할: 학생, 학원관리자, 슈퍼관리자
 // 'admin'은 레거시 호환용 (기존 DB 데이터)
@@ -14,7 +14,7 @@ export interface AcademySettings {
         logo_url?: string | null;
     };
     features: string[];  // 예: ['basic_stats', 'ranking', 'assignment', 'tts_auto']
-    enabled_levels: ('middle' | 'high' | 'advanced')[];
+    enabled_levels: Level[];
 }
 
 export interface Academy {

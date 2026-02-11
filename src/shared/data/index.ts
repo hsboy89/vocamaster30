@@ -3,9 +3,11 @@ import { generateVocabularyData } from './vocabulary-generator';
 
 // 모든 레벨의 30일치 데이터 생성
 export const allVocabulary: Record<Level, DayVocabulary[]> = {
-    middle: generateVocabularyData('middle'),
-    high: generateVocabularyData('high'),
-    advanced: generateVocabularyData('advanced'),
+    middle_1: generateVocabularyData('middle_1'),
+    middle_2: generateVocabularyData('middle_2'),
+    high_1: generateVocabularyData('high_1'),
+    high_2: generateVocabularyData('high_2'),
+    csat: generateVocabularyData('csat'),
 };
 
 export function getVocabulary(level: Level, day: number): DayVocabulary | undefined {

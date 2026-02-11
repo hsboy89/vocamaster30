@@ -10,7 +10,7 @@ const defaultAcademySettings: AcademySettings = {
         logo_url: null,
     },
     features: ['basic_stats', 'ranking'],
-    enabled_levels: ['middle', 'high', 'advanced'],
+    enabled_levels: ['middle_1', 'middle_2', 'high_1', 'high_2', 'csat'],
 };
 
 // =====================================================
