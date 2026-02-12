@@ -26,11 +26,15 @@ async function loadKoreanFont(doc: jsPDF) {
         if (!res.ok) throw new Error('Failed to load font');
         const buffer = await res.arrayBuffer();
 
-        // Convert to Uint8Array
+        // Convert to binary string for jsPDF
         const fontData = new Uint8Array(buffer);
+        let binaryString = "";
+        for (let i = 0; i < fontData.length; i++) {
+            binaryString += String.fromCharCode(fontData[i]);
+        }
 
         // Add to VFS
-        doc.addFileToVFS('NanumGothic-Regular.ttf', fontData as any); // Cast to any to avoid type issues with VFS
+        doc.addFileToVFS('NanumGothic-Regular.ttf', binaryString);
         doc.addFont('NanumGothic-Regular.ttf', 'NanumGothic', 'normal');
         doc.setFont('NanumGothic');
 
@@ -98,11 +102,11 @@ export async function generateDayVocaPDF(
         headStyles: {
             fillColor: [63, 81, 181], // Blue color
             textColor: 255,
-            fontStyle: 'bold',
+            fontStyle: 'normal', // Changed from bold to normal
         },
         columnStyles: {
             0: { cellWidth: 15, halign: 'center' }, // Check
-            1: { cellWidth: 60, fontStyle: 'bold' }, // Words
+            1: { cellWidth: 60, fontStyle: 'normal' }, // Words - Changed from bold to normal
             2: { cellWidth: 'auto' }, // Meaning
         },
         // Alternate row colors
@@ -124,10 +128,10 @@ export async function generateDayVocaPDF(
         body: testRowsMeaning,
         startY: 30,
         styles: { font: 'NanumGothic', fontSize: 10, cellPadding: 3 },
-        headStyles: { fillColor: [233, 30, 99], textColor: 255 }, // Pink
+        headStyles: { fillColor: [233, 30, 99], textColor: 255, fontStyle: 'normal' }, // Pink, normal font
         columnStyles: {
             0: { cellWidth: 15, halign: 'center' },
-            1: { cellWidth: 60, fontStyle: 'bold' },
+            1: { cellWidth: 60, fontStyle: 'normal' }, // Changed from bold to normal
             2: { cellWidth: 'auto' }
         },
         theme: 'grid',
@@ -148,7 +152,7 @@ export async function generateDayVocaPDF(
         body: testRowsWord,
         startY: 30,
         styles: { font: 'NanumGothic', fontSize: 10, cellPadding: 3 },
-        headStyles: { fillColor: [0, 150, 136], textColor: 255 }, // Teal
+        headStyles: { fillColor: [0, 150, 136], textColor: 255, fontStyle: 'normal' }, // Teal, normal font
         columnStyles: {
             0: { cellWidth: 15, halign: 'center' },
             1: { cellWidth: 60 },
