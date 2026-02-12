@@ -105,9 +105,9 @@ export async function generateDayVocaPDF(
             fontStyle: 'normal', // Changed from bold to normal
         },
         columnStyles: {
-            0: { cellWidth: 15, halign: 'center' }, // Check
-            1: { cellWidth: 60, fontStyle: 'normal' }, // Words - Changed from bold to normal
-            2: { cellWidth: 'auto' }, // Meaning
+            0: { cellWidth: 20, halign: 'center', valign: 'middle' }, // Check
+            1: { cellWidth: 60, fontStyle: 'normal', valign: 'middle' }, // Words - Changed from bold to normal
+            2: { cellWidth: 'auto', valign: 'middle' }, // Meaning
         },
         // Alternate row colors
         theme: 'grid',
@@ -130,9 +130,9 @@ export async function generateDayVocaPDF(
         styles: { font: 'NanumGothic', fontSize: 10, cellPadding: 3 },
         headStyles: { fillColor: [233, 30, 99], textColor: 255, fontStyle: 'normal' }, // Pink, normal font
         columnStyles: {
-            0: { cellWidth: 15, halign: 'center' },
-            1: { cellWidth: 60, fontStyle: 'normal' }, // Changed from bold to normal
-            2: { cellWidth: 'auto' }
+            0: { cellWidth: 20, halign: 'center', valign: 'middle' },
+            1: { cellWidth: 60, fontStyle: 'normal', valign: 'middle' }, // Changed from bold to normal
+            2: { cellWidth: 'auto', valign: 'middle' }
         },
         theme: 'grid',
     });
@@ -154,9 +154,9 @@ export async function generateDayVocaPDF(
         styles: { font: 'NanumGothic', fontSize: 10, cellPadding: 3 },
         headStyles: { fillColor: [0, 150, 136], textColor: 255, fontStyle: 'normal' }, // Teal, normal font
         columnStyles: {
-            0: { cellWidth: 15, halign: 'center' },
-            1: { cellWidth: 60 },
-            2: { cellWidth: 'auto' }
+            0: { cellWidth: 20, halign: 'center', valign: 'middle' },
+            1: { cellWidth: 60, valign: 'middle' },
+            2: { cellWidth: 'auto', valign: 'middle' }
         },
         theme: 'grid',
     });
