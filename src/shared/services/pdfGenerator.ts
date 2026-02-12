@@ -18,7 +18,7 @@ async function loadKoreanFont(doc: jsPDF) {
 
         // Using a reliable source for a Korean TTF file.
         // NanumGothic is often used.
-        const fontUrl = 'https://cdn.jsdelivr.net/gh/googlefonts/noto-fonts@main/hinted/ttf/NotoSansKR/NotoSansKR-Regular.ttf';
+        const fontUrl = 'https://raw.githubusercontent.com/google/fonts/main/ofl/nanumgothic/NanumGothic-Regular.ttf';
 
         // Optimization: Check if font is already added? jsPDF doesn't have a simple check API, but we can manage a global flag if needed.
         // For now, let's fetch.
@@ -30,9 +30,9 @@ async function loadKoreanFont(doc: jsPDF) {
         const fontData = new Uint8Array(buffer);
 
         // Add to VFS
-        doc.addFileToVFS('NotoSansKR-Regular.ttf', fontData as any); // Cast to any to avoid type issues with VFS
-        doc.addFont('NotoSansKR-Regular.ttf', 'NotoSansKR', 'normal');
-        doc.setFont('NotoSansKR');
+        doc.addFileToVFS('NanumGothic-Regular.ttf', fontData as any); // Cast to any to avoid type issues with VFS
+        doc.addFont('NanumGothic-Regular.ttf', 'NanumGothic', 'normal');
+        doc.setFont('NanumGothic');
 
         return true;
     } catch (error) {
@@ -91,7 +91,7 @@ export async function generateDayVocaPDF(
         body: tableRows,
         startY: 35,
         styles: {
-            font: 'NotoSansKR',
+            font: 'NanumGothic',
             fontSize: 10,
             cellPadding: 3,
         },
@@ -123,7 +123,7 @@ export async function generateDayVocaPDF(
         head: [["Check", "Words", "Meaning (Write here)"]],
         body: testRowsMeaning,
         startY: 30,
-        styles: { font: 'NotoSansKR', fontSize: 10, cellPadding: 3 },
+        styles: { font: 'NanumGothic', fontSize: 10, cellPadding: 3 },
         headStyles: { fillColor: [233, 30, 99], textColor: 255 }, // Pink
         columnStyles: {
             0: { cellWidth: 15, halign: 'center' },
@@ -147,7 +147,7 @@ export async function generateDayVocaPDF(
         head: [["Check", "Words (Write here)", "Meaning"]],
         body: testRowsWord,
         startY: 30,
-        styles: { font: 'NotoSansKR', fontSize: 10, cellPadding: 3 },
+        styles: { font: 'NanumGothic', fontSize: 10, cellPadding: 3 },
         headStyles: { fillColor: [0, 150, 136], textColor: 255 }, // Teal
         columnStyles: {
             0: { cellWidth: 15, halign: 'center' },
