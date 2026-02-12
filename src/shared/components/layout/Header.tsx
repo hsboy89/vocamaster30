@@ -19,7 +19,10 @@ export function Header({ currentLevel, onLevelChange, userName, academyName, onL
             <div className="max-w-6xl mx-auto px-4 py-4">
                 {/* Logo and User Info */}
                 <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-3">
+                    <div
+                        className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
+                        onClick={() => window.location.href = '/'}
+                    >
                         <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center">
                             <span className="text-white text-xl">📚</span>
                         </div>
