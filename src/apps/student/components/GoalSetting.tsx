@@ -88,6 +88,13 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
         // 포커스 될 때 업데이트되면 좋겠지만, 일단 level 변경 시 수행
     }, [level]);
 
+    // authStore와 local state(goal) 동기화 (새로고침/재진입 시)
+    useEffect(() => {
+        if (goal && user && user.goalDuration !== goal.duration) {
+            updateUser({ goalDuration: goal.duration });
+        }
+    }, [goal, user, updateUser]);
+
     const handleConfirmGoal = (duration: GoalDuration) => {
         // 선택 전 확인 팝업 표시
         setPendingDuration(duration);
