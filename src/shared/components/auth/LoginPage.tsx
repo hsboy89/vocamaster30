@@ -27,6 +27,7 @@ export function LoginPage({
     const [adminId, setAdminId] = useState('');
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(true);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     // 학원 정보 조회를 위한 상태
     const [currentAcademy, setCurrentAcademy] = useState<Academy | null>(null);
@@ -65,14 +66,19 @@ export function LoginPage({
             return;
         }
 
-        const result = await login({
-            academyCode: academyCode.trim(),
-            studentName: studentName.trim(),
-            password: password,
-            rememberMe
-        });
-        if (result && onSuccess) {
-            onSuccess();
+        setIsSubmitting(true);
+        try {
+            const result = await login({
+                academyCode: academyCode.trim(),
+                studentName: studentName.trim(),
+                password: password,
+                rememberMe
+            });
+            if (result && onSuccess) {
+                onSuccess();
+            }
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -85,15 +91,20 @@ export function LoginPage({
             return;
         }
 
-        // 슈퍼 관리자인 경우 academyCode가 없을 수 있음
-        const result = await adminLogin({
-            academyCode: useSimplifiedAdminLogin ? adminId.trim() : academyCode.trim(),
-            adminId: adminId.trim(),
-            password,
-            rememberMe
-        });
-        if (result && onSuccess) {
-            onSuccess();
+        setIsSubmitting(true);
+        try {
+            // 슈퍼 관리자인 경우 academyCode가 없을 수 있음
+            const result = await adminLogin({
+                academyCode: useSimplifiedAdminLogin ? adminId.trim() : academyCode.trim(),
+                adminId: adminId.trim(),
+                password,
+                rememberMe
+            });
+            if (result && onSuccess) {
+                onSuccess();
+            }
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -192,7 +203,7 @@ export function LoginPage({
                                                 borderColor: currentAcademy ? primaryColor : 'rgba(255,255,255,0.1)',
                                                 ['--tw-ring-color' as any]: primaryColor
                                             }}
-                                            disabled={isLoading}
+                                            disabled={isSubmitting}
                                         />
                                         {currentAcademy && (
                                             <div className="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-500">
@@ -220,7 +231,7 @@ export function LoginPage({
                                     placeholder="예: 김철수"
                                     className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-slate-500 focus:ring-2 transition-all outline-none"
                                     style={{ ['--tw-ring-color' as any]: primaryColor }}
-                                    disabled={isLoading}
+                                    disabled={isSubmitting}
                                     autoComplete="username"
                                 />
                             </div>
@@ -236,7 +247,7 @@ export function LoginPage({
                                     placeholder="비밀번호를 입력하세요"
                                     className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-slate-500 focus:ring-2 transition-all outline-none"
                                     style={{ ['--tw-ring-color' as any]: primaryColor }}
-                                    disabled={isLoading}
+                                    disabled={isSubmitting}
                                     autoComplete="current-password"
                                 />
                             </div>
@@ -305,7 +316,7 @@ export function LoginPage({
                                         placeholder={useSimplifiedAdminLogin ? "학원 코드를 입력하세요" : "admin"}
                                         autoComplete="off"
                                         className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-slate-500 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all outline-none"
-                                        disabled={isLoading}
+                                        disabled={isSubmitting}
                                     />
                                     {useSimplifiedAdminLogin && currentAcademy && (
                                         <div className="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-500">
@@ -332,7 +343,7 @@ export function LoginPage({
                                     placeholder="••••••••"
                                     autoComplete="new-password"
                                     className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-slate-500 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all outline-none"
-                                    disabled={isLoading}
+                                    disabled={isSubmitting}
                                 />
                             </div>
 
