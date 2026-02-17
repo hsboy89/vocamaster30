@@ -1,3 +1,14 @@
+-- 0. users 테이블에 누락된 컬럼 추가 (가장 중요)
+DO $$
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1 FROM information_schema.columns 
+        WHERE table_name = 'users' AND column_name = 'goal_duration'
+    ) THEN
+        ALTER TABLE public.users ADD COLUMN goal_duration INTEGER;
+    END IF;
+END $$;
+
 -- 1. Users 테이블 RLS 정책 수정 (UPDATE 허용) (필요시)
 -- Supabase 대시보드에서 'users' 테이블 RLS 정책에 "UPDATE for users based on id"가 있는지 확인하세요. 없으면 추가:
 -- CREATE POLICY "Enable update for users based on id" ON "public"."users" AS PERMISSIVE FOR UPDATE TO public USING (auth.uid() = id) WITH CHECK (auth.uid() = id);

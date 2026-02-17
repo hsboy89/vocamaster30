@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuthStore } from '../../../stores';
 import { getRankingByGoalPlan, RankingItem } from '../../../shared/services/admin';
-import { GoalDuration, GOAL_OPTIONS } from '../../../shared/types';
+import { GOAL_OPTIONS } from '../../../shared/types';
 
 interface RankingDetailModalProps {
     onClose: () => void;
@@ -9,18 +9,18 @@ interface RankingDetailModalProps {
 
 const MEDALS = ['🥇', '🥈', '🥉'];
 
-type FilterOption = 'all' | GoalDuration;
+type FilterOption = number;
 
-const FILTER_TABS: { value: FilterOption; label: string }[] = [
-    { value: 'all', label: '전체' },
-    ...GOAL_OPTIONS.map(o => ({ value: o.duration as FilterOption, label: o.label })),
-];
+const FILTER_TABS: { value: FilterOption; label: string }[] = GOAL_OPTIONS.map(o => ({
+    value: o.duration,
+    label: o.label
+}));
 
 export function RankingDetailModal({ onClose }: RankingDetailModalProps) {
     const { user } = useAuthStore();
     const [rankings, setRankings] = useState<RankingItem[]>([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [filter, setFilter] = useState<FilterOption>((user?.goalDuration as FilterOption) || 'all');
+    const [filter, setFilter] = useState<FilterOption>((user?.goalDuration as FilterOption) || 30);
 
     const currentMonth = new Date().getMonth() + 1;
 
@@ -32,7 +32,8 @@ export function RankingDetailModal({ onClose }: RankingDetailModalProps) {
         if (!user) return;
         setIsLoading(true);
         try {
-            const goalDuration = filter === 'all' ? undefined : filter;
+            // 전체 탭이 없어졌으므로 filter값 그대로 사용
+            const goalDuration = filter;
             const data = await getRankingByGoalPlan(user.academyId, goalDuration, 10);
             setRankings(data);
         } catch (e) {
@@ -171,9 +172,9 @@ export function RankingDetailModal({ onClose }: RankingDetailModalProps) {
                                                         ? 'text-orange-600 dark:text-orange-400'
                                                         : 'text-gray-500 dark:text-slate-400'
                                                     }`}>
-                                                    {item.averageScore}점
+                                                    {Math.round(item.averageScore)}점
                                                 </p>
-                                                <p className="text-[10px] text-gray-400 dark:text-slate-500">퀴즈</p>
+                                                <p className="text-[10px] text-gray-400 dark:text-slate-500">평균 점수</p>
                                             </div>
                                         </div>
                                     </div>
@@ -186,7 +187,7 @@ export function RankingDetailModal({ onClose }: RankingDetailModalProps) {
                 {/* Footer */}
                 <div className="px-6 py-3 border-t border-gray-100 dark:border-white/10 bg-gray-50 dark:bg-white/5">
                     <p className="text-center text-[11px] text-gray-400 dark:text-slate-500">
-                        📊 완료 Day 기준 · 동점 시 퀴즈 평균점수 순
+                        📊 완료 Day 기준 · 동점 시 평균점수 순
                     </p>
                 </div>
             </div>

@@ -683,49 +683,45 @@ export async function getRankingByGoalPlan(
 
         const userIds = users.map(u => u.id);
 
-        // 2. 이번 달 완료 진행 상황 조회 (academy_id 필터 없이 user_id로 직접 필터)
-        const { data: progress } = await supabase
-            .from('student_progress')
-            .select('user_id, day, status, last_studied_at')
-            .eq('status', 'completed')
-            .gte('last_studied_at', monthStartISO)
-            .in('user_id', userIds);
-
-        // user_id별 완료 Day 수 집계
-        const completedMap = new Map<string, number>();
-        progress?.forEach(p => {
-            const current = completedMap.get(p.user_id) || 0;
-            completedMap.set(p.user_id, current + 1);
-        });
-
-        // 3. 퀴즈 평균 점수 조회 (이번 달, user_id로 직접 필터)
+        // 2. 퀴즈 이력 조회 (이번 달, user_id로 직접 필터)
+        // 랭킹 산정 기준: 퀴즈를 완료한 Day 수
         const { data: quizzes } = await supabase
             .from('quiz_history')
-            .select('user_id, correct_answers, total_questions')
+            .select('user_id, day, correct_answers, total_questions, completed_at')
             .gte('completed_at', monthStartISO)
             .in('user_id', userIds);
 
         const scoreMap = new Map<string, { total: number; count: number }>();
+        const completedMap = new Map<string, Set<number>>();
+
         quizzes?.forEach(q => {
+            // 점수 집계
             if (q.total_questions > 0) {
                 let correctCount = q.correct_answers;
+                // 구버전 데이터 호환 (5배수 저장된 경우)
                 if (correctCount > q.total_questions) {
                     correctCount = Math.round(correctCount / 5);
                 }
                 const score = (correctCount / q.total_questions) * 100;
+
                 const existing = scoreMap.get(q.user_id) || { total: 0, count: 0 };
                 scoreMap.set(q.user_id, {
                     total: existing.total + score,
                     count: existing.count + 1,
                 });
+
+                // 완료 Day 집계 (중복 제거)
+                const userDays = completedMap.get(q.user_id) || new Set();
+                userDays.add(q.day);
+                completedMap.set(q.user_id, userDays);
             }
         });
 
-        // 4. 랭킹 데이터 생성 (학습 활동이 있는 학생만 포함)
+        // 3. 랭킹 데이터 생성 (학습 활동이 있는 학생만 포함)
         const rankings: RankingItem[] = users
             .filter(user => completedMap.has(user.id) || scoreMap.has(user.id))
             .map(user => {
-                const completedDays = completedMap.get(user.id) || 0;
+                const completedDays = completedMap.get(user.id)?.size || 0;
                 const scoreData = scoreMap.get(user.id);
                 const averageScore = scoreData ? Math.round(scoreData.total / scoreData.count) : 0;
 
@@ -739,10 +735,11 @@ export async function getRankingByGoalPlan(
                 };
             });
 
-        // 5. 정렬: 완료 Day 내림차순 → 평균점수 내림차순
+        // 4. 정렬: 완료 Day 내림차순 → 평균점수 내림차순 → 이름 오름차순
         rankings.sort((a, b) => {
             if (b.completedDays !== a.completedDays) return b.completedDays - a.completedDays;
-            return b.averageScore - a.averageScore;
+            if (b.averageScore !== a.averageScore) return b.averageScore - a.averageScore;
+            return a.studentName.localeCompare(b.studentName);
         });
 
         // 6. 순위 부여 및 제한

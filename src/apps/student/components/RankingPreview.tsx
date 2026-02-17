@@ -99,10 +99,14 @@ export function RankingPreview() {
                                         </span>
                                     )}
                                 </div>
-                                <span className={`text-xs font-bold ${i === 0 ? 'text-amber-600' : 'text-slate-500'
-                                    }`}>
-                                    {item.completedDays}일 완료
-                                </span>
+                                <div className="text-right">
+                                    <span className={`block text-xs font-bold ${i === 0 ? 'text-amber-600' : 'text-slate-500'}`}>
+                                        {item.completedDays}일
+                                    </span>
+                                    <span className="text-[10px] text-slate-400">
+                                        {Math.round(item.averageScore)}점
+                                    </span>
+                                </div>
                             </div>
                         ))}
                     </div>
