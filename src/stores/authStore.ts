@@ -21,6 +21,7 @@ interface AuthStore {
     setLoading: (loading: boolean) => void;
     setError: (error: string | null) => void;
     checkSession: () => void;
+    updateUser: (updates: Partial<User>) => void;
 }
 
 // Custom storage adapter to handle both localStorage and sessionStorage
@@ -327,6 +328,13 @@ export const useAuthStore = create<AuthStore>()(
                 if (user) {
                     set({ isAuthenticated: true });
                 }
+            },
+
+            updateUser: (updates: Partial<User>) => {
+                const { user } = get();
+                if (!user) return;
+                const updatedUser = { ...user, ...updates };
+                set({ user: updatedUser });
             },
         }),
         {

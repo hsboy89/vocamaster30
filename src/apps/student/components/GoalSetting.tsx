@@ -58,7 +58,7 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
     const [availableCount, setAvailableCount] = useState<number>(0);
     const [totalCount, setTotalCount] = useState<number>(0);
     const [pendingDuration, setPendingDuration] = useState<GoalDuration | null>(null); // 확인 팝업용
-    const { user } = useAuthStore();
+    const { user, updateUser } = useAuthStore();
 
     const DAILY_OPTIONS = [30, 50, 70, 100];
 
@@ -109,6 +109,11 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
             wordsPerDay: plan.wordsPerDay,
         };
         saveGoal(newGoal);
+
+        // Update local store immediately
+        if (user) {
+            updateUser({ goalDuration: duration });
+        }
 
         // Sync to DB
         if (user) {
