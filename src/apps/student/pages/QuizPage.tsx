@@ -76,8 +76,8 @@ export function QuizPage({ level, day, words, initialQuizType, onBack }: QuizPag
         }
     };
 
-    const handleClose = () => {
-        saveResult(level, day);
+    const handleClose = async () => {
+        await saveResult(level, day);
         onBack();
     };
 

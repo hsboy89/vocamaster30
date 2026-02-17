@@ -475,10 +475,10 @@ export function getQuizResults(): QuizResult[] {
     return getQuizResultsLocal();
 }
 
-export function saveQuizResult(result: QuizResult): void {
+export async function saveQuizResult(result: QuizResult): Promise<void> {
     saveQuizResultLocal(result);
     // Also sync to cloud asynchronously
-    saveQuizResultToCloud(result);
+    await saveQuizResultToCloud(result);
 }
 
 // Settings (local only)

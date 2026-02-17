@@ -20,7 +20,7 @@ interface UseQuizReturn {
     nextQuestion: () => void;
     startQuiz: (words: Word[], type: QuizType) => void;
     resetQuiz: () => void;
-    saveResult: (level: Level, day: number) => void;
+    saveResult: (level: Level, day: number) => Promise<void>;
 }
 
 function shuffleArray<T>(array: T[]): T[] {
@@ -155,7 +155,7 @@ export function useQuiz(): UseQuizReturn {
     }, []);
 
     const saveResult = useCallback(
-        (level: Level, day: number) => {
+        async (level: Level, day: number) => {
             // 오답 저장
             wrongWords.forEach((word) => {
                 storage.addWrongAnswer(word, level, day);
@@ -172,7 +172,7 @@ export function useQuiz(): UseQuizReturn {
                 completedAt: new Date().toISOString(),
             };
 
-            storage.saveQuizResult(result);
+            await storage.saveQuizResult(result);
         },
         [wrongWords, currentQuestion?.type, totalQuestions, correctCount]
     );
