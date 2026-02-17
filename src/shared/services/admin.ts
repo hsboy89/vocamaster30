@@ -683,22 +683,17 @@ export async function getRankingByGoalPlan(
 
         const userIds = users.map(u => u.id);
 
-        // 2. 퀴즈 이력 조회 (이번 달, user_id로 직접 필터)
-        // 랭킹 산정 기준: 퀴즈를 완료한 Day 수
+        // 2. 퀴즈 이력 조회 (평균 점수용)
         const { data: quizzes } = await supabase
             .from('quiz_history')
-            .select('user_id, day, correct_answers, total_questions, completed_at')
+            .select('user_id, correct_answers, total_questions')
             .gte('completed_at', monthStartISO)
             .in('user_id', userIds);
 
         const scoreMap = new Map<string, { total: number; count: number }>();
-        const completedMap = new Map<string, Set<number>>();
-
         quizzes?.forEach(q => {
-            // 점수 집계
             if (q.total_questions > 0) {
                 let correctCount = q.correct_answers;
-                // 구버전 데이터 호환 (5배수 저장된 경우)
                 if (correctCount > q.total_questions) {
                     correctCount = Math.round(correctCount / 5);
                 }
@@ -709,15 +704,25 @@ export async function getRankingByGoalPlan(
                     total: existing.total + score,
                     count: existing.count + 1,
                 });
-
-                // 완료 Day 집계 (중복 제거)
-                const userDays = completedMap.get(q.user_id) || new Set();
-                userDays.add(q.day);
-                completedMap.set(q.user_id, userDays);
             }
         });
 
-        // 3. 랭킹 데이터 생성 (학습 활동이 있는 학생만 포함)
+        // 3. 학습 진도 조회 (완료 Day 집계용)
+        const { data: progress } = await supabase
+            .from('student_progress')
+            .select('user_id, day')
+            .eq('status', 'completed')
+            .gte('last_studied_at', monthStartISO)
+            .in('user_id', userIds);
+
+        const completedMap = new Map<string, Set<number>>();
+        progress?.forEach(p => {
+            const userDays = completedMap.get(p.user_id) || new Set();
+            userDays.add(p.day);
+            completedMap.set(p.user_id, userDays);
+        });
+
+        // 4. 랭킹 데이터 생성 (학습 활동이 있는 학생만 포함)
         const rankings: RankingItem[] = users
             .filter(user => completedMap.has(user.id) || scoreMap.has(user.id))
             .map(user => {
