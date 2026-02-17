@@ -6,6 +6,8 @@ interface StudyFooterControlsProps {
     onHideModeChange: (mode: HideMode) => void;
     onAutoSpeakChange: (enabled: boolean) => void;
     onQuizStart: () => void;
+    onStudyComplete?: () => void;
+    isLastWord?: boolean;
 }
 
 export function StudyFooterControls({
@@ -14,6 +16,8 @@ export function StudyFooterControls({
     onHideModeChange,
     onAutoSpeakChange,
     onQuizStart,
+    onStudyComplete,
+    isLastWord = false,
 }: StudyFooterControlsProps) {
     const hideModes: { value: HideMode; label: string }[] = [
         { value: 'none', label: '전체 보기' },
@@ -77,17 +81,34 @@ export function StudyFooterControls({
                     </div>
                 </div>
 
-                {/* Main Action */}
-                <button
-                    onClick={onQuizStart}
-                    className="w-full sm:w-auto group relative px-10 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-black text-lg transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_10px_30px_rgba(37,99,235,0.4)] overflow-hidden"
-                >
-                    <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:animate-shimmer" />
-                    <div className="flex items-center justify-center gap-3 relative z-10">
-                        <span className="text-2xl group-hover:rotate-12 transition-transform">📝</span>
-                        <span>테스트 시작하기</span>
-                    </div>
-                </button>
+                {/* Main Actions */}
+                <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+                    {/* 학습완료 Button - only shows on last word */}
+                    {isLastWord && onStudyComplete && (
+                        <button
+                            onClick={onStudyComplete}
+                            className="w-full sm:w-auto group relative px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl font-black text-lg transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_10px_30px_rgba(16,185,129,0.3)] overflow-hidden"
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:animate-shimmer" />
+                            <div className="flex items-center justify-center gap-3 relative z-10">
+                                <span className="text-2xl group-hover:scale-110 transition-transform">✅</span>
+                                <span>학습완료</span>
+                            </div>
+                        </button>
+                    )}
+
+                    {/* 테스트 시작하기 Button */}
+                    <button
+                        onClick={onQuizStart}
+                        className="w-full sm:w-auto group relative px-10 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-black text-lg transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_10px_30px_rgba(37,99,235,0.4)] overflow-hidden"
+                    >
+                        <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:animate-shimmer" />
+                        <div className="flex items-center justify-center gap-3 relative z-10">
+                            <span className="text-2xl group-hover:rotate-12 transition-transform">📝</span>
+                            <span>테스트 시작하기</span>
+                        </div>
+                    </button>
+                </div>
             </div>
         </div>
     );

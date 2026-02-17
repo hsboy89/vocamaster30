@@ -159,6 +159,12 @@ export function StudyPage({ level, day, category, onBack, onQuizStart }: StudyPa
         onQuizStart(shuffle(words), 'choice');
     };
 
+    const handleStudyComplete = () => {
+        // 학습완료 버튼 클릭 시 Day를 완료 처리하고 홈으로 돌아감
+        setStatus(level, day, 'completed');
+        onBack();
+    };
+
 
 
     // Derived state
@@ -389,6 +395,8 @@ export function StudyPage({ level, day, category, onBack, onQuizStart }: StudyPa
                         onHideModeChange={setHideMode}
                         onAutoSpeakChange={setAutoSpeak}
                         onQuizStart={handleQuizStart}
+                        onStudyComplete={!category ? handleStudyComplete : undefined}
+                        isLastWord={currentIndex === words.length - 1}
                     />
                 </div>
             </div>
