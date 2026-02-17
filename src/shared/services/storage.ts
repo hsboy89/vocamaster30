@@ -15,6 +15,12 @@ function getUserId(): string | null {
     return user?.id || null;
 }
 
+// Helper: Get current user's academy ID
+function getAcademyId(): string | null {
+    const { user } = useAuthStore.getState();
+    return user?.academyId || null;
+}
+
 // =====================================================
 // Progress Management (Supabase + Local Fallback)
 // =====================================================
@@ -98,6 +104,7 @@ export async function setProgressToCloud(
             .from('student_progress')
             .upsert({
                 user_id: userId,
+                academy_id: getAcademyId(),
                 level,
                 day,
                 status,
@@ -178,6 +185,7 @@ export async function addWrongAnswerToCloud(word: Word, level: Level, day: numbe
                 .from('wrong_answers')
                 .insert({
                     user_id: userId,
+                    academy_id: getAcademyId(),
                     word_id: word.id,
                     word_data: word,
                     level,
@@ -257,6 +265,7 @@ export async function saveQuizResultToCloud(result: QuizResult): Promise<void> {
             .from('quiz_history')
             .insert({
                 user_id: userId,
+                academy_id: getAcademyId(),
                 quiz_type: result.quizType,
                 level: result.level,
                 day: result.day,

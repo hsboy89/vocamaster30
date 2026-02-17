@@ -9,12 +9,14 @@ import {
     getDayProgressStats,
     getAtRiskStudents,
     getGlobalTopWrongWords,
+    getRankingByGoalPlan,
     createStudent,
     deleteStudent,
     DashboardStats,
     StudentListItem,
     DayProgress,
-    WrongWordStat
+    WrongWordStat,
+    RankingItem
 } from '../../../shared/services/admin';
 
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
@@ -44,6 +46,11 @@ export function AdminDashboard() {
     const [newPassword, setNewPassword] = useState('');
     const [addError, setAddError] = useState<string | null>(null);
     const [isAdding, setIsAdding] = useState(false);
+
+    // 랭킹 상태
+    const [rankings, setRankings] = useState<RankingItem[]>([]);
+    const [rankingFilter, setRankingFilter] = useState<number | undefined>(undefined);
+    const [isLoadingRanking, setIsLoadingRanking] = useState(false);
 
     useEffect(() => {
         if (user) {
@@ -77,6 +84,23 @@ export function AdminDashboard() {
         }
         setIsLoading(false);
     };
+
+    // 랭킹 로드
+    const loadRanking = async () => {
+        if (!user) return;
+        setIsLoadingRanking(true);
+        try {
+            const data = await getRankingByGoalPlan(user.academyId, rankingFilter, 10);
+            setRankings(data);
+        } catch (error) {
+            console.error('Failed to load ranking:', error);
+        }
+        setIsLoadingRanking(false);
+    };
+
+    useEffect(() => {
+        if (user) loadRanking();
+    }, [rankingFilter, user]);
 
     const loadDayProgress = async () => {
         if (!user) return;
@@ -406,6 +430,115 @@ export function AdminDashboard() {
                             )}
                         </div>
                     </div>
+                </div>
+
+                {/* 이달의 학습 랭킹 */}
+                <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm p-6 border border-gray-100 dark:border-white/5 mb-8">
+                    <div className="flex items-center justify-between mb-6">
+                        <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl flex items-center justify-center shadow-lg shadow-amber-500/20">
+                                <span className="text-white text-lg">🏆</span>
+                            </div>
+                            <div>
+                                <h2 className="text-lg font-bold text-gray-900 dark:text-white">이달의 학습 랭킹</h2>
+                                <p className="text-xs text-gray-500 dark:text-slate-400">
+                                    {new Date().getMonth() + 1}월 랭킹 · 매월 1일 자동 초기화
+                                </p>
+                            </div>
+                        </div>
+                        <button
+                            onClick={loadRanking}
+                            className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-gray-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-500/10 rounded-lg transition-all"
+                        >
+                            <svg className={`w-4 h-4 ${isLoadingRanking ? 'animate-spin' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                            </svg>
+                            새로고침
+                        </button>
+                    </div>
+
+                    {/* 플랜별 필터 */}
+                    <div className="flex gap-2 mb-5 overflow-x-auto pb-1">
+                        {[{ value: undefined, label: '전체' }, { value: 5, label: '5일' }, { value: 7, label: '7일' }, { value: 10, label: '10일' }, { value: 14, label: '14일' }, { value: 30, label: '30일' }].map(tab => (
+                            <button
+                                key={tab.label}
+                                onClick={() => setRankingFilter(tab.value)}
+                                className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${rankingFilter === tab.value
+                                    ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/20'
+                                    : 'bg-gray-100 dark:bg-white/5 text-gray-500 dark:text-slate-400 hover:bg-gray-200 dark:hover:bg-white/10'
+                                    }`}
+                            >
+                                {tab.label}
+                            </button>
+                        ))}
+                    </div>
+
+                    {/* 랭킹 테이블 */}
+                    {isLoadingRanking ? (
+                        <div className="flex items-center justify-center py-12">
+                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-amber-500" />
+                        </div>
+                    ) : rankings.length === 0 ? (
+                        <div className="text-center py-12">
+                            <span className="text-4xl mb-2 block">📊</span>
+                            <p className="text-gray-500 dark:text-slate-400 text-sm">이번 달 학습 데이터가 없습니다</p>
+                        </div>
+                    ) : (
+                        <div className="overflow-x-auto">
+                            <table className="w-full">
+                                <thead>
+                                    <tr className="border-b border-gray-100 dark:border-white/5">
+                                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-slate-400 uppercase">순위</th>
+                                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-slate-400 uppercase">학생명</th>
+                                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-slate-400 uppercase">완료 Day</th>
+                                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-slate-400 uppercase">퀴즈 평균</th>
+                                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-slate-400 uppercase">플랜</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-gray-100 dark:divide-white/5">
+                                    {rankings.map(item => {
+                                        const medals = ['🥇', '🥈', '🥉'];
+                                        return (
+                                            <tr key={item.userId} className={`hover:bg-gray-50 dark:hover:bg-white/5 transition-colors ${item.rank <= 3 ? 'bg-amber-50/50 dark:bg-amber-500/5' : ''
+                                                }`}>
+                                                <td className="px-4 py-3">
+                                                    {item.rank <= 3 ? (
+                                                        <span className="text-lg">{medals[item.rank - 1]}</span>
+                                                    ) : (
+                                                        <span className="text-sm font-bold text-gray-400 dark:text-slate-500 ml-1">{item.rank}</span>
+                                                    )}
+                                                </td>
+                                                <td className="px-4 py-3 font-semibold text-gray-900 dark:text-white text-sm">{item.studentName}</td>
+                                                <td className="px-4 py-3">
+                                                    <span className={`text-sm font-bold ${item.rank <= 3 ? 'text-amber-600 dark:text-amber-400' : 'text-gray-700 dark:text-slate-300'
+                                                        }`}>
+                                                        {item.completedDays}일
+                                                    </span>
+                                                </td>
+                                                <td className="px-4 py-3">
+                                                    <span className={`text-sm font-medium ${item.averageScore >= 80 ? 'text-emerald-600 dark:text-emerald-400' :
+                                                        item.averageScore >= 60 ? 'text-orange-600 dark:text-orange-400' :
+                                                            'text-gray-500 dark:text-slate-400'
+                                                        }`}>
+                                                        {item.averageScore}점
+                                                    </span>
+                                                </td>
+                                                <td className="px-4 py-3">
+                                                    {item.goalDuration ? (
+                                                        <span className="text-xs bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-300 px-2 py-0.5 rounded-full font-medium">
+                                                            {item.goalDuration}일
+                                                        </span>
+                                                    ) : (
+                                                        <span className="text-xs text-gray-400 dark:text-slate-500">미설정</span>
+                                                    )}
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
+                    )}
                 </div>
 
                 {/* Student List */}

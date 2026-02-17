@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Word, Level, QuizType, LEVEL_INFO } from '../../../shared/types';
-import { useQuiz } from '../../../shared/hooks';
+import { useQuiz, useProgress } from '../../../shared/hooks';
 import { QuizChoice, QuizSpelling, QuizResult } from '../components';
 
 interface QuizPageProps {
@@ -14,6 +14,7 @@ interface QuizPageProps {
 export function QuizPage({ level, day, words, initialQuizType, onBack }: QuizPageProps) {
     const [quizType, setQuizType] = useState<QuizType>(initialQuizType);
     const [isStarted, setIsStarted] = useState(false);
+    const { addMemorizedWord, setStatus } = useProgress();
 
     const {
         currentQuestion,
@@ -40,6 +41,22 @@ export function QuizPage({ level, day, words, initialQuizType, onBack }: QuizPag
             handleStart(initialQuizType);
         }
     }, [initialQuizType, words, handleStart]);
+
+    // 퀴즈 완료 시 학습 상태 업데이트
+    useEffect(() => {
+        if (isComplete) {
+            // 퀴즈를 풀면 해당 Day를 '완료' 처리 (랭킹 반영)
+            setStatus(level, day, 'completed');
+
+            // 정답 단어들을 암기 완료로 기록 (통계용)
+            const wrongWordIds = new Set(wrongWords.map(w => w.id));
+            const correctWords = words.filter(w => !wrongWordIds.has(w.id));
+
+            correctWords.forEach(word => {
+                addMemorizedWord(level, day, word.id, words.length);
+            });
+        }
+    }, [isComplete, wrongWords, words, level, day, setStatus, addMemorizedWord]);
 
     const handleAnswer = (answer: string, _isCorrect: boolean) => {
         checkAnswer(answer);

@@ -1,0 +1,134 @@
+import { useState, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
+import { useAuthStore } from '../../../stores';
+import { getRankingByGoalPlan, RankingItem } from '../../../shared/services/admin';
+import { RankingDetailModal } from './RankingDetailModal';
+
+const MEDALS = ['🥇', '🥈', '🥉'];
+
+export function RankingPreview() {
+    const { user } = useAuthStore();
+    const [top3, setTop3] = useState<RankingItem[]>([]);
+    const [showDetail, setShowDetail] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const currentMonth = new Date().getMonth() + 1;
+
+    useEffect(() => {
+        if (user?.academyId) {
+            loadRanking();
+        }
+    }, [user]);
+
+    // 페이지 포커스 시 자동 새로고침 (퀴즈 후 돌아왔을 때)
+    useEffect(() => {
+        const handleFocus = () => {
+            if (user?.academyId) loadRanking();
+        };
+        const handleVisibility = () => {
+            if (!document.hidden && user?.academyId) loadRanking();
+        };
+        window.addEventListener('focus', handleFocus);
+        document.addEventListener('visibilitychange', handleVisibility);
+        return () => {
+            window.removeEventListener('focus', handleFocus);
+            document.removeEventListener('visibilitychange', handleVisibility);
+        };
+    }, [user]);
+
+    const loadRanking = useCallback(async () => {
+        if (!user) return;
+        setIsLoading(true);
+        try {
+            const data = await getRankingByGoalPlan(user.academyId, user.goalDuration || undefined, 3);
+            setTop3(data);
+        } catch (e) {
+            console.error('Failed to load ranking:', e);
+        }
+        setIsLoading(false);
+    }, [user]);
+
+    // 게스트 또는 학원 미소속이면 숨김
+    if (!user?.academyId) return null;
+
+    return (
+        <>
+            <button
+                onClick={() => setShowDetail(true)}
+                className="w-full bg-white/70 backdrop-blur-md rounded-2xl shadow-lg border border-white/60 p-4 text-left hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 group"
+            >
+                {/* 헤더 */}
+                <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-2">
+                        <span className="text-lg">🏆</span>
+                        <h3 className="text-sm font-bold text-slate-800">이달의 랭킹</h3>
+                    </div>
+                    <span className="text-[10px] bg-amber-100 text-amber-600 px-2 py-0.5 rounded-full font-semibold">
+                        {currentMonth}월
+                    </span>
+                </div>
+
+                {/* Top 3 */}
+                {isLoading ? (
+                    <div className="flex items-center justify-center py-4">
+                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-amber-500" />
+                    </div>
+                ) : top3.length === 0 ? (
+                    <p className="text-xs text-slate-400 text-center py-3">
+                        아직 랭킹 데이터가 없습니다
+                    </p>
+                ) : (
+                    <div className="space-y-2">
+                        {top3.map((item, i) => (
+                            <div
+                                key={item.userId}
+                                className={`flex items-center justify-between py-1.5 px-2.5 rounded-lg ${i === 0
+                                    ? 'bg-gradient-to-r from-amber-50 to-yellow-50 border border-amber-100'
+                                    : 'bg-slate-50/60'
+                                    } ${user.id === item.userId ? 'ring-2 ring-blue-400/40' : ''}`}
+                            >
+                                <div className="flex items-center gap-2">
+                                    <span className="text-base">{MEDALS[i]}</span>
+                                    <span className={`text-sm font-semibold ${i === 0 ? 'text-amber-700' : 'text-slate-700'
+                                        }`}>
+                                        {item.studentName}
+                                    </span>
+                                    {user.id === item.userId && (
+                                        <span className="text-[9px] bg-blue-100 text-blue-600 px-1.5 py-0.5 rounded-full font-bold">
+                                            나
+                                        </span>
+                                    )}
+                                </div>
+                                <span className={`text-xs font-bold ${i === 0 ? 'text-amber-600' : 'text-slate-500'
+                                    }`}>
+                                    {item.completedDays}일 완료
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                )}
+
+                {/* 하단 */}
+                <div className="flex items-center justify-between mt-3 pt-2 border-t border-slate-100">
+                    <span className="text-[10px] text-slate-400">매월 초기화</span>
+                    <span className="text-[10px] text-blue-500 font-semibold group-hover:text-blue-600 transition-colors flex items-center gap-1">
+                        상세 보기
+                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                    </span>
+                </div>
+            </button>
+
+            {/* Detail Modal — createPortal로 body에 렌더링하여 z-index 문제 해결 */}
+            {showDetail && createPortal(
+                <RankingDetailModal
+                    onClose={() => setShowDetail(false)}
+                />,
+                document.body
+            )}
+        </>
+    );
+}
+
+export default RankingPreview;

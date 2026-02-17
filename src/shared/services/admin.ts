@@ -29,6 +29,7 @@ export interface StudentListItem {
     lastLoginAt: string | null;
     averageScore: number;
     goalDuration?: number;   // 목표 기간 (일)
+    totalDays?: number;      // 총 학습 일수 (목표 기간 or 30)
 }
 
 // Day별 진행률 타입
@@ -325,6 +326,7 @@ export async function getStudentList(academyId?: string): Promise<StudentListIte
                     lastLoginAt: user.last_login_at || null,
                     averageScore: avgScore,
                     goalDuration: user.goal_duration,
+                    totalDays: user.goal_duration || 30 // 총 학습 일수 추가
                 };
             })
         );
@@ -339,17 +341,21 @@ export async function getStudentList(academyId?: string): Promise<StudentListIte
 // Day별 진행률 조회 (전체 학생 대상)
 export async function getDayProgressStats(level: string = 'middle_1', academyId?: string): Promise<DayProgress[]> {
     try {
-        // 전체 학생 수
+        // 전체 학생 수 + 학생별 goal_duration 조회
         let studentQuery = supabase
             .from('users')
-            .select('*', { count: 'exact', head: true })
+            .select('id, goal_duration')
             .eq('role', 'student');
 
         if (academyId) {
             studentQuery = studentQuery.eq('academy_id', academyId);
         }
 
-        const { count: totalStudents } = await studentQuery;
+        const { data: students } = await studentQuery;
+        const totalStudents = students?.length || 0;
+
+        // 학생들의 최대 goal_duration 으로 차트 범위 결정
+        const maxDays = students?.reduce((max, s) => Math.max(max, s.goal_duration || 30), 0) || 30;
 
         // 완료된 진도 데이터
         let progressQuery = supabase
@@ -370,7 +376,7 @@ export async function getDayProgressStats(level: string = 'middle_1', academyId?
         });
 
         const result: DayProgress[] = [];
-        for (let day = 1; day <= 30; day++) {
+        for (let day = 1; day <= maxDays; day++) {
             const completedCount = dayStats[day] || 0;
             result.push({
                 day,
@@ -634,4 +640,118 @@ export async function checkStudentExists(
     }
 }
 
+// =====================================================
+// 랭킹 시스템 (월별 자동 초기화)
+// =====================================================
 
+export interface RankingItem {
+    rank: number;
+    userId: string;
+    studentName: string;
+    completedDays: number;   // 이번 달 완료한 Day 수
+    averageScore: number;    // 평균 퀴즈 점수
+    goalDuration?: number;   // 학습 플랜 기간
+}
+
+// 맞춤 플랜별 랭킹 조회 (이번 달)
+export async function getRankingByGoalPlan(
+    academyId?: string,
+    goalDuration?: number,      // null/undefined = 전체
+    limit: number = 10
+): Promise<RankingItem[]> {
+    try {
+        // 이번 달 시작일
+        const now = new Date();
+        const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+        const monthStartISO = monthStart.toISOString();
+
+        // 1. 학생 목록 조회
+        let userQuery = supabase
+            .from('users')
+            .select('id, student_name, goal_duration')
+            .eq('role', 'student');
+
+        if (academyId) {
+            userQuery = userQuery.eq('academy_id', academyId);
+        }
+        if (goalDuration) {
+            userQuery = userQuery.eq('goal_duration', goalDuration);
+        }
+
+        const { data: users, error: userError } = await userQuery;
+        if (userError || !users || users.length === 0) return [];
+
+        const userIds = users.map(u => u.id);
+
+        // 2. 이번 달 완료 진행 상황 조회 (academy_id 필터 없이 user_id로 직접 필터)
+        const { data: progress } = await supabase
+            .from('student_progress')
+            .select('user_id, day, status, last_studied_at')
+            .eq('status', 'completed')
+            .gte('last_studied_at', monthStartISO)
+            .in('user_id', userIds);
+
+        // user_id별 완료 Day 수 집계
+        const completedMap = new Map<string, number>();
+        progress?.forEach(p => {
+            const current = completedMap.get(p.user_id) || 0;
+            completedMap.set(p.user_id, current + 1);
+        });
+
+        // 3. 퀴즈 평균 점수 조회 (이번 달, user_id로 직접 필터)
+        const { data: quizzes } = await supabase
+            .from('quiz_history')
+            .select('user_id, correct_answers, total_questions')
+            .gte('completed_at', monthStartISO)
+            .in('user_id', userIds);
+
+        const scoreMap = new Map<string, { total: number; count: number }>();
+        quizzes?.forEach(q => {
+            if (q.total_questions > 0) {
+                let correctCount = q.correct_answers;
+                if (correctCount > q.total_questions) {
+                    correctCount = Math.round(correctCount / 5);
+                }
+                const score = (correctCount / q.total_questions) * 100;
+                const existing = scoreMap.get(q.user_id) || { total: 0, count: 0 };
+                scoreMap.set(q.user_id, {
+                    total: existing.total + score,
+                    count: existing.count + 1,
+                });
+            }
+        });
+
+        // 4. 랭킹 데이터 생성 (학습 활동이 있는 학생만 포함)
+        const rankings: RankingItem[] = users
+            .filter(user => completedMap.has(user.id) || scoreMap.has(user.id))
+            .map(user => {
+                const completedDays = completedMap.get(user.id) || 0;
+                const scoreData = scoreMap.get(user.id);
+                const averageScore = scoreData ? Math.round(scoreData.total / scoreData.count) : 0;
+
+                return {
+                    rank: 0,
+                    userId: user.id,
+                    studentName: user.student_name,
+                    completedDays,
+                    averageScore,
+                    goalDuration: user.goal_duration,
+                };
+            });
+
+        // 5. 정렬: 완료 Day 내림차순 → 평균점수 내림차순
+        rankings.sort((a, b) => {
+            if (b.completedDays !== a.completedDays) return b.completedDays - a.completedDays;
+            return b.averageScore - a.averageScore;
+        });
+
+        // 6. 순위 부여 및 제한
+        return rankings.slice(0, limit).map((item, index) => ({
+            ...item,
+            rank: index + 1,
+        }));
+    } catch (error) {
+        console.error('Failed to get ranking:', error);
+        return [];
+    }
+}

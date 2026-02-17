@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { Level, LEVEL_INFO, WrongAnswer } from '../../../shared/types';
-import { DayGrid, GoalSetting } from '../components';
+import { DayGrid, GoalSetting, RankingPreview } from '../components';
 import { WrongAnswerNote } from '../../../shared/components';
 import { useProgress } from '../../../shared/hooks';
 import * as storage from '../../../shared/services/storage';
@@ -107,17 +107,20 @@ export function HomePage({ level, onDaySelect, isGuest, onLockedClick }: HomePag
                             </div>
                         </div>
 
-                        {/* Stats Cards */}
-                        <div className="flex gap-4 md:gap-5 w-full md:w-auto justify-center">
-
-                            <div className="bg-white/70 backdrop-blur-md p-5 rounded-2xl shadow-lg border border-white/60 flex-1 md:flex-none min-w-[90px] text-center transform hover:-translate-y-1 transition-transform duration-300 delay-75">
-                                <p className="text-2xl font-bold text-blue-600 mb-0.5">{levelInfo.totalWords.toLocaleString()}</p>
-                                <p className="text-xs font-medium text-slate-500">총 단어</p>
+                        {/* Stats Cards + Ranking */}
+                        <div className="flex flex-col gap-4 w-full md:w-auto">
+                            <div className="flex gap-4 md:gap-5 justify-center">
+                                <div className="bg-white/70 backdrop-blur-md p-5 rounded-2xl shadow-lg border border-white/60 flex-1 md:flex-none min-w-[90px] text-center transform hover:-translate-y-1 transition-transform duration-300 delay-75">
+                                    <p className="text-2xl font-bold text-blue-600 mb-0.5">{levelInfo.totalWords.toLocaleString()}</p>
+                                    <p className="text-xs font-medium text-slate-500">총 단어</p>
+                                </div>
+                                <div className="bg-white/70 backdrop-blur-md p-5 rounded-2xl shadow-lg border border-white/60 flex-1 md:flex-none min-w-[90px] text-center transform hover:-translate-y-1 transition-transform duration-300 delay-150">
+                                    <p className="text-2xl font-bold text-emerald-500 mb-0.5">{completionRate}%</p>
+                                    <p className="text-xs font-medium text-slate-500">진도율</p>
+                                </div>
                             </div>
-                            <div className="bg-white/70 backdrop-blur-md p-5 rounded-2xl shadow-lg border border-white/60 flex-1 md:flex-none min-w-[90px] text-center transform hover:-translate-y-1 transition-transform duration-300 delay-150">
-                                <p className="text-2xl font-bold text-emerald-500 mb-0.5">{completionRate}%</p>
-                                <p className="text-xs font-medium text-slate-500">진도율</p>
-                            </div>
+                            {/* 랭킹 프리뷰 (로그인 사용자만) */}
+                            {!isGuest && <RankingPreview />}
                         </div>
                     </div>
 

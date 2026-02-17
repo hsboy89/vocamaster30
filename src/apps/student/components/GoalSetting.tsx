@@ -57,6 +57,7 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
     const [dailyCount, setDailyCount] = useState<number>(30); // 기본 30단어
     const [availableCount, setAvailableCount] = useState<number>(0);
     const [totalCount, setTotalCount] = useState<number>(0);
+    const [pendingDuration, setPendingDuration] = useState<GoalDuration | null>(null); // 확인 팝업용
     const { user } = useAuthStore();
 
     const DAILY_OPTIONS = [30, 50, 70, 100];
@@ -87,7 +88,13 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
         // 포커스 될 때 업데이트되면 좋겠지만, 일단 level 변경 시 수행
     }, [level]);
 
+    const handleConfirmGoal = (duration: GoalDuration) => {
+        // 선택 전 확인 팝업 표시
+        setPendingDuration(duration);
+    };
+
     const handleSetGoal = (duration: GoalDuration) => {
+        setPendingDuration(null); // 팝업 닫기
         const memorized = getAllMemorizedWordIds(level);
 
         // 1. 단어 분배 플랜 생성 (이번 회차)
@@ -288,7 +295,7 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
                                 return (
                                     <button
                                         key={option.duration}
-                                        onClick={() => handleSetGoal(option.duration)}
+                                        onClick={() => handleConfirmGoal(option.duration)}
                                         className="group relative rounded-xl border border-white/10 bg-white/5 hover:bg-blue-600/20 hover:border-blue-500/50 p-4 text-center transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
                                     >
                                         <p className="text-xl font-bold text-white group-hover:text-blue-400 mb-1 transition-colors">
@@ -303,6 +310,56 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
                                     </button>
                                 );
                             })}
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* 확인 팝업 */}
+            {pendingDuration && (
+                <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4" onClick={() => setPendingDuration(null)}>
+                    <div
+                        className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl w-full max-w-sm p-7 border border-white/10 animate-in fade-in zoom-in-95"
+                        onClick={e => e.stopPropagation()}
+                    >
+                        <div className="text-center mb-6">
+                            <div className="w-14 h-14 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-amber-500/30">
+                                <span className="text-2xl">⚠️</span>
+                            </div>
+                            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                                학습 플랜을 시작할까요?
+                            </h3>
+                            <div className="space-y-2 text-sm text-gray-600 dark:text-slate-400">
+                                <p>
+                                    <span className="font-bold text-blue-600 dark:text-blue-400">{pendingDuration}일 플랜</span>을 선택하면
+                                </p>
+                                <p>
+                                    해당 플랜을 <span className="font-bold text-red-500">완료할 때까지</span> 다른 플랜으로
+                                </p>
+                                <p>변경할 수 없습니다.</p>
+                            </div>
+                        </div>
+
+                        <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 rounded-xl p-3 mb-6">
+                            <p className="text-xs text-amber-700 dark:text-amber-400 text-center font-medium">
+                                💡 한 번 선택한 플랜은 끝까지 진행해야 합니다.
+                                목표 달성 후 새로운 플랜을 선택할 수 있어요!
+                            </p>
+                        </div>
+
+                        <div className="flex gap-3">
+                            <button
+                                onClick={() => setPendingDuration(null)}
+                                className="flex-1 px-4 py-3 bg-gray-100 dark:bg-white/5 text-gray-700 dark:text-slate-300 rounded-2xl hover:bg-gray-200 dark:hover:bg-white/10 transition-all font-bold text-sm"
+                            >
+                                취소
+                            </button>
+                            <button
+                                onClick={() => handleSetGoal(pendingDuration)}
+                                className="flex-1 px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-2xl hover:from-blue-700 hover:to-blue-600 transition-all font-bold text-sm shadow-lg shadow-blue-500/30"
+                            >
+                                시작하기
+                            </button>
                         </div>
                     </div>
                 </div>
