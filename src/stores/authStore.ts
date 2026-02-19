@@ -28,27 +28,38 @@ interface AuthStore {
 // Explicitly typed to satisfy PersistStorage interface
 const customStorage: PersistStorage<any> = {
     getItem: (name: string): StorageValue<any> | null => {
-        // Try localStorage first (persistent), then sessionStorage (session only)
-        const value = localStorage.getItem(name) || sessionStorage.getItem(name);
-        if (!value) return null;
         try {
+            // Try localStorage first (persistent), then sessionStorage (session only)
+            const value = localStorage.getItem(name) || sessionStorage.getItem(name);
+            if (!value) return null;
             return JSON.parse(value);
-        } catch {
+        } catch (e) {
+            console.warn('Storage access failed:', e);
             return null;
         }
     },
     setItem: (name: string, value: StorageValue<any>) => {
-        // We need to know which storage to use based on user preference
-        const strValue = JSON.stringify(value);
-        if (sessionStorage.getItem(name)) {
-            sessionStorage.setItem(name, strValue);
-        } else {
-            localStorage.setItem(name, strValue);
+        try {
+            // We need to know which storage to use based on user preference
+            const strValue = JSON.stringify(value);
+            if (sessionStorage.getItem(name)) {
+                sessionStorage.setItem(name, strValue);
+            } else {
+                localStorage.setItem(name, strValue);
+            }
+        } catch (e) {
+            console.error('Storage write failed:', e);
+            // Fallback: try sessionStorage if localStorage failed? Or just log.
+            // In strict environments, both might fail. Ideally, we fall back to in-memory, but zustand handles that implicitly if persistence fails.
         }
     },
     removeItem: (name: string) => {
-        localStorage.removeItem(name);
-        sessionStorage.removeItem(name);
+        try {
+            localStorage.removeItem(name);
+            sessionStorage.removeItem(name);
+        } catch (e) {
+            console.warn('Storage remove failed:', e);
+        }
     },
 };
 

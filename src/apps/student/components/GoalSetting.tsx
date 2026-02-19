@@ -113,9 +113,9 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
     // authStore와 local state(goal) 동기화 (새로고침/재진입 시) - 제거됨 (무한루프 원인)
     // useEffect(() => {
     //     if (goal && user && user.goalDuration !== goal.duration) {
-    //         updateUser({ goalDuration: goal.duration });
+    //         // updateUser({ goalDuration: goal.duration }); // Dangerous loop
     //     }
-    // }, [goal, user, updateUser]);
+    // }, [goal, user]);
 
     const handleConfirmGoal = (duration: GoalDuration) => {
         // 선택 전 확인 팝업 표시

@@ -56,26 +56,36 @@ export function RankingPreview() {
     }, [academyId, loadRanking]);
 
     // 페이지 포커스 시 자동 새로고침 (디바운스 적용)
+    // 페이지 포커스/가시성 변경 시 자동 새로고침 (스로틀링 적용)
     useEffect(() => {
-        let timeoutId: ReturnType<typeof setTimeout>;
+        const handleRefresh = () => {
+            // 마지막 갱신으로부터 10초 미만이면 스킵 (무한 루프 방지)
+            const now = Date.now();
+            const lastTime = parseInt(sessionStorage.getItem('last_ranking_fetch') || '0');
+            if (now - lastTime < 10000) return;
 
-        const handleFocus = () => {
-            // 포커스 이벤트가 빈번하게 발생할 경우를 대비해 디바운스
-            clearTimeout(timeoutId);
-            timeoutId = setTimeout(() => {
-                if (academyId) loadRanking(true); // 포커스 시엔 강제 갱신
-            }, 1000);
+            if (academyId && !isLoadingRef.current) {
+                loadRanking(true);
+                sessionStorage.setItem('last_ranking_fetch', now.toString());
+            }
         };
 
-        window.addEventListener('focus', handleFocus);
+        window.addEventListener('focus', handleRefresh);
+        document.addEventListener('visibilitychange', handleRefresh);
+
         return () => {
-            window.removeEventListener('focus', handleFocus);
-            clearTimeout(timeoutId);
+            window.removeEventListener('focus', handleRefresh);
+            document.removeEventListener('visibilitychange', handleRefresh);
         };
     }, [academyId, loadRanking]);
 
-    // 게스트 또는 학원 미소속이면 숨김
-    if (!user?.academyId) return null;
+    // 게스트는 숨김 (학원 미소속이어도 일단 렌더링 시도하되, API 호출에서 방어)
+    if (!user) return null;
+    // academyId가 없어도 렌더링 자체는 하되 데이터 로드가 안될 뿐임 (에러 메시지 표시 가능)
+    // 기존: if (!user?.academyId) return null; 
+
+    // 안전장치: academyId가 없으면 빈 상태 반환
+    if (!academyId) return null;
 
     return (
         <>
