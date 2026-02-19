@@ -339,6 +339,13 @@ export const useAuthStore = create<AuthStore>()(
             updateUser: (updates: Partial<User>) => {
                 const { user } = get();
                 if (!user) return;
+
+                // 실제로 변경된 값이 있는지 확인 (무한루프 방지)
+                const hasChanges = Object.keys(updates).some(
+                    key => (user as any)[key] !== (updates as any)[key]
+                );
+                if (!hasChanges) return;
+
                 const updatedUser = { ...user, ...updates };
                 set({ user: updatedUser });
             },
