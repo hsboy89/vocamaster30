@@ -767,18 +767,18 @@ export function AdminDashboard() {
 
                             <div>
                                 <label className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
-                                    비밀번호
+                                    비밀번호 <span className="text-red-500">*</span>
                                 </label>
                                 <input
                                     type="text"
                                     value={newPassword}
                                     onChange={(e) => setNewPassword(e.target.value)}
-                                    placeholder="로그인 비밀번호 (선택사항)"
+                                    placeholder="학생 로그인 비밀번호"
                                     className="w-full px-4 py-3.5 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:text-white dark:placeholder-slate-500 transition-all font-mono"
                                     disabled={isAdding}
                                     autoComplete="new-password"
                                 />
-                                <p className="text-xs text-gray-400 mt-1">입력하지 않으면 비밀번호 없이 로그인할 수 있습니다.</p>
+                                <p className="text-xs text-gray-400 mt-1">학생이 로그인할 때 사용하는 비밀번호입니다.</p>
                             </div>
 
                             <div className="grid grid-cols-2 gap-4">
