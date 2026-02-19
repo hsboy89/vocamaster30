@@ -157,9 +157,9 @@ export function useQuiz(): UseQuizReturn {
     const saveResult = useCallback(
         async (level: Level, day: number) => {
             // 오답 저장
-            wrongWords.forEach((word) => {
-                storage.addWrongAnswer(word, level, day);
-            });
+            for (const word of wrongWords) {
+                await storage.addWrongAnswer(word, level, day);
+            }
 
             // 퀴즈 결과 저장
             const result: QuizResult = {

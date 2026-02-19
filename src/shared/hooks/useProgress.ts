@@ -19,9 +19,12 @@ export function useProgress(): UseProgressReturn {
 
     // 초기 로드
     useEffect(() => {
-        const loaded = storage.getAllProgress();
-        setProgress(loaded);
-        setIsLoading(false);
+        const loadProgress = async () => {
+            const loaded = await storage.getAllProgress();
+            setProgress(loaded);
+            setIsLoading(false);
+        };
+        loadProgress();
     }, []);
 
     const getStatus = useCallback(

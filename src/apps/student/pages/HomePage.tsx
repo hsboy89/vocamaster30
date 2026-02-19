@@ -19,14 +19,14 @@ export function HomePage({ level, onDaySelect, isGuest, onLockedClick }: HomePag
     const [wrongAnswers, setWrongAnswers] = useState<WrongAnswer[]>([]);
     const [goalDays, setGoalDays] = useState<number | null>(null);
 
-    const handleOpenWrongNote = () => {
-        const data = storage.getWrongAnswers();
+    const handleOpenWrongNote = async () => {
+        const data = await storage.getWrongAnswers();
         setWrongAnswers(data);
         setShowWrongNote(true);
     };
 
-    const handleRefreshWrongNote = useCallback(() => {
-        const data = storage.getWrongAnswers();
+    const handleRefreshWrongNote = useCallback(async () => {
+        const data = await storage.getWrongAnswers();
         setWrongAnswers(data);
     }, []);
 

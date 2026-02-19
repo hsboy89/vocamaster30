@@ -11,8 +11,8 @@ interface WrongAnswerNoteProps {
 export function WrongAnswerNote({ wrongAnswers, onRefresh, onClose }: WrongAnswerNoteProps) {
     const { speak } = useTTS();
 
-    const handleRemove = (wordId: string) => {
-        removeWrongAnswer(wordId);
+    const handleRemove = async (wordId: string) => {
+        await removeWrongAnswer(wordId);
         onRefresh();
     };
 

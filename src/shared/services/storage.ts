@@ -423,54 +423,57 @@ function saveQuizResultLocal(result: QuizResult): void {
 }
 
 // =====================================================
-// Legacy API Compatibility (for existing code)
+// Public API — DB-first for registered, localStorage for guests
 // =====================================================
 
-export function getProgress(level: Level, day: number): UserProgress | null {
+// --- Progress ---
+
+export async function getProgress(level: Level, day: number): Promise<UserProgress | null> {
+    const userId = getUserId();
+    if (userId) {
+        return getProgressFromCloud(level, day);
+    }
     return getProgressLocal(level, day);
 }
 
-export function getAllProgress(): UserProgress[] {
+export async function getAllProgress(): Promise<UserProgress[]> {
+    const userId = getUserId();
+    if (userId) {
+        return getAllProgressFromCloud();
+    }
     return getAllProgressLocal();
 }
 
 export async function setProgress(level: Level, day: number, status: StudyStatus, memorizedWords: string[] = []): Promise<void> {
-    setProgressLocal(level, day, status, memorizedWords);
-    // Also sync to cloud asynchronously
-    await setProgressToCloud(level, day, status, memorizedWords);
+    const userId = getUserId();
+    if (userId) {
+        await setProgressToCloud(level, day, status, memorizedWords);
+    } else {
+        setProgressLocal(level, day, status, memorizedWords);
+    }
 }
 
-export function getProgressByLevel(level: Level): UserProgress[] {
-    return getAllProgressLocal().filter((p) => p.level === level);
+export async function getProgressByLevel(level: Level): Promise<UserProgress[]> {
+    const allProgress = await getAllProgress();
+    return allProgress.filter((p) => p.level === level);
 }
 
-export function calculateCompletionRate(level: Level): number {
-    const progress = getProgressByLevel(level);
+export async function calculateCompletionRate(level: Level): Promise<number> {
+    const progress = await getProgressByLevel(level);
     const completed = progress.filter((p) => p.status === 'completed').length;
     return Math.round((completed / 30) * 100);
 }
 
-export function getAllMemorizedWordIds(level: Level): string[] {
-    const progress = getProgressByLevel(level);
+export async function getAllMemorizedWordIds(level: Level): Promise<string[]> {
+    const progress = await getProgressByLevel(level);
     return progress.flatMap(p => p.memorizedWords || []);
 }
 
 export async function resetLevelProgress(level: Level): Promise<void> {
     const userId = getUserId();
 
-    // 1. Local Reset
-    try {
-        const allProgress = getAllProgressLocal();
-        const filtered = allProgress.filter(p => p.level !== level);
-        localStorage.setItem(STORAGE_KEYS.PROGRESS, JSON.stringify(filtered));
-
-        // Settings 등 다른 정보는 유지. Plan은 GoalSetting에서 별도 처리.
-    } catch (e) {
-        console.error("Failed to reset local progress", e);
-    }
-
-    // 2. Cloud Reset (Soft Delete or Hard Delete)
     if (userId) {
+        // Cloud Reset
         try {
             await supabase
                 .from('student_progress')
@@ -480,40 +483,70 @@ export async function resetLevelProgress(level: Level): Promise<void> {
         } catch (e) {
             console.error("Failed to reset cloud progress", e);
         }
+    } else {
+        // Local Reset
+        try {
+            const allProgress = getAllProgressLocal();
+            const filtered = allProgress.filter(p => p.level !== level);
+            localStorage.setItem(STORAGE_KEYS.PROGRESS, JSON.stringify(filtered));
+        } catch (e) {
+            console.error("Failed to reset local progress", e);
+        }
     }
 }
 
-export function getWrongAnswers(): WrongAnswer[] {
+// --- Wrong Answers ---
+
+export async function getWrongAnswers(): Promise<WrongAnswer[]> {
+    const userId = getUserId();
+    if (userId) {
+        return getWrongAnswersFromCloud();
+    }
     return getWrongAnswersLocal();
 }
 
-export function addWrongAnswer(word: Word, level: Level, day: number): void {
-    addWrongAnswerLocal(word, level, day);
-    // Also sync to cloud asynchronously
-    addWrongAnswerToCloud(word, level, day);
+export async function addWrongAnswer(word: Word, level: Level, day: number): Promise<void> {
+    const userId = getUserId();
+    if (userId) {
+        await addWrongAnswerToCloud(word, level, day);
+    } else {
+        addWrongAnswerLocal(word, level, day);
+    }
 }
 
-export function removeWrongAnswer(wordId: string): void {
-    removeWrongAnswerLocal(wordId);
-    // Also sync to cloud asynchronously
-    removeWrongAnswerFromCloud(wordId);
+export async function removeWrongAnswer(wordId: string): Promise<void> {
+    const userId = getUserId();
+    if (userId) {
+        await removeWrongAnswerFromCloud(wordId);
+    } else {
+        removeWrongAnswerLocal(wordId);
+    }
 }
 
 export function clearWrongAnswers(): void {
     localStorage.removeItem(STORAGE_KEYS.WRONG_ANSWERS);
 }
 
-export function getQuizResults(): QuizResult[] {
+// --- Quiz Results ---
+
+export async function getQuizResults(): Promise<QuizResult[]> {
+    const userId = getUserId();
+    if (userId) {
+        return getQuizResultsFromCloud();
+    }
     return getQuizResultsLocal();
 }
 
 export async function saveQuizResult(result: QuizResult): Promise<void> {
-    saveQuizResultLocal(result);
-    // Also sync to cloud asynchronously
-    await saveQuizResultToCloud(result);
+    const userId = getUserId();
+    if (userId) {
+        await saveQuizResultToCloud(result);
+    } else {
+        saveQuizResultLocal(result);
+    }
 }
 
-// Settings (local only)
+// --- Settings (local only, per-device) ---
 export interface Settings {
     hideMode: 'none' | 'word' | 'meaning' | 'synonyms';
     soundEnabled: boolean;
@@ -549,3 +582,4 @@ export function clearAllData(): void {
         localStorage.removeItem(key);
     });
 }
+

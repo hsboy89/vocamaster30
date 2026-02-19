@@ -62,8 +62,8 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
     const lastNotifiedDuration = useRef<number | null | undefined>(undefined);
 
     useEffect(() => {
-        const loadInfo = () => {
-            const memorized = getAllMemorizedWordIds(level);
+        const loadInfo = async () => {
+            const memorized = await getAllMemorizedWordIds(level);
             const total = LEVEL_INFO[level].totalWords; // 혹은 data/index.ts의 getAllWords(level).length
             setTotalCount(total);
             setAvailableCount(Math.max(0, total - memorized.length));
@@ -128,9 +128,9 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
         setPendingDuration(duration);
     };
 
-    const handleSetGoal = (duration: GoalDuration) => {
+    const handleSetGoal = async (duration: GoalDuration) => {
         setPendingDuration(null); // 팝업 닫기
-        const memorized = getAllMemorizedWordIds(level);
+        const memorized = await getAllMemorizedWordIds(level);
 
         // 1. 단어 분배 플랜 생성 (이번 회차)
         const plan = createStudyPlan(level, duration, memorized, dailyCount);
@@ -225,9 +225,9 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
 
         // 🎉 목표 완료 — 다음 학습 시작 버튼
         if (isAllCompleted) {
-            const handleStartNextRound = (nextDuration: GoalDuration) => {
+            const handleStartNextRound = async (nextDuration: GoalDuration) => {
                 setIsChoosingNextRound(false);
-                const memorized = getAllMemorizedWordIds(level);
+                const memorized = await getAllMemorizedWordIds(level);
 
                 // 기존 목표 클리어
                 clearGoal();
