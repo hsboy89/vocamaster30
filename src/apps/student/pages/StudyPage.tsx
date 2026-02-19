@@ -96,25 +96,20 @@ export function StudyPage({ level, day, category, onBack, onQuizStart }: StudyPa
         if (loadedWords.length > 0) {
             setWords(loadedWords);
             if (!category) {
-                // 플랜 모드일 때는 '학습 시작' 상태만 업데이트하고, 
-                // 기존 useProgress는 30일 고정이라 Day 매핑이 안 맞을 수 있음.
-                // 일단은 상태 업데이트는 하되, 암기 단어 불러오기는 '단어 ID' 기반이므로 호환됨.
-
                 const currentStatus = getStatus(level, day);
                 if (currentStatus === 'not-started') {
                     setStatus(level, day, 'in-progress');
                 }
 
-                // 암기한 단어 ID 목록 불러오기 (이건 전역적으로 ID 기반이라 Plan 써도 호환됨)
-                // 다만 Day별 'progress' 객체가 30일치만 저장되므로, 
-                // Plan 모드일 때 Day 1에 200단어를 학습하면, Day 1의 progress 데이터가 매우 커짐.
-                // storage.getProgress는 day별로 저장하므로 문제없음.
-                const progress = storage.getProgress(level, day);
-                if (progress) {
-                    setMemorizedWordIds(new Set(progress.memorizedWords));
-                } else {
-                    setMemorizedWordIds(new Set());
-                }
+                // 암기한 단어 ID 목록 비동기 로드
+                (async () => {
+                    const progress = await storage.getProgress(level, day);
+                    if (progress) {
+                        setMemorizedWordIds(new Set(progress.memorizedWords));
+                    } else {
+                        setMemorizedWordIds(new Set());
+                    }
+                })();
             } else {
                 setMemorizedWordIds(new Set());
             }
