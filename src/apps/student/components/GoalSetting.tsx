@@ -69,7 +69,19 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
             setTotalCount(total);
             setAvailableCount(Math.max(0, total - memorized.length));
 
-            const stored = getStoredGoal();
+            let stored = getStoredGoal();
+
+            // DB에서 복구 시도 (로컬에 없거나, 로컬 정보가 현재 레벨과 다를 때 DB 정보 확인)
+            if (!stored && user?.goalStartDate && user?.goalLevel === level) {
+                stored = {
+                    duration: (user.goalDuration as GoalDuration) || 30,
+                    startDate: user.goalStartDate,
+                    level: user.goalLevel as Level,
+                    wordsPerDay: user.goalWordsPerDay || 30,
+                };
+                saveGoal(stored); // 로컬에도 저장
+            }
+
             if (stored && stored.level === level) {
                 const remaining = getDaysRemaining(stored.startDate, stored.duration);
                 if (remaining > 0) {
@@ -86,7 +98,7 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
 
         loadInfo();
         // 포커스 될 때 업데이트되면 좋겠지만, 일단 level 변경 시 수행
-    }, [level]);
+    }, [level, user]);
 
     // authStore와 local state(goal) 동기화 (새로고침/재진입 시)
     useEffect(() => {
@@ -127,7 +139,9 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
             supabase.from('users')
                 .update({
                     goal_duration: duration,
-                    // 필요 시 daily_word_count 등 추가 가능
+                    goal_start_date: newGoal.startDate,
+                    goal_level: level,
+                    goal_words_per_day: plan.wordsPerDay,
                 })
                 .eq('id', user.id)
                 .then(({ error }) => {
@@ -144,6 +158,21 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
         clearGoal();
         setGoal(null);
         onGoalChange?.(null);
+
+        // Sync clear to DB
+        if (user) {
+            supabase.from('users')
+                .update({
+                    goal_duration: null,
+                    goal_start_date: null,
+                    goal_level: null,
+                    goal_words_per_day: null,
+                })
+                .eq('id', user.id)
+                .then(({ error }) => {
+                    if (error) console.error('Failed to clear goal from DB', error);
+                });
+        }
     };
 
     const handleResetProgress = async () => {

@@ -65,6 +65,9 @@ export interface User {
 
     // 학습 목표 (일 단위)
     goalDuration?: number;
+    goalStartDate?: string;       // 목표 시작일
+    goalLevel?: string;           // 목표 설정 당시 레벨
+    goalWordsPerDay?: number;     // 목표 일일 단어 수
 }
 
 export interface AuthState {
@@ -115,6 +118,9 @@ export interface DbUser {
     target_university?: string;
     parent_phone?: string;
     goal_duration?: number;
+    goal_start_date?: string;
+    goal_level?: string;
+    goal_words_per_day?: number;
 }
 
 // =====================================================
@@ -137,6 +143,9 @@ export function dbUserToUser(dbUser: DbUser): User {
         targetUniversity: dbUser.target_university,
         parentPhone: dbUser.parent_phone,
         goalDuration: dbUser.goal_duration,
+        goalStartDate: dbUser.goal_start_date,
+        goalLevel: dbUser.goal_level,
+        goalWordsPerDay: dbUser.goal_words_per_day,
     };
 }
 

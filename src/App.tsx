@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 // Shared Types & Components
 import { Level, Word, QuizType, Category } from './shared/types';
@@ -32,6 +32,15 @@ function StudentApp() {
 
   const { user, logout } = useAuthStore();
   const isGuest = !user;
+
+  // Sync local quiz results when user logs in
+  useEffect(() => {
+    if (user) {
+      import('./shared/services/storage').then(({ syncLocalQuizResultsToCloud }) => {
+        syncLocalQuizResultsToCloud();
+      });
+    }
+  }, [user]);
 
   const handleLevelChange = (level: Level) => {
     setCurrentLevel(level);

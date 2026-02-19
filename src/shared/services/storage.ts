@@ -279,6 +279,38 @@ export async function saveQuizResultToCloud(result: QuizResult): Promise<void> {
     }
 }
 
+export async function syncLocalQuizResultsToCloud(): Promise<void> {
+    const userId = getUserId();
+    if (!userId) return;
+
+    const localResults = getQuizResultsLocal();
+    if (localResults.length === 0) return;
+
+    try {
+        const cloudResults = await getQuizResultsFromCloud();
+
+        // 중복 체크: completedAt, quizType, level, day가 모두 같은 경우 이미 저장된 것으로 간주
+        const newResults = localResults.filter(local => {
+            return !cloudResults.some(cloud =>
+                cloud.completedAt === local.completedAt &&
+                cloud.quizType === local.quizType &&
+                cloud.level === local.level &&
+                cloud.day === local.day
+            );
+        });
+
+        if (newResults.length === 0) return;
+
+        console.log(`Syncing ${newResults.length} quiz results to cloud...`);
+
+        // 병렬로 저장
+        await Promise.all(newResults.map(result => saveQuizResultToCloud(result)));
+        console.log('Quiz results synced successfully.');
+    } catch (error) {
+        console.error('Failed to sync quiz results:', error);
+    }
+}
+
 // =====================================================
 // Local Storage Functions (Fallback / Offline)
 // =====================================================

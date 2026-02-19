@@ -173,6 +173,12 @@ export const useAuthStore = create<AuthStore>()(
                     }
 
                     set({ user, isAuthenticated: true, isGuest: false, isLoading: false });
+
+                    // Sync local quiz results to cloud asynchronously
+                    import('../shared/services/storage').then(({ syncLocalQuizResultsToCloud }) => {
+                        syncLocalQuizResultsToCloud();
+                    });
+
                     return true;
 
                 } catch (error) {
