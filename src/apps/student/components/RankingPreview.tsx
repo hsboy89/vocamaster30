@@ -65,7 +65,8 @@ export function RankingPreview() {
     }, [academyId, loadRanking]);
 
     // 페이지 포커스 시 자동 새로고침 (디바운스 적용)
-    // 페이지 포커스/가시성 변경 시 자동 새로고침 (스로틀링 적용)
+    // 페이지 포커스/가시성 변경 시 자동 새로고침 -> 제거됨 (무한 루프 원인 의심)
+    /*
     useEffect(() => {
         console.warn('🔄 RankingPreview: Focus/Visibility effect triggered');
         const handleRefresh = () => {
@@ -96,6 +97,7 @@ export function RankingPreview() {
             document.removeEventListener('visibilitychange', handleRefresh);
         };
     }, [academyId, loadRanking]);
+    */
 
     // 게스트는 숨김 (학원 미소속이어도 일단 렌더링 시도하되, API 호출에서 방어)
     if (!user) {
