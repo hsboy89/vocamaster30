@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useAuthStore } from '../../../stores';
 import { getRankingByGoalPlan, RankingItem } from '../../../shared/services/admin';
@@ -11,22 +11,41 @@ export function RankingPreview() {
     const [top3, setTop3] = useState<RankingItem[]>([]);
     const [showDetail, setShowDetail] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const isLoadingRef = useRef(false);
 
     const currentMonth = new Date().getMonth() + 1;
 
+    // 안정적인 primitive 값만 의존성으로 사용 (객체 참조 변경으로 인한 무한루프 방지)
+    const academyId = user?.academyId;
+    const goalDuration = user?.goalDuration;
+
+    const loadRanking = useCallback(async () => {
+        if (!academyId || isLoadingRef.current) return;
+        isLoadingRef.current = true;
+        setIsLoading(true);
+        try {
+            const data = await getRankingByGoalPlan(academyId, goalDuration || undefined, 3);
+            setTop3(data);
+        } catch (e) {
+            console.error('Failed to load ranking:', e);
+        }
+        setIsLoading(false);
+        isLoadingRef.current = false;
+    }, [academyId, goalDuration]);
+
     useEffect(() => {
-        if (user?.academyId) {
+        if (academyId) {
             loadRanking();
         }
-    }, [user]);
+    }, [academyId, loadRanking]);
 
     // 페이지 포커스 시 자동 새로고침 (퀴즈 후 돌아왔을 때)
     useEffect(() => {
         const handleFocus = () => {
-            if (user?.academyId) loadRanking();
+            if (academyId) loadRanking();
         };
         const handleVisibility = () => {
-            if (!document.hidden && user?.academyId) loadRanking();
+            if (!document.hidden && academyId) loadRanking();
         };
         window.addEventListener('focus', handleFocus);
         document.addEventListener('visibilitychange', handleVisibility);
@@ -34,19 +53,7 @@ export function RankingPreview() {
             window.removeEventListener('focus', handleFocus);
             document.removeEventListener('visibilitychange', handleVisibility);
         };
-    }, [user]);
-
-    const loadRanking = useCallback(async () => {
-        if (!user) return;
-        setIsLoading(true);
-        try {
-            const data = await getRankingByGoalPlan(user.academyId, user.goalDuration || undefined, 3);
-            setTop3(data);
-        } catch (e) {
-            console.error('Failed to load ranking:', e);
-        }
-        setIsLoading(false);
-    }, [user]);
+    }, [academyId, loadRanking]);
 
     // 게스트 또는 학원 미소속이면 숨김
     if (!user?.academyId) return null;
