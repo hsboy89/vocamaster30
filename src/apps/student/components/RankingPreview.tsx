@@ -177,8 +177,7 @@ export function RankingPreview() {
                 )}
 
                 {/* 하단 */}
-                <div className="flex items-center justify-between mt-3 pt-2 border-t border-slate-100">
-                    <span className="text-[10px] text-slate-400">매월 초기화</span>
+                <div className="flex items-center justify-end mt-3 pt-2 border-t border-slate-100">
                     <span className="text-[10px] text-blue-500 font-semibold group-hover:text-blue-600 transition-colors flex items-center gap-1">
                         상세 보기
                         <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">

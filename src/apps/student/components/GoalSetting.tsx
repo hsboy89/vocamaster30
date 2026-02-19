@@ -173,26 +173,7 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
         onGoalChange?.(duration);
     };
 
-    const handleClearGoal = () => {
-        clearGoal();
-        setGoal(null);
-        onGoalChange?.(null);
 
-        // Sync clear to DB
-        if (user) {
-            supabase.from('users')
-                .update({
-                    goal_duration: null,
-                    goal_start_date: null,
-                    goal_level: null,
-                    goal_words_per_day: null,
-                })
-                .eq('id', user.id)
-                .then(({ error }) => {
-                    if (error) console.error('Failed to clear goal from DB', error);
-                });
-        }
-    };
 
     const handleResetProgress = async () => {
         if (confirm('모든 학습 기록이 초기화됩니다. 정말 다시 시작하시겠습니까?')) {
@@ -248,20 +229,14 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
                             <div className="flex items-center gap-3">
                                 <span className="text-2xl">🎯</span>
                                 <div>
-                                    <h3 className="font-bold text-lg">
+                                    <h3 className="font-bold text-lg text-white">
                                         {goalOption?.label} 목표 진행 중
                                     </h3>
-                                    <p className="text-white/80 text-sm">
+                                    <p className="text-white/90 text-sm font-medium">
                                         하루 {goal.wordsPerDay}단어 · D-{daysRemaining}
                                     </p>
                                 </div>
                             </div>
-                            <button
-                                onClick={handleClearGoal}
-                                className="text-white/60 hover:text-white/90 text-sm px-3 py-1 rounded-lg hover:bg-white/10 transition-all"
-                            >
-                                초기화
-                            </button>
                         </div>
 
                         {/* Progress Bar */}
@@ -271,7 +246,7 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
                                 style={{ width: `${progressPercent}%` }}
                             />
                         </div>
-                        <div className="flex justify-between text-xs text-white/70">
+                        <div className="flex justify-between text-xs text-white font-medium">
                             <span>{daysElapsed}일 경과</span>
                             <span>{progressPercent}% 달성</span>
                         </div>
