@@ -3,6 +3,7 @@ import { GoalDuration, GOAL_OPTIONS, Level, LEVEL_INFO, StudyGoal, StudyPlan } f
 import { createStudyPlan } from '../../../shared/utils/study-planner';
 import { getAllMemorizedWordIds, resetLevelProgress } from '../../../shared/services/storage';
 import { useAuthStore } from '../../../stores';
+import { useProgress } from '../../../shared/hooks';
 import { supabase } from '../../../shared/lib';
 
 const GOAL_STORAGE_KEY = 'vocamaster-study-goal';
@@ -45,20 +46,16 @@ function getDaysRemaining(startDate: string, duration: GoalDuration): number {
     return Math.max(0, diff);
 }
 
-function getDaysElapsed(startDate: string): number {
-    const start = new Date(startDate);
-    const now = new Date();
-    return Math.max(0, Math.ceil((now.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)));
-}
-
 export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
     const [goal, setGoal] = useState<StudyGoal | null>(null);
     const [isSettingGoal, setIsSettingGoal] = useState(false);
+    const [isChoosingNextRound, setIsChoosingNextRound] = useState(false);
     const [dailyCount, setDailyCount] = useState<number>(30); // 기본 30단어
     const [availableCount, setAvailableCount] = useState<number>(0);
     const [totalCount, setTotalCount] = useState<number>(0);
     const [pendingDuration, setPendingDuration] = useState<GoalDuration | null>(null); // 확인 팝업용
     const { user, updateUser } = useAuthStore();
+    const { getStatus } = useProgress();
 
     const DAILY_OPTIONS = [30, 50, 70, 100];
 
@@ -214,9 +211,127 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
     // 목표가 설정되어 있을 때
     if (goal) {
         const daysRemaining = getDaysRemaining(goal.startDate, goal.duration);
-        const daysElapsed = getDaysElapsed(goal.startDate);
-        const progressPercent = Math.min(100, Math.round((daysElapsed / goal.duration) * 100));
         const goalOption = GOAL_OPTIONS.find(o => o.duration === goal.duration);
+
+        // 실제 완료한 Day 수 체크 (날짜 기반이 아닌 실제 학습 완료 기준)
+        let completedDayCount = 0;
+        for (let d = 1; d <= goal.duration; d++) {
+            if (getStatus(level, d) === 'completed') {
+                completedDayCount++;
+            }
+        }
+        const isAllCompleted = completedDayCount >= goal.duration;
+        const progressPercent = Math.min(100, Math.round((completedDayCount / goal.duration) * 100));
+
+        // 🎉 목표 완료 — 다음 학습 시작 버튼
+        if (isAllCompleted) {
+            const handleStartNextRound = (nextDuration: GoalDuration) => {
+                setIsChoosingNextRound(false);
+                const memorized = getAllMemorizedWordIds(level);
+
+                // 기존 목표 클리어
+                clearGoal();
+
+                // 새 플랜 생성 (이미 외운 단어 제외)
+                const plan = createStudyPlan(level, nextDuration, memorized, dailyCount);
+                savePlan(plan);
+
+                const newGoal: StudyGoal = {
+                    duration: nextDuration,
+                    startDate: new Date().toISOString(),
+                    level,
+                    wordsPerDay: plan.wordsPerDay,
+                };
+                saveGoal(newGoal);
+
+                if (user) {
+                    updateUser({ goalDuration: nextDuration });
+                    supabase.from('users')
+                        .update({
+                            goal_duration: nextDuration,
+                            goal_start_date: newGoal.startDate,
+                            goal_level: level,
+                            goal_words_per_day: plan.wordsPerDay,
+                        })
+                        .eq('id', user.id)
+                        .then(({ error }) => {
+                            if (error) console.error('Failed to sync next round goal to DB', error);
+                        });
+                }
+
+                setGoal(newGoal);
+                onGoalChange?.(nextDuration);
+            };
+
+            return (
+                <div className="max-w-6xl mx-auto px-4 py-4">
+                    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 p-6 text-white shadow-xl">
+                        <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl animate-pulse" />
+                        <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full -ml-8 -mb-8 blur-xl" />
+
+                        <div className="relative z-10">
+                            <div className="flex items-center gap-3 mb-4">
+                                <span className="text-3xl">🎉</span>
+                                <div>
+                                    <h3 className="font-bold text-lg text-white">
+                                        {goalOption?.label} 목표 완료!
+                                    </h3>
+                                    <p className="text-white/90 text-sm font-medium">
+                                        {completedDayCount}일 모두 학습 완료 · 남은 단어 {availableCount}개
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* 완료 Progress Bar */}
+                            <div className="bg-white/20 rounded-full h-3 overflow-hidden mb-4">
+                                <div className="h-full bg-white rounded-full w-full" />
+                            </div>
+
+                            {availableCount > 0 ? (
+                                !isChoosingNextRound ? (
+                                    <button
+                                        onClick={() => setIsChoosingNextRound(true)}
+                                        className="w-full py-3 px-6 bg-white text-emerald-600 rounded-xl font-bold text-base hover:bg-emerald-50 hover:scale-[1.02] transition-all shadow-lg"
+                                    >
+                                        🚀 다음 학습 시작하기
+                                    </button>
+                                ) : (
+                                    <div className="space-y-3">
+                                        <p className="text-white/90 text-sm font-medium text-center">다음 학습 기간을 선택하세요</p>
+                                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                                            {GOAL_OPTIONS.map((option) => {
+                                                const targetTotal = Math.min(availableCount, option.duration * dailyCount);
+                                                if (targetTotal === 0) return null;
+                                                return (
+                                                    <button
+                                                        key={option.duration}
+                                                        onClick={() => handleStartNextRound(option.duration)}
+                                                        className="py-2.5 px-3 bg-white/15 hover:bg-white/25 backdrop-blur-sm rounded-xl text-center transition-all hover:scale-105 border border-white/20"
+                                                    >
+                                                        <p className="font-bold text-white text-sm">{option.label}</p>
+                                                        <p className="text-white/70 text-[10px]">{targetTotal}단어</p>
+                                                    </button>
+                                                );
+                                            })}
+                                        </div>
+                                        <button
+                                            onClick={() => setIsChoosingNextRound(false)}
+                                            className="w-full text-white/60 hover:text-white/90 text-xs py-1 transition-colors"
+                                        >
+                                            취소
+                                        </button>
+                                    </div>
+                                )
+                            ) : (
+                                <p className="text-white/90 text-sm text-center font-medium">
+                                    🏆 이 레벨의 모든 단어를 학습했습니다!
+                                </p>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            );
+        }
 
         return (
             <div className="max-w-6xl mx-auto px-4 py-4">
@@ -237,6 +352,10 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
                                     </p>
                                 </div>
                             </div>
+                            <div className="text-right">
+                                <p className="text-white font-bold text-lg">{completedDayCount}/{goal.duration}</p>
+                                <p className="text-white/70 text-[10px]">완료</p>
+                            </div>
                         </div>
 
                         {/* Progress Bar */}
@@ -247,7 +366,7 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
                             />
                         </div>
                         <div className="flex justify-between text-xs text-white font-medium">
-                            <span>{daysElapsed}일 경과</span>
+                            <span>{completedDayCount}일 완료</span>
                             <span>{progressPercent}% 달성</span>
                         </div>
                     </div>
