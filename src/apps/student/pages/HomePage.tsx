@@ -17,7 +17,7 @@ export function HomePage({ level, onDaySelect, isGuest, onLockedClick }: HomePag
     const { getCompletionRate, getStatus } = useProgress();
     const [showWrongNote, setShowWrongNote] = useState(false);
     const [wrongAnswers, setWrongAnswers] = useState<WrongAnswer[]>([]);
-    const [goalDays, setGoalDays] = useState<number | null>(null);
+    // const [goalDays, setGoalDays] = useState<number | null>(null);
 
     const handleOpenWrongNote = () => {
         const data = storage.getWrongAnswers();
