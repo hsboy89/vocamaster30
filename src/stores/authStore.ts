@@ -81,7 +81,7 @@ export const useAuthStore = create<AuthStore>()(
                         .select('*')
                         .eq('academy_code', code)
                         .eq('status', 'active') // 활성화된 학원만 조회
-                        .single();
+                        .maybeSingle();
 
                     if (error || !data) {
                         set({ isLoading: false });
@@ -125,7 +125,7 @@ export const useAuthStore = create<AuthStore>()(
                         .eq('academy_id', currentAcademy.id)
                         .eq('student_name', studentName)
                         .eq('role', 'student')
-                        .single();
+                        .maybeSingle();
 
                     if (fetchError || !existingUser) {
                         set({
@@ -282,7 +282,7 @@ export const useAuthStore = create<AuthStore>()(
                         .eq('academy_id', currentAcademy.id)
                         .eq('admin_id', adminId)
                         .eq('role', 'academy_admin')
-                        .single();
+                        .maybeSingle();
 
                     if (adminError || !academyAdmin) throw new Error('해당 학원에 등록된 관리자가 아닙니다.');
 

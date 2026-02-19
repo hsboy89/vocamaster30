@@ -91,7 +91,7 @@ export async function createAcademy(input: CreateAcademyInput): Promise<{ succes
         .from('academies')
         .select('id')
         .eq('academy_code', input.academyCode)
-        .single();
+        .maybeSingle();
 
     if (existing) {
         return { success: false, error: '이미 존재하는 학원 코드입니다.' };
@@ -286,7 +286,7 @@ export async function createAcademyAdmin(input: AcademyAdminInput): Promise<{ su
         .select('id')
         .eq('academy_id', input.academyId)
         .eq('admin_id', input.adminId)
-        .single();
+        .maybeSingle();
 
     if (existing) {
         return { success: false, error: '이미 존재하는 관리자 ID입니다.' };
