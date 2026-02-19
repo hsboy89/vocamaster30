@@ -5,9 +5,10 @@ import * as storage from '../services/storage';
 interface UseProgressReturn {
     progress: UserProgress[];
     getStatus: (level: Level, day: number) => StudyStatus;
-    setStatus: (level: Level, day: number, status: StudyStatus) => void;
-    addMemorizedWord: (level: Level, day: number, wordId: string, totalWords?: number) => void;
-    removeMemorizedWord: (level: Level, day: number, wordId: string) => void;
+    setStatus: (level: Level, day: number, status: StudyStatus) => Promise<void>;
+    addMemorizedWord: (level: Level, day: number, wordId: string, totalWords?: number) => Promise<void>;
+    removeMemorizedWord: (level: Level, day: number, wordId: string) => Promise<void>;
+    updateProgress: (level: Level, day: number, status: StudyStatus, memorizedWords: string[]) => Promise<void>;
     getCompletionRate: (level: Level) => number;
     isLoading: boolean;
 }
@@ -32,9 +33,9 @@ export function useProgress(): UseProgressReturn {
     );
 
     const setStatus = useCallback(
-        (level: Level, day: number, status: StudyStatus) => {
+        async (level: Level, day: number, status: StudyStatus) => {
             const existing = progress.find((p) => p.level === level && p.day === day);
-            storage.setProgress(level, day, status, existing?.memorizedWords || []);
+            await storage.setProgress(level, day, status, existing?.memorizedWords || []);
 
             setProgress((prev) => {
                 const newProgress = prev.filter((p) => !(p.level === level && p.day === day));
@@ -52,7 +53,7 @@ export function useProgress(): UseProgressReturn {
     );
 
     const addMemorizedWord = useCallback(
-        (level: Level, day: number, wordId: string, totalWords?: number) => {
+        async (level: Level, day: number, wordId: string, totalWords?: number) => {
             const existing = progress.find((p) => p.level === level && p.day === day);
             const currentMemorized = existing?.memorizedWords || [];
 
@@ -65,7 +66,7 @@ export function useProgress(): UseProgressReturn {
                     newStatus = 'completed';
                 }
 
-                storage.setProgress(level, day, newStatus, newMemorized);
+                await storage.setProgress(level, day, newStatus, newMemorized);
 
                 setProgress((prev) => {
                     const newProgress = prev.filter((p) => !(p.level === level && p.day === day));
@@ -84,13 +85,13 @@ export function useProgress(): UseProgressReturn {
     );
 
     const removeMemorizedWord = useCallback(
-        (level: Level, day: number, wordId: string) => {
+        async (level: Level, day: number, wordId: string) => {
             const existing = progress.find((p) => p.level === level && p.day === day);
             if (existing) {
                 const newMemorized = existing.memorizedWords.filter(id => id !== wordId);
                 const newStatus: StudyStatus = 'in-progress';
 
-                storage.setProgress(level, day, newStatus, newMemorized);
+                await storage.setProgress(level, day, newStatus, newMemorized);
 
                 setProgress((prev) => {
                     const newProgress = prev.filter((p) => !(p.level === level && p.day === day));
@@ -117,12 +118,32 @@ export function useProgress(): UseProgressReturn {
         [progress]
     );
 
+    const updateProgress = useCallback(
+        async (level: Level, day: number, status: StudyStatus, memorizedWords: string[]) => {
+            await storage.setProgress(level, day, status, memorizedWords);
+
+            setProgress((prev) => {
+                const newProgress = prev.filter((p) => !(p.level === level && p.day === day));
+                newProgress.push({
+                    level,
+                    day,
+                    status,
+                    memorizedWords,
+                    lastStudied: new Date().toISOString(),
+                });
+                return newProgress;
+            });
+        },
+        [progress]
+    );
+
     return {
         progress,
         getStatus,
         setStatus,
         addMemorizedWord,
         removeMemorizedWord,
+        updateProgress,
         getCompletionRate,
         isLoading,
     };

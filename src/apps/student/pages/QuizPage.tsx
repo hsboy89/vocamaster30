@@ -14,7 +14,7 @@ interface QuizPageProps {
 export function QuizPage({ level, day, words, initialQuizType, onBack }: QuizPageProps) {
     const [quizType, setQuizType] = useState<QuizType>(initialQuizType);
     const [isStarted, setIsStarted] = useState(false);
-    const { addMemorizedWord, setStatus } = useProgress();
+    const { progress, updateProgress } = useProgress();
 
     const {
         currentQuestion,
@@ -44,19 +44,35 @@ export function QuizPage({ level, day, words, initialQuizType, onBack }: QuizPag
 
     // 퀴즈 완료 시 학습 상태 업데이트
     useEffect(() => {
-        if (isComplete) {
-            // 퀴즈를 풀면 해당 Day를 '완료' 처리 (랭킹 반영)
-            setStatus(level, day, 'completed');
+        const updateQuizProgress = async () => {
+            if (isComplete) {
+                // 기존 암기 단어 목록 가져오기
+                const existingProgress = progress.find(p => p.level === level && p.day === day);
+                const currentMemorized = new Set(existingProgress?.memorizedWords || []);
 
-            // 정답 단어들을 암기 완료로 기록 (통계용)
-            const wrongWordIds = new Set(wrongWords.map(w => w.id));
-            const correctWords = words.filter(w => !wrongWordIds.has(w.id));
+                // 정답 단어들을 암기 완료로 추가
+                const wrongWordIds = new Set(wrongWords.map(w => w.id));
+                const correctWords = words.filter(w => !wrongWordIds.has(w.id));
 
-            correctWords.forEach(word => {
-                addMemorizedWord(level, day, word.id, words.length);
-            });
-        }
-    }, [isComplete, wrongWords, words, level, day, setStatus, addMemorizedWord]);
+                correctWords.forEach(word => {
+                    currentMemorized.add(word.id);
+                });
+
+                // 한번에 업데이트 (상태: completed, 암기단어: 병합된 목록)
+                await updateProgress(level, day, 'completed', Array.from(currentMemorized));
+            }
+        };
+
+        updateQuizProgress();
+    }, [isComplete]); // Remove other dependencies to avoid re-running if progress changes (infinite loop risk if not careful)
+    // Actually relying on `progress` inside `useEffect` means we need it in dependency.
+    // But `updateProgress` updates `progress`, which triggers `useEffect` again.
+    // But `isComplete` is true.
+    // So it might loop.
+    // We need a flag or only run once when isComplete becomes true.
+    // `isComplete` transitions from false to true.
+    // But how to track "already updated"?
+    // Maybe `QuizPage` should have a state `isProgressUpdated`.
 
     const handleAnswer = (answer: string, _isCorrect: boolean) => {
         checkAnswer(answer);

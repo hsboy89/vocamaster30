@@ -434,10 +434,10 @@ export function getAllProgress(): UserProgress[] {
     return getAllProgressLocal();
 }
 
-export function setProgress(level: Level, day: number, status: StudyStatus, memorizedWords: string[] = []): void {
+export async function setProgress(level: Level, day: number, status: StudyStatus, memorizedWords: string[] = []): Promise<void> {
     setProgressLocal(level, day, status, memorizedWords);
     // Also sync to cloud asynchronously
-    setProgressToCloud(level, day, status, memorizedWords);
+    await setProgressToCloud(level, day, status, memorizedWords);
 }
 
 export function getProgressByLevel(level: Level): UserProgress[] {

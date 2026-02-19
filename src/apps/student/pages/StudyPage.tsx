@@ -128,29 +128,29 @@ export function StudyPage({ level, day, category, onBack, onQuizStart }: StudyPa
         }
     };
 
-    const handleNext = () => {
+    const handleNext = async () => {
         if (currentIndex < words.length - 1) {
             // "Next(>)" = Confidence. Automatically mark current word as memorized.
             const currentWordId = words[currentIndex].id;
             if (!memorizedWordIds.has(currentWordId)) {
-                addMemorizedWord(level, day, currentWordId, words.length);
+                await addMemorizedWord(level, day, currentWordId, words.length);
                 setMemorizedWordIds(prev => new Set(Array.from(prev).concat(currentWordId)));
             }
             setCurrentIndex(currentIndex + 1);
         }
     };
 
-    const handleMemorized = () => {
+    const handleMemorized = async () => {
         const currentWordId = words[currentIndex].id;
         if (memorizedWordIds.has(currentWordId)) {
-            removeMemorizedWord(level, day, currentWordId);
+            await removeMemorizedWord(level, day, currentWordId);
             setMemorizedWordIds(prev => {
                 const next = new Set(prev);
                 next.delete(currentWordId);
                 return next;
             });
         } else {
-            addMemorizedWord(level, day, currentWordId, words.length);
+            await addMemorizedWord(level, day, currentWordId, words.length);
             setMemorizedWordIds(prev => new Set(Array.from(prev).concat(currentWordId)));
         }
     };
@@ -159,9 +159,9 @@ export function StudyPage({ level, day, category, onBack, onQuizStart }: StudyPa
         onQuizStart(shuffle(words), 'choice');
     };
 
-    const handleStudyComplete = () => {
+    const handleStudyComplete = async () => {
         // 학습완료 버튼 클릭 시 Day를 완료 처리하고 홈으로 돌아감
-        setStatus(level, day, 'completed');
+        await setStatus(level, day, 'completed');
         onBack();
     };
 
