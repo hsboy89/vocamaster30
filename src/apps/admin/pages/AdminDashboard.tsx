@@ -179,10 +179,22 @@ export function AdminDashboard() {
         }
     };
 
-    const filteredStudents = students.filter(student =>
-        student.studentName.includes(searchTerm) ||
-        student.academyName.includes(searchTerm)
-    );
+    const [showRiskOnly, setShowRiskOnly] = useState(false);
+
+    // ...
+
+    const handleRiskClick = () => {
+        setShowRiskOnly(prev => !prev);
+        // Optional: Scroll to list
+        document.getElementById('student-list')?.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    const filteredStudents = students.filter(student => {
+        const matchesSearch = student.studentName.includes(searchTerm) ||
+            student.academyName.includes(searchTerm);
+        const matchesRisk = showRiskOnly ? atRiskIds.has(student.id) : true;
+        return matchesSearch && matchesRisk;
+    });
 
     const formatLastLogin = (dateString: string | null) => {
         if (!dateString) return '접속 기록 없음';
@@ -278,7 +290,7 @@ export function AdminDashboard() {
                     <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm p-6 border border-gray-100 dark:border-white/5">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-sm text-gray-500 dark:text-slate-400 mb-1">오늘의 학습 성실도</p>
+                                <p className="text-sm text-gray-500 dark:text-slate-400 mb-1">오늘의 완료율</p>
                                 <p className="text-3xl font-bold text-gray-900 dark:text-white">
                                     {stats?.todayAttendance.active || 0}
                                     <span className="text-lg text-gray-400 dark:text-slate-500 font-normal ml-1">/ {stats?.todayAttendance.total || 0}</span>
@@ -292,26 +304,61 @@ export function AdminDashboard() {
                         </div>
                     </div>
 
-                    <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm p-6 border border-gray-100 dark:border-white/5">
-                        <div className="flex items-center justify-between">
-                            <div>
-                                <p className="text-sm text-gray-500 dark:text-slate-400 mb-1">누적 마스터 단어</p>
-                                <p className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">{(stats?.totalMastery || 0).toLocaleString()}</p>
-                            </div>
-                            <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-500/10 rounded-xl flex items-center justify-center">
-                                <svg className="w-6 h-6 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                                </svg>
-                            </div>
+                    <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm p-6 border border-gray-100 dark:border-white/5 relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                            <span className="text-6xl">🏆</span>
+                        </div>
+                        <div className="relative z-10">
+                            <p className="text-sm text-gray-500 dark:text-slate-400 mb-3 flex items-center justify-between">
+                                <span>이달의 단어왕 Top 3</span>
+                                <span className="text-xs bg-amber-100 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 px-2 py-0.5 rounded-full">
+                                    {new Date().getMonth() + 1}월
+                                </span>
+                            </p>
+
+                            {rankings.length > 0 ? (
+                                <div className="space-y-2">
+                                    {rankings.slice(0, 3).map((item, idx) => (
+                                        <div key={item.userId} className="flex items-center justify-between">
+                                            <div className="flex items-center gap-2">
+                                                <span className={`w-5 h-5 flex items-center justify-center rounded-full text-xs font-bold ${idx === 0 ? 'bg-amber-100 text-amber-600' :
+                                                        idx === 1 ? 'bg-gray-100 text-gray-600' :
+                                                            'bg-orange-50 text-orange-600'
+                                                    }`}>
+                                                    {idx + 1}
+                                                </span>
+                                                <span className={`text-sm font-medium ${idx === 0 ? 'text-gray-900 dark:text-white' : 'text-gray-600 dark:text-slate-300'}`}>
+                                                    {item.studentName}
+                                                </span>
+                                            </div>
+                                            <span className="text-xs font-bold text-blue-600 dark:text-blue-400">
+                                                {item.completedDays}일
+                                            </span>
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className="h-[72px] flex items-center justify-center text-gray-400 text-sm">
+                                    데이터 집계 중...
+                                </div>
+                            )}
                         </div>
                     </div>
 
-                    <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm p-6 border border-gray-100 dark:border-white/5 ring-2 ring-red-500/20">
+                    <div
+                        onClick={handleRiskClick}
+                        className={`bg-white dark:bg-slate-900 rounded-2xl shadow-sm p-6 border transition-all cursor-pointer hover:shadow-md ${showRiskOnly
+                            ? 'border-red-500 ring-2 ring-red-500/20'
+                            : 'border-gray-100 dark:border-white/5 hover:border-red-200 dark:hover:border-red-500/30'
+                            }`}
+                    >
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-sm text-gray-500 dark:text-slate-400 mb-1">중단 위험 학생</p>
                                 <p className="text-3xl font-bold text-red-600 dark:text-red-400">{stats?.atRiskCount || 0}명</p>
-                                <p className="text-xs text-red-400 dark:text-red-500/80 mt-1">3일 이상 미접속</p>
+                                <p className="text-xs text-red-400 dark:text-red-500/80 mt-1">
+                                    {showRiskOnly ? '필터링 해제 클릭' : '3일 이상 미접속 (클릭)'}
+                                </p>
                             </div>
                             <div className="w-12 h-12 bg-red-100 dark:bg-red-500/10 rounded-xl flex items-center justify-center">
                                 <svg className="w-6 h-6 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -542,7 +589,7 @@ export function AdminDashboard() {
                 </div>
 
                 {/* Student List */}
-                <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-100 dark:border-white/5">
+                <div id="student-list" className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-100 dark:border-white/5">
                     <div className="p-6 border-b border-gray-100 dark:border-white/5">
                         <div className="flex items-center justify-between gap-4 flex-wrap">
                             <h2 className="text-lg font-bold text-gray-900 dark:text-white">학생 목록</h2>
