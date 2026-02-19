@@ -8,6 +8,7 @@ import {
     createAcademy,
     updateAcademy,
     deleteAcademy,
+    updateAcademyAdminPassword,
     createAcademyAdmin,
     AcademyListItem,
     SuperAdminStats,
@@ -35,6 +36,7 @@ export function SuperAdminDashboard() {
     const [editAcademyCode, setEditAcademyCode] = useState('');
     const [editAcademyName, setEditAcademyName] = useState('');
     const [editAcademyStatus, setEditAcademyStatus] = useState<'active' | 'suspended' | 'trial'>('active');
+    const [editAcademyPassword, setEditAcademyPassword] = useState('');
     const [editError, setEditError] = useState<string | null>(null);
     const [isEditing, setIsEditing] = useState(false);
 
@@ -157,6 +159,7 @@ export function SuperAdminDashboard() {
         setEditAcademyCode(academy.academyCode);
         setEditAcademyName(academy.name);
         setEditAcademyStatus(academy.status);
+        setEditAcademyPassword('');
         setEditError(null);
         setShowEditModal(true);
     };
@@ -180,8 +183,23 @@ export function SuperAdminDashboard() {
         });
 
         if (result.success) {
+            // 비밀번호도 입력했다면 업데이트
+            if (editAcademyPassword.trim()) {
+                if (editAcademyPassword.trim().length < 4) {
+                    setEditError('비밀번호는 4자 이상이어야 합니다.');
+                    setIsEditing(false);
+                    return;
+                }
+                const pwResult = await updateAcademyAdminPassword(editAcademyId, editAcademyPassword.trim());
+                if (!pwResult.success) {
+                    setEditError(`학원 정보는 수정되었으나 비밀번호 변경에 실패했습니다: ${pwResult.error}`);
+                    setIsEditing(false);
+                    return;
+                }
+            }
             setShowEditModal(false);
             setEditAcademyId(null);
+            setEditAcademyPassword('');
             loadData();
         } else {
             setEditError(result.error || '학원 수정에 실패했습니다.');
@@ -654,6 +672,21 @@ export function SuperAdminDashboard() {
                                     <option value="trial">체험</option>
                                     <option value="suspended">정지</option>
                                 </select>
+                            </div>
+
+                            <div className="pt-4 border-t border-gray-100 dark:border-white/10">
+                                <label className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
+                                    관리자 비밀번호 초기화
+                                </label>
+                                <input
+                                    type="password"
+                                    value={editAcademyPassword}
+                                    onChange={(e) => setEditAcademyPassword(e.target.value)}
+                                    placeholder="새 비밀번호 (4자 이상)"
+                                    className="w-full px-4 py-3.5 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white dark:placeholder-slate-500"
+                                    disabled={isEditing}
+                                />
+                                <p className="mt-1 text-xs text-gray-500 dark:text-slate-500">입력 시에만 비밀번호가 변경됩니다.</p>
                             </div>
 
                             {editError && (

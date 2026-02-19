@@ -160,6 +160,36 @@ export async function updateAcademy(academyId: string, input: UpdateAcademyInput
     return { success: true };
 }
 
+// 학원 관리자 비밀번호 초기화
+export async function updateAcademyAdminPassword(academyId: string, newPassword: string): Promise<{ success: boolean; error?: string }> {
+    // 해당 학원의 관리자 계정 조회 (기본 관리자)
+    const { data: adminUser, error: findError } = await supabase
+        .from('users')
+        .select('id')
+        .eq('academy_id', academyId)
+        .eq('role', 'academy_admin')
+        .limit(1)
+        .single();
+
+    if (findError || !adminUser) {
+        console.error('Failed to find academy admin:', findError);
+        return { success: false, error: '관리자 계정을 찾을 수 없습니다.' };
+    }
+
+    // 비밀번호 업데이트
+    const { error: updateError } = await supabase
+        .from('users')
+        .update({ password_hash: newPassword })
+        .eq('id', adminUser.id);
+
+    if (updateError) {
+        console.error('Failed to update admin password:', updateError);
+        return { success: false, error: updateError.message };
+    }
+
+    return { success: true };
+}
+
 // 학원 삭제
 export async function deleteAcademy(academyId: string): Promise<{ success: boolean; error?: string }> {
     // 먼저 해당 학원의 모든 사용자 삭제

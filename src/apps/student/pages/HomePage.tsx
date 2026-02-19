@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { Level, LEVEL_INFO, WrongAnswer } from '../../../shared/types';
-import { DayGrid, GoalSetting /*, RankingPreview */ } from '../components';
+import { DayGrid, /* GoalSetting, RankingPreview */ } from '../components';
 import { WrongAnswerNote } from '../../../shared/components';
 import { useProgress } from '../../../shared/hooks';
 import * as storage from '../../../shared/services/storage';
@@ -136,8 +136,8 @@ export function HomePage({ level, onDaySelect, isGuest, onLockedClick }: HomePag
                 </div>
             </section>
 
-            {/* 단기 목표 설정 */}
-            <GoalSetting level={level} onGoalChange={(days) => setGoalDays(days)} />
+            {/* 단기 목표 설정 - 무한 루프 원인 의심으로 임시 비활성화 */}
+            {/* <GoalSetting level={level} onGoalChange={(days) => setGoalDays(days)} /> */}
 
             {/* 기존 30일 Day Grid (하단에 유지) */}
             <div className="border-t border-gray-100 mt-4">
