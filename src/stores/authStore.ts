@@ -338,6 +338,10 @@ export const useAuthStore = create<AuthStore>()(
             },
 
             setLoading: (loading: boolean) => set({ isLoading: loading }),
+            setUser: (user: User | null) => {
+                console.warn('👤 AuthStore: setUser called', user);
+                set({ user });
+            },
             setError: (error: string | null) => set({ error }),
 
             checkSession: () => {
@@ -348,6 +352,7 @@ export const useAuthStore = create<AuthStore>()(
             },
 
             updateUser: (updates: Partial<User>) => {
+                console.warn('📝 AuthStore: updateUser called', updates);
                 const { user } = get();
                 if (!user) return;
 

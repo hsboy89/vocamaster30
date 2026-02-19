@@ -191,6 +191,10 @@ function AppRouter() {
 }
 
 function App() {
+  useEffect(() => {
+    console.warn('🚀 App: Mounted');
+    return () => console.warn('👋 App: Unmounted');
+  }, []);
   return (
     <BrowserRouter>
       <AppRouter />

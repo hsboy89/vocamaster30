@@ -110,6 +110,15 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [level, user?.goalStartDate, user?.goalLevel, user?.goalDuration, user?.goalWordsPerDay]);
 
+    // ------------------------------------------------------------------------
+    // Effects
+    // ------------------------------------------------------------------------
+
+    // 디버깅: 렌더링 추적
+    useEffect(() => {
+        console.warn('🎯 GoalSetting: Rendered', { userGoal: user?.goalDuration, localGoal: goal?.duration });
+    });
+
     // authStore와 local state(goal) 동기화 (새로고침/재진입 시) - 제거됨 (무한루프 원인)
     // useEffect(() => {
     //     if (goal && user && user.goalDuration !== goal.duration) {
