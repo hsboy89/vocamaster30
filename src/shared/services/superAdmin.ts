@@ -161,7 +161,6 @@ export async function updateAcademy(academyId: string, input: UpdateAcademyInput
 }
 
 // 학원 관리자 비밀번호 초기화
-// 학원 관리자 비밀번호 초기화
 export async function updateAcademyAdminPassword(academyId: string, newPassword: string): Promise<{ success: boolean; error?: string }> {
     console.log(`Attempting password reset for academy: ${academyId}`);
 
