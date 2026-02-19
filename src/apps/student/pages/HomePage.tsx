@@ -119,8 +119,8 @@ export function HomePage({ level, onDaySelect, isGuest, onLockedClick }: HomePag
                                     <p className="text-xs font-medium text-slate-500">진도율</p>
                                 </div>
                             </div>
-                            {/* 랭킹 프리뷰 (로그인 사용자만) */}
-                            {!isGuest && <RankingPreview />}
+                            {/* 랭킹 프리뷰 (로그인 사용자만) - 긴급 비활성화 (무한 루프 원인 의심) */}
+                            {/* {!isGuest && <RankingPreview />} */}
                         </div>
                     </div>
 
