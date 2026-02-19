@@ -694,9 +694,14 @@ export async function getRankingByGoalPlan(
         quizzes?.forEach(q => {
             if (q.total_questions > 0) {
                 let correctCount = q.correct_answers;
+
+                // 레거시 데이터 호환: 이전에 score(=correctCount*5)가 correct_answers로 저장된 경우
                 if (correctCount > q.total_questions) {
                     correctCount = Math.round(correctCount / 5);
                 }
+                // 최대값 제한 (정답 수가 총 문제 수를 초과 불가)
+                correctCount = Math.min(correctCount, q.total_questions);
+
                 const score = (correctCount / q.total_questions) * 100;
 
                 const existing = scoreMap.get(q.user_id) || { total: 0, count: 0 };

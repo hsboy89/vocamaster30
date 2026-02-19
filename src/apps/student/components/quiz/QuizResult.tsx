@@ -90,7 +90,7 @@ export function QuizResult({
                 {/* Stats */}
                 <div className="grid grid-cols-2 gap-4 text-sm">
                     <div className="bg-white rounded-lg p-3">
-                        <p className="text-green-500 font-semibold text-lg">{score}문제</p>
+                        <p className="text-green-500 font-semibold text-lg">{totalQuestions - wrongCount}문제</p>
                         <p className="text-gray-500">정답 ({totalQuestions}문제 중)</p>
                     </div>
                     <div className="bg-white rounded-lg p-3">

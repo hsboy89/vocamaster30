@@ -179,7 +179,7 @@ export function QuizPage({ level, day, words, initialQuizType, onBack }: QuizPag
                             level,
                             day,
                             totalQuestions,
-                            correctAnswers: Math.round(score / 5),
+                            correctAnswers: totalQuestions - wrongWords.length,
                             wrongWordIds: wrongWords.map(w => w.id),
                             completedAt: new Date().toISOString()
                         }}
