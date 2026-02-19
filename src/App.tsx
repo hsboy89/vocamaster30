@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 // Shared Types & Components
 import { Level, Word, QuizType, Category } from './shared/types';
 import { Header, LoginPage, ProtectedRoute } from './shared/components';
 import { AdminLoginLayout } from './shared/components/layout/AdminLoginLayout';
 import { StudentLoginModal } from './shared/components/auth/StudentLoginModal';
+import { ErrorBoundary } from './shared/components/common/ErrorBoundary';
 import { useAuthStore } from './stores';
 // Apps
 import { HomePage, StudyPage, QuizPage } from './apps/student/pages';
@@ -17,6 +18,43 @@ type StudentView = 'home' | 'study' | 'quiz';
 interface QuizState {
   words: Word[];
   quizType: QuizType;
+}
+
+/**
+ * 라우트 세션 가드 — URL과 세션 역할이 맞지 않으면 자동 로그아웃
+ * 예: super_admin 세션으로 /student 접속 시 → 자동 로그아웃
+ */
+function useRouteSessionGuard() {
+  const location = useLocation();
+  const { user, logout } = useAuthStore();
+
+  useEffect(() => {
+    if (!user) return;
+
+    const path = location.pathname;
+    const role = user.role;
+
+    // 학생 페이지에 관리자 세션이 남아있으면 강제 로그아웃
+    if (path.startsWith('/student') && role !== 'student') {
+      console.warn(`🚫 Route guard: "${role}" session on student page → auto logout`);
+      logout();
+      return;
+    }
+
+    // 관리자 페이지에 학생 세션이 남아있으면 강제 로그아웃
+    if (path.startsWith('/admin') && role === 'student') {
+      console.warn(`🚫 Route guard: "${role}" session on admin page → auto logout`);
+      logout();
+      return;
+    }
+
+    // 수퍼관리자 페이지에 학생/관리자 세션이 남아있으면 강제 로그아웃
+    if (path.startsWith('/super-admin') && role !== 'super_admin') {
+      console.warn(`🚫 Route guard: "${role}" session on super-admin page → auto logout`);
+      logout();
+      return;
+    }
+  }, [location.pathname, user?.role]);
 }
 
 // Student App Component
@@ -33,15 +71,7 @@ function StudentApp() {
   const { user, logout } = useAuthStore();
   const isGuest = !user;
 
-  // 학생 페이지에 관리자 세션이 남아있으면 강제 로그아웃
-  useEffect(() => {
-    if (user && user.role !== 'student') {
-      console.warn(`🚫 Student page: forcing logout for non-student role "${user.role}"`);
-      logout();
-    }
-  }, []);
-
-  // Sync local quiz results when user logs in
+  // Sync local quiz results when user logs in (학생만)
   useEffect(() => {
     if (user && user.role === 'student') {
       import('./shared/services/storage').then(({ syncLocalQuizResultsToCloud }) => {
@@ -137,6 +167,9 @@ function StudentApp() {
 
 // Root Router Component
 function AppRouter() {
+  // 모든 라우트에서 세션 역할 충돌 방지
+  useRouteSessionGuard();
+
   return (
     <Routes>
       {/* Redirect root to student */}
@@ -204,10 +237,13 @@ function App() {
     return () => console.warn('👋 App: Unmounted');
   }, []);
   return (
-    <BrowserRouter>
-      <AppRouter />
-    </BrowserRouter>
+    <ErrorBoundary>
+      <BrowserRouter>
+        <AppRouter />
+      </BrowserRouter>
+    </ErrorBoundary>
   );
 }
 
 export default App;
+
