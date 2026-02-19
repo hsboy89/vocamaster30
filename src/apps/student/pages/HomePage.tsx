@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { Level, LEVEL_INFO, WrongAnswer } from '../../../shared/types';
-import { DayGrid, GoalSetting, RankingPreview } from '../components';
+import { DayGrid, GoalSetting /*, RankingPreview */ } from '../components';
 import { WrongAnswerNote } from '../../../shared/components';
 import { useProgress } from '../../../shared/hooks';
 import * as storage from '../../../shared/services/storage';
