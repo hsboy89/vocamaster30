@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { Level, LEVEL_INFO, WrongAnswer } from '../../../shared/types';
-import { DayGrid, /* GoalSetting, RankingPreview */ } from '../components';
+import { DayGrid, GoalSetting, RankingPreview } from '../components';
 import { WrongAnswerNote } from '../../../shared/components';
 import { useProgress } from '../../../shared/hooks';
 import * as storage from '../../../shared/services/storage';
@@ -17,7 +17,7 @@ export function HomePage({ level, onDaySelect, isGuest, onLockedClick }: HomePag
     const { getCompletionRate, getStatus } = useProgress();
     const [showWrongNote, setShowWrongNote] = useState(false);
     const [wrongAnswers, setWrongAnswers] = useState<WrongAnswer[]>([]);
-    // const [goalDays, setGoalDays] = useState<number | null>(null);
+    const [goalDays, setGoalDays] = useState<number | null>(null);
 
     const handleOpenWrongNote = () => {
         const data = storage.getWrongAnswers();
@@ -119,8 +119,8 @@ export function HomePage({ level, onDaySelect, isGuest, onLockedClick }: HomePag
                                     <p className="text-xs font-medium text-slate-500">진도율</p>
                                 </div>
                             </div>
-                            {/* 랭킹 프리뷰 (로그인 사용자만) - 긴급 비활성화 (무한 루프 원인 의심) */}
-                            {/* {!isGuest && <RankingPreview />} */}
+                            {/* 랭킹 프리뷰 (로그인 사용자만) */}
+                            {!isGuest && <RankingPreview />}
                         </div>
                     </div>
 
@@ -136,16 +136,15 @@ export function HomePage({ level, onDaySelect, isGuest, onLockedClick }: HomePag
                 </div>
             </section>
 
-            {/* 단기 목표 설정 - 무한 루프 원인 의심으로 임시 비활성화 */}
-            {/* <GoalSetting level={level} onGoalChange={(days) => setGoalDays(days)} /> */}
+            {/* 단기 목표 설정 */}
+            <GoalSetting level={level} onGoalChange={(days) => setGoalDays(days)} />
 
             {/* 기존 30일 Day Grid (하단에 유지) */}
             <div className="border-t border-gray-100 mt-4">
                 <div className="max-w-6xl mx-auto px-4 pt-6 pb-2">
                     <h2 className="text-xl font-bold text-gray-900 mb-1">📅 일별 학습</h2>
                     <p className="text-sm text-gray-500 mb-4">
-                        {/* {goalDays ? `${goalDays}일 목표 학습` : '30일 과정으로 체계적으로 학습하세요'} */}
-                        30일 과정으로 체계적으로 학습하세요
+                        {goalDays ? `${goalDays}일 목표 학습` : '30일 과정으로 체계적으로 학습하세요'}
                     </p>
                 </div>
                 <DayGrid
@@ -154,7 +153,7 @@ export function HomePage({ level, onDaySelect, isGuest, onLockedClick }: HomePag
                     onOpenWrongNote={handleOpenWrongNote}
                     isGuest={isGuest}
                     onLockedClick={onLockedClick}
-                    maxDays={30} // goalDays || 30
+                    maxDays={goalDays || 30}
                 />
             </div>
         </div>
