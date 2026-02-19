@@ -36,7 +36,7 @@ export async function getProgressFromCloud(level: Level, day: number): Promise<U
             .eq('user_id', userId)
             .eq('level', level)
             .eq('day', day)
-            .single();
+            .maybeSingle();
 
         if (error && error.code !== 'PGRST116') {
             console.error('Failed to get progress from cloud:', error);
@@ -170,7 +170,7 @@ export async function addWrongAnswerToCloud(word: Word, level: Level, day: numbe
             .select('wrong_count')
             .eq('user_id', userId)
             .eq('word_id', word.id)
-            .single();
+            .maybeSingle();
 
         if (existing) {
             // Update wrong count
