@@ -101,14 +101,12 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [level, user?.goalStartDate, user?.goalLevel, user?.goalDuration, user?.goalWordsPerDay]);
 
-    // authStore와 local state(goal) 동기화 (새로고침/재진입 시)
-    const userGoalDuration = user?.goalDuration;
-    useEffect(() => {
-        if (goal && userGoalDuration !== goal.duration) {
-            updateUser({ goalDuration: goal.duration });
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [goal?.duration]);
+    // authStore와 local state(goal) 동기화 (새로고침/재진입 시) - 제거됨 (무한루프 원인)
+    // useEffect(() => {
+    //     if (goal && user && user.goalDuration !== goal.duration) {
+    //         updateUser({ goalDuration: goal.duration });
+    //     }
+    // }, [goal, user, updateUser]);
 
     const handleConfirmGoal = (duration: GoalDuration) => {
         // 선택 전 확인 팝업 표시
