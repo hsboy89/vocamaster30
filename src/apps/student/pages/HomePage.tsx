@@ -144,7 +144,8 @@ export function HomePage({ level, onDaySelect, isGuest, onLockedClick }: HomePag
                 <div className="max-w-6xl mx-auto px-4 pt-6 pb-2">
                     <h2 className="text-xl font-bold text-gray-900 mb-1">📅 일별 학습</h2>
                     <p className="text-sm text-gray-500 mb-4">
-                        {goalDays ? `${goalDays}일 목표 학습` : '30일 과정으로 체계적으로 학습하세요'}
+                        {/* {goalDays ? `${goalDays}일 목표 학습` : '30일 과정으로 체계적으로 학습하세요'} */}
+                        30일 과정으로 체계적으로 학습하세요
                     </p>
                 </div>
                 <DayGrid
@@ -153,7 +154,7 @@ export function HomePage({ level, onDaySelect, isGuest, onLockedClick }: HomePag
                     onOpenWrongNote={handleOpenWrongNote}
                     isGuest={isGuest}
                     onLockedClick={onLockedClick}
-                    maxDays={goalDays || 30}
+                    maxDays={30} // goalDays || 30
                 />
             </div>
         </div>
