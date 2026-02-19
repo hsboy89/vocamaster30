@@ -154,7 +154,21 @@ export const useAuthStore = create<AuthStore>()(
                         }
                     }
 
-                    // 3. 마지막 로그인 시간 업데이트
+                    // 3. 사용자 전환 감지 → 이전 사용자의 로컬 데이터 클리어
+                    const previousUserId = localStorage.getItem('vocamaster-last-user-id');
+                    if (previousUserId && previousUserId !== existingUser.id) {
+                        console.log(`User switched: ${previousUserId} → ${existingUser.id}, clearing local data`);
+                        // 학생별 학습 데이터 클리어
+                        localStorage.removeItem('vocamaster_progress');
+                        localStorage.removeItem('vocamaster_wrong_answers');
+                        localStorage.removeItem('vocamaster_quiz_results');
+                        localStorage.removeItem('vocamaster_settings');
+                        localStorage.removeItem('vocamaster-study-goal');
+                        localStorage.removeItem('vocamaster-study-plan');
+                    }
+                    localStorage.setItem('vocamaster-last-user-id', existingUser.id);
+
+                    // 4. 마지막 로그인 시간 업데이트
                     await supabase
                         .from('users')
                         .update({ last_login_at: new Date().toISOString() })
