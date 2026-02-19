@@ -33,9 +33,17 @@ function StudentApp() {
   const { user, logout } = useAuthStore();
   const isGuest = !user;
 
+  // 학생 페이지에 관리자 세션이 남아있으면 강제 로그아웃
+  useEffect(() => {
+    if (user && user.role !== 'student') {
+      console.warn(`🚫 Student page: forcing logout for non-student role "${user.role}"`);
+      logout();
+    }
+  }, []);
+
   // Sync local quiz results when user logs in
   useEffect(() => {
-    if (user) {
+    if (user && user.role === 'student') {
       import('./shared/services/storage').then(({ syncLocalQuizResultsToCloud }) => {
         syncLocalQuizResultsToCloud();
       });
