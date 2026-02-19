@@ -162,19 +162,20 @@ export async function updateAcademy(academyId: string, input: UpdateAcademyInput
 
 // 학원 관리자 비밀번호 초기화
 export async function updateAcademyAdminPassword(academyId: string, newPassword: string): Promise<{ success: boolean; error?: string }> {
-    // 해당 학원의 관리자 계정 조회 (기본 관리자)
-    const { data: adminUser, error: findError } = await supabase
+    // 해당 학원의 관리자 계정 조회 (기본 관리자 또는 레거시 관리자)
+    const { data: adminUsers, error: findError } = await supabase
         .from('users')
         .select('id')
         .eq('academy_id', academyId)
-        .eq('role', 'academy_admin')
-        .limit(1)
-        .single();
+        .in('role', ['academy_admin', 'admin'])
+        .limit(1);
 
-    if (findError || !adminUser) {
+    if (findError || !adminUsers || adminUsers.length === 0) {
         console.error('Failed to find academy admin:', findError);
         return { success: false, error: '관리자 계정을 찾을 수 없습니다.' };
     }
+
+    const adminUser = adminUsers[0];
 
     // 비밀번호 업데이트
     const { error: updateError } = await supabase
