@@ -23,24 +23,22 @@ export function RankingDetailModal({ onClose }: RankingDetailModalProps) {
     const [filter, setFilter] = useState<FilterOption>((user?.goalDuration as FilterOption) || 30);
 
     const currentMonth = new Date().getMonth() + 1;
+    const academyId = user?.academyId;
 
     useEffect(() => {
-        loadRanking();
-    }, [filter, user]);
-
-    const loadRanking = async () => {
-        if (!user) return;
-        setIsLoading(true);
-        try {
-            // 전체 탭이 없어졌으므로 filter값 그대로 사용
-            const goalDuration = filter;
-            const data = await getRankingByGoalPlan(user.academyId, goalDuration, 10);
-            setRankings(data);
-        } catch (e) {
-            console.error('Failed to load ranking:', e);
-        }
-        setIsLoading(false);
-    };
+        if (!academyId) return;
+        const load = async () => {
+            setIsLoading(true);
+            try {
+                const data = await getRankingByGoalPlan(academyId, filter, 10);
+                setRankings(data);
+            } catch (e) {
+                console.error('Failed to load ranking:', e);
+            }
+            setIsLoading(false);
+        };
+        load();
+    }, [filter, academyId]);
 
     return (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4" onClick={onClose}>
