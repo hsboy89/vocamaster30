@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { Word, Level, QuizType, LEVEL_INFO } from '../../../shared/types';
 import { useQuiz, useProgress } from '../../../shared/hooks';
 import { QuizChoice, QuizSpelling, QuizResult } from '../components';
@@ -43,9 +43,14 @@ export function QuizPage({ level, day, words, initialQuizType, onBack }: QuizPag
     }, [initialQuizType, words, handleStart]);
 
     // 퀴즈 완료 시 학습 상태 업데이트
+    const progressUpdatePromise = useRef<Promise<void> | null>(null);
+    const didSave = useRef(false);
+
     useEffect(() => {
-        const updateQuizProgress = async () => {
-            if (isComplete) {
+        if (isComplete && !didSave.current) {
+            didSave.current = true;
+
+            const updateQuizProgress = async () => {
                 // 기존 암기 단어 목록 가져오기
                 const existingProgress = progress.find(p => p.level === level && p.day === day);
                 const currentMemorized = new Set(existingProgress?.memorizedWords || []);
@@ -60,19 +65,13 @@ export function QuizPage({ level, day, words, initialQuizType, onBack }: QuizPag
 
                 // 한번에 업데이트 (상태: completed, 암기단어: 병합된 목록)
                 await updateProgress(level, day, 'completed', Array.from(currentMemorized));
-            }
-        };
+            };
 
-        updateQuizProgress();
-    }, [isComplete]); // Remove other dependencies to avoid re-running if progress changes (infinite loop risk if not careful)
-    // Actually relying on `progress` inside `useEffect` means we need it in dependency.
-    // But `updateProgress` updates `progress`, which triggers `useEffect` again.
-    // But `isComplete` is true.
-    // So it might loop.
-    // We need a flag or only run once when isComplete becomes true.
-    // `isComplete` transitions from false to true.
-    // But how to track "already updated"?
-    // Maybe `QuizPage` should have a state `isProgressUpdated`.
+            progressUpdatePromise.current = updateQuizProgress();
+        }
+    }, [isComplete, level, day, progress, updateProgress, words, wrongWords]);
+
+
 
     const handleAnswer = (answer: string, _isCorrect: boolean) => {
         checkAnswer(answer);
@@ -93,7 +92,14 @@ export function QuizPage({ level, day, words, initialQuizType, onBack }: QuizPag
     };
 
     const handleClose = async () => {
+        // 1. 퀴즈 결과 저장 (Quiz History)
         await saveResult(level, day);
+
+        // 2. 학습 진도 저장 완료 대기 (Student Progress)
+        if (progressUpdatePromise.current) {
+            await progressUpdatePromise.current;
+        }
+
         onBack();
     };
 
