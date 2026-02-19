@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { GoalDuration, GOAL_OPTIONS, Level, LEVEL_INFO, StudyGoal, StudyPlan } from '../../../shared/types';
 import { createStudyPlan } from '../../../shared/utils/study-planner';
 import { getAllMemorizedWordIds, resetLevelProgress } from '../../../shared/services/storage';
@@ -62,6 +62,8 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
 
     const DAILY_OPTIONS = [30, 50, 70, 100];
 
+    const lastNotifiedDuration = useRef<number | null | undefined>(undefined);
+
     useEffect(() => {
         const loadInfo = () => {
             const memorized = getAllMemorizedWordIds(level);
@@ -82,17 +84,24 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
                 saveGoal(stored); // 로컬에도 저장
             }
 
+            const notifyChange = (duration: number | null) => {
+                if (lastNotifiedDuration.current !== duration) {
+                    lastNotifiedDuration.current = duration;
+                    onGoalChange?.(duration);
+                }
+            };
+
             if (stored && stored.level === level) {
                 const remaining = getDaysRemaining(stored.startDate, stored.duration);
                 if (remaining > 0) {
                     setGoal(stored);
-                    onGoalChange?.(stored.duration);
+                    notifyChange(stored.duration);
                 } else {
                     clearGoal();
-                    onGoalChange?.(null);
+                    notifyChange(null);
                 }
             } else {
-                onGoalChange?.(null);
+                notifyChange(null);
             }
         };
 

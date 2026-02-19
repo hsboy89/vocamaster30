@@ -15,43 +15,62 @@ export function RankingPreview() {
 
     const currentMonth = new Date().getMonth() + 1;
 
-    // 안정적인 primitive 값만 의존성으로 사용 (객체 참조 변경으로 인한 무한루프 방지)
+    // 안정적인 primitive 값만 의존성으로 사용
     const academyId = user?.academyId;
     const goalDuration = user?.goalDuration;
 
-    const loadRanking = useCallback(async () => {
-        if (!academyId || isLoadingRef.current) return;
+    // 중복 호출 방지 ref
+    const lastFetchKey = useRef<string>("");
+
+    const loadRanking = useCallback(async (force = false) => {
+        if (!academyId) return;
+
+        // 이미 로딩 중이면 스킵
+        if (isLoadingRef.current) return;
+
+        // 동일한 조건으로 이미 조회했으면 스킵 (강제 새로고침 제외)
+        const currentKey = `${academyId}-${goalDuration || 'all'}`;
+        if (!force && lastFetchKey.current === currentKey) return;
+
         isLoadingRef.current = true;
         setIsLoading(true);
+        lastFetchKey.current = currentKey;
+
         try {
             const data = await getRankingByGoalPlan(academyId, goalDuration || undefined, 3);
             setTop3(data);
         } catch (e) {
             console.error('Failed to load ranking:', e);
+            // 에러 시 키 초기화하여 재시도 허용할지 결정 (여기선 루프 방지를 위해 유지)
+        } finally {
+            setIsLoading(false);
+            isLoadingRef.current = false;
         }
-        setIsLoading(false);
-        isLoadingRef.current = false;
     }, [academyId, goalDuration]);
 
     useEffect(() => {
+        // 컴포넌트 마운트/업데이트 시 데이터 로드
         if (academyId) {
             loadRanking();
         }
     }, [academyId, loadRanking]);
 
-    // 페이지 포커스 시 자동 새로고침 (퀴즈 후 돌아왔을 때)
+    // 페이지 포커스 시 자동 새로고침 (디바운스 적용)
     useEffect(() => {
+        let timeoutId: ReturnType<typeof setTimeout>;
+
         const handleFocus = () => {
-            if (academyId) loadRanking();
+            // 포커스 이벤트가 빈번하게 발생할 경우를 대비해 디바운스
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+                if (academyId) loadRanking(true); // 포커스 시엔 강제 갱신
+            }, 1000);
         };
-        const handleVisibility = () => {
-            if (!document.hidden && academyId) loadRanking();
-        };
+
         window.addEventListener('focus', handleFocus);
-        document.addEventListener('visibilitychange', handleVisibility);
         return () => {
             window.removeEventListener('focus', handleFocus);
-            document.removeEventListener('visibilitychange', handleVisibility);
+            clearTimeout(timeoutId);
         };
     }, [academyId, loadRanking]);
 
