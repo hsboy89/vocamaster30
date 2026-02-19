@@ -40,7 +40,7 @@ function StudentApp() {
         syncLocalQuizResultsToCloud();
       });
     }
-  }, [user]);
+  }, [user?.id]);
 
   const handleLevelChange = (level: Level) => {
     setCurrentLevel(level);

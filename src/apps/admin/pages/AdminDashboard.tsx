@@ -56,13 +56,15 @@ export function AdminDashboard() {
         if (user) {
             loadDashboardData();
         }
-    }, [user]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user?.academyId]);
 
     useEffect(() => {
         if (user) {
             loadDayProgress();
         }
-    }, [selectedLevel, user]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [selectedLevel, user?.academyId]);
 
     const loadDashboardData = async () => {
         if (!user) return;
@@ -100,7 +102,8 @@ export function AdminDashboard() {
 
     useEffect(() => {
         if (user) loadRanking();
-    }, [rankingFilter, user]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [rankingFilter, user?.academyId]);
 
     const loadDayProgress = async () => {
         if (!user) return;
@@ -322,8 +325,8 @@ export function AdminDashboard() {
                                         <div key={item.userId} className="flex items-center justify-between">
                                             <div className="flex items-center gap-2">
                                                 <span className={`w-5 h-5 flex items-center justify-center rounded-full text-xs font-bold ${idx === 0 ? 'bg-amber-100 text-amber-600' :
-                                                        idx === 1 ? 'bg-gray-100 text-gray-600' :
-                                                            'bg-orange-50 text-orange-600'
+                                                    idx === 1 ? 'bg-gray-100 text-gray-600' :
+                                                        'bg-orange-50 text-orange-600'
                                                     }`}>
                                                     {idx + 1}
                                                 </span>
