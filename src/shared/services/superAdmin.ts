@@ -162,26 +162,64 @@ export async function updateAcademy(academyId: string, input: UpdateAcademyInput
 
 // 학원 관리자 비밀번호 초기화
 export async function updateAcademyAdminPassword(academyId: string, newPassword: string): Promise<{ success: boolean; error?: string }> {
-    // 해당 학원의 관리자 계정 조회 (기본 관리자 또는 레거시 관리자)
-    const { data: adminUsers, error: findError } = await supabase
+    console.log(`Attempting password reset for academy: ${academyId}`);
+
+    // [Step 1] 해당 학원의 관리자 계정 조회 (ID로 직접 조회)
+    let { data: adminUsers, error: findError } = await supabase
         .from('users')
-        .select('id')
+        .select('id, admin_id, student_name')
         .eq('academy_id', academyId)
         .in('role', ['academy_admin', 'admin'])
         .limit(1);
 
-    if (findError || !adminUsers || adminUsers.length === 0) {
-        console.error('Failed to find academy admin:', findError);
+    if (findError) {
+        console.error('Database error during admin lookup:', findError);
+        return { success: false, error: findError.message };
+    }
+
+    let adminIdToUpdate = adminUsers?.[0]?.id;
+
+    // [Step 2] 만약 ID로 못 찾았다면, 학원 코드로 조회 (레거시 데이터 대응)
+    if (!adminIdToUpdate) {
+        console.log('Admin not found by academy_id. Trying fallback search by academy code...');
+
+        // 학원 정보 조회하여 코드 가져오기
+        const { data: academy, error: academyError } = await supabase
+            .from('academies')
+            .select('academy_code, name')
+            .eq('id', academyId)
+            .single();
+
+        if (academyError || !academy) {
+            console.error('Failed to find academy during password reset fallback:', academyError);
+            return { success: false, error: '학원 정보를 찾을 수 없습니다.' };
+        }
+
+        console.log(`Searching for admin with admin_id: ${academy.academy_code}`);
+
+        // 학원 코드를 admin_id로 가진 관리자 조회
+        const { data: fallbackUsers } = await supabase
+            .from('users')
+            .select('id')
+            .eq('admin_id', academy.academy_code)
+            .in('role', ['academy_admin', 'admin'])
+            .limit(1);
+
+        adminIdToUpdate = fallbackUsers?.[0]?.id;
+    }
+
+    if (!adminIdToUpdate) {
+        console.warn(`Final failure: Admin account not found for academy ${academyId}`);
         return { success: false, error: '관리자 계정을 찾을 수 없습니다.' };
     }
 
-    const adminUser = adminUsers[0];
+    console.log(`Proceeding to update password for user ID: ${adminIdToUpdate}`);
 
-    // 비밀번호 업데이트
+    // [Step 3] 비밀번호 업데이트
     const { error: updateError } = await supabase
         .from('users')
         .update({ password_hash: newPassword })
-        .eq('id', adminUser.id);
+        .eq('id', adminIdToUpdate);
 
     if (updateError) {
         console.error('Failed to update admin password:', updateError);
