@@ -162,3 +162,20 @@ export const LEVEL_INFO: Record<Level, LevelInfo> = {
         totalWords: 1500,
     },
 };
+
+// 레벨 순서 (진급 순서)
+export const LEVEL_ORDER: Level[] = ['middle_1', 'middle_2', 'high_1', 'high_2', 'csat'];
+
+// 레벨 완료 기록 (랭킹 산정용)
+export interface LevelCompletion {
+    userId: string;
+    level: Level;
+    averageScore: number;
+    totalQuizzes: number;
+    passed: boolean;
+    promotionTestTaken: boolean;
+    promotionTestScore?: number;
+    attemptNumber: number;
+    isRankingEligible: boolean;
+    completedAt: string;
+}

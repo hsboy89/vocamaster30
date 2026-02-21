@@ -68,6 +68,9 @@ export interface User {
     goalStartDate?: string;       // 목표 시작일
     goalLevel?: string;           // 목표 설정 당시 레벨
     goalWordsPerDay?: number;     // 목표 일일 단어 수
+
+    // 접근 가능 시작 레벨 (관리자가 학생 등록 시 설정)
+    startLevel?: string;          // 'middle_1', 'high_1' 등
 }
 
 export interface AuthState {
@@ -121,6 +124,7 @@ export interface DbUser {
     goal_start_date?: string;
     goal_level?: string;
     goal_words_per_day?: number;
+    start_level?: string;
 }
 
 // =====================================================
@@ -146,6 +150,7 @@ export function dbUserToUser(dbUser: DbUser): User {
         goalStartDate: dbUser.goal_start_date,
         goalLevel: dbUser.goal_level,
         goalWordsPerDay: dbUser.goal_words_per_day,
+        startLevel: dbUser.start_level,
     };
 }
 

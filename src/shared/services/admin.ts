@@ -762,3 +762,95 @@ export async function getRankingByGoalPlan(
         return [];
     }
 }
+
+// =====================================================
+// 레벨별 랭킹 시스템 (탭 완료 기반)
+// =====================================================
+
+export interface RankingByLevelItem {
+    rank: number;
+    userId: string;
+    studentName: string;
+    level: string;
+    averageScore: number;       // 레벨 전체 퀴즈 평균 점수
+    attemptNumber: number;
+    completedAt: string;
+}
+
+/**
+ * 레벨(탭)별 랭킹 조회 — level_completions 테이블 기반
+ * - 해당 레벨을 완료한 학생만 포함
+ * - is_ranking_eligible = true인 학생만
+ * - 평균 점수 내림차순 정렬
+ */
+export async function getRankingByLevel(
+    academyId?: string,
+    level?: string,             // 'middle_1', 'middle_2', etc.
+    limit: number = 10
+): Promise<RankingByLevelItem[]> {
+    try {
+        // 1. level_completions에서 랭킹 자격자 조회
+        let query = supabase
+            .from('level_completions')
+            .select('user_id, level, average_score, attempt_number, completed_at, is_ranking_eligible')
+            .eq('is_ranking_eligible', true);
+
+        if (academyId) {
+            query = query.eq('academy_id', academyId);
+        }
+        if (level) {
+            query = query.eq('level', level);
+        }
+
+        query = query.order('average_score', { ascending: false });
+
+        const { data: completions, error: compError } = await query;
+        if (compError || !completions || completions.length === 0) return [];
+
+        // 2. 같은 유저의 여러 attempt 중 가장 높은 점수만 사용
+        const bestByUser = new Map<string, typeof completions[0]>();
+        completions.forEach(c => {
+            const existing = bestByUser.get(c.user_id);
+            if (!existing || c.average_score > existing.average_score) {
+                bestByUser.set(c.user_id, c);
+            }
+        });
+
+        const uniqueCompletions = Array.from(bestByUser.values());
+
+        // 3. 학생 이름 조회
+        const userIds = uniqueCompletions.map(c => c.user_id);
+        const { data: users } = await supabase
+            .from('users')
+            .select('id, student_name')
+            .in('id', userIds);
+
+        const nameMap = new Map<string, string>();
+        users?.forEach(u => nameMap.set(u.id, u.student_name));
+
+        // 4. 랭킹 데이터 생성 및 정렬
+        const rankings: RankingByLevelItem[] = uniqueCompletions
+            .map(c => ({
+                rank: 0,
+                userId: c.user_id,
+                studentName: nameMap.get(c.user_id) || '(알 수 없음)',
+                level: c.level,
+                averageScore: parseFloat(c.average_score),
+                attemptNumber: c.attempt_number,
+                completedAt: c.completed_at,
+            }))
+            .sort((a, b) => {
+                if (b.averageScore !== a.averageScore) return b.averageScore - a.averageScore;
+                return a.studentName.localeCompare(b.studentName);
+            });
+
+        // 5. 순위 부여 및 제한
+        return rankings.slice(0, limit).map((item, index) => ({
+            ...item,
+            rank: index + 1,
+        }));
+    } catch (error) {
+        console.error('Failed to get ranking by level:', error);
+        return [];
+    }
+}

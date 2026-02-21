@@ -1,28 +1,27 @@
 import { useState, useEffect } from 'react';
 import { useAuthStore } from '../../../stores';
-import { getRankingByGoalPlan, RankingItem } from '../../../shared/services/admin';
-import { GOAL_OPTIONS } from '../../../shared/types';
+import { getRankingByLevel, RankingByLevelItem } from '../../../shared/services/admin';
+import { LEVEL_INFO, Level, LEVEL_ORDER } from '../../../shared/types';
 
 interface RankingDetailModalProps {
+    initialLevel?: Level;
     onClose: () => void;
 }
 
 const MEDALS = ['🥇', '🥈', '🥉'];
 
-type FilterOption = number;
-
-const FILTER_TABS: { value: FilterOption; label: string }[] = GOAL_OPTIONS.map(o => ({
-    value: o.duration,
-    label: o.label
+// 레벨별 필터 탭
+const LEVEL_TABS: { value: Level; label: string }[] = LEVEL_ORDER.map(l => ({
+    value: l,
+    label: LEVEL_INFO[l].nameKo
 }));
 
-export function RankingDetailModal({ onClose }: RankingDetailModalProps) {
+export function RankingDetailModal({ initialLevel, onClose }: RankingDetailModalProps) {
     const { user } = useAuthStore();
-    const [rankings, setRankings] = useState<RankingItem[]>([]);
+    const [rankings, setRankings] = useState<RankingByLevelItem[]>([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [filter, setFilter] = useState<FilterOption>((user?.goalDuration as FilterOption) || 30);
+    const [selectedLevel, setSelectedLevel] = useState<Level>(initialLevel || 'middle_1');
 
-    const currentMonth = new Date().getMonth() + 1;
     const academyId = user?.academyId;
 
     useEffect(() => {
@@ -30,7 +29,7 @@ export function RankingDetailModal({ onClose }: RankingDetailModalProps) {
         const load = async () => {
             setIsLoading(true);
             try {
-                const data = await getRankingByGoalPlan(academyId, filter, 10);
+                const data = await getRankingByLevel(academyId, selectedLevel, 10);
                 setRankings(data);
             } catch (e) {
                 console.error('Failed to load ranking:', e);
@@ -38,7 +37,7 @@ export function RankingDetailModal({ onClose }: RankingDetailModalProps) {
             setIsLoading(false);
         };
         load();
-    }, [filter, academyId]);
+    }, [selectedLevel, academyId]);
 
     return (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4" onClick={onClose}>
@@ -55,10 +54,10 @@ export function RankingDetailModal({ onClose }: RankingDetailModalProps) {
                             </div>
                             <div>
                                 <h2 className="text-lg font-bold text-gray-900 dark:text-white">
-                                    이달의 학습 랭킹
+                                    레벨별 학습 랭킹
                                 </h2>
                                 <p className="text-xs text-gray-500 dark:text-slate-400">
-                                    {currentMonth}월 · 매월 1일 자동 초기화
+                                    탭 완료 기준 · 평균 점수 순
                                 </p>
                             </div>
                         </div>
@@ -72,13 +71,13 @@ export function RankingDetailModal({ onClose }: RankingDetailModalProps) {
                         </button>
                     </div>
 
-                    {/* Filter Tabs */}
+                    {/* Level Filter Tabs */}
                     <div className="flex gap-1.5 overflow-x-auto pb-1 scrollbar-none">
-                        {FILTER_TABS.map(tab => (
+                        {LEVEL_TABS.map(tab => (
                             <button
                                 key={tab.value}
-                                onClick={() => setFilter(tab.value)}
-                                className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${filter === tab.value
+                                onClick={() => setSelectedLevel(tab.value)}
+                                className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${selectedLevel === tab.value
                                     ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/30'
                                     : 'bg-gray-100 dark:bg-white/5 text-gray-500 dark:text-slate-400 hover:bg-gray-200 dark:hover:bg-white/10'
                                     }`}
@@ -99,10 +98,10 @@ export function RankingDetailModal({ onClose }: RankingDetailModalProps) {
                         <div className="text-center py-12">
                             <span className="text-4xl mb-3 block">📊</span>
                             <p className="text-gray-500 dark:text-slate-400 text-sm">
-                                이번 달 학습 데이터가 없습니다
+                                아직 이 레벨을 완료한 학생이 없습니다
                             </p>
                             <p className="text-gray-400 dark:text-slate-500 text-xs mt-1">
-                                학습을 시작하면 랭킹에 반영됩니다
+                                모든 Day를 완료하면 랭킹에 반영됩니다
                             </p>
                         </div>
                     ) : (
@@ -147,26 +146,14 @@ export function RankingDetailModal({ onClose }: RankingDetailModalProps) {
                                                     </span>
                                                 )}
                                             </div>
-                                            {item.goalDuration && (
-                                                <span className="text-[10px] text-gray-400 dark:text-slate-500">
-                                                    {item.goalDuration}일 플랜
-                                                </span>
-                                            )}
                                         </div>
 
-                                        {/* Stats */}
+                                        {/* Score */}
                                         <div className="flex items-center gap-3 flex-shrink-0">
                                             <div className="text-right">
-                                                <p className={`text-sm font-bold ${isTop3 ? 'text-amber-600 dark:text-amber-400' : 'text-gray-700 dark:text-slate-300'
-                                                    }`}>
-                                                    {item.completedDays}일
-                                                </p>
-                                                <p className="text-[10px] text-gray-400 dark:text-slate-500">완료</p>
-                                            </div>
-                                            <div className="text-right">
-                                                <p className={`text-sm font-bold ${item.averageScore >= 80
+                                                <p className={`text-sm font-bold ${item.averageScore >= 90
                                                     ? 'text-emerald-600 dark:text-emerald-400'
-                                                    : item.averageScore >= 60
+                                                    : item.averageScore >= 70
                                                         ? 'text-orange-600 dark:text-orange-400'
                                                         : 'text-gray-500 dark:text-slate-400'
                                                     }`}>
@@ -185,7 +172,7 @@ export function RankingDetailModal({ onClose }: RankingDetailModalProps) {
                 {/* Footer */}
                 <div className="px-6 py-3 border-t border-gray-100 dark:border-white/10 bg-gray-50 dark:bg-white/5">
                     <p className="text-center text-[11px] text-gray-400 dark:text-slate-500">
-                        📊 완료 Day 기준 · 동점 시 평균점수 순
+                        📊 탭별 전체 학습 완료 기준 · 평균 점수 순
                     </p>
                 </div>
             </div>

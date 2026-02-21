@@ -1,4 +1,4 @@
-import { Level, StudyStatus, UserProgress, WrongAnswer, Word, QuizResult } from '../types';
+import { Level, StudyStatus, UserProgress, WrongAnswer, Word, QuizResult, LevelCompletion } from '../types';
 import { supabase } from '../lib';
 import { useAuthStore } from '../../stores';
 
@@ -581,5 +581,319 @@ export function clearAllData(): void {
     Object.values(STORAGE_KEYS).forEach((key) => {
         localStorage.removeItem(key);
     });
+}
+
+// =====================================================
+// Level Completion & Promotion Test
+// =====================================================
+
+export interface LevelCompletionResult {
+    averageScore: number;
+    totalQuizzes: number;
+    passed: boolean; // avg >= 90
+    needsPromotionTest: boolean; // avg < 90
+    attemptNumber: number;
+    isRankingEligible: boolean;
+}
+
+/**
+ * 레벨의 모든 Day가 완료되었는지 확인하고, 완료 시 level_completions에 기록
+ */
+export async function checkAndCompleteLevelIfDone(level: Level): Promise<LevelCompletionResult | null> {
+    const userId = getUserId();
+    const academyId = getAcademyId();
+    if (!userId) return null;
+
+    try {
+        // 1. 해당 레벨의 모든 Day 완료 여부 확인
+        const { data: progressData } = await supabase
+            .from('student_progress')
+            .select('day, status')
+            .eq('user_id', userId)
+            .eq('level', level);
+
+        if (!progressData) return null;
+
+        const completedDays = new Set(
+            progressData.filter(p => p.status === 'completed').map(p => p.day)
+        );
+
+        // 해당 레벨의 총 Day 수 가져오기 (사용자의 목표 기간)
+        const { data: userData } = await supabase
+            .from('users')
+            .select('goal_duration')
+            .eq('id', userId)
+            .single();
+
+        const totalDays = userData?.goal_duration || 30;
+
+        // 모든 Day가 완료되지 않았으면 null 반환
+        for (let d = 1; d <= totalDays; d++) {
+            if (!completedDays.has(d)) return null;
+        }
+
+        // 2. 이 레벨의 퀴즈 평균 점수 계산
+        const { data: quizzes } = await supabase
+            .from('quiz_history')
+            .select('correct_answers, total_questions')
+            .eq('user_id', userId)
+            .eq('level', level);
+
+        let totalScore = 0;
+        let quizCount = 0;
+        quizzes?.forEach(q => {
+            if (q.total_questions > 0) {
+                let correctCount = q.correct_answers;
+                if (correctCount > q.total_questions) {
+                    correctCount = Math.round(correctCount / 5);
+                }
+                correctCount = Math.min(correctCount, q.total_questions);
+                totalScore += (correctCount / q.total_questions) * 100;
+                quizCount++;
+            }
+        });
+
+        const averageScore = quizCount > 0 ? Math.round((totalScore / quizCount) * 100) / 100 : 0;
+        const passed = averageScore >= 90;
+
+        // 3. 이 레벨의 기존 완료 횟수 확인 (attempt_number 결정)
+        const { data: existingCompletions } = await supabase
+            .from('level_completions')
+            .select('attempt_number, is_ranking_eligible')
+            .eq('user_id', userId)
+            .eq('level', level)
+            .order('attempt_number', { ascending: false });
+
+        const lastAttempt = existingCompletions?.[0]?.attempt_number || 0;
+        const attemptNumber = lastAttempt + 1;
+
+        // 4. 랭킹 자격 결정
+        // 재학습(2회차 이상)이면, 이전에 top 3에 들지 않았을 때만 랭킹 포함
+        let isRankingEligible = true;
+        if (attemptNumber > 1) {
+            // 이전 완료에서 랭킹 3등 안에 들었는지 확인
+            const wasTop3 = await checkIfWasTop3(userId, level, academyId);
+            isRankingEligible = !wasTop3;
+        }
+
+        // 5. level_completions에 저장
+        await supabase
+            .from('level_completions')
+            .upsert({
+                user_id: userId,
+                academy_id: academyId,
+                level,
+                average_score: averageScore,
+                total_quizzes: quizCount,
+                passed,
+                promotion_test_taken: false,
+                promotion_test_score: null,
+                attempt_number: attemptNumber,
+                is_ranking_eligible: isRankingEligible,
+                completed_at: new Date().toISOString(),
+            }, {
+                onConflict: 'user_id,level,attempt_number'
+            });
+
+        return {
+            averageScore,
+            totalQuizzes: quizCount,
+            passed,
+            needsPromotionTest: !passed,
+            attemptNumber,
+            isRankingEligible,
+        };
+    } catch (error) {
+        console.error('Failed to check level completion:', error);
+        return null;
+    }
+}
+
+/**
+ * 특정 레벨의 오답 단어 조회 (진급 테스트용)
+ */
+export async function getWrongAnswersByLevel(level: Level): Promise<WrongAnswer[]> {
+    const userId = getUserId();
+    if (!userId) return [];
+
+    try {
+        const { data, error } = await supabase
+            .from('wrong_answers')
+            .select('*')
+            .eq('user_id', userId)
+            .eq('level', level)
+            .order('wrong_count', { ascending: false });
+
+        if (error) {
+            console.error('Failed to get wrong answers by level:', error);
+            return [];
+        }
+
+        return (data || []).map(item => ({
+            word: item.word_data as Word,
+            level: item.level,
+            day: item.day,
+            wrongCount: item.wrong_count,
+            addedAt: item.added_at,
+        }));
+    } catch (error) {
+        console.error('Failed to get wrong answers by level:', error);
+        return [];
+    }
+}
+
+/**
+ * 진급 테스트 결과 저장
+ */
+export async function savePromotionTestResult(
+    level: Level,
+    score: number,
+    passed: boolean
+): Promise<void> {
+    const userId = getUserId();
+    if (!userId) return;
+
+    try {
+        // 가장 최근 완료 기록의 attempt_number 조회
+        const { data: latest } = await supabase
+            .from('level_completions')
+            .select('attempt_number')
+            .eq('user_id', userId)
+            .eq('level', level)
+            .order('attempt_number', { ascending: false })
+            .limit(1);
+
+        const attemptNumber = latest?.[0]?.attempt_number || 1;
+
+        await supabase
+            .from('level_completions')
+            .update({
+                promotion_test_taken: true,
+                promotion_test_score: score,
+                passed: passed,
+            })
+            .eq('user_id', userId)
+            .eq('level', level)
+            .eq('attempt_number', attemptNumber);
+    } catch (error) {
+        console.error('Failed to save promotion test result:', error);
+    }
+}
+
+/**
+ * 사용자의 레벨 완료 기록 조회
+ */
+export async function getLevelCompletions(level?: Level): Promise<LevelCompletion[]> {
+    const userId = getUserId();
+    if (!userId) return [];
+
+    try {
+        let query = supabase
+            .from('level_completions')
+            .select('*')
+            .eq('user_id', userId)
+            .order('completed_at', { ascending: false });
+
+        if (level) {
+            query = query.eq('level', level);
+        }
+
+        const { data, error } = await query;
+
+        if (error) {
+            console.error('Failed to get level completions:', error);
+            return [];
+        }
+
+        return (data || []).map(item => ({
+            userId: item.user_id,
+            level: item.level,
+            averageScore: parseFloat(item.average_score),
+            totalQuizzes: item.total_quizzes,
+            passed: item.passed,
+            promotionTestTaken: item.promotion_test_taken,
+            promotionTestScore: item.promotion_test_score ? parseFloat(item.promotion_test_score) : undefined,
+            attemptNumber: item.attempt_number,
+            isRankingEligible: item.is_ranking_eligible,
+            completedAt: item.completed_at,
+        }));
+    } catch (error) {
+        console.error('Failed to get level completions:', error);
+        return [];
+    }
+}
+
+/**
+ * 특정 레벨이 접근 가능한지 확인
+ * - 관리자가 설정한 start_level부터 접근 가능
+ * - 이전 레벨을 통과(passed=true)해야 다음 레벨 접근 가능
+ */
+export async function isLevelUnlocked(level: Level): Promise<boolean> {
+    const userId = getUserId();
+    if (!userId) return true; // 게스트는 모두 접근 가능
+
+    const levelOrder: Level[] = ['middle_1', 'middle_2', 'high_1', 'high_2', 'csat'];
+    const levelIndex = levelOrder.indexOf(level);
+
+    try {
+        // 사용자의 start_level 확인
+        const { data: userData } = await supabase
+            .from('users')
+            .select('start_level')
+            .eq('id', userId)
+            .single();
+
+        const startLevel = (userData?.start_level || 'middle_1') as Level;
+        const startIndex = levelOrder.indexOf(startLevel);
+
+        // start_level보다 낮은 레벨은 항상 접근 불가
+        if (levelIndex < startIndex) return false;
+
+        // start_level과 동일하면 항상 접근 가능
+        if (levelIndex === startIndex) return true;
+
+        // start_level보다 높은 레벨은 이전 레벨이 통과되었는지 확인
+        const prevLevel = levelOrder[levelIndex - 1];
+
+        const { data: prevCompletion } = await supabase
+            .from('level_completions')
+            .select('passed')
+            .eq('user_id', userId)
+            .eq('level', prevLevel)
+            .eq('passed', true)
+            .limit(1);
+
+        return (prevCompletion && prevCompletion.length > 0) || false;
+    } catch (error) {
+        console.error('Failed to check level unlock:', error);
+        return true; // 에러 시 접근 허용 (안전)
+    }
+}
+
+/**
+ * 이전에 해당 레벨에서 top 3에 들었는지 확인
+ */
+async function checkIfWasTop3(userId: string, level: Level, academyId: string | null): Promise<boolean> {
+    if (!academyId) return false;
+
+    try {
+        // 해당 레벨의 모든 랭킹 자격 있는 완료 기록 조회
+        const { data: allCompletions } = await supabase
+            .from('level_completions')
+            .select('user_id, average_score')
+            .eq('academy_id', academyId)
+            .eq('level', level)
+            .eq('is_ranking_eligible', true)
+            .order('average_score', { ascending: false });
+
+        if (!allCompletions || allCompletions.length === 0) return false;
+
+        // 상위 3명에 해당 유저가 있는지 확인
+        const top3UserIds = allCompletions.slice(0, 3).map(c => c.user_id);
+        return top3UserIds.includes(userId);
+    } catch (error) {
+        console.error('Failed to check top 3:', error);
+        return false;
+    }
 }
 

@@ -11,9 +11,10 @@ interface HomePageProps {
     onDaySelect: (day: number) => void;
     isGuest?: boolean;
     onLockedClick?: () => void;
+    onPromotionTest?: () => void;
 }
 
-export function HomePage({ level, onDaySelect, isGuest, onLockedClick }: HomePageProps) {
+export function HomePage({ level, onDaySelect, isGuest, onLockedClick, onPromotionTest }: HomePageProps) {
     const { getCompletionRate, getStatus } = useProgress();
     const [showWrongNote, setShowWrongNote] = useState(false);
     const [wrongAnswers, setWrongAnswers] = useState<WrongAnswer[]>([]);
@@ -120,7 +121,7 @@ export function HomePage({ level, onDaySelect, isGuest, onLockedClick }: HomePag
                                 </div>
                             </div>
                             {/* 랭킹 프리뷰 (로그인 사용자만) */}
-                            {!isGuest && <RankingPreview />}
+                            {!isGuest && <RankingPreview level={level} />}
                         </div>
                     </div>
 
@@ -137,7 +138,7 @@ export function HomePage({ level, onDaySelect, isGuest, onLockedClick }: HomePag
             </section>
 
             {/* 단기 목표 설정 */}
-            <GoalSetting level={level} onGoalChange={(days) => setGoalDays(days)} />
+            <GoalSetting level={level} onGoalChange={(days) => setGoalDays(days)} onPromotionTest={onPromotionTest} />
 
             {/* 기존 30일 Day Grid (하단에 유지) */}
             <div className="border-t border-gray-100 mt-4">

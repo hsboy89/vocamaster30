@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { GoalDuration, GOAL_OPTIONS, Level, LEVEL_INFO, StudyGoal, StudyPlan } from '../../../shared/types';
 import { createStudyPlan } from '../../../shared/utils/study-planner';
-import { getAllMemorizedWordIds, resetLevelProgress } from '../../../shared/services/storage';
+import { getAllMemorizedWordIds, resetLevelProgress, checkAndCompleteLevelIfDone, LevelCompletionResult } from '../../../shared/services/storage';
 import { useAuthStore } from '../../../stores';
 import { useProgress } from '../../../shared/hooks';
 import { supabase } from '../../../shared/lib';
@@ -12,6 +12,7 @@ const PLAN_STORAGE_KEY = 'vocamaster-study-plan';
 interface GoalSettingProps {
     level: Level;
     onGoalChange?: (days: number | null) => void;
+    onPromotionTest?: () => void;
 }
 
 function getStoredGoal(): StudyGoal | null {
@@ -46,15 +47,17 @@ function getDaysRemaining(startDate: string, duration: GoalDuration): number {
     return Math.max(0, diff);
 }
 
-export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
+export function GoalSetting({ level, onGoalChange, onPromotionTest }: GoalSettingProps) {
     const [goal, setGoal] = useState<StudyGoal | null>(null);
     const [isSettingGoal, setIsSettingGoal] = useState(false);
+    const [isNewStudent, setIsNewStudent] = useState(false);
     const [isChoosingNextRound, setIsChoosingNextRound] = useState(false);
     const [dailyCount, setDailyCount] = useState<number>(30); // 기본 30단어
     const [availableCount, setAvailableCount] = useState<number>(0);
     const [totalCount, setTotalCount] = useState<number>(0);
     const [pendingDuration, setPendingDuration] = useState<GoalDuration | null>(null); // 확인 팝업용
-    const { user, updateUser } = useAuthStore();
+    const [levelCompletion, setLevelCompletion] = useState<LevelCompletionResult | null>(null);
+    const { user, updateUser, isGuest } = useAuthStore();
     const { getStatus } = useProgress();
 
     const DAILY_OPTIONS = [30, 50, 70, 100];
@@ -99,6 +102,12 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
                 }
             } else {
                 notifyChange(null);
+
+                // 신규 학생 감지: 로그인됨 + 게스트 아님 + 목표 없음 + 학습 기록 없음
+                if (user && !isGuest && memorized.length === 0) {
+                    setIsNewStudent(true);
+                    setIsSettingGoal(true);
+                }
             }
         };
 
@@ -166,6 +175,7 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
         }
 
         setGoal(newGoal);
+        setIsNewStudent(false);
         setIsSettingGoal(false);
         onGoalChange?.(duration);
     };
@@ -180,8 +190,15 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
         }
     };
 
-    // 1회독 완료 축하 메시지
+    // 1회독 완료 + 레벨 완료 체크
     if (availableCount === 0 && totalCount > 0) {
+        // 레벨 완료 체크 (최초 1회)
+        if (!levelCompletion) {
+            checkAndCompleteLevelIfDone(level).then(result => {
+                if (result) setLevelCompletion(result);
+            });
+        }
+
         return (
             <div className="max-w-6xl mx-auto px-4 py-4">
                 <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-yellow-500 to-amber-600 p-8 text-white shadow-xl text-center">
@@ -196,12 +213,48 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
                             </p>
                         </div>
 
-                        <button
-                            onClick={handleResetProgress}
-                            className="bg-white text-amber-600 px-8 py-3 rounded-xl font-bold text-lg hover:bg-amber-50 hover:scale-105 transition-all shadow-lg"
-                        >
-                            처음부터 다시 시작하기
-                        </button>
+                        {/* 레벨 완료 결과 표시 */}
+                        {levelCompletion && (
+                            <div className="bg-white/20 backdrop-blur-sm rounded-xl p-4 mx-auto max-w-sm">
+                                <p className="text-sm text-white/80 mb-1">평균 퀀즈 점수</p>
+                                <p className={`text-4xl font-black ${levelCompletion.passed ? 'text-green-200' : 'text-red-200'}`}>
+                                    {Math.round(levelCompletion.averageScore)}%
+                                </p>
+                                <p className="text-xs text-white/70 mt-1">
+                                    통과 기준: 90% · 총 {levelCompletion.totalQuizzes}회 퀀즈
+                                </p>
+                            </div>
+                        )}
+
+                        {/* 액션 버튼 */}
+                        <div className="flex flex-col gap-3 items-center">
+                            {levelCompletion?.passed ? (
+                                <p className="text-white/90 text-sm font-semibold bg-green-500/30 px-4 py-2 rounded-lg">
+                                    ✅ 진급 조건 충족! 다음 레벨로 이동할 수 있습니다.
+                                </p>
+                            ) : levelCompletion?.needsPromotionTest ? (
+                                <>
+                                    <p className="text-white/90 text-sm">
+                                        평균 점수가 90% 미만입니다. 진급 테스트를 통과해야 다음 레벨로 이동할 수 있습니다.
+                                    </p>
+                                    {onPromotionTest && (
+                                        <button
+                                            onClick={onPromotionTest}
+                                            className="bg-white text-amber-600 px-8 py-3 rounded-xl font-bold text-lg hover:bg-amber-50 hover:scale-105 transition-all shadow-lg"
+                                        >
+                                            🎯 진급 테스트 응시
+                                        </button>
+                                    )}
+                                </>
+                            ) : null}
+
+                            <button
+                                onClick={handleResetProgress}
+                                className="bg-white/20 text-white px-6 py-2 rounded-xl font-semibold hover:bg-white/30 transition-all text-sm"
+                            >
+                                처음부터 다시 시작하기
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -398,23 +451,37 @@ export function GoalSetting({ level, onGoalChange }: GoalSettingProps) {
                 </button>
             ) : (
                 <div className="rounded-2xl border border-white/10 bg-slate-800/90 backdrop-blur-sm p-6 shadow-xl animate-in fade-in zoom-in-95 duration-200 space-y-6">
+                    {/* 신규 학생 환영 메시지 */}
+                    {isNewStudent && (
+                        <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-blue-600/20 to-emerald-600/20 border border-blue-500/20 p-5 text-center">
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full -mr-10 -mt-10 blur-2xl" />
+                            <div className="relative z-10">
+                                <span className="text-3xl mb-2 block">🎉</span>
+                                <h3 className="font-black text-white text-lg mb-1">환영합니다, {user?.studentName}님!</h3>
+                                <p className="text-slate-300 text-sm">학습 목표를 설정하면 맞춤 학습 플랜이 만들어져요</p>
+                            </div>
+                        </div>
+                    )}
+
                     <div className="flex items-center justify-between">
                         <div>
                             <h3 className="font-bold text-white text-lg flex items-center gap-2">
-                                <span>🎯</span> 학습 플랜 설정
+                                <span>🎯</span> {isNewStudent ? '첫 학습 목표를 설정하세요' : '학습 플랜 설정'}
                             </h3>
                             <p className="text-slate-400 text-sm mt-1">
-                                남은 <span className="text-white font-bold">{availableCount}</span>단어 학습을 위한 계획을 세웁니다.
+                                총 <span className="text-white font-bold">{availableCount}</span>단어를 {isNewStudent ? '내 속도에 맞춰 학습해보세요' : '학습을 위한 계획을 세웁니다'}.
                             </p>
                         </div>
-                        <button
-                            onClick={() => setIsSettingGoal(false)}
-                            className="text-gray-400 hover:text-white p-1.5 hover:bg-white/10 rounded-lg transition-all"
-                        >
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
+                        {!isNewStudent && (
+                            <button
+                                onClick={() => setIsSettingGoal(false)}
+                                className="text-gray-400 hover:text-white p-1.5 hover:bg-white/10 rounded-lg transition-all"
+                            >
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        )}
                     </div>
 
                     {/* Step 1: 하루 목표량 선택 */}

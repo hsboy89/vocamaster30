@@ -8,12 +8,12 @@ import { StudentLoginModal } from './shared/components/auth/StudentLoginModal';
 import { ErrorBoundary } from './shared/components/common/ErrorBoundary';
 import { useAuthStore } from './stores';
 // Apps
-import { HomePage, StudyPage, QuizPage } from './apps/student/pages';
+import { HomePage, StudyPage, QuizPage, PromotionTestPage } from './apps/student/pages';
 import { AdminDashboard, StudentDetailPage } from './apps/admin/pages';
 import { SuperAdminDashboard } from './apps/super-admin/pages';
 import './index.css';
 
-type StudentView = 'home' | 'study' | 'quiz';
+type StudentView = 'home' | 'study' | 'quiz' | 'promotion-test';
 
 interface QuizState {
   words: Word[];
@@ -111,6 +111,25 @@ function StudentApp() {
     logout();
   };
 
+  // Promotion Test Handlers
+  const handlePromotionTest = () => {
+    setCurrentView('promotion-test');
+  };
+
+  const handlePromotionPass = () => {
+    // 다음 레벨로 이동
+    const levelOrder = ['middle_1', 'middle_2', 'high_1', 'high_2', 'csat'] as const;
+    const currentIndex = levelOrder.indexOf(currentLevel);
+    if (currentIndex < levelOrder.length - 1) {
+      setCurrentLevel(levelOrder[currentIndex + 1]);
+    }
+    setCurrentView('home');
+  };
+
+  const handlePromotionFail = () => {
+    setCurrentView('home');
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header - always visible on home */}
@@ -132,6 +151,7 @@ function StudentApp() {
           onDaySelect={handleDaySelect}
           isGuest={isGuest}
           onLockedClick={() => setIsLoginModalOpen(true)}
+          onPromotionTest={handlePromotionTest}
         />
       )}
 
@@ -152,6 +172,15 @@ function StudentApp() {
           words={quizState.words}
           initialQuizType={quizState.quizType}
           onBack={handleBack}
+        />
+      )}
+
+      {currentView === 'promotion-test' && (
+        <PromotionTestPage
+          level={currentLevel}
+          onBack={handleBack}
+          onPass={handlePromotionPass}
+          onFail={handlePromotionFail}
         />
       )}
 
