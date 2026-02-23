@@ -313,7 +313,7 @@ export function AdminDashboard() {
                         </div>
                         <div className="relative z-10">
                             <p className="text-sm text-gray-500 dark:text-slate-400 mb-3 flex items-center justify-between">
-                                <span>이달의 단어왕 Top 3</span>
+                                <span>이달의 학습왕 Top 3</span>
                                 <span className="text-xs bg-amber-100 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 px-2 py-0.5 rounded-full">
                                     {new Date().getMonth() + 1}월
                                 </span>
@@ -372,15 +372,54 @@ export function AdminDashboard() {
                     </div>
 
                     <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm p-6 border border-gray-100 dark:border-white/5">
-                        <div className="flex items-center justify-between">
-                            <div>
-                                <p className="text-sm text-gray-500 dark:text-slate-400 mb-1">평균 퀴즈 점수</p>
-                                <p className="text-3xl font-bold text-orange-600 dark:text-orange-400">{stats?.averageScore || 0}점</p>
+                        <div className="flex items-center justify-between mb-4">
+                            <p className="text-sm text-gray-500 dark:text-slate-400">이번 달 퀴즈</p>
+                            <span className="text-lg font-bold text-gray-900 dark:text-white">
+                                {stats?.quizDistribution.totalAttempts || 0}회
+                            </span>
+                        </div>
+                        <div className="space-y-3">
+                            <div className="flex items-center justify-between text-xs">
+                                <div className="flex items-center gap-1.5">
+                                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                                    <span className="text-gray-600 dark:text-slate-300">우수 (90+)</span>
+                                </div>
+                                <span className="font-bold text-emerald-600 dark:text-emerald-400">{stats?.quizDistribution.excellent || 0}%</span>
                             </div>
-                            <div className="w-12 h-12 bg-orange-100 dark:bg-orange-500/10 rounded-xl flex items-center justify-center">
-                                <svg className="w-6 h-6 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-                                </svg>
+                            <div className="flex items-center justify-between text-xs">
+                                <div className="flex items-center gap-1.5">
+                                    <span className="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                                    <span className="text-gray-600 dark:text-slate-300">보통 (70-89)</span>
+                                </div>
+                                <span className="font-bold text-amber-500 dark:text-amber-400">{stats?.quizDistribution.average || 0}%</span>
+                            </div>
+                            {/* 3색 프로그레스 바 */}
+                            <div className="w-full h-3 bg-gray-100 dark:bg-white/5 rounded-full overflow-hidden flex">
+                                {(stats?.quizDistribution.totalAttempts || 0) > 0 ? (
+                                    <>
+                                        <div
+                                            className="h-full bg-emerald-500 transition-all"
+                                            style={{ width: `${stats?.quizDistribution.excellent || 0}%` }}
+                                        />
+                                        <div
+                                            className="h-full bg-amber-400 transition-all"
+                                            style={{ width: `${stats?.quizDistribution.average || 0}%` }}
+                                        />
+                                        <div
+                                            className="h-full bg-red-400 transition-all"
+                                            style={{ width: `${stats?.quizDistribution.below || 0}%` }}
+                                        />
+                                    </>
+                                ) : (
+                                    <div className="h-full w-full bg-gray-200 dark:bg-white/10" />
+                                )}
+                            </div>
+                            <div className="flex items-center justify-between text-xs">
+                                <div className="flex items-center gap-1.5">
+                                    <span className="w-2.5 h-2.5 rounded-full bg-red-400"></span>
+                                    <span className="text-gray-600 dark:text-slate-300">미달 (70↓)</span>
+                                </div>
+                                <span className="font-bold text-red-500 dark:text-red-400">{stats?.quizDistribution.below || 0}%</span>
                             </div>
                         </div>
                     </div>

@@ -10,7 +10,12 @@ export interface DashboardStats {
     };
     totalMastery: number;
     atRiskCount: number;
-    averageScore: number;
+    quizDistribution: {
+        totalAttempts: number;
+        excellent: number;  // 90점 이상 비율 (%)
+        average: number;    // 70~89점 비율 (%)
+        below: number;      // 70점 미만 비율 (%)
+    };
 }
 
 export interface WrongWordStat {
@@ -129,10 +134,12 @@ export async function getDashboardStats(academyId?: string): Promise<DashboardSt
 
         const { count: atRiskCount } = await riskQuery;
 
-        // 5. 평균 퀴즈 점수
+        // 5. 이번 달 퀴즈 3단계 분포
+        const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
         let quizQuery = supabase
             .from('quiz_history')
-            .select('correct_answers, total_questions');
+            .select('correct_answers, total_questions')
+            .gte('completed_at', monthStart.toISOString());
 
         if (academyId) {
             quizQuery = quizQuery.eq('academy_id', academyId);
@@ -140,15 +147,34 @@ export async function getDashboardStats(academyId?: string): Promise<DashboardSt
 
         const { data: quizData } = await quizQuery;
 
-        let totalScore = 0;
-        let quizCount = 0;
+        let excellentCount = 0;
+        let averageCount = 0;
+        let belowCount = 0;
+        let totalAttempts = 0;
+
         quizData?.forEach(q => {
             if (q.total_questions > 0) {
-                totalScore += (q.correct_answers / q.total_questions) * 100;
-                quizCount++;
+                let correctCount = q.correct_answers;
+                // 레거시 데이터 보정: score(=correctCount*5)가 correct_answers로 저장된 경우
+                if (correctCount > q.total_questions) {
+                    correctCount = Math.round(correctCount / 5);
+                }
+                correctCount = Math.min(correctCount, q.total_questions);
+                const score = (correctCount / q.total_questions) * 100;
+
+                totalAttempts++;
+                if (score >= 90) excellentCount++;
+                else if (score >= 70) averageCount++;
+                else belowCount++;
             }
         });
-        const averageScore = quizCount > 0 ? Math.round(totalScore / quizCount) : 0;
+
+        const quizDistribution = {
+            totalAttempts,
+            excellent: totalAttempts > 0 ? Math.round((excellentCount / totalAttempts) * 100) : 0,
+            average: totalAttempts > 0 ? Math.round((averageCount / totalAttempts) * 100) : 0,
+            below: totalAttempts > 0 ? Math.round((belowCount / totalAttempts) * 100) : 0,
+        };
 
         return {
             totalStudents: totalCount,
@@ -158,7 +184,7 @@ export async function getDashboardStats(academyId?: string): Promise<DashboardSt
             },
             totalMastery,
             atRiskCount: atRiskCount || 0,
-            averageScore,
+            quizDistribution,
         };
     } catch (error) {
         console.error('Failed to get dashboard stats:', error);
@@ -167,7 +193,7 @@ export async function getDashboardStats(academyId?: string): Promise<DashboardSt
             todayAttendance: { active: 0, total: 0 },
             totalMastery: 0,
             atRiskCount: 0,
-            averageScore: 0,
+            quizDistribution: { totalAttempts: 0, excellent: 0, average: 0, below: 0 },
         };
     }
 }
