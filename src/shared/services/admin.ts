@@ -11,10 +11,14 @@ export interface DashboardStats {
     totalMastery: number;
     atRiskCount: number;
     quizDistribution: {
-        totalAttempts: number;
-        excellent: number;  // 90점 이상 비율 (%)
-        average: number;    // 70~89점 비율 (%)
-        below: number;      // 70점 미만 비율 (%)
+        quizStudents: number;   // 이번 달 퀴즈 응시 학생 수
+        totalStudents: number;  // 전체 학생 수
+        excellentCount: number; // 90점 이상 학생 수
+        averageCount: number;   // 70~89점 학생 수
+        belowCount: number;     // 70점 미만 학생 수
+        excellentPct: number;   // 90점 이상 비율 (%)
+        averagePct: number;     // 70~89점 비율 (%)
+        belowPct: number;       // 70점 미만 비율 (%)
     };
 }
 
@@ -134,11 +138,11 @@ export async function getDashboardStats(academyId?: string): Promise<DashboardSt
 
         const { count: atRiskCount } = await riskQuery;
 
-        // 5. 이번 달 퀴즈 3단계 분포
+        // 5. 이번 달 퀴즈 — 학생별 평균 점수 기준 3단계 분포
         const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
         let quizQuery = supabase
             .from('quiz_history')
-            .select('correct_answers, total_questions')
+            .select('user_id, correct_answers, total_questions')
             .gte('completed_at', monthStart.toISOString());
 
         if (academyId) {
@@ -147,33 +151,48 @@ export async function getDashboardStats(academyId?: string): Promise<DashboardSt
 
         const { data: quizData } = await quizQuery;
 
-        let excellentCount = 0;
-        let averageCount = 0;
-        let belowCount = 0;
-        let totalAttempts = 0;
-
+        // 학생별 점수 합산
+        const studentScores = new Map<string, { total: number; count: number }>();
         quizData?.forEach(q => {
             if (q.total_questions > 0) {
                 let correctCount = q.correct_answers;
-                // 레거시 데이터 보정: score(=correctCount*5)가 correct_answers로 저장된 경우
+                // 레거시 데이터 보정
                 if (correctCount > q.total_questions) {
                     correctCount = Math.round(correctCount / 5);
                 }
                 correctCount = Math.min(correctCount, q.total_questions);
                 const score = (correctCount / q.total_questions) * 100;
 
-                totalAttempts++;
-                if (score >= 90) excellentCount++;
-                else if (score >= 70) averageCount++;
-                else belowCount++;
+                const existing = studentScores.get(q.user_id) || { total: 0, count: 0 };
+                studentScores.set(q.user_id, {
+                    total: existing.total + score,
+                    count: existing.count + 1,
+                });
             }
         });
 
+        // 학생별 평균으로 3단계 분류
+        let excellentCount = 0;
+        let averageCount = 0;
+        let belowCount = 0;
+        const quizStudents = studentScores.size;
+
+        studentScores.forEach(({ total, count }) => {
+            const avg = total / count;
+            if (avg >= 90) excellentCount++;
+            else if (avg >= 70) averageCount++;
+            else belowCount++;
+        });
+
         const quizDistribution = {
-            totalAttempts,
-            excellent: totalAttempts > 0 ? Math.round((excellentCount / totalAttempts) * 100) : 0,
-            average: totalAttempts > 0 ? Math.round((averageCount / totalAttempts) * 100) : 0,
-            below: totalAttempts > 0 ? Math.round((belowCount / totalAttempts) * 100) : 0,
+            quizStudents,
+            totalStudents: totalCount,
+            excellentCount,
+            averageCount,
+            belowCount,
+            excellentPct: quizStudents > 0 ? Math.round((excellentCount / quizStudents) * 100) : 0,
+            averagePct: quizStudents > 0 ? Math.round((averageCount / quizStudents) * 100) : 0,
+            belowPct: quizStudents > 0 ? Math.round((belowCount / quizStudents) * 100) : 0,
         };
 
         return {
@@ -193,7 +212,7 @@ export async function getDashboardStats(academyId?: string): Promise<DashboardSt
             todayAttendance: { active: 0, total: 0 },
             totalMastery: 0,
             atRiskCount: 0,
-            quizDistribution: { totalAttempts: 0, excellent: 0, average: 0, below: 0 },
+            quizDistribution: { quizStudents: 0, totalStudents: 0, excellentCount: 0, averageCount: 0, belowCount: 0, excellentPct: 0, averagePct: 0, belowPct: 0 },
         };
     }
 }

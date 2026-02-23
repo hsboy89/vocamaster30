@@ -375,7 +375,8 @@ export function AdminDashboard() {
                         <div className="flex items-center justify-between mb-4">
                             <p className="text-sm text-gray-500 dark:text-slate-400">이번 달 퀴즈</p>
                             <span className="text-lg font-bold text-gray-900 dark:text-white">
-                                {stats?.quizDistribution.totalAttempts || 0}회
+                                {stats?.quizDistribution.quizStudents || 0}명
+                                <span className="text-sm text-gray-400 dark:text-slate-500 font-normal">/{stats?.quizDistribution.totalStudents || 0}명</span>
                             </span>
                         </div>
                         <div className="space-y-3">
@@ -384,30 +385,30 @@ export function AdminDashboard() {
                                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
                                     <span className="text-gray-600 dark:text-slate-300">우수 (90+)</span>
                                 </div>
-                                <span className="font-bold text-emerald-600 dark:text-emerald-400">{stats?.quizDistribution.excellent || 0}%</span>
+                                <span className="font-bold text-emerald-600 dark:text-emerald-400">{stats?.quizDistribution.excellentCount || 0}명 ({stats?.quizDistribution.excellentPct || 0}%)</span>
                             </div>
                             <div className="flex items-center justify-between text-xs">
                                 <div className="flex items-center gap-1.5">
                                     <span className="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
                                     <span className="text-gray-600 dark:text-slate-300">보통 (70-89)</span>
                                 </div>
-                                <span className="font-bold text-amber-500 dark:text-amber-400">{stats?.quizDistribution.average || 0}%</span>
+                                <span className="font-bold text-amber-500 dark:text-amber-400">{stats?.quizDistribution.averageCount || 0}명 ({stats?.quizDistribution.averagePct || 0}%)</span>
                             </div>
                             {/* 3색 프로그레스 바 */}
                             <div className="w-full h-3 bg-gray-100 dark:bg-white/5 rounded-full overflow-hidden flex">
-                                {(stats?.quizDistribution.totalAttempts || 0) > 0 ? (
+                                {(stats?.quizDistribution.quizStudents || 0) > 0 ? (
                                     <>
                                         <div
                                             className="h-full bg-emerald-500 transition-all"
-                                            style={{ width: `${stats?.quizDistribution.excellent || 0}%` }}
+                                            style={{ width: `${stats?.quizDistribution.excellentPct || 0}%` }}
                                         />
                                         <div
                                             className="h-full bg-amber-400 transition-all"
-                                            style={{ width: `${stats?.quizDistribution.average || 0}%` }}
+                                            style={{ width: `${stats?.quizDistribution.averagePct || 0}%` }}
                                         />
                                         <div
                                             className="h-full bg-red-400 transition-all"
-                                            style={{ width: `${stats?.quizDistribution.below || 0}%` }}
+                                            style={{ width: `${stats?.quizDistribution.belowPct || 0}%` }}
                                         />
                                     </>
                                 ) : (
@@ -419,7 +420,7 @@ export function AdminDashboard() {
                                     <span className="w-2.5 h-2.5 rounded-full bg-red-400"></span>
                                     <span className="text-gray-600 dark:text-slate-300">미달 (70↓)</span>
                                 </div>
-                                <span className="font-bold text-red-500 dark:text-red-400">{stats?.quizDistribution.below || 0}%</span>
+                                <span className="font-bold text-red-500 dark:text-red-400">{stats?.quizDistribution.belowCount || 0}명 ({stats?.quizDistribution.belowPct || 0}%)</span>
                             </div>
                         </div>
                     </div>
