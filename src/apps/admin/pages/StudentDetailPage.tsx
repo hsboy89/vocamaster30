@@ -141,8 +141,8 @@ export function StudentDetailPage() {
         middle_1: '중등 필수',
         middle_2: '중등 심화',
         high_1: '고등 필수',
-        high_2: '고등 심화',
-        csat: '수능완성',
+        high_2: '고등 베이직',
+        csat: '수능 빈출',
     };
 
     if (isLoading) {

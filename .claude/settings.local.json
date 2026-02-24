@@ -4,8 +4,14 @@
       "Bash(npm run build:*)",
       "Bash(git commit:*)",
       "Bash(git push:*)",
+<<<<<<< HEAD
       "Bash(npm run dev)",
       "Bash(git log -1 --format='%an %ae')"
+=======
+      "Bash(node -e \"const db = require\\(''./src/shared/data/vocabulary-db.json''\\); console.log\\(Object.keys\\(db.data\\)\\); console.log\\(db.data.high_2 ? ''high_2 exists'' : ''high_2 missing''\\); if\\(db.data.high_2\\) console.log\\(''high_2 days:'', db.data.high_2.length\\);\")",
+      "Bash(node -e \"const db = require\\(''./src/shared/data/vocabulary-db.json''\\); const m1 = db.data.middle_1; if\\(m1 && m1.length > 0\\) { const day1 = m1[0]; console.log\\(JSON.stringify\\(day1.words[0], null, 2\\)\\); }\")",
+      "Bash(node -e \":*)"
+>>>>>>> d61ebf7 (Update High School Basic (Days 20-30) vocabulary data)
     ]
   }
 }

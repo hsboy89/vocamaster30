@@ -677,13 +677,12 @@ export function AdminDashboard() {
                                                     return (
                                                         <div
                                                             key={date}
-                                                            className={`w-3 h-3 rounded-sm transition-all hover:ring-2 hover:ring-blue-400 cursor-pointer ${
-                                                                intensity === 0 ? 'bg-gray-100 dark:bg-white/5' :
-                                                                intensity === 1 ? 'bg-emerald-200 dark:bg-emerald-500/20' :
-                                                                intensity === 2 ? 'bg-emerald-300 dark:bg-emerald-500/40' :
-                                                                intensity === 3 ? 'bg-emerald-400 dark:bg-emerald-500/60' :
-                                                                'bg-emerald-500 dark:bg-emerald-500/80'
-                                                            }`}
+                                                            className={`w-3 h-3 rounded-sm transition-all hover:ring-2 hover:ring-blue-400 cursor-pointer ${intensity === 0 ? 'bg-gray-100 dark:bg-white/5' :
+                                                                    intensity === 1 ? 'bg-emerald-200 dark:bg-emerald-500/20' :
+                                                                        intensity === 2 ? 'bg-emerald-300 dark:bg-emerald-500/40' :
+                                                                            intensity === 3 ? 'bg-emerald-400 dark:bg-emerald-500/60' :
+                                                                                'bg-emerald-500 dark:bg-emerald-500/80'
+                                                                }`}
                                                             title={`${date}: ${count}개 완료`}
                                                         />
                                                     );

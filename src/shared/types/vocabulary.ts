@@ -148,8 +148,8 @@ export const LEVEL_INFO: Record<Level, LevelInfo> = {
     high_2: {
         id: 'high_2',
         name: 'High School 2',
-        nameKo: '고등 심화',
-        description: '고난도 독해 및 심화 어휘',
+        nameKo: '고등 베이직',
+        description: '고등 기초 어휘 및 내신 기본 단어',
         totalDays: 30,
         wordsPerDay: 40,
         totalWords: 1200,
@@ -167,7 +167,7 @@ export const LEVEL_INFO: Record<Level, LevelInfo> = {
 };
 
 // 레벨 순서 (진급 순서)
-export const LEVEL_ORDER: Level[] = ['middle_1', 'middle_2', 'high_1', 'high_2', 'csat'];
+export const LEVEL_ORDER: Level[] = ['middle_1', 'middle_2', 'high_2', 'high_1', 'csat'];
 
 // 레벨 완료 기록 (랭킹 산정용)
 export interface LevelCompletion {
