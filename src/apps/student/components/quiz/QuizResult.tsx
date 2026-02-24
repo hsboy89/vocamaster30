@@ -49,53 +49,60 @@ export function QuizResult({
             <div className="mb-8">
                 <span className="text-6xl mb-4 block animate-bounce">{grade.emoji}</span>
                 <h2 className={`text-3xl font-bold ${grade.color} mb-2`}>{grade.text}</h2>
-                <p className="text-gray-500">{getQuizTypeName()} 완료</p>
+                <p className="text-gray-500 dark:text-gray-400">{getQuizTypeName()} 완료</p>
             </div>
 
             {/* Score */}
-            <div className="bg-gray-50 rounded-2xl p-6 mb-8">
-                <div className="flex justify-center items-baseline gap-2 mb-4">
-                    <span className="text-5xl font-bold text-gray-900">{percentage}</span>
-                    <span className="text-2xl text-gray-400">점</span>
+            <div className="bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-3xl p-6 mb-8 shadow-inner">
+                <div className="flex justify-center items-baseline gap-2 mb-6">
+                    <span className="text-6xl font-black text-gray-900 dark:text-white tracking-tight">{percentage}</span>
+                    <span className="text-2xl font-bold text-gray-400 dark:text-gray-500">점</span>
                 </div>
 
                 {/* Progress Ring */}
-                <div className="relative inline-flex items-center justify-center w-32 h-32 mb-4">
-                    <svg className="w-32 h-32 transform -rotate-90">
+                <div className="relative inline-flex items-center justify-center w-40 h-40 mb-8">
+                    <svg className="w-full h-full transform -rotate-90 filter drop-shadow-sm">
                         <circle
-                            cx="64"
-                            cy="64"
-                            r="56"
+                            cx="80"
+                            cy="80"
+                            r="70"
                             stroke="currentColor"
-                            strokeWidth="8"
+                            strokeWidth="10"
                             fill="none"
-                            className="text-gray-200"
+                            className="text-gray-200 dark:text-gray-800"
                         />
                         <circle
-                            cx="64"
-                            cy="64"
-                            r="56"
+                            cx="80"
+                            cy="80"
+                            r="70"
                             stroke="currentColor"
-                            strokeWidth="8"
+                            strokeWidth="10"
                             fill="none"
-                            strokeDasharray={`${percentage * 3.52} 352`}
+                            strokeDasharray={`${percentage * 4.4} 440`}
                             strokeLinecap="round"
-                            className={`transition-all duration-1000 ${percentage >= 70 ? 'text-green-500' : percentage >= 50 ? 'text-blue-500' : 'text-orange-500'
+                            className={`transition-all duration-1000 ${percentage >= 90 ? 'text-yellow-400' : percentage >= 70 ? 'text-green-500' : percentage >= 50 ? 'text-blue-500' : 'text-orange-500'
                                 }`}
+                            style={{ filter: 'drop-shadow(0 0 8px currentColor)' }}
                         />
                     </svg>
-                    <span className="absolute text-2xl font-bold text-gray-800">{percentage}%</span>
+                    <div className="absolute flex flex-col items-center justify-center translate-y-1">
+                        <span className="text-4xl font-black text-gray-900 dark:text-white leading-none">
+                            {percentage}
+                            <span className="text-xl ml-0.5 opacity-80">%</span>
+                        </span>
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mt-1">Accuracy</span>
+                    </div>
                 </div>
 
                 {/* Stats */}
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                    <div className="bg-white rounded-lg p-3">
-                        <p className="text-green-500 font-semibold text-lg">{totalQuestions - wrongCount}문제</p>
-                        <p className="text-gray-500">정답 ({totalQuestions}문제 중)</p>
+                <div className="grid grid-cols-2 gap-4 text-sm mt-4">
+                    <div className="bg-white dark:bg-white/10 rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-white/5 transition-transform hover:scale-105">
+                        <p className="text-green-500 font-black text-2xl">{totalQuestions - wrongCount}</p>
+                        <p className="text-gray-500 dark:text-gray-400 font-medium">정답</p>
                     </div>
-                    <div className="bg-white rounded-lg p-3">
-                        <p className="text-red-500 font-semibold text-lg">{wrongCount}문제</p>
-                        <p className="text-gray-500">오답</p>
+                    <div className="bg-white dark:bg-white/10 rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-white/5 transition-transform hover:scale-105">
+                        <p className="text-red-500 font-black text-2xl">{wrongCount}</p>
+                        <p className="text-gray-500 dark:text-gray-400 font-medium">오답</p>
                     </div>
                 </div>
             </div>
@@ -108,11 +115,11 @@ export function QuizResult({
                         오답 복습하기 ({wrongCount}개)
                     </button>
                 )}
-                <button onClick={onRetry} className="btn btn-outline w-full">
+                <button onClick={onRetry} className="btn btn-outline dark:border-white/20 dark:text-white w-full py-4 text-lg font-bold">
                     <span className="mr-2">🔄</span>
                     다시 도전하기
                 </button>
-                <button onClick={onClose} className="btn bg-gray-100 text-gray-700 hover:bg-gray-200 w-full">
+                <button onClick={onClose} className="btn bg-gray-900 dark:bg-blue-600 text-white hover:bg-black dark:hover:bg-blue-700 w-full py-4 text-lg font-bold transition-all transform active:scale-95 shadow-xl shadow-blue-500/20">
                     <span className="mr-2">✅</span>
                     학습으로 돌아가기
                 </button>
