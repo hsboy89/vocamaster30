@@ -61983,7 +61983,7 @@
             ],
             "examples": [
               {
-                "sentence": "She has propensity for kindness.",
+                "sentence": "She has a propensity for kindness.",
                 "translation": "친절한 성향이 있다."
               },
               {
@@ -63004,7 +63004,7 @@
                 "translation": "부상에 대한 보상을 구했다."
               },
               {
-                "sentence": "The court provided redress.",
+                "sentence": "The अदालत provided redress.",
                 "translation": "법원이 시정을 제공했다."
               }
             ],
@@ -63449,7 +63449,7 @@
             "id": "c26-004",
             "word": "Exorbitant",
             "meaning": "법외의, 터무니없이 비싼",
-            "pronunciation": "ɪɡˈɔːrbɪtənt",
+            "pronunciation": "ɪɡˈzɔːrbɪtənt",
             "synonyms": [
               "excessive",
               "extreme"
@@ -65560,7 +65560,7 @@
         "words": [
           {
             "id": "c35-001",
-            "word": "prescient",
+            "word": "Prescient",
             "meaning": "선견지명이 있는",
             "pronunciation": "ˈprɛʃənt",
             "synonyms": [
@@ -65579,11 +65579,12 @@
                 "sentence": "A prescient leader.",
                 "translation": "선견지명이 있는 지도자."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c35-002",
-            "word": "insular",
+            "word": "Insular",
             "meaning": "섬의, 편협한",
             "pronunciation": "ˈɪnsjələr",
             "synonyms": [
@@ -65602,11 +65603,12 @@
                 "sentence": "An insular community.",
                 "translation": "편협한 공동체."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c35-003",
-            "word": "recalcitrant",
+            "word": "Recalcitrant",
             "meaning": "반항적인, 다루기 힘든",
             "pronunciation": "rɪˈkælsɪtrənt",
             "synonyms": [
@@ -65625,11 +65627,12 @@
                 "sentence": "Recalcitrant employees.",
                 "translation": "다루기 힘든 직원."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c35-004",
-            "word": "antithesis",
+            "word": "Antithesis",
             "meaning": "안티테제, 정반대",
             "pronunciation": "ænˈtɪθɪsɪs",
             "synonyms": [
@@ -65648,11 +65651,12 @@
                 "sentence": "The antithesis of good is evil.",
                 "translation": "선의 정반대는 악이다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c35-005",
-            "word": "labyrinthine",
+            "word": "Labyrinthine",
             "meaning": "미로 같은, 복잡한",
             "pronunciation": "ˌlæbəˈrɪnθɪn",
             "synonyms": [
@@ -65671,11 +65675,12 @@
                 "sentence": "A labyrinthine bureaucracy.",
                 "translation": "미로 같은 관료제."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c35-006",
-            "word": "apocryphal",
+            "word": "Apocryphal",
             "meaning": "출처 불분명한, 진위 의심스러운",
             "pronunciation": "əˈpɑːkrɪfəl",
             "synonyms": [
@@ -65694,11 +65699,12 @@
                 "sentence": "Apocryphal accounts.",
                 "translation": "출처 불분명한 기록."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c35-007",
-            "word": "recrimination",
+            "word": "Recrimination",
             "meaning": "비난의 응수, 맞비난",
             "pronunciation": "rɪˌkrɪmɪˈneɪʃən",
             "synonyms": [
@@ -65717,11 +65723,12 @@
                 "sentence": "She engaged in recrimination.",
                 "translation": "맞비난에 참여했다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c35-008",
-            "word": "inexorable",
+            "word": "Inexorable",
             "meaning": "막을 수 없는, 가차 없는",
             "pronunciation": "ɪnˈɛksərəbl",
             "synonyms": [
@@ -65740,11 +65747,12 @@
                 "sentence": "Inexorable progress.",
                 "translation": "가차 없는 진보."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c35-009",
-            "word": "malfeasance",
+            "word": "Malfeasance",
             "meaning": "불법행위, 직권남용",
             "pronunciation": "mælˈfiːzəns",
             "synonyms": [
@@ -65761,11 +65769,12 @@
                 "sentence": "Corporate malfeasance.",
                 "translation": "기업 불법행위."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c35-010",
-            "word": "ameliorate",
+            "word": "Ameliorate",
             "meaning": "개선하다, 향상시키다",
             "pronunciation": "əˈmiːliəreɪt",
             "synonyms": [
@@ -65784,7 +65793,8 @@
                 "sentence": "She ameliorated the conditions.",
                 "translation": "조건을 향상시켰다."
               }
-            ]
+            ],
+            "category": "csat"
           }
         ]
       },
@@ -65793,7 +65803,7 @@
         "words": [
           {
             "id": "c36-001",
-            "word": "loquacious",
+            "word": "Loquacious",
             "meaning": "수다스러운, 말이 많은",
             "pronunciation": "loʊˈkweɪʃəs",
             "synonyms": [
@@ -65812,11 +65822,12 @@
                 "sentence": "A loquacious neighbor.",
                 "translation": "수다스러운 이웃."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c36-002",
-            "word": "exiguous",
+            "word": "Exiguous",
             "meaning": "극소의, 빈약한",
             "pronunciation": "ɪɡˈzɪɡjuəs",
             "synonyms": [
@@ -65835,11 +65846,12 @@
                 "sentence": "Exiguous resources.",
                 "translation": "극소의 자원."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c36-003",
-            "word": "calumny",
+            "word": "Calumny",
             "meaning": "중상, 비방",
             "pronunciation": "ˈkæləmni",
             "synonyms": [
@@ -65858,11 +65870,12 @@
                 "sentence": "The calumny damaged his reputation.",
                 "translation": "비방이 명성을 손상시켰다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c36-004",
-            "word": "propinquity",
+            "word": "Propinquity",
             "meaning": "가까움, 근접",
             "pronunciation": "proʊˈpɪŋkwɪti",
             "synonyms": [
@@ -65881,11 +65894,12 @@
                 "sentence": "Propinquity leads to friendship.",
                 "translation": "가까움이 우정으로 이어진다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c36-005",
-            "word": "lugubrious",
+            "word": "Lugubrious",
             "meaning": "슬픈, 우울한",
             "pronunciation": "luːˈɡuːbriəs",
             "synonyms": [
@@ -65904,11 +65918,12 @@
                 "sentence": "A lugubrious expression.",
                 "translation": "슬픈 표정."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c36-006",
-            "word": "sanguine",
+            "word": "Sanguine",
             "meaning": "낙관적인, 자신 있는",
             "pronunciation": "ˈsæŋɡwɪn",
             "synonyms": [
@@ -65927,11 +65942,12 @@
                 "sentence": "A sanguine outlook.",
                 "translation": "낙관적 전망."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c36-007",
-            "word": "quixotic",
+            "word": "Quixotic",
             "meaning": "비현실적인, 이상주의적인",
             "pronunciation": "kwɪkˈsɑːtɪk",
             "synonyms": [
@@ -65950,11 +65966,12 @@
                 "sentence": "His quixotic plans.",
                 "translation": "이상주의적 계획."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c36-008",
-            "word": "harangue",
+            "word": "Harangue",
             "meaning": "열변, 장광설; 열변을 토하다",
             "pronunciation": "həˈræŋ",
             "synonyms": [
@@ -65971,11 +65988,12 @@
                 "sentence": "He harangued the crowd.",
                 "translation": "군중에게 장광설을 했다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c36-009",
-            "word": "pusillanimous",
+            "word": "Pusillanimous",
             "meaning": "비겁한, 소심한",
             "pronunciation": "ˌpjuːsɪˈlænɪməs",
             "synonyms": [
@@ -65994,11 +66012,12 @@
                 "sentence": "His pusillanimous behavior.",
                 "translation": "소심한 행동."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c36-010",
-            "word": "sycophantic",
+            "word": "Sycophantic",
             "meaning": "아첨하는, 알랑거리는",
             "pronunciation": "ˌsɪkəˈfæntɪk",
             "synonyms": [
@@ -66017,7 +66036,8 @@
                 "sentence": "Sycophantic advisors.",
                 "translation": "아첨하는 보좌관."
               }
-            ]
+            ],
+            "category": "csat"
           }
         ]
       },
@@ -66026,7 +66046,7 @@
         "words": [
           {
             "id": "c37-001",
-            "word": "capricious",
+            "word": "Capricious",
             "meaning": "변덕스러운, 변화무쌍한",
             "pronunciation": "kəˈprɪʃəs",
             "synonyms": [
@@ -66045,11 +66065,12 @@
                 "sentence": "A capricious boss.",
                 "translation": "변덕스러운 상사."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c37-002",
-            "word": "diatribe",
+            "word": "Diatribe",
             "meaning": "통렬한 비판, 맹비난",
             "pronunciation": "ˈdaɪətraɪb",
             "synonyms": [
@@ -66068,13 +66089,14 @@
                 "sentence": "A bitter diatribe.",
                 "translation": "신랄한 맹비난."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c37-003",
-            "word": "egregious",
+            "word": "Egregious",
             "meaning": "극심한, 지독한",
-            "pronunciation": "ɪˈɡ리ːdʒəs",
+            "pronunciation": "ɪˈɡriːdʒəs",
             "synonyms": [
               "terrible",
               "appalling"
@@ -66091,11 +66113,12 @@
                 "sentence": "Egregious violations.",
                 "translation": "극심한 위반."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c37-004",
-            "word": "ignominy",
+            "word": "Ignominy",
             "meaning": "치욕, 불명예",
             "pronunciation": "ˈɪɡnəmɪni",
             "synonyms": [
@@ -66114,11 +66137,12 @@
                 "sentence": "The ignominy of failure.",
                 "translation": "실패의 불명예."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c37-005",
-            "word": "sycophant",
+            "word": "Sycophant",
             "meaning": "아첨꾼",
             "pronunciation": "ˈsɪkəfænt",
             "synonyms": [
@@ -66136,11 +66160,12 @@
                 "sentence": "She detests sycophants.",
                 "translation": "아첨꾼을 혐오한다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c37-006",
-            "word": "ubiquitous",
+            "word": "Ubiquitous",
             "meaning": "편재하는, 어디에나 있는",
             "pronunciation": "juːˈbɪkwɪtəs",
             "synonyms": [
@@ -66158,11 +66183,12 @@
                 "sentence": "Pollution is ubiquitous.",
                 "translation": "오염이 어디에나 있다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c37-007",
-            "word": "anomalous",
+            "word": "Anomalous",
             "meaning": "비정상적인, 이례적인",
             "pronunciation": "əˈnɑːmələs",
             "synonyms": [
@@ -66181,11 +66207,12 @@
                 "sentence": "The result was anomalous.",
                 "translation": "결과가 비정상적이었다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c37-008",
-            "word": "truculent",
+            "word": "Truculent",
             "meaning": "호전적인, 난폭한",
             "pronunciation": "ˈtrʌkjələnt",
             "synonyms": [
@@ -66204,11 +66231,12 @@
                 "sentence": "His truculent manner.",
                 "translation": "난폭한 태도."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c37-009",
-            "word": "voracious",
+            "word": "Voracious",
             "meaning": "탐욕스러운, 게걸스러운",
             "pronunciation": "vɔːˈreɪʃəs",
             "synonyms": [
@@ -66227,11 +66255,12 @@
                 "sentence": "A voracious appetite.",
                 "translation": "탐욕스러운 식욕."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c37-010",
-            "word": "effrontery",
+            "word": "Effrontery",
             "meaning": "뻔뻔함, 후안무치",
             "pronunciation": "ɪˈfrʌntəri",
             "synonyms": [
@@ -66250,7 +66279,8 @@
                 "sentence": "He showed great effrontery.",
                 "translation": "대단한 후안무치를 보였다."
               }
-            ]
+            ],
+            "category": "csat"
           }
         ]
       },
@@ -66259,7 +66289,7 @@
         "words": [
           {
             "id": "c38-001",
-            "word": "assiduous",
+            "word": "Assiduous",
             "meaning": "근면한, 끈기 있는",
             "pronunciation": "əˈsɪdjuəs",
             "synonyms": [
@@ -66278,11 +66308,12 @@
                 "sentence": "Assiduous effort yields results.",
                 "translation": "끈기 있는 노력이 결과를 낸다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c38-002",
-            "word": "diffident",
+            "word": "Diffident",
             "meaning": "자신 없는, 수줍은",
             "pronunciation": "ˈdɪfɪdənt",
             "synonyms": [
@@ -66301,11 +66332,12 @@
                 "sentence": "A diffident young woman.",
                 "translation": "수줍은 젊은 여성."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c38-003",
-            "word": "garrulous",
+            "word": "Garrulous",
             "meaning": "수다스러운",
             "pronunciation": "ˈɡærələs",
             "synonyms": [
@@ -66324,11 +66356,12 @@
                 "sentence": "She became garrulous.",
                 "translation": "수다스러워졌다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c38-004",
-            "word": "proclivity",
+            "word": "Proclivity",
             "meaning": "성향, 경향",
             "pronunciation": "proʊˈklɪvɪti",
             "synonyms": [
@@ -66347,11 +66380,12 @@
                 "sentence": "Her proclivity for art.",
                 "translation": "예술에 대한 경향."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c38-005",
-            "word": "irascible",
+            "word": "Irascible",
             "meaning": "화를 잘 내는, 성마른",
             "pronunciation": "ɪˈræsɪbl",
             "synonyms": [
@@ -66370,11 +66404,12 @@
                 "sentence": "An irascible old man.",
                 "translation": "화를 잘 내는 노인."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c38-006",
-            "word": "obstreperous",
+            "word": "Obstreperous",
             "meaning": "시끄러운, 난폭한",
             "pronunciation": "əbˈstrɛpərəs",
             "synonyms": [
@@ -66393,11 +66428,12 @@
                 "sentence": "The crowd became obstreperous.",
                 "translation": "군중이 소란스러워졌다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c38-007",
-            "word": "pugnacious",
+            "word": "Pugnacious",
             "meaning": "호전적인, 싸우기 좋아하는",
             "pronunciation": "pʌɡˈneɪʃəs",
             "synonyms": [
@@ -66416,11 +66452,12 @@
                 "sentence": "He is naturally pugnacious.",
                 "translation": "본래 싸우기 좋아한다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c38-008",
-            "word": "serendipitous",
+            "word": "Serendipitous",
             "meaning": "우연히 발견한, 뜻밖의",
             "pronunciation": "ˌsɛrənˈdɪpɪtəs",
             "synonyms": [
@@ -66439,11 +66476,12 @@
                 "sentence": "Their meeting was serendipitous.",
                 "translation": "만남이 뜻밖이었다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c38-009",
-            "word": "imperious",
+            "word": "Imperious",
             "meaning": "오만한, 거만한",
             "pronunciation": "ɪmˈpɪriəs",
             "synonyms": [
@@ -66462,11 +66500,12 @@
                 "sentence": "She has an imperious manner.",
                 "translation": "거만한 태도가 있다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c38-010",
-            "word": "insolent",
+            "word": "Insolent",
             "meaning": "무례한, 건방진",
             "pronunciation": "ˈɪnsələnt",
             "synonyms": [
@@ -66485,7 +66524,8 @@
                 "sentence": "An insolent child.",
                 "translation": "건방진 아이."
               }
-            ]
+            ],
+            "category": "csat"
           }
         ]
       },
@@ -66494,7 +66534,7 @@
         "words": [
           {
             "id": "c39-001",
-            "word": "nefarious",
+            "word": "Nefarious",
             "meaning": "극악무도한, 사악한",
             "pronunciation": "nɪˈfɛriəs",
             "synonyms": [
@@ -66513,11 +66553,12 @@
                 "sentence": "Nefarious activities.",
                 "translation": "극악무도한 활동."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c39-002",
-            "word": "morose",
+            "word": "Morose",
             "meaning": "시무룩한, 음울한",
             "pronunciation": "məˈroʊs",
             "synonyms": [
@@ -66536,11 +66577,12 @@
                 "sentence": "A morose expression.",
                 "translation": "음울한 표정."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c39-003",
-            "word": "gregarious",
+            "word": "Gregarious",
             "meaning": "사교적인, 군집하는",
             "pronunciation": "ɡrɪˈɡɛriəs",
             "synonyms": [
@@ -66559,11 +66601,12 @@
                 "sentence": "Gregarious animals live in groups.",
                 "translation": "군집 동물이 무리 지어 산다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c39-004",
-            "word": "reticent",
+            "word": "Reticent",
             "meaning": "말이 없는, 과묵한",
             "pronunciation": "ˈrɛtɪsənt",
             "synonyms": [
@@ -66582,11 +66625,12 @@
                 "sentence": "A reticent person.",
                 "translation": "말이 없는 사람."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c39-005",
-            "word": "surreptitious",
+            "word": "Surreptitious",
             "meaning": "은밀한, 몰래 하는",
             "pronunciation": "ˌsɜːrəpˈtɪʃəs",
             "synonyms": [
@@ -66605,11 +66649,12 @@
                 "sentence": "Surreptitious recording.",
                 "translation": "몰래 녹음."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c39-006",
-            "word": "obsequious",
+            "word": "Obsequious",
             "meaning": "아첨하는, 비굴한",
             "pronunciation": "əbˈsiːkwiəs",
             "synonyms": [
@@ -66628,11 +66673,12 @@
                 "sentence": "An obsequious assistant.",
                 "translation": "아첨하는 보좌관."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c39-007",
-            "word": "magniloquent",
+            "word": "Magniloquent",
             "meaning": "과장하여 말하는, 거창한",
             "pronunciation": "mæɡˈnɪləkwənt",
             "synonyms": [
@@ -66651,11 +66697,12 @@
                 "sentence": "His magniloquent claims.",
                 "translation": "거창한 주장."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c39-008",
-            "word": "munificent",
+            "word": "Munificent",
             "meaning": "관대한, 후한",
             "pronunciation": "mjuːˈnɪfɪsənt",
             "synonyms": [
@@ -66674,11 +66721,12 @@
                 "sentence": "The munificent donation helped.",
                 "translation": "후한 기부가 도움이 되었다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c39-009",
-            "word": "supercilious",
+            "word": "Supercilious",
             "meaning": "거만한, 건방진",
             "pronunciation": "ˌsuːpərˈsɪliəs",
             "synonyms": [
@@ -66697,11 +66745,12 @@
                 "sentence": "Her supercilious manner.",
                 "translation": "건방진 태도."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c39-010",
-            "word": "desultory",
+            "word": "Desultory",
             "meaning": "산만한, 일관성 없는",
             "pronunciation": "ˈdɛsəltɔːri",
             "synonyms": [
@@ -66720,7 +66769,8 @@
                 "sentence": "Desultory attempts.",
                 "translation": "일관성 없는 시도."
               }
-            ]
+            ],
+            "category": "csat"
           }
         ]
       },
@@ -66729,7 +66779,7 @@
         "words": [
           {
             "id": "c40-001",
-            "word": "acerbic",
+            "word": "Acerbic",
             "meaning": "신랄한, 매서운",
             "pronunciation": "əˈsɜːrbɪk",
             "synonyms": [
@@ -66748,11 +66798,12 @@
                 "sentence": "An acerbic critic.",
                 "translation": "매서운 비평가."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c40-002",
-            "word": "laconic",
+            "word": "Laconic",
             "meaning": "간결한, 과묵한",
             "pronunciation": "ləˈkɑːnɪk",
             "synonyms": [
@@ -66771,11 +66822,12 @@
                 "sentence": "He gave a laconic answer.",
                 "translation": "과묵하게 대답했다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c40-003",
-            "word": "pedantic",
+            "word": "Pedantic",
             "meaning": "현학적인, 학식을 뽐내는",
             "pronunciation": "pɪˈdæntɪk",
             "synonyms": [
@@ -66794,11 +66846,12 @@
                 "sentence": "A pedantic professor.",
                 "translation": "현학적인 교수."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c40-004",
-            "word": "recondite",
+            "word": "Recondite",
             "meaning": "난해한, 심오한",
             "pronunciation": "ˈrɛkəndaɪt",
             "synonyms": [
@@ -66817,11 +66870,12 @@
                 "sentence": "The topic is recondite.",
                 "translation": "주제가 심오하다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c40-005",
-            "word": "vapid",
+            "word": "Vapid",
             "meaning": "지루한, 김 빠진",
             "pronunciation": "ˈvæpɪd",
             "synonyms": [
@@ -66840,11 +66894,12 @@
                 "sentence": "Vapid entertainment.",
                 "translation": "김 빠진 오락."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c40-006",
-            "word": "histrionic",
+            "word": "Histrionic",
             "meaning": "연극적인, 과장된",
             "pronunciation": "ˌhɪstriˈɑːnɪk",
             "synonyms": [
@@ -66863,11 +66918,12 @@
                 "sentence": "Histrionic behavior.",
                 "translation": "과장된 행동."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c40-007",
-            "word": "obfuscate",
+            "word": "Obfuscate",
             "meaning": "흐리게 하다, 혼동시키다",
             "pronunciation": "ˈɑːbfəskeɪt",
             "synonyms": [
@@ -66886,11 +66942,12 @@
                 "sentence": "Don't obfuscate the truth.",
                 "translation": "진실을 혼동시키지 마."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c40-008",
-            "word": "perfidious",
+            "word": "Perfidious",
             "meaning": "배반하는, 불성실한",
             "pronunciation": "pərˈfɪdiəs",
             "synonyms": [
@@ -66909,11 +66966,12 @@
                 "sentence": "His perfidious nature.",
                 "translation": "배반하는 성격."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c40-009",
-            "word": "sycophantic",
+            "word": "Sycophantic",
             "meaning": "아첨하는",
             "pronunciation": "ˌsɪkəˈfæntɪk",
             "synonyms": [
@@ -66932,13 +66990,14 @@
                 "sentence": "His sycophantic manner.",
                 "translation": "아첨하는 태도."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c40-010",
-            "word": "trepidation",
+            "word": "Trepidation",
             "meaning": "불안, 공포",
-            "pronunciation": "ˌ트레피데이션",
+            "pronunciation": "ˌtrɛpɪˈdeɪʃən",
             "synonyms": [
               "anxiety",
               "fear"
@@ -66955,7 +67014,8 @@
                 "sentence": "With great trepidation.",
                 "translation": "큰 공포와 함께."
               }
-            ]
+            ],
+            "category": "csat"
           }
         ]
       },
@@ -66964,7 +67024,7 @@
         "words": [
           {
             "id": "c41-001",
-            "word": "grandiloquent",
+            "word": "Grandiloquent",
             "meaning": "거창한, 과장된",
             "pronunciation": "ɡrænˈdɪləkwənt",
             "synonyms": [
@@ -66983,11 +67043,12 @@
                 "sentence": "His grandiloquent words.",
                 "translation": "과장된 말."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c41-002",
-            "word": "inscrutable",
+            "word": "Inscrutable",
             "meaning": "불가해한, 이해할 수 없는",
             "pronunciation": "ɪnˈskruːtəbl",
             "synonyms": [
@@ -67006,11 +67067,12 @@
                 "sentence": "Her inscrutable motives.",
                 "translation": "이해할 수 없는 동기."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c41-003",
-            "word": "prevaricate",
+            "word": "Prevaricate",
             "meaning": "얼버무리다, 말을 돌리다",
             "pronunciation": "prɪˈværɪkeɪt",
             "synonyms": [
@@ -67029,11 +67091,12 @@
                 "sentence": "Don't prevaricate.",
                 "translation": "말을 돌리지 마."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c41-004",
-            "word": "recalcitrant",
+            "word": "Recalcitrant",
             "meaning": "반항적인",
             "pronunciation": "rɪˈkælsɪtrənt",
             "synonyms": [
@@ -67052,11 +67115,12 @@
                 "sentence": "Recalcitrant behavior.",
                 "translation": "반항적 행동."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c41-005",
-            "word": "circumlocution",
+            "word": "Circumlocution",
             "meaning": "완곡어법, 말을 빙빙 돌림",
             "pronunciation": "ˌsɜːrkəmloʊˈkjuːʃən",
             "synonyms": [
@@ -67074,13 +67138,14 @@
                 "sentence": "Avoid circumlocution.",
                 "translation": "말을 빙빙 돌리지 마."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c41-006",
-            "word": "fastidious",
+            "word": "Fastidious",
             "meaning": "까다로운, 꼼꼼한",
-            "pronunciation": "fæˈ스지지어스",
+            "pronunciation": "fæˈstɪdiəs",
             "synonyms": [
               "meticulous",
               "fussy"
@@ -67097,11 +67162,12 @@
                 "sentence": "A fastidious nature.",
                 "translation": "까다로운 성격."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c41-007",
-            "word": "parsimonious",
+            "word": "Parsimonious",
             "meaning": "인색한, 검소한",
             "pronunciation": "ˌpɑːrsɪˈmoʊniəs",
             "synonyms": [
@@ -67120,11 +67186,12 @@
                 "sentence": "He is parsimonious.",
                 "translation": "인색하다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c41-008",
-            "word": "ostentatious",
+            "word": "Ostentatious",
             "meaning": "과시적인",
             "pronunciation": "ˌɑːstɛnˈteɪʃəs",
             "synonyms": [
@@ -67143,11 +67210,12 @@
                 "sentence": "Ostentatious wealth.",
                 "translation": "과시적인 부."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c41-009",
-            "word": "querulous",
+            "word": "Querulous",
             "meaning": "불평이 많은",
             "pronunciation": "ˈkwɛrələs",
             "synonyms": [
@@ -67166,11 +67234,12 @@
                 "sentence": "Her querulous tone.",
                 "translation": "불평하는 어조."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c41-010",
-            "word": "intransigent",
+            "word": "Intransigent",
             "meaning": "화해를 거부하는, 비타협적인",
             "pronunciation": "ɪnˈtrænsɪdʒənt",
             "synonyms": [
@@ -67189,7 +67258,8 @@
                 "sentence": "His intransigent position.",
                 "translation": "비타협적인 입장."
               }
-            ]
+            ],
+            "category": "csat"
           }
         ]
       },
@@ -67198,7 +67268,7 @@
         "words": [
           {
             "id": "c42-001",
-            "word": "equanimity",
+            "word": "Equanimity",
             "meaning": "침착, 평정",
             "pronunciation": "ˌiːkwəˈnɪmɪti",
             "synonyms": [
@@ -67217,11 +67287,12 @@
                 "sentence": "He maintained equanimity.",
                 "translation": "평정을 유지했다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c42-002",
-            "word": "insouciant",
+            "word": "Insouciant",
             "meaning": "태평한, 무관심한",
             "pronunciation": "ɪnˈsuːsiənt",
             "synonyms": [
@@ -67240,11 +67311,12 @@
                 "sentence": "She seemed insouciant.",
                 "translation": "무관심해 보였다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c42-003",
-            "word": "vacuous",
+            "word": "Vacuous",
             "meaning": "공허한, 멍한, 어리석은",
             "pronunciation": "ˈvækjuəs",
             "synonyms": [
@@ -67263,11 +67335,12 @@
                 "sentence": "Vacuous remarks.",
                 "translation": "공허한 발언."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c42-004",
-            "word": "chicanery",
+            "word": "Chicanery",
             "meaning": "속임수, 궤변",
             "pronunciation": "ʃɪˈkeɪnəri",
             "synonyms": [
@@ -67286,11 +67359,12 @@
                 "sentence": "He resorted to chicanery.",
                 "translation": "궤변에 의지했다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c42-005",
-            "word": "quagmire",
+            "word": "Quagmire",
             "meaning": "수렁, 곤경",
             "pronunciation": "ˈkwæɡmaɪr",
             "synonyms": [
@@ -67307,11 +67381,12 @@
                 "sentence": "A political quagmire.",
                 "translation": "정치적 곤경."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c42-006",
-            "word": "palliative",
+            "word": "Palliative",
             "meaning": "완화하는; 완화제",
             "pronunciation": "ˈpæliətɪv",
             "synonyms": [
@@ -67328,11 +67403,12 @@
                 "sentence": "A palliative measure.",
                 "translation": "완화 조치."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c42-007",
-            "word": "dogmatic",
+            "word": "Dogmatic",
             "meaning": "독단적인, 교조적인",
             "pronunciation": "dɔːɡˈmætɪk",
             "synonyms": [
@@ -67351,11 +67427,12 @@
                 "sentence": "A dogmatic approach.",
                 "translation": "독단적 접근."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c42-008",
-            "word": "pernicious",
+            "word": "Pernicious",
             "meaning": "해로운, 치명적인",
             "pronunciation": "pərˈnɪʃəs",
             "synonyms": [
@@ -67374,11 +67451,12 @@
                 "sentence": "The pernicious effects.",
                 "translation": "치명적 영향."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c42-009",
-            "word": "propitious",
+            "word": "Propitious",
             "meaning": "유리한, 상서로운",
             "pronunciation": "prəˈpɪʃəs",
             "synonyms": [
@@ -67397,16 +67475,17 @@
                 "sentence": "Propitious conditions.",
                 "translation": "상서로운 조건."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c42-010",
-            "word": "pertinacious",
+            "word": "Pertinacious",
             "meaning": "완강한, 끈질긴",
             "pronunciation": "ˌpɜːrtɪˈneɪʃəs",
             "synonyms": [
               "persistent",
-              "tenacity"
+              "tenacious"
             ],
             "antonyms": [
               "yielding"
@@ -67420,7 +67499,8 @@
                 "sentence": "A pertinacious argument.",
                 "translation": "완강한 논증."
               }
-            ]
+            ],
+            "category": "csat"
           }
         ]
       },
@@ -67429,7 +67509,7 @@
         "words": [
           {
             "id": "c43-001",
-            "word": "mercurial",
+            "word": "Mercurial",
             "meaning": "변덕스러운, 활발한",
             "pronunciation": "mɜːrˈkjʊriəl",
             "synonyms": [
@@ -67448,11 +67528,12 @@
                 "sentence": "A mercurial personality.",
                 "translation": "변덕스러운 성격."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c43-002",
-            "word": "obdurate",
+            "word": "Obdurate",
             "meaning": "완고한, 냉혹한",
             "pronunciation": "ˈɑːbdjʊrɪt",
             "synonyms": [
@@ -67471,11 +67552,12 @@
                 "sentence": "An obdurate refusal.",
                 "translation": "완고한 거절."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c43-003",
-            "word": "perspicuous",
+            "word": "Perspicuous",
             "meaning": "명쾌한, 알기 쉬운",
             "pronunciation": "pərˈspɪkjuəs",
             "synonyms": [
@@ -67494,11 +67576,12 @@
                 "sentence": "Her writing is perspicuous.",
                 "translation": "글이 알기 쉽다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c43-004",
-            "word": "surreptitious",
+            "word": "Surreptitious",
             "meaning": "은밀한",
             "pronunciation": "ˌsɜːrəpˈtɪʃəs",
             "synonyms": [
@@ -67517,11 +67600,12 @@
                 "sentence": "Surreptitious glances.",
                 "translation": "은밀한 시선."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c43-005",
-            "word": "inimitable",
+            "word": "Inimitable",
             "meaning": "모방할 수 없는, 독특한",
             "pronunciation": "ɪˈnɪmɪtəbl",
             "synonyms": [
@@ -67540,11 +67624,12 @@
                 "sentence": "An inimitable performance.",
                 "translation": "독특한 공연."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c43-006",
-            "word": "mellifluous",
+            "word": "Mellifluous",
             "meaning": "감미로운, 유창한",
             "pronunciation": "mɪˈlɪfluəs",
             "synonyms": [
@@ -67563,11 +67648,12 @@
                 "sentence": "Mellifluous words.",
                 "translation": "유창한 말."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c43-007",
-            "word": "redoubtable",
+            "word": "Redoubtable",
             "meaning": "무시무시한, 만만치 않은",
             "pronunciation": "rɪˈdaʊtəbl",
             "synonyms": [
@@ -67586,11 +67672,12 @@
                 "sentence": "She is a redoubtable force.",
                 "translation": "무시무시한 힘이다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c43-008",
-            "word": "vituperative",
+            "word": "Vituperative",
             "meaning": "독설적인, 맹렬히 비난하는",
             "pronunciation": "vaɪˈtjuːpərətɪv",
             "synonyms": [
@@ -67609,11 +67696,12 @@
                 "sentence": "A vituperative attack.",
                 "translation": "맹렬한 비난."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c43-009",
-            "word": "lugubrious",
+            "word": "Lugubrious",
             "meaning": "슬픈, 우울한",
             "pronunciation": "luːˈɡuːbriəs",
             "synonyms": [
@@ -67632,11 +67720,12 @@
                 "sentence": "His lugubrious face.",
                 "translation": "우울한 얼굴."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c43-010",
-            "word": "trenchant",
+            "word": "Trenchant",
             "meaning": "통렬한, 날카로운",
             "pronunciation": "ˈtrɛntʃənt",
             "synonyms": [
@@ -67655,7 +67744,8 @@
                 "sentence": "Trenchant wit.",
                 "translation": "날카로운 재치."
               }
-            ]
+            ],
+            "category": "csat"
           }
         ]
       },
@@ -67664,7 +67754,7 @@
         "words": [
           {
             "id": "c44-001",
-            "word": "feckless",
+            "word": "Feckless",
             "meaning": "무책임한, 무기력한",
             "pronunciation": "ˈfɛkləs",
             "synonyms": [
@@ -67683,11 +67773,12 @@
                 "sentence": "Feckless behavior.",
                 "translation": "무기력한 행동."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c44-002",
-            "word": "byzantine",
+            "word": "Byzantine",
             "meaning": "복잡한, 뒤얽힌",
             "pronunciation": "ˈbɪzəntiːn",
             "synonyms": [
@@ -67706,11 +67797,12 @@
                 "sentence": "A byzantine legal system.",
                 "translation": "뒤얽힌 법률 체계."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c44-003",
-            "word": "martinet",
+            "word": "Martinet",
             "meaning": "엄격한 사람, 훈련관",
             "pronunciation": "ˌmɑːrtɪˈnɛt",
             "synonyms": [
@@ -67727,11 +67819,12 @@
                 "sentence": "A military martinet.",
                 "translation": "군사적 훈련관."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c44-004",
-            "word": "recondite",
+            "word": "Recondite",
             "meaning": "난해한, 심오한",
             "pronunciation": "ˈrɛkəndaɪt",
             "synonyms": [
@@ -67750,11 +67843,12 @@
                 "sentence": "A recondite subject.",
                 "translation": "심오한 주제."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c44-005",
-            "word": "officious",
+            "word": "Officious",
             "meaning": "지나치게 참견하는, 주제넘은",
             "pronunciation": "əˈfɪʃəs",
             "synonyms": [
@@ -67773,11 +67867,12 @@
                 "sentence": "His officious manner.",
                 "translation": "지나치게 참견하는 태도."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c44-006",
-            "word": "sycophancy",
+            "word": "Sycophancy",
             "meaning": "아첨, 아부",
             "pronunciation": "ˈsɪkəfənsi",
             "synonyms": [
@@ -67795,11 +67890,12 @@
                 "sentence": "He despises sycophancy.",
                 "translation": "아부를 경멸한다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c44-007",
-            "word": "obsequious",
+            "word": "Obsequious",
             "meaning": "비굴한, 아첨하는",
             "pronunciation": "əbˈsiːkwiəs",
             "synonyms": [
@@ -67818,11 +67914,12 @@
                 "sentence": "His obsequious manner.",
                 "translation": "아첨하는 태도."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c44-008",
-            "word": "excoriate",
+            "word": "Excoriate",
             "meaning": "맹비난하다",
             "pronunciation": "ɪkˈskɔːrieɪt",
             "synonyms": [
@@ -67841,11 +67938,12 @@
                 "sentence": "She was excoriated in the press.",
                 "translation": "언론에서 맹비난받았다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c44-009",
-            "word": "plethora",
+            "word": "Plethora",
             "meaning": "과다, 과잉",
             "pronunciation": "ˈplɛθərə",
             "synonyms": [
@@ -67864,11 +67962,12 @@
                 "sentence": "She faces a plethora of problems.",
                 "translation": "과다한 문제에 직면했다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c44-010",
-            "word": "supine",
+            "word": "Supine",
             "meaning": "드러누운, 게으른",
             "pronunciation": "suːˈpaɪn",
             "synonyms": [
@@ -67887,7 +67986,8 @@
                 "sentence": "He lay supine on the floor.",
                 "translation": "바닥에 드러누웠다."
               }
-            ]
+            ],
+            "category": "csat"
           }
         ]
       },
@@ -67896,7 +67996,7 @@
         "words": [
           {
             "id": "c45-001",
-            "word": "assiduously",
+            "word": "Assiduously",
             "meaning": "근면하게, 꾸준히",
             "pronunciation": "əˈsɪdjuəsli",
             "synonyms": [
@@ -67915,13 +68015,14 @@
                 "sentence": "He worked assiduously.",
                 "translation": "꾸준히 일했다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c45-002",
-            "word": "intransigence",
+            "word": "Intransigence",
             "meaning": "비타협, 고집",
-            "pronunciation": "ɪnˈ트랜시전스",
+            "pronunciation": "ɪnˈtrænsɪdʒəns",
             "synonyms": [
               "stubbornness"
             ],
@@ -67937,11 +68038,12 @@
                 "sentence": "His intransigence frustrated everyone.",
                 "translation": "고집이 모두를 좌절시켰다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c45-003",
-            "word": "prescience",
+            "word": "Prescience",
             "meaning": "선견지명, 예지력",
             "pronunciation": "ˈprɛʃəns",
             "synonyms": [
@@ -67960,11 +68062,12 @@
                 "sentence": "His prescience was remarkable.",
                 "translation": "예지력이 놀라웠다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c45-004",
-            "word": "quiescent",
+            "word": "Quiescent",
             "meaning": "정지 상태인, 조용한",
             "pronunciation": "kwiˈɛsənt",
             "synonyms": [
@@ -67983,11 +68086,12 @@
                 "sentence": "A quiescent period.",
                 "translation": "조용한 기간."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c45-005",
-            "word": "recidivism",
+            "word": "Recidivism",
             "meaning": "재범, 누범",
             "pronunciation": "rɪˈsɪdɪvɪzəm",
             "synonyms": [
@@ -68005,11 +68109,12 @@
                 "sentence": "Programs to reduce recidivism.",
                 "translation": "재범을 줄이기 위한 프로그램."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c45-006",
-            "word": "sagacity",
+            "word": "Sagacity",
             "meaning": "현명함, 총명",
             "pronunciation": "səˈɡæsɪti",
             "synonyms": [
@@ -68028,11 +68133,12 @@
                 "sentence": "His sagacity guided the team.",
                 "translation": "총명함이 팀을 이끌었다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c45-007",
-            "word": "inimical",
+            "word": "Inimical",
             "meaning": "적대적인, 해로운",
             "pronunciation": "ɪˈnɪmɪkəl",
             "synonyms": [
@@ -68051,11 +68157,12 @@
                 "sentence": "Factors inimical to growth.",
                 "translation": "성장에 해로운 요인."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c45-008",
-            "word": "truculent",
+            "word": "Truculent",
             "meaning": "호전적인, 난폭한",
             "pronunciation": "ˈtrʌkjələnt",
             "synonyms": [
@@ -68074,11 +68181,12 @@
                 "sentence": "He was truculent.",
                 "translation": "난폭했다."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c45-009",
-            "word": "usurious",
+            "word": "Usurious",
             "meaning": "고리대금의, 착취적인",
             "pronunciation": "juːˈʒʊriəs",
             "synonyms": [
@@ -68096,11 +68204,12 @@
                 "sentence": "Usurious lending practices.",
                 "translation": "착취적 대출 관행."
               }
-            ]
+            ],
+            "category": "csat"
           },
           {
             "id": "c45-010",
-            "word": "verisimilitude",
+            "word": "Verisimilitude",
             "meaning": "사실성, 핍진성",
             "pronunciation": "ˌvɛrɪsɪˈmɪlɪtuːd",
             "synonyms": [
@@ -68117,7 +68226,8 @@
                 "sentence": "Verisimilitude in art.",
                 "translation": "예술의 핍진성."
               }
-            ]
+            ],
+            "category": "csat"
           }
         ]
       }
