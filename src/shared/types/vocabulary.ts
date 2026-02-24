@@ -157,12 +157,12 @@ export const LEVEL_INFO: Record<Level, LevelInfo> = {
     },
     csat: {
         id: 'csat',
-        name: 'CSAT',
+        name: 'CSAT High-Frequency',
         nameKo: '수능 빈출',
-        description: '수능 기출 및 빈출 심화 어휘',
-        totalDays: 30,
-        wordsPerDay: 50,
-        totalWords: 1500,
+        description: '수능 대비 고득점을 위한 심화 영어 단어',
+        totalDays: 16,
+        wordsPerDay: 30, // Approximate average
+        totalWords: 499,
     },
 };
 
