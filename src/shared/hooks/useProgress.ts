@@ -23,8 +23,14 @@ export function useProgress(): UseProgressReturn {
     useEffect(() => {
         const loadProgress = async () => {
             setIsLoading(true);
-            const loaded = await storage.getAllProgress();
-            setProgress(loaded);
+            // 로그인한 사용자는 항상 DB에서 로드 (localStorage 동기화 문제 방지)
+            if (user?.id && user.id !== 'guest') {
+                const loaded = await storage.getAllProgressFromCloud();
+                setProgress(loaded);
+            } else {
+                const loaded = await storage.getAllProgress();
+                setProgress(loaded);
+            }
             setIsLoading(false);
         };
         loadProgress();
