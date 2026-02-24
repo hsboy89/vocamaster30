@@ -49,6 +49,29 @@ export interface DayProgress {
     percentage: number;
 }
 
+// 일별 활성 학생 수 타입
+export interface DailyActiveUsers {
+    date: string;           // YYYY-MM-DD
+    activeUsers: number;    // 해당 날짜에 학습한 고유 학생 수
+}
+
+// 학생 활동 히트맵 타입
+export interface StudentActivityHeatmap {
+    userId: string;
+    studentName: string;
+    activities: {
+        date: string;       // YYYY-MM-DD
+        count: number;      // 해당 날짜의 학습 활동 수 (완료한 Day 수)
+    }[];
+}
+
+// 오늘의 학습 현황 상세 타입
+export interface TodayStudyDetails {
+    activeStudents: number;     // 오늘 학습한 학생 수
+    completedDays: number;      // 오늘 완료된 Day 수
+    memorizedWords: number;     // 오늘 암기된 단어 수
+}
+
 // 학생 상세 정보 타입
 export interface StudentDetail {
     user: User;
@@ -139,7 +162,8 @@ export async function getDashboardStats(academyId?: string): Promise<DashboardSt
         const { count: atRiskCount } = await riskQuery;
 
         // 5. 이번 달 퀴즈 — 학생별 평균 점수 기준 3단계 분포
-        const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
+        const now = new Date();
+        const monthStart = new Date(now.getFullYear(), now.getMonth(), 1, 0, 0, 0, 0);
         let quizQuery = supabase
             .from('quiz_history')
             .select('user_id, correct_answers, total_questions')
@@ -151,10 +175,18 @@ export async function getDashboardStats(academyId?: string): Promise<DashboardSt
 
         const { data: quizData } = await quizQuery;
 
+        console.log('[DEBUG] 이번 달 퀴즈 데이터:', {
+            monthStart: monthStart.toISOString(),
+            quizCount: quizData?.length || 0,
+            academyId
+        });
+
         // 학생별 점수 합산
         const studentScores = new Map<string, { total: number; count: number }>();
         quizData?.forEach(q => {
-            if (q.total_questions > 0) {
+            // 0점 퀴즈 제외 (학습 중도 이탈 세션)
+            // 실제로 0점을 맞는 경우보다 퀴즈를 시작하고 포기한 경우가 훨씬 많음
+            if (q.total_questions > 0 && q.correct_answers > 0) {
                 let correctCount = q.correct_answers;
                 // 레거시 데이터 보정
                 if (correctCount > q.total_questions) {
@@ -168,6 +200,14 @@ export async function getDashboardStats(academyId?: string): Promise<DashboardSt
                     total: existing.total + score,
                     count: existing.count + 1,
                 });
+
+                console.log('[DEBUG] 퀴즈 점수 계산:', {
+                    user_id: q.user_id,
+                    correctCount,
+                    total: q.total_questions,
+                    score,
+                    avg: (existing.total + score) / (existing.count + 1)
+                });
             }
         });
 
@@ -177,11 +217,21 @@ export async function getDashboardStats(academyId?: string): Promise<DashboardSt
         let belowCount = 0;
         const quizStudents = studentScores.size;
 
-        studentScores.forEach(({ total, count }) => {
+        studentScores.forEach(({ total, count }, userId) => {
             const avg = total / count;
+            const grade = avg >= 90 ? '우수' : avg >= 70 ? '보통' : '미달';
+            console.log('[DEBUG] 학생 평균 점수:', { userId, avg, grade });
+
             if (avg >= 90) excellentCount++;
             else if (avg >= 70) averageCount++;
             else belowCount++;
+        });
+
+        console.log('[DEBUG] 퀴즈 분포:', {
+            quizStudents: studentScores.size,
+            excellentCount,
+            averageCount,
+            belowCount
         });
 
         const quizDistribution = {
@@ -350,16 +400,21 @@ export async function getStudentList(academyId?: string): Promise<StudentListIte
 
                 let avgScore = 0;
                 if (quizzes && quizzes.length > 0) {
-                    const total = quizzes.reduce((sum, q) => {
-                        let correctCount = q.correct_answers;
-                        // 과거 데이터 보정: 정답 수가 전체 문제 수보다 크면 점수(5배수)로 저장된 것으로 간주
-                        if (correctCount > q.total_questions) {
-                            correctCount = Math.round(correctCount / 5);
-                        }
-                        let score = (q.total_questions > 0 ? (correctCount / q.total_questions) * 100 : 0);
-                        return sum + score;
-                    }, 0);
-                    avgScore = Math.round(total / quizzes.length);
+                    // 0점 퀴즈 제외 (학습 중도 이탈 세션)
+                    const validQuizzes = quizzes.filter(q => q.total_questions > 0 && q.correct_answers > 0);
+
+                    if (validQuizzes.length > 0) {
+                        const total = validQuizzes.reduce((sum, q) => {
+                            let correctCount = q.correct_answers;
+                            // 과거 데이터 보정: 정답 수가 전체 문제 수보다 크면 점수(5배수)로 저장된 것으로 간주
+                            if (correctCount > q.total_questions) {
+                                correctCount = Math.round(correctCount / 5);
+                            }
+                            let score = (correctCount / q.total_questions) * 100;
+                            return sum + score;
+                        }, 0);
+                        avgScore = Math.round(total / validQuizzes.length);
+                    }
                 }
 
                 return {
@@ -379,6 +434,201 @@ export async function getStudentList(academyId?: string): Promise<StudentListIte
         return studentList;
     } catch (error) {
         console.error('Failed to get student list:', error);
+        return [];
+    }
+}
+
+// 일별 활성 학생 수 조회 (최근 30일)
+export async function getDailyActiveUsers(academyId?: string, days: number = 30): Promise<DailyActiveUsers[]> {
+    try {
+        const today = new Date();
+        today.setHours(23, 59, 59, 999);
+
+        const startDate = new Date(today);
+        startDate.setDate(startDate.getDate() - days + 1);
+        startDate.setHours(0, 0, 0, 0);
+
+        // 해당 기간의 학습 기록 조회
+        let query = supabase
+            .from('student_progress')
+            .select('user_id, last_studied_at')
+            .gte('last_studied_at', startDate.toISOString());
+
+        if (academyId) {
+            query = query.eq('academy_id', academyId);
+        }
+
+        const { data: progressData } = await query;
+
+        // 날짜별로 고유 학생 수 집계
+        const dailyMap = new Map<string, Set<string>>();
+
+        // 먼저 모든 날짜를 0으로 초기화
+        for (let i = 0; i < days; i++) {
+            const date = new Date(startDate);
+            date.setDate(date.getDate() + i);
+            const dateStr = date.toISOString().split('T')[0];
+            dailyMap.set(dateStr, new Set());
+        }
+
+        // 실제 활동 데이터 채우기
+        progressData?.forEach(p => {
+            if (p.last_studied_at) {
+                const dateStr = p.last_studied_at.split('T')[0];
+                if (dailyMap.has(dateStr)) {
+                    dailyMap.get(dateStr)!.add(p.user_id);
+                }
+            }
+        });
+
+        // 결과 생성
+        const result: DailyActiveUsers[] = [];
+        dailyMap.forEach((userSet, date) => {
+            result.push({
+                date,
+                activeUsers: userSet.size
+            });
+        });
+
+        // 날짜순 정렬
+        result.sort((a, b) => a.date.localeCompare(b.date));
+
+        return result;
+    } catch (error) {
+        console.error('Failed to get daily active users:', error);
+        return [];
+    }
+}
+
+// 오늘의 학습 현황 상세 조회
+export async function getTodayStudyDetails(academyId?: string): Promise<TodayStudyDetails> {
+    try {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        // 1. 오늘 학습한 고유 학생 수
+        let activeQuery = supabase
+            .from('student_progress')
+            .select('user_id')
+            .gte('last_studied_at', today.toISOString());
+
+        if (academyId) {
+            activeQuery = activeQuery.eq('academy_id', academyId);
+        }
+
+        const { data: activeData } = await activeQuery;
+        const activeStudents = new Set(activeData?.map(a => a.user_id)).size;
+
+        // 2. 오늘 완료된 Day 수
+        let completedQuery = supabase
+            .from('student_progress')
+            .select('id', { count: 'exact', head: true })
+            .eq('status', 'completed')
+            .gte('last_studied_at', today.toISOString());
+
+        if (academyId) {
+            completedQuery = completedQuery.eq('academy_id', academyId);
+        }
+
+        const { count: completedDays } = await completedQuery;
+
+        // 3. 오늘 암기된 단어 수
+        let wordsQuery = supabase
+            .from('student_progress')
+            .select('memorized_words')
+            .gte('last_studied_at', today.toISOString());
+
+        if (academyId) {
+            wordsQuery = wordsQuery.eq('academy_id', academyId);
+        }
+
+        const { data: wordsData } = await wordsQuery;
+        const memorizedWords = wordsData?.reduce((sum, p) =>
+            sum + (p.memorized_words?.length || 0), 0) || 0;
+
+        return {
+            activeStudents,
+            completedDays: completedDays || 0,
+            memorizedWords
+        };
+    } catch (error) {
+        console.error('Failed to get today study details:', error);
+        return {
+            activeStudents: 0,
+            completedDays: 0,
+            memorizedWords: 0
+        };
+    }
+}
+
+// 학생 활동 히트맵 조회 (최근 30일)
+export async function getStudentActivityHeatmap(academyId?: string, days: number = 30): Promise<StudentActivityHeatmap[]> {
+    try {
+        const today = new Date();
+        today.setHours(23, 59, 59, 999);
+
+        const startDate = new Date(today);
+        startDate.setDate(startDate.getDate() - days + 1);
+        startDate.setHours(0, 0, 0, 0);
+
+        // 1. 학생 목록 조회
+        let userQuery = supabase
+            .from('users')
+            .select('id, student_name')
+            .eq('role', 'student')
+            .order('student_name');
+
+        if (academyId) {
+            userQuery = userQuery.eq('academy_id', academyId);
+        }
+
+        const { data: users } = await userQuery;
+        if (!users || users.length === 0) return [];
+
+        const userIds = users.map(u => u.id);
+
+        // 2. 해당 기간의 학습 기록 조회
+        let progressQuery = supabase
+            .from('student_progress')
+            .select('user_id, day, status, last_studied_at')
+            .gte('last_studied_at', startDate.toISOString())
+            .in('user_id', userIds);
+
+        if (academyId) {
+            progressQuery = progressQuery.eq('academy_id', academyId);
+        }
+
+        const { data: progressData } = await progressQuery;
+
+        // 3. 학생별 날짜별 활동 집계
+        const result: StudentActivityHeatmap[] = users.map(user => {
+            const userProgress = progressData?.filter(p => p.user_id === user.id) || [];
+
+            // 날짜별로 완료한 Day 수 집계
+            const dateMap = new Map<string, number>();
+            userProgress.forEach(p => {
+                if (p.last_studied_at && p.status === 'completed') {
+                    const dateStr = p.last_studied_at.split('T')[0];
+                    dateMap.set(dateStr, (dateMap.get(dateStr) || 0) + 1);
+                }
+            });
+
+            const activities = Array.from(dateMap.entries()).map(([date, count]) => ({
+                date,
+                count
+            }));
+
+            return {
+                userId: user.id,
+                studentName: user.student_name,
+                activities
+            };
+        });
+
+        // 활동이 있는 학생만 반환 (최근 30일 내 활동이 있는 경우)
+        return result.filter(student => student.activities.length > 0);
+    } catch (error) {
+        console.error('Failed to get student activity heatmap:', error);
         return [];
     }
 }

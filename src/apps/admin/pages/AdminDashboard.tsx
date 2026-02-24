@@ -10,13 +10,19 @@ import {
     getAtRiskStudents,
     getGlobalTopWrongWords,
     getRankingByGoalPlan,
+    getDailyActiveUsers,
+    getTodayStudyDetails,
+    getStudentActivityHeatmap,
     createStudent,
     deleteStudent,
     DashboardStats,
     StudentListItem,
     DayProgress,
     WrongWordStat,
-    RankingItem
+    RankingItem,
+    DailyActiveUsers,
+    TodayStudyDetails,
+    StudentActivityHeatmap
 } from '../../../shared/services/admin';
 
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
@@ -28,6 +34,9 @@ export function AdminDashboard() {
     const [stats, setStats] = useState<DashboardStats | null>(null);
     const [students, setStudents] = useState<StudentListItem[]>([]);
     const [dayProgress, setDayProgress] = useState<DayProgress[]>([]);
+    const [dailyActiveUsers, setDailyActiveUsers] = useState<DailyActiveUsers[]>([]);
+    const [todayDetails, setTodayDetails] = useState<TodayStudyDetails | null>(null);
+    const [studentHeatmap, setStudentHeatmap] = useState<StudentActivityHeatmap[]>([]);
     const [selectedLevel, setSelectedLevel] = useState<Level>('middle_1');
     const [searchTerm, setSearchTerm] = useState('');
     const [isLoading, setIsLoading] = useState(false); // Default to false to show UI structure in background mode
@@ -71,16 +80,22 @@ export function AdminDashboard() {
         setIsLoading(true);
         try {
             const academyId = user.academyId; // Multi-tenant scoping
-            const [statsData, studentsData, wrongWordsData, atRiskStudentsData] = await Promise.all([
+            const [statsData, studentsData, wrongWordsData, atRiskStudentsData, dailyActiveData, todayData, heatmapData] = await Promise.all([
                 getDashboardStats(academyId),
                 getStudentList(academyId),
                 getGlobalTopWrongWords(academyId),
                 getAtRiskStudents(academyId),
+                getDailyActiveUsers(academyId, 30),
+                getTodayStudyDetails(academyId),
+                getStudentActivityHeatmap(academyId, 30),
             ]);
             setStats(statsData);
             setStudents(studentsData);
             setTopWrongWords(wrongWordsData);
             setAtRiskIds(new Set(atRiskStudentsData.map(s => s.id)));
+            setDailyActiveUsers(dailyActiveData);
+            setTodayDetails(todayData);
+            setStudentHeatmap(heatmapData);
         } catch (error) {
             console.error('Failed to load dashboard data:', error);
         }
@@ -285,18 +300,28 @@ export function AdminDashboard() {
                 {/* Stats Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                     <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm p-6 border border-gray-100 dark:border-white/5">
-                        <div className="flex items-center justify-between">
+                        <div className="flex items-center justify-between mb-4">
                             <div>
-                                <p className="text-sm text-gray-500 dark:text-slate-400 mb-1">오늘의 완료율</p>
+                                <p className="text-sm text-gray-500 dark:text-slate-400 mb-1">오늘의 학습 현황</p>
                                 <p className="text-3xl font-bold text-gray-900 dark:text-white">
-                                    {stats?.todayAttendance.active || 0}
-                                    <span className="text-lg text-gray-400 dark:text-slate-500 font-normal ml-1">/ {stats?.todayAttendance.total || 0}</span>
+                                    {todayDetails?.activeStudents || 0}
+                                    <span className="text-lg text-gray-400 dark:text-slate-500 font-normal ml-1">명</span>
                                 </p>
                             </div>
                             <div className="w-12 h-12 bg-blue-100 dark:bg-blue-500/10 rounded-xl flex items-center justify-center">
                                 <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
+                            </div>
+                        </div>
+                        <div className="space-y-2 text-xs">
+                            <div className="flex items-center justify-between">
+                                <span className="text-gray-500 dark:text-slate-400">완료한 Day</span>
+                                <span className="font-bold text-emerald-600 dark:text-emerald-400">{todayDetails?.completedDays || 0}개</span>
+                            </div>
+                            <div className="flex items-center justify-between">
+                                <span className="text-gray-500 dark:text-slate-400">암기한 단어</span>
+                                <span className="font-bold text-blue-600 dark:text-blue-400">{todayDetails?.memorizedWords || 0}개</span>
                             </div>
                         </div>
                     </div>
@@ -421,39 +446,33 @@ export function AdminDashboard() {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-                    {/* Day Progress Chart */}
+                    {/* Daily Active Users Chart */}
                     <div className="lg:col-span-2 bg-white dark:bg-slate-900 rounded-2xl shadow-sm p-6 border border-gray-100 dark:border-white/5">
                         <div className="flex items-center justify-between mb-6">
-                            <h2 className="text-lg font-bold text-gray-900 dark:text-white">Day별 학습 진행률</h2>
-                            <div className="flex gap-2">
-                                {(['middle_1', 'middle_2', 'high_1', 'high_2', 'csat'] as Level[]).map((level) => (
-                                    <button
-                                        key={level}
-                                        onClick={() => setSelectedLevel(level)}
-                                        className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${selectedLevel === level
-                                            ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20'
-                                            : 'bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-slate-400 hover:bg-gray-200 dark:hover:bg-white/10'
-                                            }`}
-                                    >
-                                        {LEVEL_INFO[level].nameKo}
-                                    </button>
-                                ))}
+                            <div>
+                                <h2 className="text-lg font-bold text-gray-900 dark:text-white">일별 활성 학생 수</h2>
+                                <p className="text-xs text-gray-500 dark:text-slate-400 mt-1">최근 30일간 매일 학습한 학생 수 추이</p>
                             </div>
                         </div>
                         <div className="h-64">
                             <ResponsiveContainer width="100%" height="100%">
-                                <BarChart data={dayProgress}>
+                                <BarChart data={dailyActiveUsers}>
                                     <XAxis
-                                        dataKey="day"
-                                        tick={{ fontSize: 12, fill: isDark ? '#94a3b8' : '#64748b' }}
-                                        tickFormatter={(value) => `D${value}`}
+                                        dataKey="date"
+                                        tick={{ fontSize: 11, fill: isDark ? '#94a3b8' : '#64748b' }}
+                                        tickFormatter={(value) => {
+                                            const date = new Date(value);
+                                            return `${date.getMonth() + 1}/${date.getDate()}`;
+                                        }}
                                         axisLine={{ stroke: isDark ? '#1e293b' : '#e2e8f0' }}
                                         tickLine={false}
+                                        interval={2}
+                                        angle={0}
+                                        textAnchor="middle"
                                     />
                                     <YAxis
                                         tick={{ fontSize: 12, fill: isDark ? '#94a3b8' : '#64748b' }}
-                                        tickFormatter={(value) => `${value}%`}
-                                        domain={[0, 100]}
+                                        tickFormatter={(value) => `${value}명`}
                                         axisLine={{ stroke: isDark ? '#1e293b' : '#e2e8f0' }}
                                         tickLine={false}
                                     />
@@ -465,18 +484,13 @@ export function AdminDashboard() {
                                             color: isDark ? '#f1f5f9' : '#1e293b'
                                         }}
                                         itemStyle={{ color: isDark ? '#cbd5e1' : '#475569' }}
-                                        formatter={(value) => [`${value ?? 0}%`, '완료율']}
-                                        labelFormatter={(label) => `Day ${label}`}
+                                        formatter={(value) => [`${value}명`, '활성 학생']}
+                                        labelFormatter={(label) => {
+                                            const date = new Date(label);
+                                            return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+                                        }}
                                     />
-                                    <Bar dataKey="percentage" radius={[4, 4, 0, 0]}>
-                                        {dayProgress.map((entry, index) => (
-                                            <Cell
-                                                key={`cell-${index}`}
-                                                fill={entry.percentage >= 70 ? '#10b981' : entry.percentage >= 40 ? '#f59e0b' : '#ef4444'}
-                                                fillOpacity={isDark ? 0.8 : 1}
-                                            />
-                                        ))}
-                                    </Bar>
+                                    <Bar dataKey="activeUsers" radius={[4, 4, 0, 0]} fill="#3b82f6" fillOpacity={isDark ? 0.8 : 1} />
                                 </BarChart>
                             </ResponsiveContainer>
                         </div>
@@ -621,6 +635,96 @@ export function AdminDashboard() {
                                     })}
                                 </tbody>
                             </table>
+                        </div>
+                    )}
+                </div>
+
+                {/* Student Activity Heatmap */}
+                <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm p-6 border border-gray-100 dark:border-white/5 mb-8">
+                    <div className="flex items-center justify-between mb-6">
+                        <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 bg-gradient-to-br from-purple-400 to-indigo-500 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/20">
+                                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h2 className="text-lg font-bold text-gray-900 dark:text-white">학생 활동 히트맵</h2>
+                                <p className="text-xs text-gray-500 dark:text-slate-400">최근 30일간 학생별 학습 활동 현황</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {studentHeatmap.length === 0 ? (
+                        <div className="text-center py-12">
+                            <span className="text-4xl mb-2 block">📊</span>
+                            <p className="text-gray-500 dark:text-slate-400 text-sm">최근 30일 내 학습 활동이 없습니다</p>
+                        </div>
+                    ) : (
+                        <div className="overflow-x-auto">
+                            <div className="min-w-max space-y-2">
+                                {studentHeatmap.slice(0, 10).map((student) => {
+                                    // 최근 30일 날짜 배열 생성
+                                    const dates: string[] = [];
+                                    for (let i = 29; i >= 0; i--) {
+                                        const date = new Date();
+                                        date.setDate(date.getDate() - i);
+                                        dates.push(date.toISOString().split('T')[0]);
+                                    }
+
+                                    // 활동 맵 생성
+                                    const activityMap = new Map(student.activities.map(a => [a.date, a.count]));
+
+                                    return (
+                                        <div key={student.userId} className="flex items-center gap-3">
+                                            <div className="w-24 flex-shrink-0">
+                                                <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
+                                                    {student.studentName}
+                                                </p>
+                                            </div>
+                                            <div className="flex gap-1">
+                                                {dates.map((date) => {
+                                                    const count = activityMap.get(date) || 0;
+                                                    const intensity = count === 0 ? 0 : count >= 3 ? 4 : count >= 2 ? 3 : count >= 1 ? 2 : 1;
+
+                                                    return (
+                                                        <div
+                                                            key={date}
+                                                            className={`w-3 h-3 rounded-sm transition-all hover:ring-2 hover:ring-blue-400 cursor-pointer ${
+                                                                intensity === 0 ? 'bg-gray-100 dark:bg-white/5' :
+                                                                intensity === 1 ? 'bg-emerald-200 dark:bg-emerald-500/20' :
+                                                                intensity === 2 ? 'bg-emerald-300 dark:bg-emerald-500/40' :
+                                                                intensity === 3 ? 'bg-emerald-400 dark:bg-emerald-500/60' :
+                                                                'bg-emerald-500 dark:bg-emerald-500/80'
+                                                            }`}
+                                                            title={`${date}: ${count}개 완료`}
+                                                        />
+                                                    );
+                                                })}
+                                            </div>
+                                            <div className="flex-shrink-0 text-xs text-gray-500 dark:text-slate-400">
+                                                {student.activities.reduce((sum, a) => sum + a.count, 0)}일
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+
+                            {/* 범례 */}
+                            <div className="flex items-center gap-4 mt-6 pt-4 border-t border-gray-100 dark:border-white/5">
+                                <span className="text-xs text-gray-500 dark:text-slate-400">활동 강도:</span>
+                                <div className="flex items-center gap-2">
+                                    <span className="text-xs text-gray-500 dark:text-slate-400">적음</span>
+                                    <div className="flex gap-1">
+                                        <div className="w-3 h-3 rounded-sm bg-gray-100 dark:bg-white/5" />
+                                        <div className="w-3 h-3 rounded-sm bg-emerald-200 dark:bg-emerald-500/20" />
+                                        <div className="w-3 h-3 rounded-sm bg-emerald-300 dark:bg-emerald-500/40" />
+                                        <div className="w-3 h-3 rounded-sm bg-emerald-400 dark:bg-emerald-500/60" />
+                                        <div className="w-3 h-3 rounded-sm bg-emerald-500 dark:bg-emerald-500/80" />
+                                    </div>
+                                    <span className="text-xs text-gray-500 dark:text-slate-400">많음</span>
+                                </div>
+                            </div>
                         </div>
                     )}
                 </div>

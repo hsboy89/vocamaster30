@@ -23,11 +23,24 @@ export function Header({ currentLevel, onLevelChange, userName, academyName, onL
                         className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
                         onClick={() => window.location.href = '/'}
                     >
-                        <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center">
-                            <span className="text-white text-xl">📚</span>
+                        <div className="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden">
+                            <img
+                                src="https://zvdqkxkgrgclecjhkqny.supabase.co/storage/v1/object/public/images/IMG_7060.png"
+                                alt="Voca Master Logo"
+                                className="w-full h-full object-cover"
+                                onError={(e) => {
+                                    // Fallback to emoji if image fails to load
+                                    e.currentTarget.style.display = 'none';
+                                    const fallback = document.createElement('span');
+                                    fallback.className = 'text-white text-xl';
+                                    fallback.textContent = '📚';
+                                    e.currentTarget.parentElement?.classList.add('gradient-primary');
+                                    e.currentTarget.parentElement?.appendChild(fallback);
+                                }}
+                            />
                         </div>
                         <div>
-                            <h1 className="text-xl font-bold text-gray-900 dark:text-white">Voca Master 30</h1>
+                            <h1 className="text-xl font-bold text-gray-900 dark:text-white">The First Voca Master</h1>
                             <p className="text-xs text-gray-400 dark:text-slate-300 font-medium">하루 10분, 30일 완성</p>
                         </div>
                     </div>
