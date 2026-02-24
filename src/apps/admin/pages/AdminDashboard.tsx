@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Level } from '../../../shared/types';
+// Removed unused Level import
 import { useAuthStore } from '../../../stores';
 import { useDarkMode } from '../../../shared/hooks';
 import {
     getDashboardStats,
     getStudentList,
-    getDayProgressStats,
     getAtRiskStudents,
     getGlobalTopWrongWords,
     getRankingByGoalPlan,
@@ -17,7 +16,6 @@ import {
     deleteStudent,
     DashboardStats,
     StudentListItem,
-    DayProgress,
     WrongWordStat,
     RankingItem,
     DailyActiveUsers,
@@ -66,12 +64,7 @@ export function AdminDashboard() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user?.academyId]);
 
-    useEffect(() => {
-        if (user) {
-            loadDayProgress();
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [selectedLevel, user?.academyId]);
+    // Removed loadDayProgress useEffect - no longer needed
 
     const loadDashboardData = async () => {
         if (!user) return;
@@ -118,11 +111,7 @@ export function AdminDashboard() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [rankingFilter, user?.academyId]);
 
-    const loadDayProgress = async () => {
-        if (!user) return;
-        const progress = await getDayProgressStats(selectedLevel, user.academyId);
-        setDayProgress(progress);
-    };
+    // Removed loadDayProgress function - no longer needed
 
     const handleLogout = () => {
         logout();
