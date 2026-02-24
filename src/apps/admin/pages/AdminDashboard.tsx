@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Level, LEVEL_INFO } from '../../../shared/types';
+import { Level } from '../../../shared/types';
 import { useAuthStore } from '../../../stores';
 import { useDarkMode } from '../../../shared/hooks';
 import {
@@ -25,7 +25,7 @@ import {
     StudentActivityHeatmap
 } from '../../../shared/services/admin';
 
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 export function AdminDashboard() {
     const navigate = useNavigate();
@@ -33,11 +33,9 @@ export function AdminDashboard() {
     const { isDark, toggle: toggleDarkMode } = useDarkMode();
     const [stats, setStats] = useState<DashboardStats | null>(null);
     const [students, setStudents] = useState<StudentListItem[]>([]);
-    const [dayProgress, setDayProgress] = useState<DayProgress[]>([]);
     const [dailyActiveUsers, setDailyActiveUsers] = useState<DailyActiveUsers[]>([]);
     const [todayDetails, setTodayDetails] = useState<TodayStudyDetails | null>(null);
     const [studentHeatmap, setStudentHeatmap] = useState<StudentActivityHeatmap[]>([]);
-    const [selectedLevel, setSelectedLevel] = useState<Level>('middle_1');
     const [searchTerm, setSearchTerm] = useState('');
     const [isLoading, setIsLoading] = useState(false); // Default to false to show UI structure in background mode
     const [topWrongWords, setTopWrongWords] = useState<WrongWordStat[]>([]);
