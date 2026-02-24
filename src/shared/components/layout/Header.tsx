@@ -38,8 +38,8 @@ export function Header({ currentLevel, onLevelChange, userName, academyName, onL
                             />
                         </div>
                         <div>
-                            <h1 className="text-xl font-bold text-slate-900 dark:text-white">The First Voca Master</h1>
-                            <p className="text-sm font-medium text-slate-600 dark:text-slate-300">하루 10분, 30일 완성</p>
+                            <h1 className="text-xl font-bold text-slate-900">The First Voca Master</h1>
+                            <p className="text-sm font-medium text-slate-600">하루 10분, 30일 완성</p>
                         </div>
                     </div>
 
@@ -62,7 +62,7 @@ export function Header({ currentLevel, onLevelChange, userName, academyName, onL
                         {/* Dark Mode Toggle */}
                         <button
                             onClick={() => alert('준비중입니다.')}
-                            className="p-2 text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10 rounded-lg transition-colors"
+                            className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
                             aria-label="야간 모드 (준비중)"
                         >
                             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="w-5 h-5">

@@ -434,17 +434,17 @@ export function GoalSetting({ level, onGoalChange, onPromotionTest }: GoalSettin
             {!isSettingGoal ? (
                 <button
                     onClick={() => setIsSettingGoal(true)}
-                    className="w-full group relative overflow-hidden rounded-2xl border-2 border-dashed border-slate-300 dark:border-white/20 hover:border-blue-500/50 p-6 text-center transition-all duration-300 hover:bg-slate-50 dark:hover:bg-white/5"
+                    className="w-full group relative overflow-hidden rounded-2xl border-2 border-dashed border-slate-300 hover:border-blue-500/50 p-6 text-center transition-all duration-300 hover:bg-slate-50"
                 >
                     <div className="flex items-center justify-center gap-3">
                         <span className="text-2xl group-hover:scale-110 transition-transform">🎯</span>
                         <div>
                             <div className="flex items-center gap-2">
-                                <h3 className="font-bold text-slate-800 dark:text-gray-100 text-base group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">맞춤 학습 플랜 만들기</h3>
-                                <span className="text-[10px] bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-300 px-2 py-0.5 rounded-full">New</span>
+                                <h3 className="font-bold text-slate-800 text-base group-hover:text-blue-600 transition-colors">맞춤 학습 플랜 만들기</h3>
+                                <span className="text-[10px] bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full">New</span>
                             </div>
-                            <p className="text-sm text-slate-500 dark:text-gray-400 mt-1">
-                                남은 <span className="text-slate-900 dark:text-white font-bold">{availableCount}</span>단어를 내 속도에 맞춰 계획해드려요
+                            <p className="text-sm text-slate-500 mt-1">
+                                남은 <span className="text-slate-900 font-bold">{availableCount}</span>단어를 내 속도에 맞춰 계획해드려요
                             </p>
                         </div>
                     </div>
