@@ -23,7 +23,7 @@ export function Header({ currentLevel, onLevelChange, userName, academyName, onL
                     >
                         <div className="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden">
                             <img
-                                src="https://agkovuemnjiagmvyohtb.supabase.co/storage/v1/object/public/images/IMG_7060.png"
+                                src="https://agkovuemnjiagmvyohtb.supabase.co/storage/v1/object/public/images/IMG_7061.png"
                                 alt="Voca Master Logo"
                                 className="w-full h-full object-cover"
                                 onError={(e) => {
