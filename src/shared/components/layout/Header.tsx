@@ -21,11 +21,11 @@ export function Header({ currentLevel, onLevelChange, userName, academyName, onL
                         className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
                         onClick={() => window.location.href = '/'}
                     >
-                        <div className="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden">
+                        <div className="w-12 h-12 flex items-center justify-center">
                             <img
                                 src="https://agkovuemnjiagmvyohtb.supabase.co/storage/v1/object/public/images/IMG_7061.png"
                                 alt="Voca Master Logo"
-                                className="w-full h-full object-cover"
+                                className="w-full h-full object-contain"
                                 onError={(e) => {
                                     // Fallback to emoji if image fails to load
                                     e.currentTarget.style.display = 'none';
