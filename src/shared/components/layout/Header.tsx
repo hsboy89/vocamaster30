@@ -91,18 +91,29 @@ export function Header({ currentLevel, onLevelChange, userName, academyName, onL
                     </div>
                 </div>
 
-                {/* Level Tabs */}
                 <nav className="flex justify-center sm:justify-start gap-2 bg-slate-100/50 p-1.5 rounded-full backdrop-blur-sm overflow-x-auto">
-                    {levels.map((level) => (
-                        <button
-                            key={level}
-                            onClick={() => onLevelChange(level)}
-                            className={`tab text-xs sm:text-sm px-3 py-1.5 whitespace-nowrap ${currentLevel === level ? 'active' : ''
-                                }`}
-                        >
-                            {LEVEL_INFO[level].nameKo}
-                        </button>
-                    ))}
+                    {levels.map((level) => {
+                        const info = LEVEL_INFO[level];
+                        const isComingSoon = info.isComingSoon;
+
+                        return (
+                            <button
+                                key={level}
+                                onClick={() => {
+                                    if (isComingSoon) {
+                                        alert('준비중입니다.');
+                                        return;
+                                    }
+                                    onLevelChange(level);
+                                }}
+                                className={`tab text-xs sm:text-sm px-3 py-1.5 whitespace-nowrap ${currentLevel === level ? 'active' : ''
+                                    } ${isComingSoon ? 'opacity-50 cursor-not-allowed' : ''}`}
+                            >
+                                {info.nameKo}
+                                {isComingSoon && <span className="ml-1 text-[10px] opacity-70">(준비중)</span>}
+                            </button>
+                        );
+                    })}
                 </nav>
             </div>
         </header>

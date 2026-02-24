@@ -87,6 +87,7 @@ export interface LevelInfo {
     totalDays: number;
     wordsPerDay: number;
     totalWords: number;
+    isComingSoon?: boolean;
 }
 
 // 단기 목표 옵션
@@ -151,6 +152,7 @@ export const LEVEL_INFO: Record<Level, LevelInfo> = {
         totalDays: 30,
         wordsPerDay: 40,
         totalWords: 1200,
+        isComingSoon: true,
     },
     csat: {
         id: 'csat',

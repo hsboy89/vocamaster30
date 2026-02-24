@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 // Shared Types & Components
-import { Level, Word, QuizType, Category } from './shared/types';
+import { Level, Word, QuizType, Category, LEVEL_INFO } from './shared/types';
 import { Header, LoginPage, ProtectedRoute } from './shared/components';
 import { AdminLoginLayout } from './shared/components/layout/AdminLoginLayout';
 import { StudentLoginModal } from './shared/components/auth/StudentLoginModal';
@@ -117,11 +117,18 @@ function StudentApp() {
   };
 
   const handlePromotionPass = () => {
-    // 다음 레벨로 이동
+    // 다음 레벨로 이동 (준비중인 레벨은 제외)
     const levelOrder = ['middle_1', 'middle_2', 'high_1', 'high_2', 'csat'] as const;
     const currentIndex = levelOrder.indexOf(currentLevel);
+
     if (currentIndex < levelOrder.length - 1) {
-      setCurrentLevel(levelOrder[currentIndex + 1]);
+      const nextLevel = levelOrder[currentIndex + 1];
+      if (!LEVEL_INFO[nextLevel].isComingSoon) {
+        setCurrentLevel(nextLevel);
+      } else {
+        // 다음 레벨이 준비중이면 알림
+        alert('다음 레벨(' + LEVEL_INFO[nextLevel].nameKo + ')은 현재 준비 중입니다.');
+      }
     }
     setCurrentView('home');
   };

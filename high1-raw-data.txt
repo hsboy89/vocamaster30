@@ -1,0 +1,1064 @@
+=== Day 1 ===
+include | ɪnˈkluːd | 포함하다 | contain, involve | exclude | The price includes tax. | 가격에 세금이 포함된다. | The list includes ten items. | 목록에 10개 항목이 포함된다.
+produce | prəˈdjuːs | 생산하다, 초래하다, 농산물 | create, manufacture | consume | This factory produces cars. | 이 공장은 자동차를 생산한다. | The farm produces organic vegetables. | 농장에서 유기농 채소를 생산한다.
+belief | bɪˈliːf | 믿음, 신념, 신앙 | faith, conviction | doubt, disbelief | She has a strong belief in justice. | 정의에 대한 강한 믿음이 있다. | His belief shaped his actions. | 그의 신념이 행동을 형성했다.
+similar | ˈsɪmɪlər | 비슷한, 유사한 | alike, comparable | different, dissimilar | The two designs are similar. | 두 디자인은 비슷하다. | She has similar interests to mine. | 나와 비슷한 관심사가 있다.
+moment | ˈmoʊmənt | 순간, 중요성 | instant, second | eternity | Wait a moment, please. | 잠깐만 기다려주세요. | It was an important moment in history. | 역사에서 중요한 순간이었다.
+situation | ˌsɪtʃuˈeɪʃən | 상황, 위치 | condition, circumstance | - | The economic situation is improving. | 경제 상황이 개선되고 있다. | She handled the difficult situation well. | 어려운 상황을 잘 처리했다.
+improve | ɪmˈpruːv | 개선하다, 향상하다 | enhance, upgrade | worsen, deteriorate | He improved his English skills. | 영어 실력을 향상시켰다. | The weather is improving. | 날씨가 좋아지고 있다.
+increase | ɪnˈkriːs | 증가하다, 증가, 인상 | grow, rise | decrease, reduce | Sales increased by 20%. | 매출이 20% 증가했다. | The population continues to increase. | 인구가 계속 증가하고 있다.
+decrease | dɪˈkriːs | 감소하다, 감소, 축소 | decline, diminish | increase, grow | The number of accidents decreased. | 사고 수가 감소했다. | Demand decreased sharply. | 수요가 급격히 감소했다.
+share | ʃɛr | 나누다, 공유하다, 몫 | divide, distribute | keep, hoard | She shared her ideas with the team. | 팀과 아이디어를 공유했다. | They share a room. | 방을 같이 쓴다.
+emotion | ɪˈmoʊʃən | 감정, 정서 | feeling, sentiment | apathy | She couldn't hide her emotions. | 감정을 숨길 수 없었다. | Music can stir deep emotions. | 음악은 깊은 감정을 불러일으킬 수 있다.
+common | ˈkɑːmən | 흔한, 보통의, 공통의 | usual, ordinary | rare, uncommon | It is a common mistake. | 흔한 실수이다. | They share a common interest. | 공통 관심사가 있다.
+recover | rɪˈkʌvər | 회복하다, 복구되다 | heal, restore | worsen, relapse | She recovered from her illness. | 병에서 회복했다. | The economy is slowly recovering. | 경제가 서서히 회복되고 있다.
+advanced | ədˈvænst | 진보한, 상급의 | sophisticated, complex | basic, elementary | She studies advanced mathematics. | 고급 수학을 공부한다. | The technology is very advanced. | 기술이 매우 진보했다.
+indifferent | ɪnˈdɪfərənt | 무관심한 | unconcerned, apathetic | concerned, interested | He seemed indifferent to the news. | 뉴스에 무관심한 것 같았다. | She was indifferent to his opinion. | 그의 의견에 무관심했다.
+reject | rɪˈdʒɛkt | 거절하다, 거부하다 | refuse, decline | accept, approve | The committee rejected the proposal. | 위원회가 제안을 거부했다. | She rejected his offer. | 그의 제안을 거절했다.
+refuse | rɪˈfjuːz | 거절하다, 거부하다 | decline, deny | accept, agree | He refused to answer the question. | 질문에 답하기를 거부했다. | She refused the invitation. | 초대를 거절했다.
+accept | əkˈsɛpt | 받아들이다, 수락하다 | receive, agree | reject, refuse | She accepted the job offer. | 취업 제안을 수락했다. | He accepted the challenge. | 도전을 받아들였다.
+experience | ɪkˈspɪriəns | 경험하다, 경험 | encounter, undergo | inexperience | She experienced culture shock. | 문화 충격을 경험했다. | He has years of work experience. | 수년간의 근무 경험이 있다.
+certain | ˈsɜːrtən | 확실한, 확신하는, 어떤 | sure, definite | uncertain, doubtful | I'm certain he will come. | 그가 올 것이라 확신한다. | A certain amount of risk is involved. | 어느 정도의 위험이 수반된다.
+consider | kənˈsɪdər | 고려하다, ~으로 여기다 | think about, regard | ignore, disregard | Consider all the options carefully. | 모든 선택지를 신중히 고려해라. | She is considered an expert. | 전문가로 여겨진다.
+supply | səˈplaɪ | 공급하다, 제공하다, 공급 | provide, furnish | demand | The company supplies raw materials. | 회사가 원자재를 공급한다. | Water supply was cut off. | 수도 공급이 끊겼다.
+provide | prəˈvaɪd | 공급하다, 제공하다, 대비하다 | supply, offer | withhold, deprive | The school provides free meals. | 학교가 무료 급식을 제공한다. | She provided valuable advice. | 귀중한 조언을 해줬다.
+practical | ˈpræktɪkəl | 실용적인, 실제적인 | useful, realistic | impractical, theoretical | She has practical experience. | 실무 경험이 있다. | The plan is not practical. | 그 계획은 실용적이지 않다.
+express | ɪkˈsprɛs | 표현하다, 급행의, 급행 | convey, state | suppress, conceal | She expressed her feelings clearly. | 감정을 분명하게 표현했다. | Take the express train. | 급행 열차를 타라.
+quantity | ˈkwɑːntəti | 양, 수량 | amount, volume | quality | A large quantity of food was wasted. | 많은 양의 음식이 낭비되었다. | They buy in large quantities. | 대량으로 구입한다.
+superior | suːˈpɪriər | 뛰어난, 우월한, 윗사람 | better, higher | inferior | This product is superior in quality. | 이 제품은 품질이 뛰어나다. | She reported to her superior. | 상관에게 보고했다.
+inferior | ɪnˈfɪriər | 열등한, 하위의, 하급자 | lower, lesser | superior | The quality is inferior to the original. | 원본보다 품질이 열등하다. | Don't feel inferior to others. | 다른 사람보다 열등하다고 느끼지 마라.
+seek | siːk | 찾다, 추구하다, 청하다 | search, pursue | avoid, shun | She sought advice from a lawyer. | 변호사에게 조언을 구했다. | They seek a peaceful solution. | 평화적 해결을 추구한다.
+aim | eɪm | 목표, 목적, 목표하다 | goal, objective | - | She aimed for the top university. | 최고 대학을 목표로 했다. | The aim of the project is clear. | 프로젝트의 목적이 명확하다.
+fade | feɪd | 희미해지다, 사라지다 | diminish, vanish | brighten, intensify | The color faded in the sun. | 햇빛에 색이 바랬다. | His hopes faded away. | 그의 희망이 사라졌다.
+disappear | ˌdɪsəˈpɪr | 사라지다, 없어지다 | vanish, fade | appear, emerge | The sun disappeared behind clouds. | 태양이 구름 뒤로 사라졌다. | The old traditions are disappearing. | 오래된 전통이 사라지고 있다.
+emerge | ɪˈmɜːrdʒ | 나타나다, 모습을 드러내다 | appear, surface | disappear, vanish | A new leader emerged. | 새로운 지도자가 나타났다. | The truth finally emerged. | 마침내 진실이 드러났다.
+grief | ɡriːf | 슬픔, 비탄 | sorrow, mourning | joy, happiness | She was overwhelmed with grief. | 슬픔에 압도되었다. | Grief can take many forms. | 비탄은 다양한 형태를 띨 수 있다.
+slight | slaɪt | 약간의, 하찮은 | minor, small | significant, major | There was a slight delay. | 약간의 지연이 있었다. | She felt a slight pain. | 약간의 통증을 느꼈다.
+success | səkˈsɛs | 성공, 성공작 | achievement, triumph | failure | Hard work leads to success. | 열심히 일하면 성공한다. | The event was a great success. | 행사가 대성공이었다.
+failure | ˈfeɪljər | 실패, 실패작, 고장 | defeat, collapse | success | Failure is the mother of success. | 실패는 성공의 어머니이다. | The project ended in failure. | 프로젝트가 실패로 끝났다.
+run into | rʌn ˈɪntuː | ~와 우연히 만나다, 충돌하다 | bump into, encounter | avoid | I ran into an old friend yesterday. | 어제 옛 친구를 우연히 만났다. | The car ran into a tree. | 차가 나무에 충돌했다.
+depend on | dɪˈpɛnd ɑːn | ~에 의존하다, 달려있다 | rely on, count on | - | Children depend on their parents. | 아이들은 부모에게 의존한다. | Success depends on effort. | 성공은 노력에 달려있다.
+carry out | ˈkæri aʊt | 실행하다, 완료하다 | execute, perform | abandon | They carried out the experiment. | 실험을 실행했다. | The plan was carried out successfully. | 계획이 성공적으로 실행되었다.
+=== Day 2 ===
+illegal | ɪˈliːɡəl | 불법적인, 위법인 | unlawful, illicit | legal, lawful | Illegal parking is fined. | 불법 주차는 벌금을 물린다. | The trade was declared illegal. | 그 거래는 불법으로 선언되었다.
+local | ˈloʊkəl | 지역의, 현지의, 현지인 | regional, nearby | global, national | She reads the local newspaper. | 지역 신문을 읽는다. | Buy from local shops. | 현지 가게에서 사라.
+amount | əˈmaʊnt | 총계, 양, 총계가 ~이 되다 | quantity, sum | - | A large amount of money was spent. | 많은 양의 돈이 쓰였다. | The total amount is $500. | 총액이 500달러이다.
+found | faʊnd | 설립하다, 기초를 세우다 | establish, create | abolish | She founded the company in 2010. | 2010년에 회사를 설립했다. | The school was founded in 1950. | 학교가 1950년에 설립되었다.
+establish | ɪˈstæblɪʃ | 설립하다, 확립하다 | set up, create | disband, abolish | They established a new policy. | 새 정책을 확립했다. | The brand established itself quickly. | 브랜드가 빠르게 자리 잡았다.
+historical | hɪˈstɔːrɪkəl | 역사적인, 역사상의 | historic, past | modern, current | The museum displays historical artifacts. | 박물관이 역사적 유물을 전시한다. | It was a historical event. | 역사적인 사건이었다.
+process | ˈprɑːsɛs | 과정, 처리, 처리하다, 가공하다 | procedure, method | - | The healing process takes time. | 치유 과정은 시간이 걸린다. | The factory processes raw materials. | 공장이 원자재를 가공한다.
+expert | ˈɛkspɜːrt | 전문가, 숙련된, 전문적인 | specialist, authority | amateur, novice | She is an expert in biology. | 생물학 전문가이다. | Consult an expert for advice. | 전문가에게 조언을 구해라.
+decade | ˈdɛkeɪd | 10년, 10년간 | ten years | - | Technology changed a lot in the past decade. | 지난 10년간 기술이 많이 변했다. | She has decades of experience. | 수십 년의 경험이 있다.
+continue | kənˈtɪnjuː | 계속하다, 연장하다 | proceed, persist | stop, cease | She continued reading the book. | 책을 계속 읽었다. | The rain continued all day. | 비가 하루 종일 계속됐다.
+dedicate | ˈdɛdɪkeɪt | 바치다, 헌신하다 | devote, commit | neglect | She dedicated her life to science. | 과학에 헌신했다. | The monument is dedicated to heroes. | 기념비는 영웅들에게 바쳐졌다.
+devote | dɪˈvoʊt | 바치다, 전념하다 | dedicate, commit | neglect | He devoted his time to charity. | 자선에 시간을 바쳤다. | She is devoted to her family. | 가족에게 전념한다.
+period | ˈpɪriəd | 기간, 시기, 시대 | era, phase | - | The Joseon period lasted 500 years. | 조선 시대는 500년 지속되었다. | She studied for a long period. | 오랜 기간 공부했다.
+perceive | pərˈsiːv | 인지하다, ~으로 여기다 | sense, recognize | overlook, ignore | She perceived a change in his tone. | 그의 말투에서 변화를 감지했다. | The risk was not perceived early. | 위험이 일찍 인식되지 못했다.
+recognize | ˈrɛkəɡnaɪz | 인식하다, 인정하다 | identify, acknowledge | ignore, overlook | She recognized his voice immediately. | 즉시 그의 목소리를 알아봤다. | His talent was finally recognized. | 그의 재능이 드디어 인정받았다.
+exhausted | ɪɡˈzɔːstɪd | 지친, 고갈된 | tired, worn out | energized, refreshed | She was exhausted after the exam. | 시험 후 지쳤다. | The resources are nearly exhausted. | 자원이 거의 고갈되었다.
+crime | kraɪm | 범죄, 범행, 죄악 | offense, violation | - | Crime rates have decreased. | 범죄율이 감소했다. | He was convicted of a serious crime. | 중범죄로 유죄 판결을 받았다.
+expose | ɪkˈspoʊz | 노출시키다, 폭로하다 | reveal, uncover | conceal, hide | The journalist exposed the scandal. | 기자가 스캔들을 폭로했다. | Don't expose your skin to the sun. | 피부를 햇볕에 노출시키지 마라.
+reveal | rɪˈviːl | 드러내다, 폭로하다 | disclose, show | conceal, hide | She revealed her secret. | 비밀을 드러냈다. | The study revealed surprising results. | 연구가 놀라운 결과를 밝혀냈다.
+conceal | kənˈsiːl | 숨기다, 비밀로 하다 | hide, cover up | reveal, expose | He concealed his true feelings. | 진짜 감정을 숨겼다. | She concealed the evidence. | 증거를 숨겼다.
+charity | ˈtʃærɪti | 자선 단체, 자비심 | philanthropy, generosity | greed, selfishness | She donated to charity. | 자선단체에 기부했다. | The charity helps homeless people. | 자선단체가 노숙자를 돕는다.
+deserve | dɪˈzɜːrv | ~을 받을만하다, 가치가 있다 | merit, earn | - | She deserves a promotion. | 승진할 자격이 있다. | He deserves respect. | 존경받을 만하다.
+unite | juːˈnaɪt | 결합하다, 결속시키다 | join, merge | divide, separate | The crisis united the nation. | 위기가 국민을 단결시켰다. | They united for a common goal. | 공동 목표를 위해 단결했다.
+combine | kəmˈbaɪn | 결합시키다, 겸비하다 | merge, blend | separate, divide | Combine the ingredients in a bowl. | 그릇에 재료를 합해라. | She combines work and study. | 일과 공부를 겸한다.
+separate | ˈsɛpəreɪt | 분리하다, 별개의, 각각의 | divide, split | combine, unite | Separate the recyclables. | 재활용품을 분리해라. | They went their separate ways. | 각자의 길을 갔다.
+complete | kəmˈpliːt | 완료하다, 완전한 | finish, entire | incomplete | She completed the project on time. | 프로젝트를 제시간에 완료했다. | The building is now complete. | 건물이 이제 완공되었다.
+connect | kəˈnɛkt | 연결하다, 관련시키다 | link, join | disconnect, separate | Connect the cable to the computer. | 케이블을 컴퓨터에 연결해라. | The bridge connects two cities. | 다리가 두 도시를 연결한다.
+overcome | ˌoʊvərˈkʌm | 극복하다, 이기다 | conquer, defeat | surrender, yield | She overcame many obstacles. | 많은 장애물을 극복했다. | He overcame his fear of heights. | 고소공포증을 극복했다.
+rapid | ˈræpɪd | 빠른, 신속한 | fast, swift | slow, gradual | The country experienced rapid growth. | 나라가 급성장했다. | Technology is changing at a rapid pace. | 기술이 빠른 속도로 변하고 있다.
+chase | tʃeɪs | 쫓다, 추적하다, 추적 | pursue, hunt | flee, retreat | The police chased the thief. | 경찰이 도둑을 쫓았다. | The dog chased the cat. | 개가 고양이를 쫓았다.
+achieve | əˈtʃiːv | 이루다, 성취하다 | accomplish, attain | fail | She achieved her dream. | 꿈을 이루었다. | He achieved great success. | 큰 성공을 거뒀다.
+accomplish | əˈkɑːmplɪʃ | 이루다, 성취하다 | achieve, complete | fail | She accomplished her goal. | 목표를 달성했다. | He accomplished the task quickly. | 과제를 빠르게 완수했다.
+mislead | ˌmɪsˈliːd | 잘못 인도하다, 오해하게 하다 | deceive, misguide | guide, enlighten | The advertisement misled consumers. | 광고가 소비자를 오도했다. | Don't be misled by appearances. | 겉모습에 속지 마라.
+random | ˈrændəm | 무작위의, 임의의 | arbitrary, haphazard | deliberate, planned | She picked a random number. | 무작위로 숫자를 골랐다. | The events occurred in random order. | 사건이 무작위 순서로 발생했다.
+organ | ˈɔːrɡən | 장기, 기관 | body part, instrument | - | The heart is a vital organ. | 심장은 필수적인 장기이다. | She plays the organ at church. | 교회에서 오르간을 연주한다.
+vital | ˈvaɪtəl | 아주 중요한, 필수적인 | essential, crucial | unimportant, trivial | Water is vital for survival. | 물은 생존에 필수적이다. | She plays a vital role in the team. | 팀에서 매우 중요한 역할을 한다.
+reliable | rɪˈlaɪəbl | 믿을 수 있는, 의지가 되는 | trustworthy, dependable | unreliable | She is a reliable friend. | 믿을 수 있는 친구이다. | The data is reliable. | 데이터가 신뢰할 수 있다.
+deal with | diːl wɪð | ~을 처리하다, 다루다 | handle, manage | ignore, neglect | She deals with customer complaints. | 고객 불만을 처리한다. | How do you deal with stress? | 스트레스를 어떻게 다루나요?
+lead to | liːd tuː | ~으로 이어지다, 야기하다 | result in, cause | prevent | Lack of sleep leads to health problems. | 수면 부족은 건강 문제로 이어진다. | Hard work leads to success. | 열심히 하면 성공으로 이어진다.
+get along with | ɡɛt əˈlɔːŋ wɪð | ~와 잘 지내다 | get on with | quarrel with | She gets along with everyone. | 모든 사람과 잘 지낸다. | Do you get along with your coworkers? | 동료들과 잘 지내나요?
+=== Day 3 ===
+knowledge | ˈnɑːlɪdʒ | 지식, 알고 있음 | wisdom, understanding | ignorance | Knowledge is power. | 지식은 힘이다. | She has extensive knowledge of history. | 역사에 대한 광범위한 지식이 있다.
+encourage | ɪnˈkɜːrɪdʒ | 용기를 북돋우다, 격려하다 | motivate, inspire | discourage | She encouraged him to try again. | 다시 시도하라고 격려했다. | Teachers should encourage students. | 교사는 학생을 격려해야 한다.
+discourage | dɪsˈkɜːrɪdʒ | 낙담시키다, 방해하다 | dishearten, deter | encourage | Don't be discouraged by failure. | 실패에 낙담하지 마라. | The rain discouraged outdoor activities. | 비가 야외 활동을 방해했다.
+detail | ˈdiːteɪl | 세부 사항, 상세 | particular, specifics | overview | Pay attention to detail. | 세부 사항에 주의해라. | She explained the plan in detail. | 계획을 상세히 설명했다.
+resolution | ˌrɛzəˈluːʃən | 해결, 결심, 결의 | determination, solution | indecision | She made a New Year's resolution. | 새해 결심을 했다. | The conflict needs a peaceful resolution. | 갈등에 평화로운 해결이 필요하다.
+probable | ˈprɑːbəbl | 있을 법한, 예상되는 | likely, possible | improbable, unlikely | Rain is probable this afternoon. | 오후에 비가 올 것 같다. | The probable cause was a short circuit. | 추정 원인은 합선이었다.
+trait | treɪt | 특성, 특색 | characteristic, feature | - | Honesty is her best trait. | 정직함이 그녀의 가장 좋은 특성이다. | Genetic traits are inherited. | 유전적 특성은 유전된다.
+direct | dɪˈrɛkt | 감독하다, 안내하다, 직접적인 | guide, lead | indirect | She directed the movie. | 영화를 감독했다. | Take the direct route. | 직행 경로로 가라.
+distance | ˈdɪstəns | 거리, 간격 | range, span | proximity | The distance is five kilometers. | 거리가 5킬로미터이다. | Keep a safe distance. | 안전 거리를 유지해라.
+income | ˈɪnkʌm | 수입, 소득 | earnings, salary | expense, expenditure | Her income increased this year. | 올해 소득이 증가했다. | He has a steady income. | 안정적인 수입이 있다.
+revise | rɪˈvaɪz | 개정하다, 정정하다 | amend, modify | keep, retain | She revised her essay. | 에세이를 수정했다. | The law was revised last year. | 법이 작년에 개정되었다.
+mark | mɑːrk | 표시하다, 채점하다, 표시 | sign, grade | erase | Mark the correct answer. | 정답에 표시해라. | She got a high mark on the test. | 시험에서 높은 점수를 받았다.
+negative | ˈnɛɡətɪv | 부정적인, 음성의 | pessimistic, adverse | positive | Don't be so negative. | 그렇게 부정적이지 마라. | The test result was negative. | 검사 결과가 음성이었다.
+official | əˈfɪʃəl | 공식적인, 공무의, 정식의 | formal, authorized | unofficial, informal | The official announcement was made. | 공식 발표가 있었다. | She is a government official. | 정부 관리이다.
+search | sɜːrtʃ | 찾다, 검색하다, 수색 | seek, look for | find | She searched for her keys. | 열쇠를 찾았다. | The police searched the building. | 경찰이 건물을 수색했다.
+benefit | ˈbɛnɪfɪt | 이익, 혜택, 이롭다 | advantage, profit | disadvantage, harm | Exercise benefits your health. | 운동이 건강에 이롭다. | The benefits of education are clear. | 교육의 이점은 분명하다.
+profit | ˈprɑːfɪt | 이익, 수익, 이윤, 이익을 얻다 | gain, earnings | loss | The company made a huge profit. | 회사가 큰 이익을 냈다. | She profited from the investment. | 투자에서 이익을 얻었다.
+damage | ˈdæmɪdʒ | 손상, 피해, 손상을 입히다 | harm, destruction | repair | The storm caused severe damage. | 폭풍이 심각한 피해를 입혔다. | Smoking damages your lungs. | 흡연이 폐를 손상시킨다.
+amaze | əˈmeɪz | 놀라게 하다 | astonish, surprise | bore | The magic show amazed the audience. | 마술쇼가 관객을 놀라게 했다. | Her talent never fails to amaze me. | 그녀의 재능에 항상 놀란다.
+opportunity | ˌɑːpərˈtuːnəti | 기회, 가망 | chance, occasion | obstacle | Don't miss this opportunity. | 이 기회를 놓치지 마라. | She had the opportunity to study abroad. | 유학할 기회가 있었다.
+ignore | ɪɡˈnɔːr | 무시하다, 모르는 체하다 | disregard, overlook | notice, acknowledge | She ignored his message. | 그의 메시지를 무시했다. | Don't ignore the warning signs. | 경고 신호를 무시하지 마라.
+contact | ˈkɑːntækt | 접촉하다, 연락하다, 접촉 | reach, communicate | avoid | Contact me if you have questions. | 질문이 있으면 연락해라. | They lost contact after graduation. | 졸업 후 연락이 끊겼다.
+various | ˈvɛriəs | 다양한, 여러 가지의 | diverse, multiple | uniform, similar | She tried various methods. | 다양한 방법을 시도했다. | The store sells various products. | 가게에서 다양한 제품을 판다.
+diverse | dɪˈvɜːrs | 다양한, 다른 | varied, different | uniform, homogeneous | The city has a diverse population. | 도시 인구가 다양하다. | They hold diverse opinions. | 다양한 의견을 가지고 있다.
+performance | pərˈfɔːrməns | 공연, 성과, 수행 | show, achievement | failure | Her performance was outstanding. | 그녀의 공연은 뛰어났다. | The team's performance improved. | 팀의 성과가 향상되었다.
+contain | kənˈteɪn | 포함하다, 억누르다 | include, hold | exclude | This drink contains sugar. | 이 음료에 설탕이 포함되어 있다. | She couldn't contain her excitement. | 흥분을 억누를 수 없었다.
+involve | ɪnˈvɑːlv | 포함(수반)하다, 관련시키다 | include, engage | exclude | The project involves teamwork. | 프로젝트에 팀워크가 수반된다. | Don't involve me in your problems. | 네 문제에 나를 관련시키지 마.
+concentrate | ˈkɑːnsəntreɪt | 집중하다, 전력을 기울이다 | focus, center | distract | Concentrate on your studies. | 공부에 집중해라. | She concentrated on the task. | 과제에 집중했다.
+disturb | dɪˈstɜːrb | 방해하다, 어지럽히다 | interrupt, bother | soothe, calm | Please don't disturb me. | 방해하지 마세요. | The noise disturbed her sleep. | 소음이 수면을 방해했다.
+due | djuː | 만기가 된, ~을 하기로 되어있는 | owed, expected | - | The assignment is due tomorrow. | 과제 마감이 내일이다. | The train is due at 3 p.m. | 기차가 오후 3시에 도착 예정이다.
+examine | ɪɡˈzæmɪn | 조사하다, 검진하다, 시험하다 | inspect, investigate | ignore | The doctor examined the patient. | 의사가 환자를 검진했다. | Examine the evidence carefully. | 증거를 주의 깊게 조사해라.
+investigate | ɪnˈvɛstɪɡeɪt | 조사하다, 연구하다 | examine, probe | ignore | The police investigated the crime. | 경찰이 범죄를 조사했다. | Scientists investigated the cause. | 과학자들이 원인을 조사했다.
+research | rɪˈsɜːrtʃ | 연구(조사)하다, 연구, 조사 | study, investigation | - | She conducts research on cancer. | 암에 대한 연구를 한다. | More research is needed. | 더 많은 연구가 필요하다.
+material | məˈtɪriəl | 재료, 자료, 물질, 물질의 | substance, resource | spiritual | The dress is made of soft material. | 드레스가 부드러운 소재로 만들어졌다. | She gathered research materials. | 연구 자료를 모았다.
+medical | ˈmɛdɪkəl | 의학의, 의료의 | clinical, health | - | She received medical treatment. | 의료 치료를 받았다. | Medical research saved many lives. | 의학 연구가 많은 생명을 구했다.
+pursue | pərˈsuː | 추구하다, 추적하다 | chase, seek | abandon, give up | She pursued her dream of becoming a doctor. | 의사가 되는 꿈을 추구했다. | Police pursued the suspect. | 경찰이 용의자를 추적했다.
+alter | ˈɔːltər | 바꾸다, 변경하다 | change, modify | maintain, preserve | She altered the dress to fit. | 드레스를 맞게 수정했다. | His plans were altered. | 계획이 변경되었다.
+according to | əˈkɔːrdɪŋ tuː | ~에 따라서, ~에 따르면 | based on | contrary to | According to the report, sales rose. | 보고서에 따르면 매출이 올랐다. | According to her, it's true. | 그녀에 따르면 사실이다.
+participate in | pɑːrˈtɪsɪpeɪt ɪn | ~에 참여하다, ~에 참가하다 | join, take part in | withdraw from | She participated in the contest. | 대회에 참가했다. | Everyone should participate in the discussion. | 모두 토론에 참여해야 한다.
+look into | lʊk ˈɪntuː | ~을 조사하다, 주의 깊게 살피다 | investigate, examine | ignore | The committee will look into the issue. | 위원회가 이 문제를 조사할 것이다. | She looked into the matter carefully. | 문제를 주의 깊게 조사했다.
+=== Day 4 ===
+circumstance | sɜːrkəmstæns | 환경, 상황, 형편 | condition, situation | - | Under no circumstances should you lie. | 어떤 상황에서도 거짓말하면 안 된다. | The circumstances were beyond her control. | 상황이 그녀의 통제를 벗어났다.
+environment | ɪnvaɪrənmənt | (자연, 주변의) 환경 | surroundings, nature | - | Protect the environment. | 환경을 보호해라. | A clean environment is essential. | 깨끗한 환경이 필수적이다.
+active | æktɪv | 활동적인, 적극적인, 활발한 | energetic, dynamic | passive, inactive | She leads an active lifestyle. | 활동적인 생활을 한다. | He is active in politics. | 정치에 적극적이다.
+community | kəmjuːnəti | 지역사회, 공동체 | society, neighborhood | - | The community came together. | 지역사회가 하나로 뭉쳤다. | She volunteers in her community. | 지역사회에서 봉사한다.
+necessity | nəsɛsəti | 필요, 필수품 | need, requirement | luxury | Water is a basic necessity. | 물은 기본 필수품이다. | Necessity is the mother of invention. | 필요는 발명의 어머니이다.
+effort | ɛfərt | 노력, 수고, 결과 | attempt, endeavor | laziness | She made a great effort. | 대단한 노력을 했다. | The effort was worthwhile. | 노력의 가치가 있었다.
+participation | pɑːrtɪsɪpeɪʃən | 참가, 참여 | involvement, engagement | exclusion | Active participation is required. | 적극적인 참여가 필요하다. | Participation increased this year. | 올해 참여율이 증가했다.
+regular | rɛɡjələr | 규칙적인, 정기적인, 단골손님 | routine, consistent | irregular | She exercises on a regular basis. | 규칙적으로 운동한다. | He is a regular customer. | 단골손님이다.
+development | dɪvɛləpmənt | 발전, 성장, 개발 | growth, progress | decline | Economic development is important. | 경제 발전이 중요하다. | The new development changed the area. | 새 개발이 지역을 바꿨다.
+progress | prɑːɡrɛs | 진전, 진보하다, 전진하다 | advance, improvement | regression | She made great progress. | 큰 진전을 이루었다. | The project is progressing well. | 프로젝트가 잘 진행되고 있다.
+permit | pərmɪt | 허락하다 | allow, authorize | forbid, prohibit | Smoking is not permitted here. | 여기서 흡연이 허가되지 않는다. | She was permitted to leave early. | 일찍 퇴근이 허가되었다.
+forbid | fɔːrbɪd | 금지하다 | prohibit, ban | permit, allow | The law forbids discrimination. | 법이 차별을 금지한다. | She forbade him from going. | 그가 가는 것을 금지했다.
+emission | ɪmɪʃən | 배출, 방출, 배출물 | discharge, release | absorption | Carbon emissions must be reduced. | 탄소 배출을 줄여야 한다. | The factory controls its emissions. | 공장이 배출물을 관리한다.
+perspective | pərspɛktɪv | 관점, 시각, 원근법 | viewpoint, outlook | - | Try to see it from her perspective. | 그녀의 관점에서 보려고 해봐. | Gain a new perspective on life. | 삶에 대한 새로운 시각을 갖다.
+conservative | kənsɜːrvətɪv | 보수적인, 보수주의의 | traditional, conventional | liberal, progressive | She has conservative views. | 보수적인 견해를 가졌다. | The estimate was conservative. | 추정치가 보수적이었다.
+entire | ɪntaɪər | 전체의, 완전한 | whole, complete | partial | She read the entire book. | 책을 통째로 읽었다. | The entire class passed the test. | 학급 전체가 시험에 합격했다.
+measure | mɛʒər | 측정하다, 재다, 측정, 조치 | gauge, assess | - | Measure the length of the room. | 방의 길이를 재라. | They took measures to prevent crime. | 범죄 예방 조치를 취했다.
+maintain | meɪnteɪn | 유지하다, 지지하다, 부양하다 | preserve, sustain | neglect, abandon | She maintains a healthy diet. | 건강한 식단을 유지한다. | Maintain a positive attitude. | 긍정적인 태도를 유지해라.
+support | səpɔːrt | 지지하다, 지원하다, 부양하다 | back, assist | oppose, undermine | I support your decision. | 결정을 지지한다. | She supports her family alone. | 혼자서 가족을 부양한다.
+prevent | prɪvɛnt | 막다, 예방하다 | stop, block | allow, enable | Vaccines prevent diseases. | 백신이 질병을 예방한다. | She prevented the accident. | 사고를 막았다.
+occur | əkɜːr | 발생하다, 일어나다, 생각나다 | happen, take place | - | The accident occurred at night. | 사고가 밤에 발생했다. | An idea occurred to her. | 아이디어가 떠올랐다.
+passion | pæʃən | 열정, 격정 | enthusiasm, zeal | apathy, indifference | She has a passion for music. | 음악에 열정이 있다. | Follow your passion. | 열정을 따라가라.
+determine | dɪtɜːrmɪn | 결정하다, 밝혀내다 | decide, resolve | hesitate | She determined to succeed. | 성공하기로 결심했다. | Scientists determined the cause. | 과학자들이 원인을 밝혀냈다.
+influence | ɪnfluəns | 영향, 영향을 주다 | impact, affect | - | Music influences our mood. | 음악이 기분에 영향을 미친다. | He has great influence on the team. | 팀에 큰 영향력이 있다.
+impact | ɪmpækt | 영향, 충격, 영향을 주다 | effect, consequence | - | The decision had a major impact. | 그 결정은 큰 영향을 미쳤다. | Climate change impacts everyone. | 기후 변화가 모두에게 영향을 미친다.
+immediate | ɪmiːdiət | 즉각적인, 직접의 | instant, direct | delayed, gradual | She took immediate action. | 즉각적인 조치를 취했다. | The immediate area was evacuated. | 직접적인 주변 지역이 대피되었다.
+military | mɪlɪtɛri | 군대, 군대의 | armed forces, army | civilian | He served in the military. | 군대에서 복무했다. | Military spending increased. | 군사 지출이 증가했다.
+ancient | eɪnʃənt | 고대의, 옛날의 | old, antique | modern, contemporary | She studied ancient history. | 고대사를 공부했다. | The ancient ruins are beautiful. | 고대 유적이 아름답다.
+emphasize | ɛmfəsaɪz | 강조하다, 두드러지게 하다 | stress, highlight | downplay | She emphasized the importance of education. | 교육의 중요성을 강조했다. | He emphasized his point clearly. | 요점을 분명하게 강조했다.
+preference | prɛfərəns | 선호, 선호하는 것 | choice, liking | dislike, aversion | She has a preference for tea. | 차를 선호한다. | State your preference clearly. | 선호를 명확히 말해라.
+respect | rɪspɛkt | 존경하다, 존경, 측면 | admire, honor | disrespect | She respects her teacher. | 선생님을 존경한다. | In this respect, he is right. | 이 측면에서 그가 옳다.
+concern | kənsɜːrn | 염려, 관심사, 관련되다 | worry, interest | indifference | She expressed concern for his health. | 그의 건강에 대한 걱정을 표했다. | This issue concerns all of us. | 이 문제는 우리 모두에게 관련된다.
+forecast | fɔːrkæst | 예측하다, 예보하다, 예측 | predict, project | - | The weather forecast says rain. | 일기 예보가 비를 예보한다. | She forecasted economic growth. | 경제 성장을 예측했다.
+predict | prɪdɪkt | 예측하다, 예언하다 | forecast, foresee | - | Scientists predict global warming. | 과학자들이 지구 온난화를 예측한다. | Nobody could predict the outcome. | 아무도 결과를 예측하지 못했다.
+tendency | tɛndənsi | 경향, 추세, 성향 | trend, inclination | - | She has a tendency to worry. | 걱정하는 경향이 있다. | There is a tendency toward automation. | 자동화 추세가 있다.
+function | fʌŋkʃən | 기능, 행사, 작용하다 | role, purpose | malfunction | What is the function of this tool? | 이 도구의 기능은 무엇인가? | The machine functions well. | 기계가 잘 작동한다.
+significant | sɪɡnɪfɪkənt | 중요한, 의미 있는, 상당한 | important, major | insignificant, trivial | She made a significant contribution. | 중요한 기여를 했다. | There was a significant increase. | 상당한 증가가 있었다.
+due to | djuː tuː | ~때문에, ~에 기인하는 | because of, owing to | despite | The flight was delayed due to fog. | 안개 때문에 비행기가 지연되었다. | Due to rain, the game was canceled. | 비 때문에 경기가 취소되었다.
+be aware of | biː əwɛr ɑːv | ~을 인식하다, 알다, 깨닫다 | know, recognize | be ignorant of | Be aware of the risks. | 위험을 인식해라. | She wasn't aware of the problem. | 문제를 인식하지 못했다.
+provide A with B | prəvaɪd wɪð | A에게 B를 제공하다 | supply, furnish | deprive | The school provides students with textbooks. | 학교가 학생에게 교과서를 제공한다. | She provided us with useful information. | 유용한 정보를 제공해줬다.
+=== Day 5 ===
+apologize | əˈpɑːlədʒaɪz | 사과하다 | say sorry, express regret | - | She apologized for being late. | 늦은 것에 대해 사과했다. | He should apologize to her. | 그녀에게 사과해야 한다.
+confuse | kənˈfjuːz | 혼동하다, 혼란시키다 | bewilder, puzzle | clarify | The instructions confused me. | 설명서가 나를 혼란시켰다. | Don't confuse the two words. | 두 단어를 혼동하지 마.
+disorder | dɪsˈɔːrdər | 무질서, 혼란, 장애 | chaos, confusion | order | The room was in disorder. | 방이 어질러져 있었다. | She suffers from a sleep disorder. | 수면 장애를 앓고 있다.
+gather | ˈɡæðər | 모이다, 모으다 | collect, assemble | scatter, disperse | Students gathered in the hall. | 학생들이 강당에 모였다. | She gathered information for the report. | 보고서를 위해 정보를 수집했다.
+recommend | ˌrɛkəˈmɛnd | 권장하다, 추천하다 | suggest, advise | discourage | I recommend this book. | 이 책을 추천한다. | The doctor recommended rest. | 의사가 휴식을 권했다.
+suppose | səˈpoʊz | 가정하다, 추정하다 | assume, presume | know, prove | I suppose you are right. | 네가 맞는 것 같다. | She is supposed to arrive at noon. | 정오에 도착할 예정이다.
+accident | ˈæksɪdənt | 사고, 재난, 우연 | crash, mishap | intent | A car accident happened nearby. | 근처에서 자동차 사고가 났다. | She found the information by accident. | 우연히 그 정보를 알게 되었다.
+adjust | əˈdʒʌst | 조정하다, 조절하다 | modify, adapt | fix, leave | Adjust the volume, please. | 볼륨을 조절해 주세요. | She adjusted to the new environment. | 새 환경에 적응했다.
+aspect | ˈæspɛkt | 측면, 양상, 관점 | angle, facet | whole | Consider every aspect of the problem. | 문제의 모든 측면을 고려해라. | This aspect is often overlooked. | 이 측면은 종종 간과된다.
+purchase | ˈpɜːrtʃɪs | 구입하다, 구입, 구입품 | buy, acquire | sell | She purchased a new laptop. | 새 노트북을 구입했다. | The purchase was worth it. | 그 구입은 가치가 있었다.
+purpose | ˈpɜːrpəs | 목적, 의도, 결심 | aim, goal | aimlessness | What is the purpose of your visit? | 방문 목적이 무엇입니까? | She did it on purpose. | 일부러 그랬다.
+organize | ˈɔːrɡənaɪz | 조직하다, 준비하다, 정리하다 | arrange, coordinate | disorganize | She organized the event. | 행사를 준비했다. | Organize your desk. | 책상을 정리해라.
+arrange | əˈreɪndʒ | 정리(배열)하다, 준비하다 | organize, set up | mess up | She arranged the flowers beautifully. | 꽃을 아름답게 배열했다. | They arranged a meeting. | 회의를 준비했다.
+communicate | kəˈmjuːnɪkeɪt | 의사소통하다, 전달하다 | convey, express | conceal | She communicates clearly. | 명확하게 전달한다. | We communicate via email. | 이메일로 소통한다.
+represent | ˌrɛprɪˈzɛnt | 대표하다, 나타내다, 대변하다 | symbolize, stand for | misrepresent | She represents the school. | 학교를 대표한다. | The flag represents the nation. | 국기가 나라를 나타낸다.
+treatment | ˈtriːtmənt | 치료(법), 대우, 처리 | therapy, care | neglect | She received medical treatment. | 의료 치료를 받았다. | The treatment was effective. | 치료가 효과적이었다.
+approach | əˈproʊtʃ | 접근하다, 접근 | method, way | retreat | We approached the building slowly. | 건물에 천천히 접근했다. | Try a different approach. | 다른 접근법을 시도해라.
+claim | kleɪm | 주장하다, 요구하다, 청구 | assert, demand | deny | She claimed that she was innocent. | 무죄라고 주장했다. | He filed an insurance claim. | 보험 청구를 했다.
+disappoint | ˌdɪsəˈpɔɪnt | 실망시키다, 낙담시키다 | let down, frustrate | satisfy, please | The result disappointed everyone. | 결과가 모두를 실망시켰다. | Don't disappoint your parents. | 부모님을 실망시키지 마.
+observe | əbˈzɜːrv | 관찰하다, 지키다, 목격하다 | watch, notice | ignore | She observed the stars carefully. | 별을 주의 깊게 관찰했다. | Observe the safety rules. | 안전 규칙을 지켜라.
+compare | kəmˈpɛr | 비교하다 | contrast, liken | - | Compare the prices before buying. | 구매 전 가격을 비교해라. | She compared the two products. | 두 제품을 비교했다.
+alarm | əˈlɑːrm | 경보, 놀라게 하다 | alert, frighten | calm, soothe | The fire alarm went off. | 화재 경보가 울렸다. | The news alarmed everyone. | 그 뉴스가 모두를 놀라게 했다.
+exist | ɪɡˈzɪst | 존재하다 | live, be | vanish, perish | Dinosaurs no longer exist. | 공룡은 더 이상 존재하지 않는다. | Do aliens exist? | 외계인이 존재할까?
+attract | əˈtrækt | 끌다, 매력을 느끼게 하다 | draw, lure | repel | The museum attracts many tourists. | 박물관이 많은 관광객을 끌어들인다. | She was attracted to the idea. | 그 아이디어에 끌렸다.
+crucial | ˈkruːʃəl | 중요한, 결정적인 | critical, vital | trivial, minor | This is a crucial decision. | 이것은 중대한 결정이다. | Practice is crucial for improvement. | 연습이 향상에 중요하다.
+display | dɪˈspleɪ | 전시하다, 보여주다, 전시 | show, exhibit | hide, conceal | The museum displays ancient art. | 박물관이 고대 미술을 전시한다. | She displayed her talent. | 재능을 보여줬다.
+exhibit | ɪɡˈzɪbɪt | 전시하다, 보이다, 전시품 | display, show | conceal | The gallery exhibits modern art. | 갤러리에서 현대 미술을 전시한다. | She exhibited great courage. | 큰 용기를 보여줬다.
+describe | dɪˈskraɪb | 묘사하다, 설명하다 | depict, explain | - | Describe what happened. | 무슨 일이 있었는지 묘사해라. | She described the scene vividly. | 장면을 생생하게 묘사했다.
+reward | rɪˈwɔːrd | 보상, 보답하다 | prize, compensate | punish, penalize | Hard work deserves a reward. | 열심히 한 것은 보상받을 만하다. | She was rewarded for her honesty. | 정직함에 대해 보상받았다.
+motivate | ˈmoʊtɪveɪt | 동기를 부여하다 | inspire, encourage | demotivate | Good leaders motivate their teams. | 좋은 리더는 팀에 동기를 부여한다. | She was motivated to succeed. | 성공하려는 동기가 있었다.
+general | ˈdʒɛnərəl | 일반적인, 전반적인 | common, overall | specific | In general, she is kind. | 일반적으로 그녀는 친절하다. | The general opinion was positive. | 전반적인 의견이 긍정적이었다.
+universal | ˌjuːnɪˈvɜːrsəl | 보편적인, 전 세계의 | worldwide, global | local, particular | Education is a universal right. | 교육은 보편적인 권리이다. | Music is a universal language. | 음악은 보편적 언어이다.
+specific | spəˈsɪfɪk | 특정한, 구체적인 | particular, precise | general, vague | Give a specific example. | 구체적인 예를 들어라. | She has specific requirements. | 구체적인 요구 사항이 있다.
+fee | fiː | 요금, 수수료 | charge, cost | - | The entrance fee is $10. | 입장료가 10달러이다. | She paid the registration fee. | 등록 수수료를 냈다.
+demand | dɪˈmænd | 요구하다, 수요, 요구 | require, request | supply | She demanded an explanation. | 설명을 요구했다. | Demand for oil is rising. | 석유 수요가 증가하고 있다.
+handle | ˈhændəl | 다루다, 처리하다, 손잡이 | manage, deal with | mishandle | She handled the situation well. | 상황을 잘 처리했다. | Turn the door handle. | 문 손잡이를 돌려라.
+manage | ˈmænɪdʒ | 관리하다, 해내다 | run, handle | fail | She manages a large team. | 큰 팀을 관리한다. | I managed to finish on time. | 제 시간에 끝낼 수 있었다.
+refer to | rɪˈfɜːr tuː | ~을 참조하다, 언급하다 | mention, cite | ignore | She referred to the dictionary. | 사전을 참조했다. | He referred to his notes. | 메모를 참고했다.
+take on | teɪk ɑːn | ~을 떠맡다, 고용하다 | undertake, accept | reject | She took on the new project. | 새 프로젝트를 맡았다. | The company took on more workers. | 회사가 더 많은 직원을 고용했다.
+pay attention to | peɪ əˈtɛnʃən tuː | ~에 주의하다 | focus on, heed | ignore, neglect | Pay attention to the details. | 세부 사항에 주의해라. | She paid attention to his words. | 그의 말에 주의를 기울였다.
+=== Day 6 ===
+category | ˈkætɪɡɔːri | 범주, 부문 | class, group | - | The book falls into this category. | 이 책은 이 범주에 해당한다. | There are several categories to choose from. | 선택할 수 있는 범주가 여러 개 있다.
+except | ɪkˈsɛpt | ~을 제외하고, 제외하다 | besides, excluding | including | Everyone came except John. | 존을 제외하고 모두 왔다. | She works every day except Sunday. | 일요일을 제외하고 매일 일한다.
+discuss | dɪˈskʌs | 토론하다, 논의하다 | debate, talk about | ignore | They discussed the plan. | 계획을 논의했다. | Let us discuss this later. | 나중에 이것을 논의하자.
+debate | dɪˈbeɪt | 토론하다, 숙고하다, 토론 | discuss, argue | agree | They debated the issue for hours. | 몇 시간 동안 그 문제를 토론했다. | The debate was very heated. | 토론이 매우 열띠었다.
+judgment | ˈdʒʌdʒmənt | 판단, 판결, 의견 | decision, verdict | - | She made a good judgment. | 좋은 판단을 했다. | Trust your own judgment. | 자기 판단을 믿어라.
+consume | kənˈsuːm | 소비하다, 섭취하다 | use, eat | produce, save | She consumes too much sugar. | 설탕을 너무 많이 섭취한다. | Americans consume a lot of energy. | 미국인은 많은 에너지를 소비한다.
+alive | əˈlaɪv | 살아 있는 | living, existing | dead | She is still alive. | 아직 살아 있다. | He felt alive after the run. | 달리기 후 살아있음을 느꼈다.
+valuable | ˈvæljuəbl | 소중한, 값비싼 | precious, priceless | worthless | Time is the most valuable resource. | 시간이 가장 소중한 자원이다. | She gave valuable advice. | 귀중한 조언을 했다.
+complain | kəmˈpleɪn | 불평하다, 호소하다 | grumble, protest | praise | She complained about the noise. | 소음에 대해 불평했다. | Stop complaining and start working. | 불평 그만하고 일 시작해.
+replace | rɪˈpleɪs | 대체하다, 교체하다 | substitute, swap | keep | She replaced the broken window. | 깨진 창문을 교체했다. | No one can replace her. | 아무도 그녀를 대체할 수 없다.
+norm | nɔːrm | 표준, 기준, 규범 | standard, rule | exception | Working from home is the new norm. | 재택근무가 새로운 규범이다. | Society has its own norms. | 사회에는 자체적인 규범이 있다.
+standard | ˈstændərd | 표준, 기준, 규범, 일반적인 | criterion, benchmark | exception | The product meets high standards. | 제품이 높은 기준을 충족한다. | Standard procedures must be followed. | 표준 절차를 따라야 한다.
+advertise | ˈædvərtaɪz | 광고하다, 알리다 | promote, market | conceal | The company advertises on TV. | 회사가 TV에 광고한다. | She advertised the event online. | 온라인으로 행사를 광고했다.
+awareness | əˈwɛrnɪs | 의식, 인식 | consciousness, understanding | ignorance | Public awareness has increased. | 대중 인식이 높아졌다. | Raise awareness about climate change. | 기후 변화에 대한 인식을 높여라.
+concept | ˈkɑːnsɛpt | 개념, 생각 | idea, notion | reality | The concept is easy to understand. | 개념이 이해하기 쉽다. | She introduced a new concept. | 새로운 개념을 도입했다.
+respond | rɪˈspɑːnd | 반응하다, 응답하다 | reply, react | ignore | She responded to the email quickly. | 이메일에 빠르게 응답했다. | How did he respond to the news? | 소식에 어떻게 반응했나?
+credit | ˈkrɛdɪt | 신용, 입금, 학점, 신용하다 | recognition, trust | debt | She paid by credit card. | 신용카드로 결제했다. | Give credit where it is due. | 공로가 있는 곳에 인정을 해라.
+poison | ˈpɔɪzən | 독, 독을 넣다, 해치다 | toxin, venom | antidote | The snake has deadly poison. | 뱀에 치명적인 독이 있다. | Pollution poisons the water. | 오염이 물을 오염시킨다.
+indicate | ˈɪndɪkeɪt | 나타내다, 가리키다, 암시하다 | show, suggest | conceal | The sign indicates danger. | 표지판이 위험을 나타낸다. | Studies indicate improvement. | 연구가 개선을 보여준다.
+chemical | ˈkɛmɪkəl | 화학의, 화학 물질 | synthetic, compound | natural | Avoid harmful chemicals. | 해로운 화학 물질을 피해라. | Chemical reactions produce heat. | 화학 반응이 열을 발생시킨다.
+primary | ˈpraɪmɛri | 주요한, 기본적인, 초등의 | main, chief | secondary | The primary goal is safety. | 주요 목표는 안전이다. | She attends primary school. | 초등학교에 다닌다.
+essential | ɪˈsɛnʃəl | 필수적인, 본질적인 | vital, necessary | optional, unnecessary | Sleep is essential for health. | 수면은 건강에 필수적이다. | Bring only the essential items. | 필수 물품만 가져와라.
+opinion | əˈpɪnjən | 의견, 견해 | view, belief | fact | In my opinion, she is right. | 내 의견으로는 그녀가 맞다. | Everyone has a different opinion. | 모두 다른 의견을 가지고 있다.
+efficient | ɪˈfɪʃənt | 효율적인, 능률적인 | effective, productive | inefficient, wasteful | The new system is more efficient. | 새 시스템이 더 효율적이다. | She is an efficient worker. | 그녀는 능률적인 직원이다.
+welfare | ˈwɛlfɛr | 복지, 안녕, 행복 | well-being, benefit | harm | The government provides welfare programs. | 정부가 복지 프로그램을 제공한다. | Child welfare is a priority. | 아동 복지가 우선이다.
+eliminate | ɪˈlɪmɪneɪt | 제거하다, 없애다 | remove, eradicate | add, include | Eliminate unnecessary expenses. | 불필요한 비용을 제거해라. | The team was eliminated. | 팀이 탈락했다.
+locate | loʊˈkeɪt | 위치를 찾다, ~에 위치하다 | find, situate | lose | Can you locate it on the map? | 지도에서 찾을 수 있니? | The store is located downtown. | 가게가 시내에 위치해 있다.
+invention | ɪnˈvɛnʃən | 발명, 발명품 | creation, innovation | - | The invention changed the world. | 그 발명이 세상을 바꿨다. | Necessity is the mother of invention. | 필요는 발명의 어머니이다.
+ideal | aɪˈdiːəl | 이상적인, 이상 | perfect, optimal | imperfect | This is the ideal solution. | 이상적인 해결책이다. | She has high ideals. | 높은 이상을 가지고 있다.
+realistic | ˌriːəˈlɪstɪk | 현실적인, 사실적인 | practical, sensible | unrealistic | Be more realistic. | 더 현실적이어라. | The painting is very realistic. | 그림이 매우 사실적이다.
+conclude | kənˈkluːd | 결론짓다, 끝내다 | finish, determine | begin, open | She concluded the speech. | 연설을 마무리했다. | I concluded that he was wrong. | 그가 틀렸다고 결론지었다.
+struggle | ˈstrʌɡəl | 투쟁하다, 고군분투, 투쟁 | fight, battle | surrender | She struggled to stay awake. | 깨어 있으려고 고군분투했다. | The struggle for equality continues. | 평등을 위한 투쟁이 계속된다.
+unique | juːˈniːk | 독특한, 유일한 | distinctive, one-of-a-kind | common, ordinary | Every person is unique. | 모든 사람은 독특하다. | She has a unique style. | 독특한 스타일이 있다.
+proper | ˈprɑːpər | 적절한, 올바른, 제대로 된 | appropriate, correct | improper, wrong | Use proper grammar. | 올바른 문법을 사용해라. | She wore proper attire. | 적절한 복장을 착용했다.
+appropriate | əˈproʊpriət | 적절한, 적합한 | suitable, fitting | inappropriate | Wear appropriate clothing. | 적절한 옷을 입어라. | That comment was not appropriate. | 그 발언은 적절하지 않았다.
+supplement | ˈsʌplɪmənt | 보충하다, 보충제, 부록 | addition, extra | - | She takes vitamin supplements. | 비타민 보충제를 먹는다. | He supplemented his income. | 수입을 보충했다.
+trial | ˈtraɪəl | 재판, 시험, 시련 | test, hearing | - | The trial lasted three weeks. | 재판이 3주간 지속되었다. | She faced many trials in life. | 인생에서 많은 시련을 겪었다.
+infant | ˈɪnfənt | 유아, 갓난아이 | baby, newborn | adult | The infant slept peacefully. | 유아가 평화롭게 잤다. | Infant mortality has decreased. | 유아 사망률이 감소했다.
+run out of | rʌn aʊt ɑːv | ~을 다 써버리다 | exhaust, deplete | stock up | We ran out of milk. | 우유가 다 떨어졌다. | She ran out of time. | 시간이 다 되었다.
+can afford to do | kæn əˈfɔːrd tuː duː | ~할 여유가 있다 | be able to | cannot afford | She can afford to travel abroad. | 해외여행 할 여유가 있다. | We cannot afford to waste time. | 시간을 낭비할 여유가 없다.
+=== Day 7 ===
+protest | ˈproʊtɛst | 항의하다, 항의, 시위 | object, demonstrate | support | They protested against the decision. | 결정에 항의했다. | The protest attracted thousands. | 시위에 수천 명이 모였다.
+organic | ɔːrˈɡænɪk | 유기적인, 유기농의 | natural, biological | synthetic | She buys organic vegetables. | 유기농 채소를 산다. | Organic farming is growing. | 유기 농업이 성장하고 있다.
+brilliant | ˈbrɪljənt | 뛰어난, 눈부신 | outstanding, genius | dull, mediocre | She had a brilliant idea. | 뛰어난 아이디어가 있었다. | The sunrise was brilliant. | 일출이 눈부셨다.
+finance | ˈfaɪnæns | 재정, 자금, 자금을 대다 | funding, money | - | She studied finance at university. | 대학에서 재무를 공부했다. | The project is financed by the government. | 프로젝트가 정부에 의해 자금 지원된다.
+incredible | ɪnˈkrɛdəbl | 놀라운, 믿기 어려운 | amazing, unbelievable | ordinary, credible | The view was incredible. | 경치가 놀라웠다. | She has incredible talent. | 놀라운 재능이 있다.
+interest | ˈɪntrɪst | 흥미, 관심, 이자 | curiosity, concern | boredom | She has an interest in science. | 과학에 관심이 있다. | The interest rate is low. | 이자율이 낮다.
+rare | rɛr | 드문, 희귀한 | uncommon, scarce | common, frequent | This is a rare species. | 희귀한 종이다. | Such opportunities are rare. | 그런 기회는 드물다.
+employ | ɪmˈplɔɪ | 고용하다, 사용하다 | hire, use | fire, dismiss | The company employs 500 people. | 회사가 500명을 고용한다. | She employed a new strategy. | 새 전략을 사용했다.
+hire | ˈhaɪər | 고용하다, 임대하다 | employ, recruit | fire, dismiss | They hired a new manager. | 새 매니저를 고용했다. | She hired a car for the trip. | 여행을 위해 차를 빌렸다.
+define | dɪˈfaɪn | 정의하다, 규정하다 | describe, explain | confuse | Define the term clearly. | 용어를 명확히 정의해라. | Success is hard to define. | 성공은 정의하기 어렵다.
+donate | doʊˈneɪt | 기부하다, 기증하다 | give, contribute | take, keep | She donated blood. | 헌혈했다. | He donated money to charity. | 자선단체에 돈을 기부했다.
+average | ˈævərɪdʒ | 평균, 보통의 | typical, mean | exceptional | The average score was 75. | 평균 점수가 75였다. | She is an average student. | 보통 학생이다.
+gender | ˈdʒɛndər | 성별, 성 | sex | - | Gender equality is important. | 성 평등이 중요하다. | The survey asked about gender. | 설문이 성별을 물었다.
+invest | ɪnˈvɛst | 투자하다, 쏟다 | fund, spend | withdraw | She invested in stocks. | 주식에 투자했다. | Invest time in learning. | 배움에 시간을 투자해라.
+previous | ˈpriːviəs | 이전의, 앞의 | former, prior | next, following | She had a previous appointment. | 이전 약속이 있었다. | The previous owner sold it. | 이전 소유자가 팔았다.
+worth | wɜːrθ | ~의 가치가 있는, 가치 | value, merit | worthlessness | The painting is worth millions. | 그림이 수백만의 가치가 있다. | It's worth a try. | 시도해볼 가치가 있다.
+alternative | ɔːlˈtɜːrnətɪv | 대안, 대체의 | option, substitute | - | We need an alternative plan. | 대안이 필요하다. | Alternative energy sources are important. | 대체 에너지원이 중요하다.
+factor | ˈfæktər | 요인, 요소 | element, cause | - | Cost is an important factor. | 비용이 중요한 요인이다. | Many factors affect health. | 많은 요인이 건강에 영향을 미친다.
+element | ˈɛlɪmənt | 요소, 원소, 성분 | component, part | whole | Water is a key element of life. | 물이 생명의 핵심 요소이다. | The elements of the periodic table. | 주기율표의 원소들.
+deadly | ˈdɛdli | 치명적인, 치사의 | fatal, lethal | harmless | The snake has a deadly bite. | 뱀이 치명적인 물림이 있다. | The disease can be deadly. | 질병이 치명적일 수 있다.
+firm | fɜːrm | 단단한, 확고한, 회사 | solid, company | soft, weak | She stood firm on her decision. | 결정에 확고했다. | She works at a law firm. | 법률 회사에서 일한다.
+independence | ˌɪndɪˈpɛndəns | 독립, 자주 | freedom, autonomy | dependence | Korea gained independence in 1945. | 한국이 1945년에 독립했다. | She values her independence. | 독립을 소중히 여긴다.
+occasion | əˈkeɪʒən | 경우, 행사, 때 | event, ceremony | - | A birthday is a special occasion. | 생일은 특별한 행사이다. | On this occasion, we celebrate. | 이 기회에 축하한다.
+publish | ˈpʌblɪʃ | 출판하다, 발표하다 | print, release | suppress | She published a new book. | 새 책을 출판했다. | The results were published online. | 결과가 온라인에 발표되었다.
+appearance | əˈpɪrəns | 외모, 출현, 등장 | look, presence | disappearance | Don't judge by appearance. | 외모로 판단하지 마라. | She made a brief appearance. | 잠깐 등장했다.
+appoint | əˈpɔɪnt | 임명하다, 지정하다 | assign, designate | dismiss | She was appointed as director. | 이사로 임명되었다. | He was appointed to the committee. | 위원회에 임명되었다.
+blend | blɛnd | 섞다, 혼합하다, 혼합 | mix, combine | separate | Blend the ingredients together. | 재료를 함께 섞어라. | The colors blend beautifully. | 색상이 아름답게 어우러진다.
+barrier | ˈbæriər | 장벽, 방해물 | obstacle, wall | opening | Language can be a barrier. | 언어가 장벽이 될 수 있다. | Break down barriers. | 장벽을 허물어라.
+obstacle | ˈɑːbstəkəl | 장애물, 방해 | hindrance, barrier | aid, help | She overcame every obstacle. | 모든 장애물을 극복했다. | Lack of money is a major obstacle. | 돈 부족이 주요 장애물이다.
+detect | dɪˈtɛkt | 감지하다, 발견하다 | find, discover | miss, overlook | The sensor detected movement. | 센서가 움직임을 감지했다. | She detected a flaw in the plan. | 계획의 결함을 발견했다.
+education | ˌɛdʒuˈkeɪʃən | 교육, 학력 | learning, schooling | ignorance | Education is the key to success. | 교육이 성공의 열쇠이다. | She received a good education. | 좋은 교육을 받았다.
+enormous | ɪˈnɔːrməs | 거대한, 막대한 | huge, massive | tiny, small | The building is enormous. | 건물이 거대하다. | She made an enormous effort. | 막대한 노력을 했다.
+vast | væst | 광대한, 방대한 | huge, extensive | small, narrow | The desert is vast. | 사막이 광대하다. | She has vast knowledge. | 방대한 지식이 있다.
+tiny | ˈtaɪni | 아주 작은, 극소의 | small, miniature | huge, enormous | The baby's hands are tiny. | 아기의 손이 아주 작다. | She lives in a tiny apartment. | 아주 작은 아파트에 산다.
+ordinary | ˈɔːrdɪnɛri | 보통의, 평범한 | normal, average | extraordinary | It was just an ordinary day. | 그냥 평범한 날이었다. | She is no ordinary student. | 보통 학생이 아니다.
+application | ˌæplɪˈkeɪʃən | 신청서, 응용, 적용 | request, use | - | She submitted her application. | 지원서를 제출했다. | Download the mobile application. | 모바일 앱을 다운로드해라.
+reasonable | ˈriːzənəbl | 합리적인, 타당한 | fair, sensible | unreasonable | The price is reasonable. | 가격이 합리적이다. | She made a reasonable decision. | 합리적인 결정을 했다.
+abandon | əˈbændən | 버리다, 포기하다 | desert, forsake | keep, retain | They abandoned the sinking ship. | 침몰하는 배를 버렸다. | She abandoned her old habits. | 오래된 습관을 버렸다.
+get used to | ɡɛt juːzd tuː | ~에 익숙해지다 | become accustomed to | - | She got used to the cold weather. | 추운 날씨에 익숙해졌다. | You will get used to it. | 익숙해질 거야.
+figure out | ˈfɪɡjər aʊt | 알아내다, 이해하다 | discover, solve | misunderstand | She figured out the answer. | 답을 알아냈다. | I can not figure out the problem. | 문제를 이해할 수 없다.
+=== Day 8 ===
+accurate | ˈækjərɪt | 정확한, 정밀한 | precise, exact | inaccurate | The data is accurate. | 데이터가 정확하다. | She gave an accurate description. | 정확한 묘사를 했다.
+precise | prɪˈsaɪs | 정확한, 정밀한, 꼼꼼한 | exact, specific | vague, imprecise | Give me the precise time. | 정확한 시간을 알려줘. | Her instructions were precise. | 지시가 정확했다.
+estimate | ˈɛstɪmeɪt | 추정하다, 견적, 추정치 | guess, calculate | - | She estimated the cost at $1000. | 비용을 1000달러로 추정했다. | The estimate was too low. | 추정치가 너무 낮았다.
+compete | kəmˈpiːt | 경쟁하다, 겨루다 | contend, rival | cooperate | Companies compete for customers. | 회사들이 고객을 위해 경쟁한다. | She competed in the Olympics. | 올림픽에 출전했다.
+submit | səbˈmɪt | 제출하다, 굴복하다 | present, surrender | resist, withhold | Submit your report by Friday. | 금요일까지 보고서를 제출해라. | She submitted to the rules. | 규칙에 따랐다.
+grab | ɡræb | 붙잡다, 움켜쥐다 | seize, snatch | release | She grabbed her bag and left. | 가방을 움켜쥐고 떠났다. | He grabbed the opportunity. | 기회를 잡았다.
+theory | ˈθɪəri | 이론, 학설 | hypothesis, concept | practice | The theory was proven correct. | 이론이 올바른 것으로 증명됐다. | In theory, it should work. | 이론적으로 작동해야 한다.
+document | ˈdɑːkjumənt | 문서, 서류, 기록하다 | record, file | - | She signed the document. | 문서에 서명했다. | Document your progress. | 진행 상황을 기록해라.
+enable | ɪˈneɪbl | 가능하게 하다, 할 수 있게하다 | allow, empower | prevent, disable | Technology enables remote work. | 기술이 원격 근무를 가능하게 한다. | The grant enabled her research. | 보조금이 그녀의 연구를 가능하게 했다.
+avoid | əˈvɔɪd | 피하다, 회피하다 | evade, prevent | confront, face | Avoid fatty foods. | 지방이 많은 음식을 피해라. | She avoided the question. | 질문을 피했다.
+escape | ɪˈskeɪp | 탈출하다, 도망치다, 탈출 | flee, run away | capture | He escaped from prison. | 감옥에서 탈출했다. | There is no escape. | 탈출구가 없다.
+innovate | ˈɪnəveɪt | 혁신하다, 새로운 것을 도입하다 | create, pioneer | stagnate | Companies must innovate to survive. | 회사는 생존하기 위해 혁신해야 한다. | She innovated the entire system. | 전체 시스템을 혁신했다.
+insight | ˈɪnsaɪt | 통찰력, 이해 | understanding, perception | ignorance | She has great insight into human behavior. | 인간 행동에 대한 통찰력이 있다. | The book offers valuable insights. | 책이 귀중한 통찰을 제공한다.
+insurance | ɪnˈʃʊrəns | 보험 | coverage, protection | risk | She bought health insurance. | 건강 보험에 가입했다. | Car insurance is mandatory. | 자동차 보험은 의무이다.
+infection | ɪnˈfɛkʃən | 감염, 전염 | disease, contamination | health | The wound got an infection. | 상처에 감염이 생겼다. | Prevent the spread of infection. | 감염 확산을 방지해라.
+vehicle | ˈviːɪkəl | 차량, 탈 것, 수단 | car, transport | - | She parked her vehicle. | 차를 주차했다. | Electric vehicles are popular. | 전기차가 인기이다.
+belong | bɪˈlɔːŋ | 속하다, ~의 것이다 | be part of | - | This book belongs to me. | 이 책은 내 것이다. | She belongs to the swimming club. | 수영 동아리에 속해 있다.
+celebrate | ˈsɛlɪbreɪt | 축하하다, 기념하다 | honor, commemorate | mourn | They celebrated her birthday. | 생일을 축하했다. | Korea celebrates Independence Day. | 한국은 광복절을 기념한다.
+demonstrate | ˈdɛmənstreɪt | 보여주다, 시위하다, 증명하다 | show, prove | disprove | She demonstrated how it works. | 작동 방법을 보여줬다. | Citizens demonstrated against the law. | 시민들이 법에 반대 시위했다.
+disaster | dɪˈzæstər | 재난, 재해, 참사 | catastrophe, calamity | blessing | The earthquake was a major disaster. | 지진이 대재앙이었다. | Natural disasters are increasing. | 자연재해가 증가하고 있다.
+economic | ˌiːkəˈnɑːmɪk | 경제의, 경제적인 | financial, fiscal | - | Economic growth slowed down. | 경제 성장이 둔화되었다. | The economic situation is stable. | 경제 상황이 안정적이다.
+household | ˈhaʊshoʊld | 가정, 가구, 가정의 | family, home | - | The average household income rose. | 평균 가구 소득이 올랐다. | Household chores take time. | 집안일이 시간이 걸린다.
+assign | əˈsaɪn | 배정하다, 할당하다, 부여하다 | allocate, designate | withdraw | The teacher assigned homework. | 선생님이 숙제를 부여했다. | She was assigned to Team A. | A팀에 배정되었다.
+transfer | ˈtrænsfɜːr | 이전하다, 옮기다, 전학 | move, shift | keep | She transferred to a new school. | 새 학교로 전학했다. | Transfer the money to my account. | 내 계좌로 돈을 이체해라.
+preserve | prɪˈzɜːrv | 보존하다, 보호하다 | protect, conserve | destroy | We must preserve the environment. | 환경을 보존해야 한다. | She preserved the old traditions. | 오래된 전통을 보존했다.
+opposite | ˈɑːpəzɪt | 반대의, 맞은편의, 반대 | contrary, reverse | same, identical | They have opposite views. | 반대 견해를 가지고 있다. | She sat on the opposite side. | 맞은편에 앉았다.
+satisfaction | ˌsætɪsˈfækʃən | 만족, 충족 | contentment, pleasure | dissatisfaction | She expressed great satisfaction. | 큰 만족을 표했다. | Customer satisfaction is our priority. | 고객 만족이 우선이다.
+comfort | ˈkʌmfərt | 편안함, 안위, 위로하다 | ease, relief | discomfort | She found comfort in music. | 음악에서 위안을 찾았다. | The sofa provides great comfort. | 소파가 큰 편안함을 준다.
+ease | iːz | 편안함, 용이함, 완화하다 | comfort, simplicity | difficulty | She moved with ease. | 편하게 움직였다. | The medicine eased her pain. | 약이 통증을 완화했다.
+motion | ˈmoʊʃən | 움직임, 동작, 동의 | movement, gesture | stillness | The motion of the waves is calming. | 파도의 움직임이 평온하다. | She made a motion to approve. | 승인 동의를 했다.
+operation | ˌɑːpəˈreɪʃən | 작동, 수술, 운영 | function, surgery | - | The operation was successful. | 수술이 성공적이었다. | The machine is in operation. | 기계가 작동 중이다.
+blame | bleɪm | 비난하다, 탓하다, 탓 | accuse, fault | praise | Don't blame me. | 나를 탓하지 마. | She blamed him for the mistake. | 실수를 그 탓으로 돌렸다.
+refreshing | rɪˈfrɛʃɪŋ | 상쾌한, 신선한 | invigorating, cool | tiring, dull | The cool breeze was refreshing. | 시원한 바람이 상쾌했다. | She offered a refreshing perspective. | 신선한 관점을 제시했다.
+trend | trɛnd | 추세, 경향, 유행 | tendency, fashion | - | The trend is toward automation. | 추세가 자동화를 향하고 있다. | Fashion trends change quickly. | 패션 유행이 빠르게 바뀐다.
+journal | ˈdʒɜːrnəl | 일지, 학술지, 저널 | diary, periodical | - | She writes in her journal daily. | 매일 일지를 쓴다. | The article was published in a journal. | 기사가 학술지에 발표되었다.
+private | ˈpraɪvɪt | 사적인, 비공개의 | personal, confidential | public | This is a private matter. | 사적인 문제이다. | She attends a private school. | 사립학교에 다닌다.
+sentence | ˈsɛntəns | 문장, 형벌, 판결하다 | phrase, punishment | pardon | Write a complete sentence. | 완전한 문장을 써라. | He was sentenced to five years. | 5년형을 선고받았다.
+majority | məˈdʒɔːrɪti | 다수, 대다수 | most, bulk | minority | The majority agreed with the plan. | 다수가 계획에 동의했다. | The majority of students passed. | 대다수의 학생이 합격했다.
+dozens of | ˈdʌzənz ɑːv | 수십 개의, 많은 | many, numerous | few | She received dozens of emails. | 수십 통의 이메일을 받았다. | Dozens of people attended. | 수십 명이 참석했다.
+rather than | ˈræðər ðæn | ~보다는, ~대신에 | instead of | - | She chose tea rather than coffee. | 커피보다 차를 선택했다. | Walk rather than drive. | 운전하기보다 걸어라.
+=== Day 9 ===
+available | əˈveɪləbl | 이용 가능한, 유효한 | accessible, obtainable | unavailable | The room is available now. | 방이 이용 가능하다. | She is available for a meeting. | 회의에 참석 가능하다.
+shelter | ˈʃɛltər | 보호소, 피난처, 보호하다 | refuge, haven | exposure | They found shelter from the rain. | 비를 피할 곳을 찾았다. | The shelter houses homeless people. | 보호소가 노숙자를 수용한다.
+benefit | ˈbɛnɪfɪt | 이익, 혜택, 이롭다 | advantage, profit | disadvantage | The benefits of exercise are clear. | 운동의 이점은 분명하다. | She benefits from the program. | 프로그램에서 혜택을 받는다.
+complex | ˈkɑːmplɛks | 복잡한, 복합의 | complicated, intricate | simple | The issue is complex. | 문제가 복잡하다. | She lives in an apartment complex. | 아파트 단지에 산다.
+annual | ˈænjuəl | 연간의, 1년의 | yearly | - | The annual report was published. | 연간 보고서가 발표되었다. | The annual meeting is in May. | 연례 회의가 5월에 있다.
+agriculture | ˈæɡrɪkʌltʃər | 농업, 농경 | farming, cultivation | - | Agriculture is the main industry. | 농업이 주요 산업이다. | Modern agriculture uses technology. | 현대 농업은 기술을 사용한다.
+continent | ˈkɑːntɪnənt | 대륙 | landmass | island | Africa is a large continent. | 아프리카는 큰 대륙이다. | She has traveled to every continent. | 모든 대륙을 여행했다.
+population | ˌpɑːpjuˈleɪʃən | 인구, 주민 | inhabitants, residents | - | The population is growing. | 인구가 증가하고 있다. | The city has a large population. | 도시의 인구가 많다.
+expand | ɪkˈspænd | 확대하다, 팽창하다 | grow, enlarge | shrink, contract | The company expanded its business. | 회사가 사업을 확대했다. | Metal expands when heated. | 금속이 열을 받으면 팽창한다.
+extend | ɪkˈstɛnd | 연장하다, 확대하다, 뻗다 | stretch, prolong | shorten, reduce | She extended the deadline. | 마감을 연장했다. | Extend your hand. | 손을 뻗어라.
+contract | ˈkɑːntrækt | 수축하다, 계약, 계약하다 | agreement, shrink | expand | Metal contracts when cooled. | 금속이 냉각되면 수축한다. | She signed a contract. | 계약서에 서명했다.
+severe | sɪˈvɪr | 심각한, 극심한, 엄격한 | serious, harsh | mild, gentle | The injury was severe. | 부상이 심각했다. | Severe weather is expected. | 악천후가 예상된다.
+crop | krɑːp | 농작물, 수확량, 자르다 | harvest, produce | - | The crop failed this year. | 올해 농작물이 실패했다. | Rice is the main crop. | 쌀이 주요 농작물이다.
+severe | sɪˈvɪr | 심한, 엄격한 | harsh, intense | mild, gentle | The penalty was severe. | 처벌이 엄격했다. | Severe drought affected crops. | 심한 가뭄이 농작물에 영향을 미쳤다.
+generous | ˈdʒɛnərəs | 관대한, 후한 | kind, charitable | stingy, selfish | She is very generous. | 매우 관대하다. | He left a generous tip. | 후한 팁을 남겼다.
+genuine | ˈdʒɛnjuɪn | 진짜의, 진실한 | real, authentic | fake, false | Is this a genuine product? | 정품인가요? | She has a genuine smile. | 진실한 미소를 가졌다.
+atmosphere | ˈætməsfɪr | 분위기, 대기 | mood, air | - | The restaurant has a nice atmosphere. | 레스토랑 분위기가 좋다. | Earth's atmosphere protects us. | 지구 대기가 우리를 보호한다.
+liberty | ˈlɪbərti | 자유, 해방 | freedom, independence | captivity | Liberty is a basic right. | 자유는 기본 권리이다. | The statue symbolizes liberty. | 동상이 자유를 상징한다.
+poverty | ˈpɑːvərti | 가난, 빈곤 | hardship, need | wealth, prosperity | Poverty is a global problem. | 빈곤은 세계적 문제이다. | She grew up in poverty. | 가난 속에서 자랐다.
+wealth | wɛlθ | 부, 재산, 풍부 | riches, fortune | poverty | He accumulated great wealth. | 큰 부를 축적했다. | Health is greater than wealth. | 건강이 부보다 중요하다.
+apparent | əˈpærənt | 명백한, 외견상의 | obvious, evident | hidden, unclear | It is apparent that she was upset. | 그녀가 화난 것이 분명했다. | The problem was immediately apparent. | 문제가 즉시 분명해졌다.
+annual | ˈænjuəl | 해마다의, 연간의 | yearly | monthly | The annual budget was approved. | 연간 예산이 승인되었다. | We attend the annual festival. | 연례 축제에 참석한다.
+fund | fʌnd | 기금, 자금, 자금을 대다 | capital, finance | - | The fund supports education. | 기금이 교육을 지원한다. | She funded the research. | 연구에 자금을 지원했다.
+conservation | ˌkɑːnsərˈveɪʃən | 보전, 보호 | preservation, protection | destruction | Wildlife conservation is important. | 야생 동물 보전이 중요하다. | Conservation efforts have been successful. | 보전 노력이 성공적이었다.
+fossil | ˈfɑːsəl | 화석, 구식의 | remains, relic | modern | They discovered a dinosaur fossil. | 공룡 화석을 발견했다. | Fossil fuels cause pollution. | 화석 연료가 오염을 일으킨다.
+drought | draʊt | 가뭄, 건조기 | dry spell | flood | The drought lasted for months. | 가뭄이 몇 달 지속됐다. | Drought destroyed the crops. | 가뭄으로 농작물이 망했다.
+colony | ˈkɑːləni | 식민지, 군락 | settlement, territory | - | Korea was once a colony of Japan. | 한국은 한때 일본의 식민지였다. | An ant colony can be huge. | 개미 군락은 거대할 수 있다.
+decline | dɪˈklaɪn | 감소하다, 거절하다, 쇠퇴 | decrease, refuse | increase, accept | She declined the invitation. | 초대를 거절했다. | Sales declined sharply. | 매출이 급감했다.
+domestic | dəˈmɛstɪk | 국내의, 가정의 | internal, household | foreign | Domestic tourism is growing. | 국내 관광이 증가하고 있다. | She enjoys domestic life. | 가정 생활을 즐긴다.
+analyze | ˈænəlaɪz | 분석하다, 검토하다 | examine, study | ignore | She analyzed the data carefully. | 데이터를 신중히 분석했다. | Analyze the results of the survey. | 설문 결과를 분석해라.
+debate | dɪˈbeɪt | 논쟁하다, 토론, 논의 | argue, discuss | agree | They debated the policy change. | 정책 변화를 논의했다. | The debate was lively. | 토론이 활발했다.
+ethnic | ˈɛθnɪk | 민족의, 인종의 | racial, cultural | - | Korea is an ethnically diverse country. | 한국은 민족적으로 다양한 나라이다. | Ethnic food is popular. | 민족 음식이 인기이다.
+adapt | əˈdæpt | 적응하다, 각색하다 | adjust, modify | resist | She adapted to the new culture. | 새로운 문화에 적응했다. | The book was adapted into a film. | 책이 영화로 각색되었다.
+adopt | əˈdɑːpt | 채택하다, 입양하다 | embrace, choose | reject | They adopted a new policy. | 새 정책을 채택했다. | She adopted a child. | 아이를 입양했다.
+harvest | ˈhɑːrvɪst | 수확하다, 수확(물) | gather, crop | plant, sow | Farmers harvest rice in autumn. | 농부들이 가을에 쌀을 수확한다. | The harvest was plentiful. | 수확이 풍부했다.
+budget | ˈbʌdʒɪt | 예산, 예산의 | funds, financial plan | - | The budget was approved. | 예산이 승인되었다. | She planned her budget carefully. | 예산을 신중하게 계획했다.
+at the expense of | æt ðə ɪkˈspɛns ɑːv | ~을 희생하면서, ~의 대가로 | at the cost of | - | He succeeded at the expense of his health. | 건강을 희생하면서 성공했다. | Don't achieve goals at the expense of others. | 남을 희생시키며 목표를 달성하지 마라.
+come up with | kʌm ʌp wɪð | ~을 생각해내다 | devise, invent | - | She came up with a great idea. | 훌륭한 아이디어를 생각해냈다. | Can you come up with a solution? | 해결책을 생각해낼 수 있니?
+on behalf of | ɑːn bɪˈhæf ɑːv | ~을 대신하여 | representing, for | - | She spoke on behalf of the team. | 팀을 대신해 발언했다. | He signed on behalf of the company. | 회사를 대신해 서명했다.
+=== Day 10 ===
+attempt | əˈtɛmpt | 시도하다, 시도, 기도 | try, effort | success | She attempted to climb the mountain. | 산을 오르려고 시도했다. | The attempt failed. | 시도가 실패했다.
+struggle | ˈstrʌɡəl | 분투하다, 노력, 투쟁 | fight, battle | surrender | She struggled with the math problem. | 수학 문제로 고전했다. | Life is a constant struggle. | 삶은 끊임없는 투쟁이다.
+threaten | ˈθrɛtən | 위협하다, 협박하다 | menace, intimidate | protect, reassure | The storm threatened the coast. | 폭풍이 해안을 위협했다. | She did not threaten anyone. | 아무도 위협하지 않았다.
+prejudice | ˈprɛdʒʊdɪs | 편견, 선입관 | bias, discrimination | fairness, impartiality | We must fight against prejudice. | 편견에 맞서야 한다. | Prejudice leads to injustice. | 편견이 불의로 이어진다.
+discrimination | dɪˌskrɪmɪˈneɪʃən | 차별, 식별 | bias, prejudice | equality, fairness | Racial discrimination is illegal. | 인종 차별은 불법이다. | Fight against discrimination. | 차별에 맞서 싸워라.
+guarantee | ˌɡærənˈtiː | 보증하다, 보장, 보증서 | assure, promise | - | We guarantee quality. | 품질을 보장한다. | The product comes with a guarantee. | 제품에 보증서가 있다.
+absolutely | ˌæbsəˈluːtli | 절대적으로, 확실히, 완전히 | completely, definitely | partially | She is absolutely right. | 그녀가 절대적으로 옳다. | I absolutely agree with you. | 전적으로 동의한다.
+domestic | dəˈmɛstɪk | 가정의, 국내의, 국산의 | household, internal | foreign, international | Domestic sales increased. | 국내 판매가 증가했다. | She helps with domestic work. | 가사일을 돕는다.
+demonstrate | ˈdɛmənstreɪt | 시연하다, 증명하다 | show, prove | disprove | She demonstrated the technique. | 기술을 시연했다. | The experiment demonstrated the theory. | 실험이 이론을 증명했다.
+evolution | ˌɛvəˈluːʃən | 진화, 발전, 전개 | development, progression | regression | The theory of evolution is widely accepted. | 진화론은 널리 받아들여진다. | The evolution of technology is fast. | 기술의 발전이 빠르다.
+gene | dʒiːn | 유전자 | DNA, hereditary unit | - | Genes determine many traits. | 유전자가 많은 특성을 결정한다. | She studied gene therapy. | 유전자 치료를 공부했다.
+debate | dɪˈbeɪt | 논쟁, 토론하다 | argue, discuss | agree | The debate was about tax reform. | 토론이 세금 개혁에 관한 것이었다. | They will debate the issue. | 그 문제를 토론할 것이다.
+proportion | prəˈpɔːrʃən | 비율, 부분, 균형 | ratio, share | disproportion | A large proportion of students passed. | 학생의 많은 비율이 통과했다. | The proportions are balanced. | 비율이 균형이 잡혔다.
+compromise | ˈkɑːmprəmaɪz | 타협하다, 타협, 절충 | agree, settle | disagree | They compromised on the price. | 가격에 타협했다. | Compromise is necessary in relationships. | 관계에서 타협이 필요하다.
+conflict | ˈkɑːnflɪkt | 갈등, 충돌, 분쟁 | clash, dispute | peace, harmony | The conflict lasted for years. | 분쟁이 수년간 지속되었다. | They resolved the conflict. | 갈등을 해결했다.
+ethnic | ˈɛθnɪk | 민족적인, 인종적인 | racial, cultural | - | Ethnic diversity enriches society. | 민족적 다양성이 사회를 풍요롭게 한다. | She studies ethnic cultures. | 민족 문화를 연구한다.
+reform | rɪˈfɔːrm | 개혁하다, 개혁, 개선 | improve, amend | worsen | The government reformed the tax system. | 정부가 세금 체계를 개혁했다. | Education reform is needed. | 교육 개혁이 필요하다.
+poverty | ˈpɑːvərti | 가난, 빈곤 | need, deprivation | wealth | Poverty affects millions. | 빈곤이 수백만 명에 영향을 미친다. | She escaped from poverty. | 빈곤에서 벗어났다.
+statistics | stəˈtɪstɪks | 통계, 통계학 | data, figures | - | Statistics show a decline. | 통계가 감소를 보여준다. | She studies statistics at university. | 대학에서 통계학을 공부한다.
+stability | stəˈbɪləti | 안정성, 안정 | steadiness, firmness | instability | Economic stability is important. | 경제 안정이 중요하다. | The country regained stability. | 나라가 안정을 되찾았다.
+controversy | ˈkɑːntrəvɜːrsi | 논란, 논쟁 | debate, dispute | agreement | The decision caused controversy. | 그 결정이 논란을 일으켰다. | The controversy was settled. | 논란이 해결되었다.
+immigrant | ˈɪmɪɡrənt | 이민자, 이주민 | migrant, newcomer | native, citizen | She is an immigrant from Vietnam. | 베트남에서 온 이민자이다. | The city has many immigrants. | 도시에 많은 이민자가 있다.
+refugee | ˌrɛfjuˈdʒiː | 난민, 피난민 | exile, displaced person | native | Millions of refugees need help. | 수백만 난민이 도움이 필요하다. | She works with refugees. | 난민들과 일한다.
+strategy | ˈstrætədʒi | 전략, 계획 | plan, tactic | - | She developed a new strategy. | 새로운 전략을 개발했다. | The strategy proved effective. | 전략이 효과적이었다.
+perspective | pərˈspɛktɪv | 관점, 시각 | viewpoint, outlook | - | See it from a different perspective. | 다른 관점에서 봐. | She has a unique perspective. | 독특한 관점이 있다.
+legislation | ˌlɛdʒɪsˈleɪʃən | 법률, 입법, 법률 제정 | law, regulation | - | New legislation was passed. | 새로운 법률이 통과되었다. | She supports the legislation. | 그 법률을 지지한다.
+discipline | ˈdɪsɪplɪn | 훈련, 규율, 학문 | training, control | disorder | Self-discipline is important. | 자기 훈련이 중요하다. | She studies several disciplines. | 여러 학문을 공부한다.
+institution | ˌɪnstɪˈtuːʃən | 기관, 제도, 시설 | organization, establishment | - | She works at a research institution. | 연구 기관에서 일한다. | Marriage is an important institution. | 결혼은 중요한 제도이다.
+infrastructure | ˈɪnfrəˌstrʌktʃər | 사회 기반 시설, 인프라 | facilities, systems | - | The infrastructure needs improvement. | 인프라가 개선이 필요하다. | They invested in infrastructure. | 인프라에 투자했다.
+inequality | ˌɪnɪˈkwɑːləti | 불평등, 불균등 | disparity, imbalance | equality | Income inequality is growing. | 소득 불평등이 증가하고 있다. | Fight against inequality. | 불평등에 맞서 싸워라.
+transition | trænˈzɪʃən | 변화, 전환, 이행 | change, shift | stability | The transition was smooth. | 전환이 순조로웠다. | She is in a period of transition. | 전환기에 있다.
+advocate | ˈædvəkeɪt | 옹호하다, 옹호자, 지지자 | support, champion | oppose | She advocates for human rights. | 인권을 옹호한다. | He is an advocate for change. | 변화의 지지자이다.
+welfare | ˈwɛlfɛr | 복지, 행복, 번영 | well-being, benefit | suffering | The welfare system was reformed. | 복지 제도가 개혁되었다. | Child welfare is a priority. | 아동 복지가 최우선이다.
+govern | ˈɡʌvərn | 통치하다, 지배하다 | rule, manage | submit, obey | She governs the country wisely. | 나라를 현명하게 통치한다. | Rules govern behavior. | 규칙이 행동을 지배한다.
+agenda | əˈdʒɛndə | 의제, 안건, 일정 | schedule, program | - | Climate change is on the agenda. | 기후 변화가 의제에 있다. | What's on today's agenda? | 오늘 안건이 뭐야?
+sustainable | səˈsteɪnəbl | 지속 가능한, 견딜 수 있는 | viable, enduring | unsustainable | Sustainable development is necessary. | 지속 가능한 개발이 필요하다. | She promotes sustainable living. | 지속 가능한 생활을 촉진한다.
+call for | kɑːl fɔːr | ~을 요구하다 | demand, require | reject | She called for action. | 행동을 요구했다. | The report calls for reform. | 보고서가 개혁을 요구한다.
+stand for | stænd fɔːr | ~을 상징하다, 대표하다 | represent, mean | oppose | The flag stands for freedom. | 깃발이 자유를 상징한다. | What does this acronym stand for? | 이 약어가 무엇을 의미하나?
+in terms of | ɪn tɜːrmz ɑːv | ~의 측면에서, ~에 관하여 | regarding, concerning | - | In terms of cost, it is affordable. | 비용 측면에서 부담 가능하다. | In terms of quality, it is the best. | 품질 측면에서 최고이다.
+=== Day 11 ===
+principle | ˈprɪnsɪpl | 원칙, 원리, 주의 | rule, theory | exception | She has strong principles. | 강한 원칙이 있다. | The principle of equality applies. | 평등의 원칙이 적용된다.
+component | kəmˈpoʊnənt | 구성 요소, 부품 | part, element | whole | Each component is essential. | 각 구성 요소가 필수적이다. | The device has many components. | 장치에 많은 부품이 있다.
+restore | rɪˈstɔːr | 복원하다, 회복시키다 | repair, renew | damage, destroy | They restored the old building. | 오래된 건물을 복원했다. | Peace was restored. | 평화가 회복됐다.
+authority | ɔːˈθɔːrɪti | 권위, 당국, 권한 | power, control | submission | She has the authority to decide. | 결정할 권한이 있다. | The authorities investigated the case. | 당국이 사건을 조사했다.
+civil | ˈsɪvəl | 시민의, 민간의, 정중한 | civic, polite | military, rude | Civil rights must be protected. | 시민권이 보호되어야 한다. | She was always civil in discussions. | 토론에서 항상 정중했다.
+regulate | ˈrɛɡjuleɪt | 규제하다, 조절하다 | control, manage | deregulate | The government regulates the industry. | 정부가 산업을 규제한다. | Temperature is regulated by the body. | 체온이 몸에 의해 조절된다.
+labor | ˈleɪbər | 노동, 노동력, 노동하다 | work, effort | rest, leisure | Labor rights are important. | 노동권이 중요하다. | She went into labor early. | 조기에 진통이 왔다.
+rural | ˈrʊrəl | 시골의, 농촌의 | country, agricultural | urban | She grew up in a rural area. | 시골 지역에서 자랐다. | Rural communities need support. | 농촌 지역사회가 지원이 필요하다.
+urban | ˈɜːrbən | 도시의, 도회의 | city, metropolitan | rural | Urban areas are densely populated. | 도시 지역은 인구가 밀집되어 있다. | Urban development is rapid. | 도시 발전이 빠르다.
+phenomenon | fɪˈnɑːmɪnən | 현상, 경이 | event, occurrence | - | Climate change is a global phenomenon. | 기후 변화는 세계적 현상이다. | It was a remarkable phenomenon. | 놀라운 현상이었다.
+democratic | ˌdɛməˈkrætɪk | 민주적인, 민주주의의 | representative, free | authoritarian | The country has a democratic system. | 나라가 민주주의 체제이다. | Democratic values are essential. | 민주적 가치가 필수적이다.
+revolution | ˌrɛvəˈluːʃən | 혁명, 회전 | uprising, rebellion | stability | The French Revolution changed history. | 프랑스 혁명이 역사를 바꿨다. | The digital revolution is ongoing. | 디지털 혁명이 진행 중이다.
+liberty | ˈlɪbərti | 자유, 해방, 특권 | freedom, independence | slavery | Give me liberty or give me death. | 자유가 아니면 죽음을 달라. | We cherish our liberty. | 우리의 자유를 소중히 여긴다.
+congress | ˈkɑːŋɡrɛs | 의회, 회의 | parliament, assembly | - | Congress passed the new law. | 의회가 새 법을 통과시켰다. | She attended the medical congress. | 의학 학회에 참석했다.
+inequality | ˌɪnɪˈkwɑːləti | 불평등, 불균등 | disparity, imbalance | equality | Social inequality is increasing. | 사회적 불평등이 증가하고 있다. | Address gender inequality. | 성 불평등을 해결해라.
+justice | ˈdʒʌstɪs | 정의, 재판 | fairness, equity | injustice | Justice must be served. | 정의가 실현되어야 한다. | She works in the justice system. | 사법 시스템에서 일한다.
+treaty | ˈtriːti | 조약, 협약 | agreement, pact | - | They signed a peace treaty. | 평화 조약에 서명했다. | The treaty was violated. | 조약이 위반됐다.
+democracy | dɪˈmɑːkrəsi | 민주주의, 민주 국가 | self-government, republic | dictatorship | Democracy is a form of government. | 민주주의는 정부의 한 형태이다. | She believes in democracy. | 민주주의를 믿는다.
+constitution | ˌkɑːnstɪˈtuːʃən | 헌법, 체질 | charter, law | - | The constitution protects rights. | 헌법이 권리를 보호한다. | She has a strong constitution. | 체질이 강하다.
+colonial | kəˈloʊniəl | 식민지의, 식민지 시대의 | imperial, settlement | - | Korea suffered during the colonial period. | 한국은 식민지 시대에 고통받았다. | Colonial architecture is distinctive. | 식민지 시대 건축이 특색 있다.
+autonomy | ɔːˈtɑːnəmi | 자치, 자치권, 자율 | independence, self-rule | dependence | The region gained autonomy. | 지역이 자치권을 얻었다. | She values her autonomy. | 자율성을 소중히 여긴다.
+regime | reɪˈʒiːm | 정권, 체제 | government, system | - | The regime was overthrown. | 정권이 전복되었다. | A new regime came to power. | 새 정권이 들어섰다.
+monarchy | ˈmɑːnərki | 군주제, 왕정 | kingdom, royalty | republic | Britain has a constitutional monarchy. | 영국은 입헌 군주제이다. | The monarchy was abolished. | 왕정이 폐지되었다.
+parliament | ˈpɑːrləmənt | 의회, 국회 | legislature, congress | - | Parliament voted on the bill. | 의회가 법안에 투표했다. | She was elected to parliament. | 의회에 선출되었다.
+amendment | əˈmɛndmənt | 개정, 수정, 수정안 | revision, change | - | The amendment was approved. | 수정안이 승인되었다. | Make an amendment to the contract. | 계약서를 수정해라.
+impose | ɪmˈpoʊz | 부과하다, 강요하다 | enforce, apply | remove, lift | The government imposed a new tax. | 정부가 새 세금을 부과했다. | She imposed strict rules. | 엄격한 규칙을 강요했다.
+prohibition | ˌproʊɪˈbɪʃən | 금지, 금지령 | ban, restriction | permission | The prohibition of smoking is enforced. | 흡연 금지가 시행된다. | Alcohol prohibition was lifted. | 알코올 금지령이 해제됐다.
+sovereignty | ˈsɑːvrɪnti | 주권, 통치권 | authority, dominion | submission | National sovereignty must be respected. | 국가 주권이 존중되어야 한다. | They defended their sovereignty. | 주권을 지켰다.
+republic | rɪˈpʌblɪk | 공화국, 공화정 | democracy, commonwealth | monarchy | South Korea is a republic. | 대한민국은 공화국이다. | The republic was established. | 공화국이 수립되었다.
+alliance | əˈlaɪəns | 동맹, 연합 | union, partnership | opposition | The two countries formed an alliance. | 두 나라가 동맹을 맺었다. | The alliance was beneficial. | 동맹이 유익했다.
+dominate | ˈdɑːmɪneɪt | 지배하다, 우세하다 | control, rule | submit, yield | She dominated the competition. | 대회를 지배했다. | The company dominates the market. | 회사가 시장을 지배한다.
+exploit | ɪkˈsplɔɪt | 착취하다, 이용하다, 위업 | use, take advantage of | protect | Don't exploit vulnerable people. | 취약한 사람을 착취하지 마. | His exploits were legendary. | 그의 위업은 전설적이었다.
+census | ˈsɛnsəs | 인구 조사, 국세 조사 | count, survey | - | The census is conducted every ten years. | 인구 조사가 10년마다 실시된다. | The census data is available. | 인구 조사 데이터를 이용 가능하다.
+migrate | ˈmaɪɡreɪt | 이주하다, 이동하다 | move, relocate | stay, remain | Birds migrate south in winter. | 새들이 겨울에 남쪽으로 이동한다. | Many people migrate for work. | 많은 사람이 일 때문에 이주한다.
+ethnic | ˈɛθnɪk | 민족의, 인종의 | racial, cultural | - | She studies ethnic diversity. | 민족 다양성을 연구한다. | Ethnic minorities need protection. | 소수 민족이 보호가 필요하다.
+on account of | ɑːn əˈkaʊnt ɑːv | ~때문에 | because of, due to | despite | She was absent on account of illness. | 병 때문에 결석했다. | On account of the rain, the event was canceled. | 비 때문에 행사가 취소되었다.
+regardless of | rɪˈɡɑːrdlɪs ɑːv | ~에 상관없이 | irrespective of, despite | because of | She helps everyone regardless of age. | 나이에 상관없이 모두를 돕는다. | Regardless of the cost, we will proceed. | 비용에 상관없이 진행할 것이다.
+in response to | ɪn rɪˈspɑːns tuː | ~에 대한 반응으로 | in reaction to, answering | despite | In response to the crisis, aid was sent. | 위기에 대응해 구호품이 보내졌다. | The policy was changed in response to demands. | 요구에 대한 반응으로 정책이 변했다.
+=== Day 12 ===
+phenomenon | fɪˈnɑːmɪnən | 현상, 사건 | event, occurrence | - | It's a natural phenomenon. | 자연 현상이다. | The phenomenon was studied closely. | 현상이 면밀히 연구되었다.
+theory | ˈθɪəri | 이론, 학설, 추측 | hypothesis, principle | practice | Darwin's theory of evolution. | 다윈의 진화론. | In theory, it should work. | 이론적으로 작동해야 한다.
+laboratory | ˈlæbrətɔːri | 실험실, 연구소 | lab, research center | - | She works in the laboratory. | 실험실에서 일한다. | The laboratory tests were conclusive. | 실험실 검사가 결론적이었다.
+hypothesis | haɪˈpɑːθəsɪs | 가설, 추정 | theory, assumption | fact, proof | She tested her hypothesis. | 가설을 검증했다. | The hypothesis was rejected. | 가설이 기각되었다.
+gravity | ˈɡrævɪti | 중력, 중대함 | force, seriousness | levity | Gravity pulls objects down. | 중력이 물체를 아래로 당긴다. | She understood the gravity of the situation. | 상황의 중대성을 이해했다.
+radiation | ˌreɪdiˈeɪʃən | 방사선, 복사 | emission, rays | - | Radiation can be dangerous. | 방사선이 위험할 수 있다. | The sun emits radiation. | 태양이 방사선을 방출한다.
+molecule | ˈmɑːlɪkjuːl | 분자 | particle, atom | - | Water is made of molecules. | 물은 분자로 이루어져 있다. | The molecule structure was analyzed. | 분자 구조를 분석했다.
+species | ˈspiːʃiːz | 종, 유형 | type, kind | - | Many species are endangered. | 많은 종이 멸종 위기에 있다. | She studied a new species of bird. | 새로운 새 종을 연구했다.
+experiment | ɪkˈspɛrɪmənt | 실험, 실험하다 | test, trial | theory | The experiment was successful. | 실험이 성공적이었다. | She experimented with new methods. | 새 방법으로 실험했다.
+evidence | ˈɛvɪdəns | 증거, 근거 | proof, testimony | disproof | The evidence supports the theory. | 증거가 이론을 뒷받침한다. | There is no evidence of wrongdoing. | 잘못된 행동의 증거가 없다.
+organism | ˈɔːrɡənɪzəm | 유기체, 생물 | creature, being | - | An amoeba is a single-celled organism. | 아메바는 단세포 유기체이다. | Every organism needs water. | 모든 유기체에 물이 필요하다.
+oxygen | ˈɑːksɪdʒən | 산소 | air, O2 | - | Plants produce oxygen. | 식물이 산소를 생산한다. | Oxygen is essential for life. | 산소는 생명에 필수적이다.
+carbon | ˈkɑːrbən | 탄소 | element, C | - | Carbon dioxide is a greenhouse gas. | 이산화탄소는 온실 가스이다. | Reduce your carbon footprint. | 탄소 발자국을 줄여라.
+bacteria | bækˈtɪriə | 박테리아, 세균 | germs, microbes | - | Bacteria can cause disease. | 세균이 병을 일으킬 수 있다. | Some bacteria are beneficial. | 일부 세균은 유익하다.
+virus | ˈvaɪrəs | 바이러스, 병독 | pathogen, infection | - | The virus spread quickly. | 바이러스가 빠르게 퍼졌다. | A computer virus damaged the files. | 컴퓨터 바이러스가 파일을 손상시켰다.
+cell | sɛl | 세포, 전지, 독방 | unit, chamber | - | The human body has trillions of cells. | 인체에 수조 개의 세포가 있다. | She studied cell biology. | 세포 생물학을 공부했다.
+protein | ˈproʊtiːn | 단백질 | nutrient, amino acid | - | Meat is high in protein. | 고기에 단백질이 풍부하다. | Protein helps build muscles. | 단백질이 근육 형성을 돕는다.
+tissue | ˈtɪʃuː | 조직, 세포 조직, 티슈 | fabric, membrane | - | Muscle tissue was damaged. | 근육 조직이 손상되었다. | Pass me a tissue, please. | 티슈 좀 주세요.
+gene | dʒiːn | 유전자 | DNA, chromosome | - | Genes carry hereditary information. | 유전자가 유전 정보를 전달한다. | His eye color is determined by genes. | 눈 색깔이 유전자에 의해 결정된다.
+habitat | ˈhæbɪtæt | 서식지, 거주지 | environment, home | - | The habitat was destroyed. | 서식지가 파괴됐다. | This is a natural habitat for tigers. | 호랑이의 자연 서식지이다.
+ecosystem | ˈiːkoʊsɪstəm | 생태계 | biome, environment | - | Pollution damages the ecosystem. | 오염이 생태계를 훼손한다. | The ecosystem is delicate. | 생태계가 섬세하다.
+extinct | ɪkˈstɪŋkt | 멸종한, 사라진 | dead, vanished | alive, existing | Dinosaurs are extinct. | 공룡이 멸종했다. | Many species are becoming extinct. | 많은 종이 멸종하고 있다.
+evolution | ˌɛvəˈluːʃən | 진화, 발달 | development, growth | regression | She studied the theory of evolution. | 진화론을 공부했다. | The evolution of technology is fascinating. | 기술의 진화가 매력적이다.
+geology | dʒiˈɑːlədʒi | 지질학 | earth science | - | She studied geology at university. | 대학에서 지질학을 공부했다. | The geology of the area is unique. | 그 지역의 지질이 독특하다.
+substance | ˈsʌbstəns | 물질, 성분, 본질 | matter, material | - | A toxic substance was found. | 독성 물질이 발견됐다. | What is this substance? | 이 물질이 무엇인가?
+compound | ˈkɑːmpaʊnd | 화합물, 합성의, 결합하다 | mixture, blend | element | Water is a chemical compound. | 물은 화합물이다. | The compound was analyzed. | 화합물이 분석되었다.
+dimension | dɪˈmɛnʃən | 차원, 치수, 규모 | measurement, aspect | - | Measure the dimensions of the room. | 방의 치수를 측정해라. | There are multiple dimensions to the problem. | 문제에 여러 차원이 있다.
+formula | ˈfɔːrmjələ | 공식, 방법, 처방 | equation, recipe | - | She used the mathematical formula. | 수학 공식을 사용했다. | The formula for success is hard work. | 성공의 공식은 열심히 하는 것이다.
+microscope | ˈmaɪkrəskoʊp | 현미경 | magnifier | telescope | She examined the cells under a microscope. | 현미경으로 세포를 관찰했다. | The microscope revealed tiny organisms. | 현미경이 미세 유기체를 보여줬다.
+nucleus | ˈnuːkliəs | 핵, 원자핵, 세포핵 | core, center | - | The nucleus contains genetic material. | 핵에 유전 물질이 있다. | The atomic nucleus is very small. | 원자핵은 매우 작다.
+equation | ɪˈkweɪʒən | 등식, 방정식 | formula, calculation | - | She solved the equation. | 방정식을 풀었다. | The equation was complex. | 방정식이 복잡했다.
+rotate | roʊˈteɪt | 회전하다, 교대하다 | spin, turn | stop | The earth rotates on its axis. | 지구가 축을 중심으로 회전한다. | Farmers rotate crops. | 농부들이 작물을 교대 재배한다.
+orbit | ˈɔːrbɪt | 궤도, 돌다 | circle, path | - | The Earth orbits the Sun. | 지구가 태양 주위를 돈다. | The satellite is in orbit. | 위성이 궤도에 있다.
+frequency | ˈfriːkwənsi | 빈도, 주파수 | rate, occurrence | rarity | The frequency of accidents decreased. | 사고의 빈도가 감소했다. | Radio waves have different frequencies. | 전파에 다른 주파수가 있다.
+particle | ˈpɑːrtɪkəl | 입자, 미립자 | fragment, speck | whole | Dust particles are tiny. | 먼지 입자가 아주 작다. | She studied subatomic particles. | 아원자 입자를 연구했다.
+stem | stɛm | 줄기, 유래하다 | stalk, originate | - | The stem supports the flower. | 줄기가 꽃을 지탱한다. | The problem stems from lack of funding. | 문제가 자금 부족에서 유래한다.
+stimulate | ˈstɪmjuleɪt | 자극하다, 격려하다 | encourage, motivate | discourage | Coffee stimulates the brain. | 커피가 뇌를 자극한다. | She stimulated the discussion. | 토론을 활성화했다.
+be composed of | biː kəmˈpoʊzd ɑːv | ~으로 구성되다 | consist of, be made of | - | Water is composed of hydrogen and oxygen. | 물은 수소와 산소로 구성된다. | The team is composed of experts. | 팀이 전문가로 구성된다.
+derive from | dɪˈraɪv frɑːm | ~에서 유래하다 | originate from, come from | - | The word derives from Latin. | 이 단어는 라틴어에서 유래한다. | She derives pleasure from reading. | 독서에서 즐거움을 얻는다.
+result in | rɪˈzʌlt ɪn | ~을 초래하다, 야기하다 | lead to, cause | prevent | The delay resulted in failure. | 지연이 실패를 초래했다. | His efforts resulted in success. | 그의 노력이 성공을 가져왔다.
+=== Day 13 ===
+anxiety | æŋˈzaɪəti | 불안, 걱정, 근심 | worry, unease | calm, composure | She suffers from anxiety. | 불안에 시달린다. | The exam caused great anxiety. | 시험이 큰 불안을 일으켰다.
+cognitive | ˈkɑːɡnɪtɪv | 인지의, 인식의 | mental, intellectual | - | Cognitive development is important for children. | 인지 발달이 아이에게 중요하다. | She studies cognitive psychology. | 인지 심리학을 공부한다.
+consciousness | ˈkɑːnʃəsnɪs | 의식, 자각, 지각 | awareness, perception | unconsciousness | She lost consciousness briefly. | 잠시 의식을 잃었다. | Raise environmental consciousness. | 환경 의식을 높여라.
+therapy | ˈθɛrəpi | 치료, 요법 | treatment, cure | - | She goes to therapy once a week. | 일주일에 한 번 치료를 받는다. | Physical therapy helped her recover. | 물리 치료가 회복을 도왔다.
+disorder | dɪsˈɔːrdər | 장애, 질환, 혼란 | condition, illness | order, health | She was diagnosed with an eating disorder. | 섭식 장애 진단을 받았다. | Mental disorders need treatment. | 정신 장애는 치료가 필요하다.
+psychology | saɪˈkɑːlədʒi | 심리학, 심리 | mental science | - | She majored in psychology. | 심리학을 전공했다. | Psychology helps us understand behavior. | 심리학은 행동을 이해하는 데 도움이 된다.
+perception | pərˈsɛpʃən | 인식, 지각, 인지 | awareness, understanding | misunderstanding | Perception varies from person to person. | 인식은 사람마다 다르다. | Public perception has changed. | 대중의 인식이 변했다.
+stimulus | ˈstɪmjələs | 자극, 자극제 | incentive, motivation | deterrent | The response to the stimulus was measured. | 자극에 대한 반응이 측정되었다. | Economic stimulus was provided. | 경제 자극책이 제공되었다.
+instinct | ˈɪnstɪŋkt | 본능, 직감 | intuition, impulse | reason, logic | Survival is a basic instinct. | 생존은 기본 본능이다. | She followed her instinct. | 본능을 따랐다.
+conscious | ˈkɑːnʃəs | 의식하는, 자각하는 | aware, alert | unconscious | She was conscious of being watched. | 누군가 지켜보는 것을 의식했다. | He made a conscious effort. | 의식적으로 노력했다.
+curiosity | ˌkjʊriˈɑːsəti | 호기심, 궁금증 | inquisitiveness, interest | indifference | Curiosity drives learning. | 호기심이 학습을 유발한다. | Her curiosity led to discovery. | 호기심이 발견으로 이어졌다.
+emotion | ɪˈmoʊʃən | 감정, 정서 | feeling, sentiment | apathy | She could not control her emotions. | 감정을 제어할 수 없었다. | Music evokes strong emotions. | 음악이 강한 감정을 불러일으킨다.
+trait | treɪt | 특성, 특징 | characteristic, quality | - | Kindness is her best trait. | 친절함이 가장 좋은 특징이다. | Personality traits are inherited. | 성격 특성은 유전된다.
+tendency | ˈtɛndənsi | 경향, 성향 | inclination, trend | - | She has a tendency to procrastinate. | 미루는 경향이 있다. | The tendency continued. | 경향이 계속됐다.
+adolescent | ˌædəˈlɛsənt | 청소년, 사춘기의 | teenager, youth | adult | Adolescent behavior can be challenging. | 청소년의 행동이 어려울 수 있다. | She works with adolescents. | 청소년과 일한다.
+rational | ˈræʃənəl | 이성적인, 합리적인 | logical, sensible | irrational | Make a rational decision. | 합리적 결정을 해라. | She is very rational. | 매우 이성적이다.
+bias | ˈbaɪəs | 편견, 편향 | prejudice, favoritism | fairness, impartiality | Cultural bias can be harmful. | 문화적 편견이 해로울 수 있다. | The study showed a gender bias. | 연구가 성별 편향을 보여줬다.
+empathy | ˈɛmpəθi | 공감, 감정이입 | compassion, understanding | apathy | She showed empathy for others. | 다른 사람에 대한 공감을 보여줬다. | Empathy is essential in counseling. | 상담에서 공감이 필수적이다.
+subconscious | sʌbˈkɑːnʃəs | 잠재의식의, 잠재의식 | unconscious, hidden | conscious | The decision was subconscious. | 결정이 잠재의식적이었다. | Fears exist in the subconscious. | 두려움이 잠재의식에 존재한다.
+temperament | ˈtɛmpərəmənt | 기질, 성미 | nature, disposition | - | She has a calm temperament. | 차분한 기질이 있다. | Temperament affects behavior. | 기질이 행동에 영향을 미친다.
+behavior | bɪˈheɪvjər | 행동, 행위, 태도 | conduct, manner | - | His behavior was inappropriate. | 행동이 부적절했다. | Observe the animals' behavior. | 동물의 행동을 관찰해라.
+depression | dɪˈprɛʃən | 우울증, 불경기 | sadness, recession | happiness, boom | She is being treated for depression. | 우울증 치료를 받고 있다. | The Great Depression affected millions. | 대공황이 수백만 명에 영향을 미쳤다.
+intellectual | ˌɪntəˈlɛktʃuəl | 지적인, 지식인 | scholarly, academic | foolish | She is an intellectual person. | 지적인 사람이다. | Intellectual freedom is important. | 지적 자유가 중요하다.
+diagnose | ˈdaɪəɡnoʊz | 진단하다 | identify, determine | misdiagnose | The doctor diagnosed the illness. | 의사가 질병을 진단했다. | She was diagnosed with flu. | 독감 진단을 받았다.
+symptom | ˈsɪmptəm | 증상, 징후 | sign, indication | cure | The main symptom is fever. | 주요 증상은 열이다. | These are symptoms of the disease. | 이것이 질병의 증상이다.
+fatigue | fəˈtiːɡ | 피로, 피로감 | tiredness, exhaustion | energy, vigor | Chronic fatigue is a common issue. | 만성 피로가 흔한 문제이다. | She suffered from mental fatigue. | 정신적 피로에 시달렸다.
+addiction | əˈdɪkʃən | 중독, 탐닉 | dependence, obsession | freedom, sobriety | She overcame her addiction. | 중독을 극복했다. | Phone addiction is growing. | 핸드폰 중독이 증가하고 있다.
+phobia | ˈfoʊbiə | 공포증, 혐오 | fear, dread | courage, confidence | She has a phobia of spiders. | 거미 공포증이 있다. | Many people have some type of phobia. | 많은 사람이 어떤 종류의 공포증이 있다.
+hallucination | həˌluːsɪˈneɪʃən | 환각, 환영 | illusion, delusion | reality | He experienced hallucinations. | 환각을 경험했다. | The medicine caused hallucinations. | 약이 환각을 일으켰다.
+meditation | ˌmɛdɪˈteɪʃən | 명상, 묵상 | contemplation, reflection | - | Meditation reduces stress. | 명상이 스트레스를 줄인다. | She practices meditation daily. | 매일 명상을 한다.
+placebo | pləˈsiːboʊ | 위약, 플라시보 | dummy, inactive pill | medicine | The placebo had no real effect. | 위약은 실제 효과가 없었다. | The placebo effect is well-documented. | 플라시보 효과가 잘 기록되어 있다.
+obsession | əbˈsɛʃən | 집착, 강박관념 | fixation, preoccupation | indifference | She has an obsession with cleanliness. | 청결에 대한 집착이 있다. | His obsession grew stronger. | 집착이 더 강해졌다.
+trauma | ˈtraʊmə | 트라우마, 정신적 외상 | shock, injury | healing | She is recovering from trauma. | 트라우마에서 회복 중이다. | Childhood trauma can last a lifetime. | 유년기 트라우마가 평생 갈 수 있다.
+suppress | səˈprɛs | 억누르다, 진압하다, 억제하다 | restrain, control | express, release | She suppressed her anger. | 분노를 억눌렀다. | The government suppressed the protest. | 정부가 시위를 진압했다.
+rehabilitation | ˌriːhəˌbɪlɪˈteɪʃən | 재활, 복원 | recovery, restoration | - | She is in rehabilitation. | 재활 중이다. | The rehabilitation program was successful. | 재활 프로그램이 성공적이었다.
+be associated with | biː əˈsoʊʃieɪtɪd wɪð | ~와 관련되다 | be connected with | - | Smoking is associated with cancer. | 흡연이 암과 관련된다. | Stress is associated with health problems. | 스트레스가 건강 문제와 관련된다.
+suffer from | ˈsʌfər frɑːm | ~를 앓다, 시달리다 | be afflicted by | recover from | She suffers from headaches. | 두통에 시달린다. | He suffers from insomnia. | 불면증을 앓고 있다.
+result from | rɪˈzʌlt frɑːm | ~에서 비롯되다 | stem from, arise from | cause | The problem resulted from neglect. | 문제가 방치에서 비롯됐다. | His success resulted from hard work. | 성공이 열심히 한 것에서 비롯됐다.
+=== Day 14 ===
+narrative | ˈnærətɪv | 이야기, 서사, 서술 | story, account | - | She wrote a compelling narrative. | 설득력 있는 이야기를 썼다. | The narrative was gripping. | 서사가 흡입력이 있었다.
+perspective | pərˈspɛktɪv | 관점, 시각, 원근법 | viewpoint, angle | - | Literature offers new perspectives. | 문학이 새로운 관점을 제공한다. | She told the story from her perspective. | 자신의 관점에서 이야기를 했다.
+civilization | ˌsɪvɪləˈzeɪʃən | 문명, 문화 | culture, society | barbarism | Ancient civilizations fascinate her. | 고대 문명에 매력을 느낀다. | Modern civilization depends on technology. | 현대 문명은 기술에 의존한다.
+heritage | ˈhɛrɪtɪdʒ | 유산, 전통 | legacy, tradition | - | Korea has a rich cultural heritage. | 한국은 풍부한 문화 유산이 있다. | Protect our heritage. | 유산을 보호해라.
+myth | mɪθ | 신화, 근거 없는 믿음 | legend, fable | fact, reality | Greek myths are fascinating. | 그리스 신화가 매력적이다. | It is a myth that we only use 10% of our brain. | 뇌의 10%만 사용한다는 것은 근거 없는 믿음이다.
+legend | ˈlɛdʒənd | 전설, 전설적 인물 | myth, tale | fact | He is a legend in sports. | 스포츠에서 전설이다. | The legend has been passed down for centuries. | 전설이 수세기 동안 전해졌다.
+masterpiece | ˈmæstərpiːs | 걸작, 명작 | magnum opus, classic | failure | The painting is a masterpiece. | 그 그림이 걸작이다. | She created a literary masterpiece. | 문학적 걸작을 만들었다.
+genre | ˈʒɑːnrə | 장르, 유형 | type, category | - | What genre of music do you like? | 어떤 장르의 음악을 좋아하나? | The novel belongs to the mystery genre. | 소설이 미스터리 장르에 속한다.
+biography | baɪˈɑːɡrəfi | 전기, 일대기 | life story, memoir | fiction | She read a biography of Einstein. | 아인슈타인 전기를 읽었다. | The biography was very detailed. | 전기가 매우 상세했다.
+theme | θiːm | 주제, 테마 | topic, subject | - | The main theme is love. | 주요 주제가 사랑이다. | The theme of the essay is justice. | 에세이의 주제가 정의이다.
+literature | ˈlɪtərətʃər | 문학, 문헌 | writing, books | - | She studies English literature. | 영문학을 공부한다. | There is extensive literature on the topic. | 그 주제에 대한 문헌이 많다.
+philosophy | fɪˈlɑːsəfi | 철학, 인생관 | thought, ideology | - | She studied Eastern philosophy. | 동양 철학을 공부했다. | His philosophy of life is simple. | 그의 인생관이 단순하다.
+aesthetic | ɛsˈθɛtɪk | 미적인, 심미적인, 미학 | artistic, visual | ugly | The aesthetic appeal was undeniable. | 미적 매력이 부인할 수 없었다. | She has an aesthetic sense. | 미적 감각이 있다.
+metaphor | ˈmɛtəfɔːr | 은유, 비유 | figure of speech, analogy | literal | Life is a journey is a common metaphor. | '인생은 여행이다'가 흔한 은유이다. | She used a powerful metaphor. | 강력한 은유를 사용했다.
+irony | ˈaɪrəni | 역설, 아이러니, 반어법 | sarcasm, paradox | sincerity | The irony of the situation was clear. | 상황의 아이러니가 분명했다. | She spoke with irony. | 아이러니하게 말했다.
+analogy | əˈnælədʒi | 유추, 유사 | comparison, similarity | difference | She drew an analogy between life and a game. | 인생과 게임 사이의 유추를 했다. | The analogy is helpful. | 유추가 도움이 된다.
+controversy | ˈkɑːntrəvɜːrsi | 논란, 논쟁 | debate, dispute | agreement | The book caused controversy. | 책이 논란을 일으켰다. | The controversy continues. | 논란이 계속된다.
+satire | ˈsætaɪər | 풍자, 풍자 작품 | mockery, parody | praise | The movie is a satire of politics. | 영화가 정치 풍자이다. | Satire can be very effective. | 풍자가 매우 효과적일 수 있다.
+abstract | ˈæbstrækt | 추상적인, 요약, 추상화 | theoretical, summary | concrete | The concept is too abstract. | 개념이 너무 추상적이다. | She likes abstract art. | 추상 미술을 좋아한다.
+concrete | ˈkɑːnkriːt | 구체적인, 콘크리트 | specific, solid | abstract, vague | Give me a concrete example. | 구체적인 예를 들어라. | The floor is made of concrete. | 바닥이 콘크리트로 되어 있다.
+prose | proʊz | 산문, 일반 문장 | text, writing | verse, poetry | She writes beautiful prose. | 아름다운 산문을 쓴다. | The novel is written in prose. | 소설이 산문으로 쓰였다.
+verse | vɜːrs | 시, 운문 | poetry, stanza | prose | She memorized a verse from the poem. | 시에서 한 절을 외웠다. | He writes in free verse. | 자유시로 쓴다.
+rhetoric | ˈrɛtərɪk | 수사학, 미사여구 | eloquence, persuasion | - | She studied the art of rhetoric. | 수사학을 공부했다. | Political rhetoric can be misleading. | 정치적 미사여구가 오해를 불러일으킬 수 있다.
+symbolism | ˈsɪmbəlɪzəm | 상징주의, 상징성 | representation, imagery | realism | The novel is full of symbolism. | 소설에 상징이 가득하다. | She studied symbolism in art. | 미술에서 상징주의를 공부했다.
+portrait | ˈpɔːrtrɪt | 초상화, 인물 묘사 | painting, depiction | - | She painted his portrait. | 그의 초상화를 그렸다. | The book is a portrait of 19th century life. | 책이 19세기 삶의 인물 묘사이다.
+sculpture | ˈskʌlptʃər | 조각, 조각품 | statue, carving | - | The museum has ancient sculptures. | 박물관에 고대 조각이 있다. | She creates modern sculpture. | 현대 조각을 만든다.
+archaeology | ˌɑːrkiˈɑːlədʒi | 고고학 | antiquities, excavation | - | She studies archaeology. | 고고학을 공부한다. | The archaeology site was excavated. | 고고학 발굴지가 발굴되었다.
+artifact | ˈɑːrtɪfækt | 유물, 공예품 | relic, antique | - | The museum displays ancient artifacts. | 박물관이 고대 유물을 전시한다. | The artifact was priceless. | 유물이 값을 매길 수 없었다.
+medieval | ˌmɛdiˈiːvəl | 중세의 | middle-age, feudal | modern | She studied medieval history. | 중세사를 공부했다. | The castle is a medieval structure. | 성이 중세 건축물이다.
+renaissance | ˌrɛnəˈsɑːns | 르네상스, 부활, 부흥 | revival, rebirth | decline | The Renaissance began in Italy. | 르네상스가 이탈리아에서 시작됐다. | There was a renaissance in music. | 음악에 부흥이 있었다.
+cathedral | kəˈθiːdrəl | 대성당 | church, basilica | - | The cathedral is stunning. | 대성당이 아름답다. | They visited the ancient cathedral. | 고대 대성당을 방문했다.
+manuscript | ˈmænjuskrɪpt | 원고, 필사본 | document, script | - | She submitted her manuscript. | 원고를 제출했다. | The ancient manuscript was preserved. | 고대 필사본이 보존되었다.
+chronicle | ˈkrɑːnɪkəl | 연대기, 기록하다 | record, history | - | The chronicle describes ancient events. | 연대기가 고대 사건을 묘사한다. | She chronicled her travels. | 여행을 기록했다.
+folklore | ˈfoʊklɔːr | 민속, 민간전승 | tradition, legend | - | Korean folklore is rich and varied. | 한국 민속이 풍부하고 다양하다. | She studied folklore in college. | 대학에서 민속학을 공부했다.
+dynasty | ˈdaɪnəsti | 왕조, 시대 | reign, era | - | The Joseon Dynasty lasted 500 years. | 조선 왕조가 500년 지속됐다. | The dynasty fell. | 왕조가 몰락했다.
+monument | ˈmɑːnjumənt | 기념물, 기념비 | memorial, landmark | - | They built a monument. | 기념비를 세웠다. | The monument honors the soldiers. | 기념비가 군인을 기린다.
+indigenous | ɪnˈdɪdʒənəs | 토착의, 원주민의 | native, aboriginal | foreign | Protect indigenous cultures. | 토착 문화를 보호해라. | The plant is indigenous to Korea. | 식물이 한국 토착이다.
+be dedicated to | biː ˈdɛdɪkeɪtɪd tuː | ~에 전념하다, 바쳐지다 | be devoted to, committed to | - | She is dedicated to her career. | 직업에 전념한다. | The museum is dedicated to modern art. | 박물관이 현대 미술에 전념한다.
+in contrast with | ɪn ˈkɑːntræst wɪð | ~와 대조적으로 | compared with, as opposed to | similar to | In contrast with the past, life is easier now. | 과거와 대조적으로 삶이 더 쉬워졌다. | In contrast with her sister, she is quiet. | 언니와 대조적으로 그녀는 조용하다.
+have an effect on | hæv ən ɪˈfɛkt ɑːn | ~에 영향을 미치다 | influence, affect | - | Music has an effect on mood. | 음악이 기분에 영향을 미친다. | Technology has an effect on society. | 기술이 사회에 영향을 미친다.
+=== Day 15 ===
+algorithm | ˈælɡərɪðəm | 알고리즘, 연산 방법 | formula, process | - | The algorithm sorts data efficiently. | 알고리즘이 데이터를 효율적으로 정렬한다. | She developed a new algorithm. | 새 알고리즘을 개발했다.
+artificial | ˌɑːrtɪˈfɪʃəl | 인공적인, 인조의 | synthetic, man-made | natural | Artificial intelligence is advancing. | 인공 지능이 발전하고 있다. | The flowers are artificial. | 꽃이 인조이다.
+database | ˈdeɪtəbeɪs | 데이터베이스, 자료 저장소 | records, archive | - | The database stores customer information. | 데이터베이스가 고객 정보를 저장한다. | Access the company database. | 회사 데이터베이스에 접근해라.
+digital | ˈdɪdʒɪtəl | 디지털의, 전자의 | electronic, computerized | analog | We live in a digital age. | 디지털 시대에 살고 있다. | She has a digital camera. | 디지털 카메라가 있다.
+innovation | ˌɪnəˈveɪʃən | 혁신, 새로운 것 | invention, creation | tradition | Innovation drives economic growth. | 혁신이 경제 성장을 주도한다. | The company is known for innovation. | 회사가 혁신으로 유명하다.
+automation | ˌɔːtəˈmeɪʃən | 자동화, 자동 조작 | mechanization | manual labor | Automation has changed manufacturing. | 자동화가 제조업을 바꿨다. | Jobs were lost due to automation. | 자동화로 일자리가 줄었다.
+virtual | ˈvɜːrtʃuəl | 가상의, 사실상의 | simulated, digital | real, actual | She attended a virtual meeting. | 가상 회의에 참석했다. | Virtual reality is becoming popular. | 가상 현실이 인기를 얻고 있다.
+obsolete | ˌɑːbsəˈliːt | 구식의, 쓸모없는 | outdated, old-fashioned | modern, current | The technology became obsolete. | 기술이 구식이 됐다. | Some words become obsolete over time. | 시간이 지나면 구식이 되는 단어도 있다.
+device | dɪˈvaɪs | 기기, 장치, 방법 | gadget, tool | - | She uses a mobile device. | 모바일 기기를 사용한다. | The device is easy to use. | 장치가 쓰기 쉽다.
+platform | ˈplætfɔːrm | 플랫폼, 무대 | stage, base | - | She launched an online platform. | 온라인 플랫폼을 만들었다. | The train arrived at the platform. | 기차가 플랫폼에 도착했다.
+satellite | ˈsætəlaɪt | 위성, 인공위성 | orbiter | - | The satellite orbits the Earth. | 위성이 지구를 돈다. | She watches satellite TV. | 위성 TV를 시청한다.
+network | ˈnɛtwɜːrk | 네트워크, 통신망 | system, web | isolation | The network crashed. | 네트워크가 다운됐다. | She has a wide professional network. | 넓은 전문 네트워크가 있다.
+bandwidth | ˈbændwɪdθ | 대역폭, 처리 능력 | capacity, range | - | The bandwidth is limited. | 대역폭이 제한적이다. | Increase the bandwidth for faster speed. | 더 빠른 속도를 위해 대역폭을 늘려라.
+encrypt | ɪnˈkrɪpt | 암호화하다, 코드화하다 | encode, cipher | decrypt | Encrypt your data for safety. | 안전을 위해 데이터를 암호화해라. | The message was encrypted. | 메시지가 암호화되었다.
+interface | ˈɪntərfeɪs | 인터페이스, 접점 | connection, link | - | The user interface is friendly. | 사용자 인터페이스가 친화적이다. | She designed the interface. | 인터페이스를 설계했다.
+hardware | ˈhɑːrdwɛr | 하드웨어, 장비 | equipment, machinery | software | The hardware needs an upgrade. | 하드웨어가 업그레이드가 필요하다. | She studies computer hardware. | 컴퓨터 하드웨어를 공부한다.
+software | ˈsɔːftwɛr | 소프트웨어, 프로그램 | program, application | hardware | She developed the software. | 소프트웨어를 개발했다. | Update the software regularly. | 소프트웨어를 정기적으로 업데이트해라.
+browse | braʊz | 둘러보다, 검색하다 | explore, search | - | She browsed the internet. | 인터넷을 검색했다. | He browsed through the magazine. | 잡지를 둘러봤다.
+malware | ˈmælwɛr | 악성 소프트웨어, 맬웨어 | virus, spyware | - | The malware corrupted the files. | 맬웨어가 파일을 손상시켰다. | Protect your system from malware. | 맬웨어로부터 시스템을 보호해라.
+capacity | kəˈpæsəti | 용량, 능력, 수용력 | volume, ability | inability | The stadium has a capacity of 50,000. | 경기장 수용 인원이 5만 명이다. | She has the capacity to lead. | 리더십 역량이 있다.
+simulate | ˈsɪmjuleɪt | 모의실험하다, 시뮬레이션하다 | imitate, mimic | - | The program simulates real conditions. | 프로그램이 실제 조건을 시뮬레이션한다. | They simulated the experiment. | 실험을 모의실험했다.
+autonomous | ɔːˈtɑːnəməs | 자율적인, 자치의 | independent, self-governing | dependent | Autonomous cars are being tested. | 자율 주행 차가 테스트 중이다. | The region became autonomous. | 지역이 자치 지역이 됐다.
+data | ˈdeɪtə | 데이터, 자료, 정보 | information, facts | - | Collect and analyze the data. | 데이터를 수집하고 분석해라. | The data shows positive trends. | 데이터가 긍정적 추세를 보여준다.
+prototype | ˈproʊtətaɪp | 시제품, 원형 | model, sample | final product | She built a prototype. | 시제품을 만들었다. | The prototype was tested. | 시제품이 테스트되었다.
+compatible | kəmˈpætɪbl | 호환되는, 양립할 수 있는 | consistent, harmonious | incompatible | The software is compatible with Mac. | 소프트웨어가 맥과 호환된다. | They are compatible personalities. | 양립 가능한 성격이다.
+pixel | ˈpɪksəl | 픽셀, 화소 | dot, point | - | The image has millions of pixels. | 이미지에 수백만 픽셀이 있다. | Higher pixel count means better quality. | 더 높은 화소가 더 좋은 품질을 의미한다.
+sensor | ˈsɛnsər | 센서, 감지기 | detector, probe | - | The sensor detects motion. | 센서가 움직임을 감지한다. | Temperature sensors are built in. | 온도 센서가 내장되어 있다.
+circuit | ˈsɜːrkɪt | 회로, 순환 | loop, path | - | The electric circuit was broken. | 전기 회로가 끊겼다. | She studied electrical circuits. | 전기 회로를 공부했다.
+configure | kənˈfɪɡjər | 구성하다, 설정하다 | set up, arrange | - | She configured the system settings. | 시스템 설정을 구성했다. | Configure the network properly. | 네트워크를 제대로 설정해라.
+integrate | ˈɪntɪɡreɪt | 통합하다, 합치다 | combine, merge | separate, divide | She integrated the two systems. | 두 시스템을 통합했다. | The school integrates technology into learning. | 학교가 기술을 학습에 통합한다.
+gadget | ˈɡædʒɪt | 기기, 도구 | device, tool | - | She bought a new gadget. | 새 기기를 샀다. | Electronic gadgets are popular. | 전자 기기가 인기이다.
+optimize | ˈɑːptɪmaɪz | 최적화하다 | improve, enhance | worsen | She optimized the code. | 코드를 최적화했다. | Optimize the website for mobile. | 모바일용으로 웹사이트를 최적화해라.
+transmit | trænzˈmɪt | 전송하다, 전달하다 | send, broadcast | receive | The radio transmits signals. | 라디오가 신호를 전송한다. | Data is transmitted via Wi-Fi. | 데이터가 와이파이로 전송된다.
+retrieve | rɪˈtriːv | 회수하다, 검색하다 | recover, fetch | lose | She retrieved the lost data. | 잃어버린 데이터를 회수했다. | Retrieve the file from the server. | 서버에서 파일을 검색해라.
+render | ˈrɛndər | 렌더링하다, 만들다, 표현하다 | produce, generate | - | The software renders 3D images. | 소프트웨어가 3D 이미지를 렌더링한다. | The heat rendered the area uninhabitable. | 열이 지역을 사람이 살 수 없게 만들었다.
+debug | diːˈbʌɡ | 디버그하다, 오류를 수정하다 | fix, troubleshoot | break | She debugged the program. | 프로그램을 디버그했다. | Debugging takes patience. | 디버깅에는 인내가 필요하다.
+keep up with | kiːp ʌp wɪð | ~을 따라가다, 뒤지지 않다 | stay current, match | fall behind | It's hard to keep up with technology. | 기술을 따라가기가 어렵다. | She keeps up with the latest trends. | 최신 트렌드를 따라간다.
+break down | breɪk daʊn | 고장나다, 분해하다, 무너지다 | fail, decompose | repair | The car broke down on the highway. | 고속도로에서 차가 고장났다. | She broke down the problem into steps. | 문제를 단계로 나누었다.
+be made up of | biː meɪd ʌp ɑːv | ~으로 구성되다 | consist of, comprise | - | The team is made up of ten members. | 팀이 10명으로 구성된다. | Water is made up of hydrogen and oxygen. | 물은 수소와 산소로 구성된다.
+=== Day 16 ===
+mixture | ˈmɪkstʃər | 혼합물, 혼합 | blend, combination | pure substance | The cake is a mixture of flour and sugar. | 케이크는 밀가루와 설탕의 혼합물이다. | Add the mixture slowly. | 혼합물을 천천히 넣어라.
+burst | bɜːrst | 터지다, 폭발, 파열 | explode, erupt | hold | The balloon burst. | 풍선이 터졌다. | She burst into laughter. | 웃음을 터뜨렸다.
+method | ˈmɛθəd | 방법, 방식 | approach, technique | - | She used a new method. | 새로운 방법을 사용했다. | What is the best method? | 가장 좋은 방법은 무엇인가?
+laboratory | ˈlæbrətɔːri | 실험실, 연구소 | lab, research center | - | She works in a laboratory. | 실험실에서 일한다. | The laboratory tests confirmed. | 실험실 테스트가 확인했다.
+observation | ˌɑːbzərˈveɪʃən | 관찰, 관측, 소견 | watching, remark | - | Careful observation is important. | 주의 깊은 관찰이 중요하다. | She made an interesting observation. | 흥미로운 소견을 밝혔다.
+toxic | ˈtɑːksɪk | 유독한, 해로운 | poisonous, harmful | harmless | Toxic waste pollutes the river. | 유독 폐기물이 강을 오염시킨다. | This chemical is toxic. | 이 화학물질은 유독하다.
+vapor | ˈveɪpər | 증기, 수증기 | steam, mist | liquid | Water vapor rises from the lake. | 수증기가 호수에서 올라온다. | The vapor condensed on the glass. | 증기가 유리에 응결되었다.
+gas | ɡæs | 기체, 가스, 가솔린 | fuel, fume | solid, liquid | Natural gas is used for heating. | 천연가스가 난방에 사용된다. | The room filled with gas. | 방이 가스로 가득 찼다.
+fluid | ˈfluːɪd | 유체, 액체, 유동적인 | liquid, flowing | solid | Drink plenty of fluids. | 충분한 수분을 섭취해라. | The situation is fluid. | 상황이 유동적이다.
+liquid | ˈl위드 | 액체, 액체의 | fluid, solution | solid | Pour the liquid carefully. | 액체를 조심히 부어라. | Water is a liquid. | 물은 액체이다.
+solid | ˈsɑːlɪd | 고체, 단단한, 견고한 | firm, hard | liquid, hollow | Ice is solid water. | 얼음은 고체 상태의 물이다. | She has a solid foundation. | 견고한 기초가 있다.
+metal | ˈmɛtəl | 금속 | iron, steel | nonmetal | Gold is a precious metal. | 금은 귀금속이다. | The gate is made of metal. | 문이 금속으로 만들어졌다.
+extract | ɪkˈ스트랙트 | 추출하다, 발췌, 추출물 | remove, obtain | insert | She extracted the data. | 데이터를 추출했다. | Extract the juice from oranges. | 오렌지에서 즙을 추출해라.
+hypothesis | haɪˈpɑːθɪsɪs | 가설, 추정 | theory, assumption | fact | The hypothesis was tested. | 가설이 검증되었다. | She formed a new hypothesis. | 새로운 가설을 세웠다.
+gravity | ˈɡrævɪti | 중력, 심각성 | force, seriousness | levity | Gravity pulls things down. | 중력이 물체를 아래로 끈다. | She understood the gravity of the situation. | 상황의 심각성을 이해했다.
+particle | ˈpɑːrtɪkəl | 입자, 미립자 | bit, fragment | whole | Dust particles floated in the air. | 먼지 입자가 공중에 떠다녔다. | Every particle of matter has mass. | 모든 입자에는 질량이 있다.
+component | kəmˈpoʊnənt | 구성요소, 부품 | part, element | whole | The key component is missing. | 핵심 부품이 없다. | Each component is important. | 각 구성요소가 중요하다.
+molecule | ˈmɑːlɪkjuːl | 분자 | atom, particle | - | Water molecules contain hydrogen. | 물 분자에 수소가 포함된다. | A molecule is made of atoms. | 분자는 원자로 이루어진다.
+keep A from ~ing | kiːp frɑːm | A가 ~하지 못하게 하다 | prevent, stop | allow | The rain kept us from going out. | 비가 외출을 막았다. | Nothing can keep me from trying. | 아무것도 시도하는 것을 막을 수 없다.
+habitat | ˈhæbɪtæt | 서식지, 거주지 | environment, home | - | The forest is their natural habitat. | 숲이 자연 서식지이다. | Habitat destruction threatens animals. | 서식지 파괴가 동물을 위협한다.
+species | ˈspiːʃiːz | 종, 종류 | type, kind | - | Many species are endangered. | 많은 종이 멸종 위기에 있다. | This species is rare. | 이 종은 희귀하다.
+mammal | ˈmæməl | 포유동물 | animal | - | Whales are mammals. | 고래는 포유동물이다. | Mammals feed their young milk. | 포유동물은 새끼에게 젖을 먹인다.
+predator | ˈ프레데터 | 포식자, 약탈자 | hunter, carnivore | prey | Lions are top predators. | 사자는 최상위 포식자이다. | The predator chased its prey. | 포식자가 먹이를 쫓았다.
+migrate | ˈmaɪɡreɪt | 이주하다, 이동하다 | move, relocate | settle | Birds migrate south in winter. | 새들이 겨울에 남쪽으로 이동한다. | People migrate for better opportunities. | 사람들이 더 나은 기회를 위해 이주한다.
+survive | sərˈvaɪv | 살아남다, 생존하다 | endure, outlive | perish | She survived the earthquake. | 지진에서 살아남았다. | Only the strongest survive. | 가장 강한 자만 생존한다.
+skeleton | ˈskɛlɪtn | 골격, 해골, 뼈대 | bones, framework | - | The skeleton was found in the cave. | 동굴에서 해골이 발견되었다. | She studied the human skeleton. | 인체 골격을 공부했다.
+nerve | nɜːrv | 신경, 용기 | courage, guts | cowardice | She had the nerve to complain. | 불평할 용기가 있었다. | The nerve in her hand was damaged. | 손의 신경이 손상되었다.
+stem | stɛm | 줄기, ~에서 비롯하다 | trunk, originate | - | Cut the flower at the stem. | 줄기에서 꽃을 잘라라. | The problem stems from lack of funding. | 문제가 자금 부족에서 비롯한다.
+organism | ˈɔːrɡənɪzəm | 유기체, 생물 | creature, being | - | Bacteria are simple organisms. | 박테리아는 단순한 유기체이다. | Every organism needs water. | 모든 생물에게 물이 필요하다.
+branch | bræntʃ | 가지, 분점, 분야 | limb, division | root, trunk | The bird sat on a branch. | 새가 나뭇가지에 앉았다. | The bank has many branches. | 은행에 많은 지점이 있다.
+tissue | ˈtɪʃuː | 조직, 휴지 | material, cells | - | Muscle tissue repairs itself. | 근육 조직이 스스로 회복한다. | She used a tissue to wipe her tears. | 휴지로 눈물을 닦았다.
+come up with | kʌm ʌp wɪð | ~을 생각해내다 | invent, devise | - | She came up with a great idea. | 좋은 아이디어를 생각해냈다. | They came up with a solution. | 해결책을 찾아냈다.
+volcanic | vɑːlˈkænɪk | 화산의 | volcanic | - | The volcanic eruption destroyed the town. | 화산 폭발이 도시를 파괴했다. | Volcanic soil is very fertile. | 화산 토양은 매우 비옥하다.
+vibrate | ˈvaɪbreɪt | 진동하다, 떨리다 | shake, tremble | still | The phone vibrated in her pocket. | 주머니에서 전화가 진동했다. | Sound waves make air vibrate. | 음파가 공기를 진동시킨다.
+layer | ˈleɪər | 층, 겹 | coating, level | - | Apply a second layer of paint. | 페인트를 두 번째 층 바르라. | The cake has three layers. | 케이크가 3층이다.
+temperature | ˈtɛmpərətʃər | 온도, 기온, 체온 | heat, degree | - | The temperature dropped to zero. | 온도가 영하로 떨어졌다. | Check your body temperature. | 체온을 확인해라.
+glacier | ˈɡleɪʃər | 빙하 | ice sheet | - | The glacier is melting. | 빙하가 녹고 있다. | Glaciers shaped the landscape. | 빙하가 지형을 형성했다.
+astronomy | əˈstrɑːnəmi | 천문학 | stargazing, astrophysics | - | She studies astronomy. | 천문학을 공부한다. | Astronomy reveals the universe. | 천문학이 우주를 밝힌다.
+ray | reɪ | 광선, 빛줄기 | beam, light | darkness | Sunrays warmed the Earth. | 햇빛이 지구를 따뜻하게 했다. | A ray of hope appeared. | 한 줄기 희망이 나타났다.
+consist of | kənˈsɪst ɑːv | ~으로 구성되다 | be made up of, comprise | - | The team consists of ten members. | 팀이 10명으로 구성되어 있다. | The meal consists of rice and soup. | 식사가 밥과 국으로 구성된다.
+
+=== Day 17 ===
+conquer | ˈkɑːŋkər | 정복하다, 극복하다 | defeat, overcome | surrender | He conquered his fear. | 두려움을 극복했다. | Alexander conquered many nations. | 알렉산더가 많은 나라를 정복했다.
+heritage | ˈhɛrɪtɪdʒ | 유산, 전통 | legacy, tradition | - | Protect our cultural heritage. | 문화 유산을 보호해라. | The city is a world heritage site. | 도시가 세계 유산 지구이다.
+artificial | ˌɑːrtɪˈfɪʃəl | 인공의, 인조의 | synthetic, man-made | natural | Artificial intelligence is growing. | 인공지능이 성장하고 있다. | She disliked artificial flowers. | 인조 꽃을 싫어했다.
+conventional | kənˈvɛnʃənəl | 관습적인, 전통적인 | traditional, standard | unconventional | She took a conventional approach. | 전통적 접근법을 취했다. | Conventional wisdom says otherwise. | 통념은 다르게 말한다.
+colonial | kəˈloʊniəl | 식민지의, 식민지 시대의 | imperial | independent | Korea experienced colonial rule. | 한국이 식민 통치를 경험했다. | The colonial era left its mark. | 식민지 시대가 흔적을 남겼다.
+noble | ˈnoʊbl | 고귀한, 숭고한, 귀족 | honorable, dignified | ignoble | She has noble intentions. | 숭고한 의도가 있다. | He came from a noble family. | 귀족 가문 출신이다.
+ascend | əˈsɛnd | 오르다, 올라가다 | rise, climb | descend | She ascended the mountain. | 산을 올랐다. | The balloon ascended into the sky. | 풍선이 하늘로 올라갔다.
+empower | ɪmˈpa우어 | 권한을 부여하다, 힘을 주다 | enable, authorize | weaken | Education empowers people. | 교육이 사람들에게 힘을 준다. | She was empowered to make decisions. | 결정을 내릴 권한이 부여되었다.
+be derived from | biː dɪˈraɪvd frɑːm | ~에서 유래하다 | originate from, come from | - | The word is derived from Latin. | 그 단어는 라틴어에서 유래한다. | Many medicines are derived from plants. | 많은 약이 식물에서 유래한다.
+take into account | teɪk ˈɪntuː əˈkaʊnt | ~을 고려하다 | consider, factor in | ignore | Take all factors into account. | 모든 요소를 고려해라. | She took his feelings into account. | 그의 감정을 고려했다.
+philosophy | fɪˈlɑːsəfi | 철학, 인생관 | thinking, ideology | - | She studied philosophy at university. | 대학에서 철학을 공부했다. | His philosophy of life is simple. | 그의 인생관은 단순하다.
+profound | prəˈfaʊnd | 깊은, 심오한, 지대한 | deep, significant | superficial, shallow | She made a profound impact. | 지대한 영향을 미쳤다. | The book has profound meaning. | 책이 심오한 의미가 있다.
+shallow | ˈʃæloʊ | 얕은, 피상적인 | superficial, thin | deep | The water is shallow here. | 여기 물이 얕다. | Don't be so shallow. | 그렇게 피상적이지 마.
+oppose | əˈpoʊz | 반대하다, 대항하다 | resist, object | support | She opposed the decision. | 결정에 반대했다. | Many people opposed the law. | 많은 사람이 법에 반대했다.
+spirit | ˈspɪrɪt | 정신, 영혼, 기분 | soul, mood | body | She has a strong spirit. | 강한 정신을 가졌다. | Team spirit is important. | 팀 정신이 중요하다.
+ritual | ˈrɪtʃuəl | 의식, 절차, 의식의 | ceremony, custom | - | The ritual involves dancing. | 의식에 춤이 포함된다. | Morning coffee is her daily ritual. | 아침 커피가 그녀의 일상 의식이다.
+substance | ˈsʌbstəns | 물질, 본질, 실체 | material, matter | - | This substance is toxic. | 이 물질은 유독하다. | His argument lacks substance. | 그의 논증에 실체가 없다.
+prejudice | ˈprɛdʒʊdɪs | 편견, 선입견 | bias, discrimination | fairness | She fought against prejudice. | 편견에 맞서 싸웠다. | Don't let prejudice affect your decision. | 편견이 결정에 영향을 주지 않게 해라.
+bias | ˈbaɪəs | 편견, 편향 | prejudice, partiality | fairness | The report showed bias. | 보고서가 편향을 보였다. | Avoid bias in your research. | 연구에서 편견을 피해라.
+ultimate | ˈʌltɪmɪt | 궁극적인, 최고의, 최종의 | final, supreme | initial | Her ultimate goal is to become a doctor. | 궁극적 목표는 의사가 되는 것이다. | This is the ultimate challenge. | 이것이 최고의 도전이다.
+absolute | ˈæbsəluːt | 절대적인, 완전한 | total, complete | relative | She has absolute power. | 절대적 권력이 있다. | There is no absolute truth. | 절대적 진실은 없다.
+humanity | hjuːˈmænɪti | 인류, 인간성, 인도주의 | mankind, compassion | cruelty | She cares about humanity. | 인류를 걱정한다. | Crimes against humanity. | 인도주의에 반하는 범죄.
+draft | dræft | 초안, 초고, 초안을 작성하다 | outline, plan | final version | She wrote the first draft. | 첫 번째 초안을 작성했다. | The draft was revised. | 초안이 수정되었다.
+spell | spɛl | 철자를 쓰다, 주문, 기간 | write, enchantment | - | How do you spell your name? | 이름 철자가 어떻게 되나요? | A spell of good weather. | 좋은 날씨의 기간.
+modify | ˈmɑːdɪfaɪ | 수정하다, 변경하다 | change, alter | maintain | She modified the plan. | 계획을 수정했다. | The design was modified. | 디자인이 변경되었다.
+comic | ˈkɑːmɪk | 만화의, 희극의, 만화 | funny, humorous | tragic | She reads comic books. | 만화책을 읽는다. | The comic movie was hilarious. | 코미디 영화가 매우 재미있었다.
+tragic | ˈtrædʒɪk | 비극적인, 비참한 | devastating, sad | comic, happy | It was a tragic accident. | 비극적 사고였다. | The story has a tragic ending. | 이야기가 비극적으로 끝난다.
+simplify | ˈsɪmplɪfaɪ | 간소화하다, 단순화하다 | reduce, streamline | complicate | Simplify the process. | 과정을 간소화해라. | She simplified the instructions. | 지시를 단순화했다.
+myth | mɪθ | 신화, 미신, 속설 | legend, fable | fact | Greek myths are fascinating. | 그리스 신화가 매력적이다. | That is a common myth. | 흔한 속설이다.
+imply | ɪmˈplaɪ | 암시하다, 내포하다 | suggest, hint | state explicitly | Her words implied dissatisfaction. | 말이 불만을 암시했다. | What are you implying? | 무엇을 암시하는 거야?
+context | ˈkɑːntɛkst | 맥락, 문맥, 상황 | background, setting | - | Read the word in context. | 문맥에서 단어를 읽어라. | The context is important. | 맥락이 중요하다.
+inherent | ɪnˈhɪrənt | 내재적인, 고유한 | built-in, innate | external | Risk is inherent in business. | 위험은 사업에 내재되어 있다. | She has an inherent talent. | 선천적 재능이 있다.
+outline | ˈaʊtlaɪn | 개요, 윤곽, 요약하다 | summary, sketch | detail | She outlined the plan. | 계획을 개략적으로 설명했다. | Write an outline first. | 먼저 개요를 써라.
+translate | trænzˈleɪt | 번역하다, 해석하다 | interpret, convert | - | She translated the book into Korean. | 책을 한국어로 번역했다. | Translate the sentence. | 문장을 번역해라.
+series | ˈsɪriːz | 연속, 시리즈 | sequence, chain | - | She watched the entire series. | 시리즈 전체를 봤다. | A series of events occurred. | 일련의 사건이 발생했다.
+plot | plɑːt | 줄거리, 음모, 구획 | story, scheme | - | The plot was exciting. | 줄거리가 흥미진진했다. | They plotted against the king. | 왕에 대한 음모를 꾸몄다.
+paradoxically | ˌpærəˈdɑːksɪkli | 역설적으로, 모순되게 | ironically, contradictorily | - | Paradoxically, more choice leads to less happiness. | 역설적으로 더 많은 선택이 행복을 줄인다. | Paradoxically, she became stronger. | 역설적으로 그녀는 더 강해졌다.
+ironically | aɪˈrɑːnɪkli | 아이러니하게도, 역설적으로 | paradoxically, unexpectedly | - | Ironically, the fire station burned down. | 아이러니하게도 소방서가 불탔다. | Ironically, he failed the easy test. | 아이러니하게도 쉬운 시험을 떨어졌다.
+metaphor | ˈmɛtəfɔːr | 은유, 비유 | analogy, symbol | - | Life is a journey is a metaphor. | 인생은 여행이다 는 은유이다. | She used a powerful metaphor. | 강력한 은유를 사용했다.
+fiction | ˈfɪkʃən | 소설, 허구 | novel, fantasy | fact, nonfiction | She writes science fiction. | SF 소설을 쓴다. | The story is pure fiction. | 이야기가 순수한 허구이다.
+
+=== Day 18 ===
+creative | kriˈeɪtɪv | 창의적인, 창조적인 | imaginative, inventive | unimaginative | She is very creative. | 매우 창의적이다. | Creative thinking solves problems. | 창의적 사고가 문제를 해결한다.
+abstract | ˈæbstrækt | 추상적인, 추상 | theoretical, conceptual | concrete | Abstract art is hard to understand. | 추상 미술은 이해하기 어렵다. | The concept is too abstract. | 개념이 너무 추상적이다.
+concrete | ˈkɑːŋkriːt | 구체적인, 콘크리트 | specific, solid | abstract | Give a concrete example. | 구체적인 예를 들어라. | The floor is made of concrete. | 바닥이 콘크리트로 되어 있다.
+masterpiece | ˈmæstərpiːs | 걸작, 명작 | classic, gem | failure | The painting is a masterpiece. | 그 그림은 걸작이다. | She created a musical masterpiece. | 음악 걸작을 만들었다.
+polish | ˈpɑːlɪʃ | 닦다, 광을 내다, 다듬다 | shine, refine | roughen | Polish your shoes. | 신발을 닦아라. | She polished her essay. | 에세이를 다듬었다.
+craft | kræft | 공예, 기술, 만들다 | skill, art | - | She learned the craft of pottery. | 도자기 공예를 배웠다. | He crafted a beautiful chair. | 아름다운 의자의 장인이다.
+authentic | ɔːˈθɛntɪk | 진짜의, 정통의 | genuine, real | fake | This is an authentic antique. | 이것은 진짜 골동품이다. | Try authentic Korean food. | 정통 한국 음식을 먹어봐.
+precious | ˈprɛʃəs | 귀중한, 소중한 | valuable, dear | worthless | Time is precious. | 시간은 소중하다. | She has a precious collection. | 소중한 컬렉션이 있다.
+proportion | prəˈpɔːrʃən | 비율, 비례, 부분 | ratio, percentage | disproportion | A large proportion of students passed. | 많은 비율의 학생이 합격했다. | The body is in good proportion. | 몸의 비율이 좋다.
+portrait | ˈpɔːr트리트 | 초상화, 인물 사진 | picture, painting | - | She painted a portrait. | 초상화를 그렸다. | The portrait hangs in the gallery. | 초상화가 갤러리에 걸려 있다.
+play a role | pleɪ ə roʊl | 역할을 하다 | contribute, function | - | Technology plays a role in education. | 기술이 교육에 역할을 한다. | She plays a key role in the team. | 팀에서 핵심적 역할을 한다.
+elaborate | ɪˈlæbərɪt | 정교한, 상세히 설명하다 | detailed, complex | simple | The plan was elaborate. | 계획이 정교했다. | Could you elaborate on that point? | 그 점을 상세히 설명해줄래?
+external | ɪkˈstɜːrnəl | 외부의, 외적인 | outer, outside | internal | External factors affected the result. | 외부 요인이 결과에 영향을 미쳤다. | She showed no external signs of stress. | 외적으로 스트레스 징후를 보이지 않았다.
+internal | ɪnˈtɜːrnəl | 내부의, 내적인 | inner, inside | external | Internal conflicts weakened the team. | 내부 갈등이 팀을 약화시켰다. | The company held an internal meeting. | 회사가 내부 회의를 열었다.
+memorial | məˈmɔːriəl | 기념의, 추모의, 기념물 | monument, tribute | - | They built a war memorial. | 전쟁 기념물을 세웠다. | The memorial honors the soldiers. | 기념물이 군인들을 기린다.
+differ | ˈdɪfər | 다르다, 의견이 다르다 | vary, disagree | agree, match | Opinions differ on this issue. | 이 문제에 의견이 다르다. | They differ in many ways. | 여러 면에서 다르다.
+distinguish | dɪˈstɪŋɡwɪʃ | 구별하다, 구분하다 | differentiate, tell apart | confuse | She distinguished between the two. | 둘을 구별했다. | The mark distinguishes our brand. | 표시가 브랜드를 구분한다.
+contrast | ˈkɑːntræ스트 | 대조, 대조하다 | comparison, difference | similarity | The contrast is striking. | 대조가 두드러진다. | She contrasted the two methods. | 두 방법을 대조했다.
+architect | ˈɑːrkɪtɛkt | 건축가, 설계자 | designer, planner | - | She is a famous architect. | 유명한 건축가이다. | The architect designed the building. | 건축가가 건물을 설계했다.
+institute | ˈɪnstɪtjuːt | 기관, 연구소, 설립하다 | organization, establish | dissolve | She works at a research institute. | 연구소에서 일한다. | They instituted new rules. | 새로운 규칙을 설립했다.
+coordinate | koʊˈɔːrdɪneɪt | 조정하다, 협력하다, 좌표 | organize, synchronize | disorganize | She coordinated the event. | 행사를 조정했다. | Coordinate with your team. | 팀과 협력해라.
+collapse | kəˈlæps | 붕괴하다, 쓰러지다, 붕괴 | fall, crash | rise | The building collapsed. | 건물이 붕괴했다. | The economy is on the verge of collapse. | 경제가 붕괴 직전이다.
+amuse | əˈmjuːz | 즐겁게 하다, 재미있게 하다 | entertain, delight | bore | The clown amused the children. | 광대가 아이들을 즐겁게 했다. | She was amused by the joke. | 농담에 재미있어했다.
+entertain | ˌɛntərˈteɪn | 즐겁게 하다, 대접하다, 품다 | amuse, host | bore | She entertained the guests. | 손님을 대접했다. | The show entertained thousands. | 쇼가 수천 명을 즐겁게 했다.
+compose | kəmˈpoʊz | 작곡하다, 작성하다, 구성하다 | create, write | decompose | She composed a beautiful song. | 아름다운 곡을 작곡했다. | The team is composed of experts. | 팀이 전문가로 구성되었다.
+orchestra | ˈɔːrkɪstrə | 오케스트라, 관현악단 | band, ensemble | - | She plays in an orchestra. | 오케스트라에서 연주한다. | The orchestra performed beautifully. | 오케스트라가 아름답게 연주했다.
+rehearse | rɪˈhɜːrs | 리허설하다, 연습하다 | practice, prepare | - | They rehearsed for the play. | 연극을 위해 리허설했다. | Rehearse your speech beforehand. | 미리 연설을 연습해라.
+popularity | ˌpɑːpjuˈlærɪti | 인기, 대중성 | fame, appeal | unpopularity | Her popularity is growing. | 인기가 높아지고 있다. | The song gained popularity. | 노래가 인기를 얻었다.
+perform | pərˈfɔːrm | 수행하다, 공연하다 | execute, act | fail | She performed the surgery. | 수술을 수행했다. | The band performed live. | 밴드가 라이브 공연을 했다.
+impressive | ɪmˈprɛsɪv | 인상적인, 감명 깊은 | remarkable, striking | unimpressive | Her performance was impressive. | 그녀의 공연이 인상적이었다. | The view was impressive. | 경치가 감명 깊었다.
+flash | flæʃ | 번쩍이다, 섬광 | spark, gleam | darkness | Lightning flashed across the sky. | 번개가 하늘을 가로질러 번쩍였다. | A flash of inspiration hit her. | 영감이 번쩍 떠올랐다.
+harmonize | ˈhɑːrmənaɪz | 조화시키다, 화음을 넣다 | balance, blend | clash | She harmonized the colors. | 색상을 조화시켰다. | Their voices harmonize perfectly. | 목소리가 완벽하게 어울린다.
+encounter | ɪnˈkaʊntər | 마주치다, 만남 | meet, face | avoid | She encountered a problem. | 문제에 마주쳤다. | It was an unexpected encounter. | 예상치 못한 만남이었다.
+socialize | ˈsoʊʃəlaɪz | 사교하다, 어울리다 | mingle, interact | isolate | She likes to socialize with friends. | 친구들과 어울리기를 좋아한다. | Children learn to socialize at school. | 아이들이 학교에서 사교를 배운다.
+imaginative | ɪˈmædʒɪnətɪv | 상상력이 풍부한 | creative, inventive | unimaginative | She tells imaginative stories. | 상상력 풍부한 이야기를 한다. | Children are very imaginative. | 아이들은 상상력이 풍부하다.
+magical | ˈmædʒɪkəl | 마법의, 신비로운 | enchanting, wonderful | ordinary | It was a magical experience. | 마법 같은 경험이었다. | The sunset was magical. | 석양이 신비로웠다.
+theme | θiːm | 주제, 테마 | topic, subject | - | The main theme of the novel. | 소설의 주요 주제. | The party had a beach theme. | 파티가 해변 테마였다.
+entrance | ˈɛntrəns | 입구, 입장, 등장 | entry, doorway | exit | The entrance is on the left. | 입구가 왼쪽에 있다. | She made a dramatic entrance. | 극적으로 등장했다.
+classical | ˈklæsɪkəl | 고전의, 클래식의 | traditional, classic | modern | She listens to classical music. | 클래식 음악을 듣는다. | Classical literature is timeless. | 고전 문학은 영원하다.
+be associated with | biː əˈsoʊʃieɪtɪd wɪð | ~와 관련되다 | be connected with, relate to | - | Stress is associated with illness. | 스트레스가 질병과 관련된다. | The brand is associated with quality. | 브랜드가 품질과 관련된다.
+
+=== Day 19 ===
+electronic | ˌɪlɛkˈtrɑːnɪk | 전자의, 전자 기기의 | digital, computerized | analog | She bought electronic devices. | 전자 기기를 구입했다. | Electronic music is popular. | 전자 음악이 인기이다.
+multiply | ˈmʌltɪplaɪ | 곱하다, 증가시키다 | increase, grow | divide | Multiply 5 by 3. | 5에 3을 곱해라. | Problems multiplied quickly. | 문제가 빠르게 늘어났다.
+upload | ˈʌploʊd | 업로드하다, 올리다 | post, share | download | She uploaded the photo. | 사진을 업로드했다. | Upload the file to the server. | 서버에 파일을 올려라.
+download | ˈdaʊnloʊd | 다운로드하다, 내려받다 | save, get | upload | Download the app for free. | 앱을 무료로 다운로드해라. | She downloaded the music. | 음악을 다운로드했다.
+virtual | ˈvɜːrtʃuəl | 가상의, 사실상의 | simulated, digital | real, actual | She attended a virtual meeting. | 가상 회의에 참석했다. | Virtual reality is amazing. | 가상 현실이 놀랍다.
+activate | ˈæktɪveɪt | 활성화하다, 작동시키다 | start, trigger | deactivate | Activate your account online. | 온라인으로 계정을 활성화해라. | Press the button to activate it. | 버튼을 눌러 작동시켜라.
+nuclear | ˈnuːkliər | 핵의, 원자력의 | atomic | - | Nuclear energy is powerful. | 원자력 에너지는 강력하다. | The nuclear plant was shut down. | 원전이 가동 중지되었다.
+install | ɪnˈstɔːl | 설치하다, 설비하다 | set up, place | remove, uninstall | She installed the software. | 소프트웨어를 설치했다. | Install the new update. | 새 업데이트를 설치해라.
+maximize | ˈmæksɪmaɪz | 극대화하다 | increase, optimize | minimize | Maximize your productivity. | 생산성을 극대화해라. | She maximized her profits. | 이익을 극대화했다.
+minimize | ˈmɪnɪmaɪz | 최소화하다 | reduce, decrease | maximize | Minimize the risk of error. | 오류 위험을 최소화해라. | She minimized her expenses. | 지출을 최소화했다.
+circuit | ˈsɜːrkɪt | 회로, 순환 | loop, path | - | She built an electric circuit. | 전기 회로를 만들었다. | The circuit was broken. | 회로가 끊겼다.
+sort | sɔːrt | 분류하다, 종류 | classify, type | mix | Sort the files by date. | 날짜별로 파일을 분류해라. | What sort of music do you like? | 어떤 종류의 음악을 좋아하나?
+automatic | ˌɔːtəˈmætɪk | 자동의, 자동적인 | self-operating, mechanical | manual | The door is automatic. | 문이 자동이다. | She drives an automatic car. | 자동 기어 차를 운전한다.
+manual | ˈmænjuəl | 수동의, 설명서 | by hand, guidebook | automatic | Read the instruction manual. | 사용 설명서를 읽어라. | Manual labor is hard work. | 육체 노동은 힘든 일이다.
+visual | ˈvɪʒuəl | 시각적인, 시각의 | optical, graphic | auditory | She learns through visual aids. | 시각 자료를 통해 배운다. | The visual effects were stunning. | 시각 효과가 놀라웠다.
+recharge | ˌriːˈtʃɑːrdʒ | 재충전하다 | refuel, refresh | drain | Recharge your phone battery. | 폰 배터리를 충전해라. | She needs time to recharge. | 재충전할 시간이 필요하다.
+numerous | ˈnuːmərəs | 수많은, 다수의 | many, countless | few | She received numerous awards. | 수많은 상을 받았다. | There are numerous options. | 다수의 선택지가 있다.
+statistics | stəˈtɪstɪks | 통계, 통계학 | data, figures | - | Statistics show an increase. | 통계가 증가를 보여준다. | She studied statistics. | 통계학을 공부했다.
+angle | ˈæŋɡəl | 각도, 관점, 시각 | degree, perspective | - | Measure the angle carefully. | 각도를 주의 깊게 측정해라. | Look at it from a different angle. | 다른 관점에서 봐라.
+equation | ɪˈkweɪʒən | 방정식, 등식 | formula, expression | - | Solve the equation. | 방정식을 풀어라. | The equation is complex. | 방정식이 복잡하다.
+ride | raɪd | 타다, 타기, 승차 | travel, drive | walk | She rides a bicycle. | 자전거를 탄다. | The ride was smooth. | 승차감이 좋았다.
+crash | kræʃ | 충동하다, 추락, 고장 | collide, smash | - | The plane crashed into the mountain. | 비행기가 산에 추락했다. | The computer crashed. | 컴퓨터가 고장났다.
+rush | rʌʃ | 서두르다, 돌진, 혼잡 | hurry, dash | wait | She rushed to the station. | 역으로 서둘렀다. | Don't rush your decision. | 결정을 서두르지 마.
+bump | bʌmp | 부딪히다, 충돌, 혹 | hit, knock | - | She bumped into a wall. | 벽에 부딪혔다. | There was a bump on the road. | 도로에 혹이 있었다.
+aircraft | ˈɛrkræft | 항공기, 비행기 | airplane, plane | - | The aircraft landed safely. | 항공기가 안전하게 착륙했다. | Military aircraft flew overhead. | 군용기가 상공을 날았다.
+vessel | ˈvɛsəl | 배, 선박, 그릇, 혈관 | ship, container | - | The vessel sailed across the ocean. | 선박이 대양을 가로질렀다. | Blood flows through vessels. | 혈액이 혈관을 통해 흐른다.
+satellite | ˈsætəlaɪt | 위성, 인공위성 | moon, orbiter | - | The satellite orbits the Earth. | 위성이 지구를 돈다. | Satellite TV is available. | 위성 TV를 이용할 수 있다.
+mechanical | mɪˈkænɪkəl | 기계의, 기계적인 | automatic, machine | manual | She has mechanical skills. | 기계적 기술이 있다. | Mechanical failure caused the crash. | 기계 고장이 추락을 야기했다.
+portable | ˈpɔːrtəbl | 휴대용의, 이동 가능한 | mobile, lightweight | fixed, stationary | She uses a portable speaker. | 휴대용 스피커를 사용한다. | Portable devices are convenient. | 휴대용 기기가 편리하다.
+device | dɪˈvaɪs | 장치, 기기 | gadget, tool | - | She invented a useful device. | 유용한 장치를 발명했다. | Electronic devices are everywhere. | 전자 기기가 어디에나 있다.
+capacity | kəˈpæsɪti | 수용력, 용량, 능력 | volume, ability | inability | The stadium has a capacity of 50000. | 경기장 수용 인원이 5만 명이다. | Work at full capacity. | 최대 용량으로 작업해라.
+tune | tjuːn | 곡, 선율, 조율하다 | melody, song | - | She hummed a happy tune. | 행복한 곡을 흥얼거렸다. | Tune the guitar before playing. | 연주 전에 기타를 조율해라.
+convert | kənˈvɜːrt | 전환하다, 변환하다, 개종시키다 | change, transform | maintain | She converted dollars to won. | 달러를 원으로 환전했다. | Convert the file to PDF. | 파일을 PDF로 변환해라.
+detect | dɪˈtɛkt | 발견하다, 감지하다 | find, discover | miss | The sensor detected gas. | 센서가 가스를 감지했다. | She detected a pattern. | 패턴을 발견했다.
+transform | trænsˈfɔːrm | 변형시키다, 변환하다 | change, convert | preserve | Technology transformed society. | 기술이 사회를 변형시켰다. | She transformed the room. | 방을 탈바꿈시켰다.
+access | ˈæksɛs | 접근, 접속, 이용하다 | entry, admission | restriction | She has access to the database. | 데이터베이스 접근 권한이 있다. | Access is restricted. | 접근이 제한되어 있다.
+be supposed to | biː səˈpoʊzd tuː | ~하기로 되어있다, ~해야 한다 | be expected to, should | - | She is supposed to arrive at 3. | 3시에 도착하기로 되어 있다. | You are supposed to wear a uniform. | 교복을 입어야 한다.
+be likely to | biː ˈlaɪkli tuː | ~할 것 같다 | be expected to, probably will | be unlikely to | It is likely to rain tomorrow. | 내일 비가 올 것 같다. | She is likely to succeed. | 성공할 것 같다.
+in spite of | ɪn spaɪt ɑːv | ~에도 불구하고 | despite, regardless of | because of | She went in spite of the rain. | 비에도 불구하고 갔다. | In spite of the difficulties, she succeeded. | 어려움에도 불구하고 성공했다.
+neither A nor B | ˈniːðər ... nɔːr | A도 B도 아닌 | not A and not B | both A and B | Neither she nor he was invited. | 그녀도 그도 초대받지 못했다. | It was neither hot nor cold. | 덥지도 춥지도 않았다.
+
+=== Day 20 ===
+physical | ˈfɪzɪkəl | 신체적인, 물리적인 | bodily, tangible | mental, spiritual | Physical exercise improves health. | 신체 운동이 건강을 개선한다. | She passed the physical exam. | 신체검사를 통과했다.
+opponent | əˈpoʊnənt | 상대방, 적 | rival, competitor | ally | She defeated her opponent. | 상대를 이겼다. | Her opponent was very strong. | 상대가 매우 강했다.
+target | ˈtɑːrɡɪt | 목표, 대상, 표적 | goal, aim | - | She hit the target perfectly. | 목표를 정확히 맞혔다. | The company met its sales target. | 회사가 판매 목표를 달성했다.
+posture | ˈpɑːstʃər | 자세, 태도 | stance, position | - | Maintain good posture. | 좋은 자세를 유지해라. | Her posture improved with exercise. | 운동으로 자세가 좋아졌다.
+track | træk | 추적하다, 궤도, 경주로 | follow, trail | lose | She tracked the package online. | 온라인으로 택배를 추적했다. | The train runs on the track. | 기차가 철로 위를 달린다.
+row | roʊ | 줄, 열, 노를 젓다 | line, queue | - | They sat in the front row. | 앞줄에 앉았다. | She rowed the boat across the lake. | 호수를 가로질러 배를 저었다.
+stretch | strɛtʃ | 뻗다, 늘이다, 스트레칭 | extend, spread | compress | She stretched before exercising. | 운동 전에 스트레칭했다. | Stretch your arms above your head. | 머리 위로 팔을 뻗어라.
+extreme | ɪkˈstriːm | 극단적인, 극적인 | drastic, severe | moderate | She lives in extreme conditions. | 극한 조건에서 산다. | Avoid extreme measures. | 극단적 수단을 피해라.
+flexible | ˈflɛksəbl | 유연한, 융통성 있는 | adaptable, elastic | rigid, stiff | She has a flexible schedule. | 유연한 일정이 있다. | Be flexible in your approach. | 접근 방식에 유연해라.
+muscle | ˈmʌsəl | 근육, 힘 | strength, power | weakness | She exercises her muscles daily. | 매일 근육 운동을 한다. | He pulled a muscle. | 근육을 삐었다.
+surgery | ˈsɜːrdʒəri | 수술, 외과 | operation, procedure | - | She had heart surgery. | 심장 수술을 받았다. | The surgery was successful. | 수술이 성공적이었다.
+cure | kjʊr | 치료하다, 치료법 | heal, remedy | worsen | There is no cure for the cold. | 감기 치료법은 없다. | Scientists are searching for a cure. | 과학자들이 치료법을 찾고 있다.
+heal | hiːl | 치유하다, 나다 | recover, mend | harm, wound | The wound healed quickly. | 상처가 빨리 나았다. | Time heals all wounds. | 시간이 모든 상처를 치유한다.
+symptom | ˈsɪmptəm | 증상, 징후 | sign, indication | - | What are the symptoms? | 증상이 무엇인가? | A cough is a common symptom. | 기침이 흔한 증상이다.
+immune | ɪˈmjuːn | 면역의, 영향 받지 않는 | resistant, protected | vulnerable | She is immune to the virus. | 바이러스에 면역이 있다. | Strengthen your immune system. | 면역 체계를 강화해라.
+therapy | ˈθɛrəpi | 치료, 요법 | treatment, healing | - | She attends physical therapy. | 물리 치료를 받는다. | Music therapy helps patients. | 음악 치료가 환자를 돕는다.
+faint | feɪnt | 희미한, 기절하다, 기절 | dim, pass out | strong, bright | She fainted from the heat. | 더위로 기절했다. | A faint light was visible. | 희미한 빛이 보였다.
+stroke | stroʊk | 뇌졸중, 타격, 쓰다듬다 | blow, pet | - | He suffered a stroke. | 뇌졸중을 겪었다. | She stroked the cat gently. | 고양이를 부드럽게 쓰다듬었다.
+breath | brɛθ | 숨, 호흡 | air, respiration | - | Take a deep breath. | 심호흡해라. | She was out of breath. | 숨이 가빴다.
+bleed | bliːd | 피가 나다, 출혈하다 | hemorrhage | clot | The wound was bleeding. | 상처에서 피가 났다. | Her nose started to bleed. | 코에서 피가 나기 시작했다.
+diagnose | ˌ다이애그노즈 | 진단하다, 판정하다 | identify, detect | - | The doctor diagnosed the disease. | 의사가 질병을 진단했다. | She was diagnosed with flu. | 독감으로 진단되었다.
+prescribe | prɪˈskraɪb | 처방하다, 규정하다 | recommend, order | - | The doctor prescribed medicine. | 의사가 약을 처방했다. | She was prescribed rest. | 휴식이 처방되었다.
+chronic | ˈkrɑːnɪk | 만성적인, 오래된 | persistent, long-term | acute | She has chronic back pain. | 만성 요통이 있다. | Chronic diseases need ongoing care. | 만성 질환은 지속 관리가 필요하다.
+obesity | oʊˈbiːsəti | 비만 | overweight, fatness | thinness | Obesity increases health risks. | 비만이 건강 위험을 높인다. | Childhood obesity is a concern. | 아동 비만이 걱정이다.
+pregnant | ˈ프레그넌트 | 임신한 | expecting | - | She is five months pregnant. | 임신 5개월이다. | Pregnant women need extra care. | 임산부는 추가 관리가 필요하다.
+contagious | kənˈteɪdʒəs | 전염성의, 전파되는 | infectious, spreading | noninfectious | The disease is highly contagious. | 질병이 매우 전염성이 강하다. | Laughter is contagious. | 웃음은 전염된다.
+organ | ˈɔːrɡən | 장기, 기관, 오르간 | body part, instrument | - | The heart is a vital organ. | 심장은 필수적인 장기이다. | She donated an organ. | 장기를 기증했다.
+dose | doʊs | 복용량, 투여량 | amount, portion | - | Take the correct dose. | 정확한 복용량을 먹어라. | She increased the dose. | 복용량을 늘렸다.
+disabled | dɪsˈeɪbld | 장애가 있는 | handicapped, impaired | able-bodied | Parking for disabled drivers. | 장애인 운전자용 주차장. | She helps disabled children. | 장애 아동을 돕는다.
+well-being | ˌwɛl ˈbiːɪŋ | 안녕, 행복, 복지 | welfare, health | suffering | Exercise improves well-being. | 운동이 안녕을 개선한다. | Mental well-being matters. | 정신적 안녕이 중요하다.
+nourish | ˈnɜːrɪʃ | 양분을 주다, 먹여 기르다 | feed, sustain | starve | Good food nourishes the body. | 좋은 음식이 몸에 양분을 준다. | She nourished her children well. | 아이들을 잘 먹여 길렀다.
+by means of | baɪ miːnz ɑːv | ~을 통해, ~에 의해 | through, using | without | She communicated by means of email. | 이메일을 통해 소통했다. | Travel by means of public transport. | 대중교통을 통해 이동해라.
+as opposed to | æz əˈpoʊzd tuː | ~와 대조적으로, ~가 아니라 | in contrast to, rather than | similar to | She prefers tea as opposed to coffee. | 커피가 아니라 차를 선호한다. | Quality as opposed to quantity. | 양이 아닌 질.
+conform to | kənˈfɔːrm tuː | ~을 따르다, 순응하다 | comply with, follow | rebel against | She conformed to the rules. | 규칙을 따랐다. | Everyone should conform to the law. | 모두가 법을 따라야 한다.
+on behalf of | ɑːn bɪˈhæf ɑːv | ~을 대신하여, 대표하여 | for, representing | - | She spoke on behalf of the team. | 팀을 대표해 발언했다. | I signed on behalf of the company. | 회사를 대신하여 서명했다.
+=== Day 21 ===
+fascinate | ˈfæsɪneɪt | 매혹하다, 매료시키다 | captivate, charm | bore | The story fascinated her. | 이야기가 그녀를 매혹했다. | He was fascinated by science. | 과학에 매료되었다.
+obsess | əbˈsɛs | 집착하다, 사로잡히다 | fixate, preoccupy | ignore | She is obsessed with fashion. | 패션에 집착한다. | He obsesses over every detail. | 모든 세부사항에 집착한다.
+insult | ɪnˈsʌlt | 모욕하다, 모욕 | offend, abuse | compliment | She was insulted by his words. | 그의 말에 모욕당했다. | Don't insult anyone. | 아무에게도 모욕하지 마.
+envy | ˈɛnvi | 부러워하다, 시기, 부러움 | jealousy, covet | admiration | She envied her friend's success. | 친구의 성공을 부러워했다. | Envy is a negative emotion. | 시기는 부정적 감정이다.
+gratitude | ˈɡrætɪtuːd | 감사, 고마움 | thankfulness, appreciation | ingratitude | She expressed her gratitude. | 감사를 표현했다. | Show gratitude to your parents. | 부모님께 감사를 표해라.
+hostile | ˈhɑːstaɪl | 적대적인, 적의 있는 | aggressive, unfriendly | friendly | The crowd became hostile. | 군중이 적대적이 되었다. | She received a hostile reaction. | 적대적 반응을 받았다.
+soothe | suːð | 달래다, 진정시키다 | calm, comfort | agitate | She soothed the crying baby. | 우는 아기를 달랬다. | Music soothes the soul. | 음악이 영혼을 달래준다.
+overwhelm | ˌoʊvərˈwɛlm | 압도하다, 제압하다 | overpower, crush | underwhelm | She was overwhelmed with work. | 일에 압도당했다. | The team overwhelmed their opponents. | 팀이 상대를 제압했다.
+distress | dɪˈstrɛs | 고통, 괴로움, 괴롭히다 | suffering, anguish | comfort | She was in great distress. | 큰 고통 속에 있었다. | The news caused distress. | 소식이 고통을 안겼다.
+greed | ɡriːd | 탐욕, 욕심 | avarice, selfishness | generosity | Greed leads to corruption. | 탐욕이 부패로 이어진다. | His greed destroyed his career. | 그의 탐욕이 경력을 망쳤다.
+dignity | ˈdɪɡnɪti | 존엄, 품위 | honor, respect | shame | She maintained her dignity. | 품위를 지켰다. | Treat everyone with dignity. | 모두를 존엄하게 대해라.
+absurd | əbˈsɜːrd | 어처구니없는, 터무니없는 | ridiculous, silly | reasonable | The suggestion was absurd. | 제안이 터무니없었다. | It is absurd to think that. | 그것을 생각하는 것은 어처구니없다.
+crave | kreɪv | 갈망하다, 간절히 원하다 | desire, long for | dislike | She craves chocolate. | 초콜릿을 갈망한다. | He craves attention. | 관심을 갈망한다.
+mourn | mɔːrn | 애도하다, 슬퍼하다 | grieve, lament | celebrate | She mourned her grandmother. | 할머니를 애도했다. | The nation mourned the loss. | 나라가 그 손실을 슬퍼했다.
+vulnerable | ˈvʌlnərəbl | 취약한, 연약한 | exposed, weak | protected, strong | Children are vulnerable. | 아이들은 취약하다. | The system is vulnerable to attack. | 시스템이 공격에 취약하다.
+stubborn | ˈstʌbərn | 고집 센, 완고한 | obstinate, persistent | flexible | She is very stubborn. | 매우 고집이 세다. | His stubborn attitude caused problems. | 완고한 태도가 문제를 일으켰다.
+selfish | ˈsɛlfɪʃ | 이기적인 | self-centered, greedy | selfless | Don't be so selfish. | 그렇게 이기적이지 마. | Selfish behavior harms others. | 이기적 행동이 다른 사람을 해친다.
+dread | drɛd | 두려워하다, 공포 | fear, terror | anticipate | She dreads public speaking. | 대중 연설을 두려워한다. | The exam fills students with dread. | 시험이 학생들을 공포로 채운다.
+terrify | ˈtɛrɪfaɪ | 겁에 질리게 하다 | frighten, scare | comfort | The thunder terrified the child. | 천둥이 아이를 겁에 질리게 했다. | She was terrified of spiders. | 거미를 무서워했다.
+sentiment | ˈsɛntɪmənt | 감정, 정서, 의견 | feeling, emotion | reason | Public sentiment changed. | 여론이 바뀌었다. | She expressed her sentiments. | 감정을 표현했다.
+contempt | kənˈtɛmpt | 경멸, 멸시 | scorn, disdain | respect | She looked at him with contempt. | 그를 경멸의 눈으로 봤다. | He was held in contempt. | 경멸당했다.
+affection | əˈfɛkʃən | 애정, 호감 | love, fondness | hatred | She showed affection to her children. | 자녀에게 애정을 보였다. | He has deep affection for her. | 그녀에 대한 깊은 애정이 있다.
+indignant | ɪnˈdɪɡnənt | 분개한, 분노한 | angry, outraged | pleased | She was indignant at the injustice. | 불의에 분개했다. | He gave an indignant response. | 분노한 반응을 보였다.
+dull | dʌl | 지루한, 둔한, 칙칙한 | boring, dim | exciting, bright | The lecture was very dull. | 강의가 매우 지루했다. | The knife is dull. | 칼이 무디다.
+gratify | ˈɡrætɪfaɪ | 만족시키다, 기쁘게 하다 | satisfy, please | disappoint | She was gratified by the result. | 결과에 만족했다. | His success gratified his parents. | 성공이 부모를 기쁘게 했다.
+outlook | ˈaʊtlʊk | 견해, 전망, 시각 | perspective, view | - | She has a positive outlook on life. | 긍정적 인생관이 있다. | The economic outlook is uncertain. | 경제 전망이 불확실하다.
+long for | lɔːŋ fɔːr | ~을 갈망하다 | yearn for, crave | dread | She longed for home. | 집을 그리워했다. | He longed for peace. | 평화를 갈망했다.
+get over | ɡɛt ˈoʊvər | ~을 극복하다, 낫다 | overcome, recover | succumb to | She got over her illness. | 병에서 나았다. | Get over your fear. | 두려움을 극복해라.
+make fun of | meɪk fʌn ɑːv | ~을 놀리다, 비웃다 | tease, mock | praise | Don't make fun of others. | 다른 사람을 놀리지 마. | They made fun of his accent. | 그의 억양을 놀렸다.
+be fed up with | biː fɛd ʌp wɪð | ~에 질리다, 신물 나다 | be tired of, be sick of | enjoy | She is fed up with the noise. | 소음에 질렸다. | I'm fed up with waiting. | 기다리다 지쳤다.
+
+=== Day 22 ===
+acquire | əˈkwaɪər | 얻다, 습득하다, 인수하다 | gain, obtain | lose | She acquired new skills. | 새로운 기술을 습득했다. | The company acquired a rival. | 회사가 경쟁사를 인수했다.
+perceive | pərˈsiːv | 인식하다, 감지하다 | notice, sense | overlook | She perceived a change. | 변화를 감지했다. | It depends on how you perceive it. | 어떻게 인식하느냐에 달렸다.
+prospect | ˈprɑːspɛkt | 전망, 가능성, 예상 | outlook, opportunity | - | The job prospects are good. | 취업 전망이 좋다. | She has excellent prospects. | 전망이 훌륭하다.
+ambition | æmˈbɪʃən | 야망, 포부, 야심 | aspiration, goal | apathy | She has great ambition. | 큰 야망이 있다. | His ambition drove him forward. | 야망이 그를 앞으로 이끌었다.
+virtue | ˈvɜːrtʃuː | 미덕, 장점, 덕 | goodness, merit | vice | Patience is a virtue. | 인내는 미덕이다. | She values the virtue of honesty. | 정직의 미덕을 중시한다.
+vice | vaɪs | 악덕, 악습, 부 | sin, flaw | virtue | Gambling is a common vice. | 도박은 흔한 악습이다. | She is the vice president. | 부회장이다.
+conscience | ˈkɑːnʃəns | 양심, 도의심 | morals, ethics | - | She has a guilty conscience. | 양심의 가책이 있다. | Follow your conscience. | 양심을 따라라.
+prestige | prɛˈstiːʒ | 명성, 위신 | reputation, status | disgrace | The school has great prestige. | 학교가 큰 명성이 있다. | He valued prestige over money. | 돈보다 명성을 중시했다.
+diligent | ˈdɪlɪdʒənt | 부지런한, 근면한 | hardworking, industrious | lazy | She is a diligent student. | 부지런한 학생이다. | Diligent work pays off. | 부지런한 노력은 보상받는다.
+attain | əˈteɪn | 달성하다, 성취하다 | achieve, reach | fail | She attained her goal. | 목표를 달성했다. | He attained success through effort. | 노력으로 성공을 달성했다.
+ambiguous | æmˈbɪɡjuəs | 모호한, 애매한 | vague, unclear | clear, definite | His answer was ambiguous. | 그의 대답이 모호했다. | Avoid ambiguous expressions. | 모호한 표현을 피해라.
+integrity | ɪnˈtɛɡrɪti | 진실성, 정직, 완전성 | honesty, principle | corruption | She is a person of integrity. | 진실성이 있는 사람이다. | Integrity is valued in business. | 정직이 사업에서 중시된다.
+vague | veɪɡ | 모호한, 막연한 | unclear, ambiguous | clear, precise | She gave a vague answer. | 모호한 대답을 했다. | The plan is still vague. | 계획이 아직 막연하다.
+oblige | əˈblaɪdʒ | 의무를 지우다, ~해주다 | require, compel | excuse | She felt obliged to help. | 도와야 할 의무감을 느꼈다. | I would be much obliged. | 감사하겠습니다.
+prone to | proʊn tuː | ~하기 쉬운, ~하는 경향이 있는 | likely to, inclined to | resistant to | She is prone to allergies. | 알레르기에 걸리기 쉽다. | He is prone to making mistakes. | 실수를 저지르기 쉽다.
+attribute A to B | əˈtrɪbjuːt tuː | A를 B의 탓으로 돌리다 | assign, credit | - | She attributed her success to hard work. | 성공을 노력의 덕분으로 돌렸다. | He attributed the failure to bad luck. | 실패를 불운 탓으로 돌렸다.
+consent | kənˈsɛnt | 동의하다, 동의 | agree, approve | refuse | She gave her consent. | 동의를 했다. | Consent is required for surgery. | 수술에는 동의가 필요하다.
+deliberate | dɪˈlɪbərɪt | 고의의, 신중한, 숙고하다 | intentional, careful | accidental | It was a deliberate act. | 고의적 행위였다. | She acted in a deliberate manner. | 신중하게 행동했다.
+deviate | ˈdiːvieɪt | 벗어나다, 이탈하다 | stray, depart | conform | She deviated from the original plan. | 원래 계획에서 벗어났다. | Don't deviate from the topic. | 주제에서 벗어나지 마.
+suppress | səˈ프레스 | 억누르다, 진압하다 | restrain, stifle | express | She suppressed her anger. | 분노를 억눌렀다. | The government suppressed the revolt. | 정부가 반란을 진압했다.
+stimulate | ˈstɪmjuleɪt | 자극하다, 촉진하다 | encourage, boost | discourage | Exercise stimulates the brain. | 운동이 뇌를 자극한다. | She stimulated discussion. | 토론을 촉진했다.
+thrive | θraɪv | 번성하다, 잘 자라다 | flourish, prosper | decline | Children thrive with love. | 아이들이 사랑으로 잘 자란다. | The business thrived. | 사업이 번성했다.
+bewilder | bɪˈwɪldər | 당혹시키다, 어리뚱절하게 하다 | confuse, puzzle | clarify | The complex rules bewildered her. | 복잡한 규칙이 당혹시켰다. | He was bewildered by the result. | 결과에 어리둥절했다.
+cling to | klɪŋ tuː | ~에 달라붙다, 집착하다 | hold on to, stick to | let go of | She clung to her mother. | 엄마에게 달라붙었다. | He clings to old traditions. | 오래된 전통에 집착한다.
+look down on | lʊk daʊn ɑːn | ~을 깔보다, 무시하다 | despise, scorn | look up to | Don't look down on others. | 다른 사람을 깔보지 마. | She never looks down on anyone. | 아무도 깔보지 않는다.
+be accustomed to | biː əˈkʌstəmd tuː | ~에 익숙하다 | be used to, be familiar with | be unfamiliar with | She is accustomed to hard work. | 힘든 일에 익숙하다. | He is accustomed to the cold. | 추위에 익숙하다.
+regardless of | rɪˈɡɑːrdlɪs ɑːv | ~에 상관없이 | despite, irrespective of | because of | Try regardless of the result. | 결과에 상관없이 시도해라. | She is loved regardless of everything. | 모든 것에 상관없이 사랑받는다.
+give in | ɡɪv ɪn | 항복하다, 굴복하다 | surrender, yield | resist | She refused to give in. | 항복하기를 거부했다. | Don't give in to pressure. | 압력에 굴복하지 마.
+come across | kʌm əˈkrɔːs | 우연히 만나다, ~을 발견하다 | encounter, find | - | She came across an old letter. | 오래된 편지를 우연히 발견했다. | He comes across as very friendly. | 매우 친근해 보인다.
+as a matter of fact | æz ə ˈmætər ɑːv fækt | 사실은, 실제로 | actually, in fact | - | As a matter of fact, I agree. | 사실 나도 동의한다. | As a matter of fact, she is right. | 실제로 그녀가 맞다.
+
+=== Day 23 ===
+archaeology | ˌɑːrkiˈɑːlədʒi | 고고학 | excavation study | - | She studies archaeology. | 고고학을 공부한다. | Archaeology reveals ancient cultures. | 고고학이 고대 문화를 밝힌다.
+anthropology | ˌænθrəˈpɑːlədʒi | 인류학 | study of humans | - | She majored in anthropology. | 인류학을 전공했다. | Anthropology examines human cultures. | 인류학이 인간 문화를 연구한다.
+geology | dʒiˈɑːlədʒi | 지질학 | earth science | - | She studied geology in university. | 대학에서 지질학을 공부했다. | Geology explains rock formations. | 지질학이 암석 형성을 설명한다.
+psychology | saɪˈkɑːlədʒi | 심리학, 심리 | mental science | - | She studied psychology. | 심리학을 공부했다. | Psychology helps understand behavior. | 심리학이 행동 이해를 돕는다.
+agriculture | ˈæɡrɪkʌltʃər | 농업, 농경 | farming, cultivation | industry | Agriculture is the main industry. | 농업이 주요 산업이다. | Sustainable agriculture is important. | 지속 가능한 농업이 중요하다.
+commerce | ˈkɑːmɜːrs | 상업, 통상, 무역 | trade, business | - | E-commerce is growing rapidly. | 전자상거래가 빠르게 성장하고 있다. | Commerce between the two countries. | 두 나라 간의 무역.
+geography | dʒiˈ아ɡrəfi | 지리학, 지형 | topography, terrain | - | She teaches geography. | 지리학을 가르친다. | Korea's geography is mountainous. | 한국의 지형은 산이 많다.
+ecology | ɪˈkɑːlədʒi | 생태학, 생태 | ecosystem | - | She studies ecology. | 생태학을 공부한다. | Ecology studies living systems. | 생태학이 생명 체계를 연구한다.
+semester | sɪˈmɛstər | 학기 | term, session | - | The semester begins in March. | 학기가 3월에 시작한다. | She took six courses this semester. | 이번 학기에 6과목을 들었다.
+diploma | dɪˈploʊmə | 학위증, 졸업장 | degree, certificate | - | She received her diploma. | 졸업장을 받았다. | A high school diploma is required. | 고등학교 졸업장이 필요하다.
+curriculum | kəˈrɪkjuləm | 교과과정, 교육과정 | syllabus, program | - | The curriculum was revised. | 교과과정이 개정되었다. | She designed the new curriculum. | 새 교육과정을 설계했다.
+scholarship | ˈskɑːlərʃɪp | 장학금, 학문 | grant, fellowship | - | She won a scholarship. | 장학금을 받았다. | The scholarship covers tuition. | 장학금이 등록금을 지원한다.
+tutor | ˈtuːtər | 과외교사, 가르치다 | teacher, instructor | student | She hired a math tutor. | 수학 과외 선생을 고용했다. | He tutors students after school. | 방과 후 학생을 가르친다.
+faculty | ˈfækəlti | 학부, 교수진, 능력 | staff, professors | students | The entire faculty attended. | 전 교수진이 참석했다. | She joined the university faculty. | 대학 교수진에 합류했다.
+discipline | ˈdɪsɪplɪn | 훈련, 규율, 학문 분야 | training, control | chaos | Discipline is key to success. | 규율이 성공의 열쇠이다. | She studies several disciplines. | 여러 학문 분야를 공부한다.
+literacy | ˈlɪtərəsi | 문해력, 읽고 쓰기 능력 | reading ability | illiteracy | Improve digital literacy. | 디지털 문해력을 향상시켜라. | Literacy rates are rising globally. | 전 세계적으로 문해율이 높아지고 있다.
+dissertation | ˌdɪsərˈteɪʃən | 학위 논문 | thesis, paper | - | She wrote her doctoral dissertation. | 박사 학위 논문을 썼다. | The dissertation was excellent. | 학위 논문이 훌륭했다.
+extracurricular | ˌɛkstrəkəˈrɪkjələr | 과외의, 교과외의 | activities, clubs | academic | She does extracurricular activities. | 과외 활동을 한다. | Extracurricular sports are popular. | 과외 스포츠가 인기이다.
+comprehend | ˌkɑːmprɪˈhɛnd | 이해하다, 파악하다 | understand, grasp | misunderstand | She couldn't comprehend the theory. | 이론을 이해할 수 없었다. | The text is hard to comprehend. | 텍스트가 이해하기 어렵다.
+fluent | ˈ플루언트 | 유창한, 유려한 | proficient, eloquent | stuttering | She is fluent in English. | 영어가 유창하다. | He speaks fluent Korean. | 한국어를 유창하게 한다.
+rote | roʊt | 암기, 기계적인 반복 | memorization | understanding | She learned by rote. | 암기로 배웠다. | Rote learning has limitations. | 암기 학습에는 한계가 있다.
+assign | əˈsaɪn | 배정하다, 할당하다 | allocate, designate | withdraw | The teacher assigned homework. | 선생님이 숙제를 내줬다. | She was assigned a new task. | 새 과제를 배정받았다.
+bachelor | ˈbætʃələr | 학사, 미혼 남성 | graduate, single | - | She earned her bachelor's degree. | 학사 학위를 받았다. | He is still a bachelor. | 아직 미혼이다.
+oral | ˈɔːrəl | 구두의, 구술의 | spoken, verbal | written | She passed the oral exam. | 구술 시험을 통과했다. | Oral communication skills are important. | 구두 의사소통 기술이 중요하다.
+conference | ˈkɑːnfərəns | 회의, 학회 | meeting, seminar | - | She attended an international conference. | 국제 학회에 참석했다. | The conference starts next week. | 학회가 다음 주에 시작한다.
+session | ˈsɛʃən | 회기, 수업, 기간 | meeting, class | recess | The training session lasted two hours. | 교육 시간이 2시간 지속되었다. | She attended every session. | 모든 수업에 참석했다.
+enrich | ɪnˈrɪtʃ | 풍요롭게 하다, 풍부하게 하다 | enhance, improve | diminish | Travel enriches your life. | 여행이 삶을 풍요롭게 한다. | The program enriches learning. | 프로그램이 학습을 풍부하게 한다.
+academic | ˌækəˈdɛmɪk | 학문의, 학교의, 학자 | scholarly, educational | practical | She has an academic career. | 학자 경력이 있다. | Academic performance improved. | 학업 성적이 향상되었다.
+hypothesis | haɪˈpɑːθɪsɪs | 가설 | theory, assumption | fact | She tested her hypothesis. | 가설을 검증했다. | The hypothesis proved correct. | 가설이 옳은 것으로 증명됐다.
+institution | ˌɪnstɪˈtuːʃən | 기관, 제도, 시설 | organization, establishment | - | She works at a financial institution. | 금융 기관에서 일한다. | Educational institutions play a vital role. | 교육 기관이 중요한 역할을 한다.
+acquaint | əˈkweɪnt | 알게 하다, 익숙하게 하다 | familiarize, introduce | estrange | She acquainted herself with the rules. | 규칙에 익숙해졌다. | Let me acquaint you with our system. | 시스템을 알려드리겠습니다.
+figure | ˈfɪɡjər | 숫자, 인물, 체형, 모습 | number, person | - | She is a public figure. | 공인이다. | The figure shows a steady increase. | 수치가 꾸준한 증가를 보여준다.
+intellect | ˈɪntəlɛkt | 지성, 지력, 지식인 | mind, intelligence | ignorance | She is a person of great intellect. | 큰 지성의 소유자이다. | Intellect alone is not enough. | 지성만으로는 충분하지 않다.
+on the other hand | ɑːn ðə ˈʌðər hænd | 반면에, 한편으로는 | conversely, however | - | On the other hand, it might work. | 반면에 효과가 있을 수 있다. | She is shy; on the other hand, she is bright. | 수줍지만 반면에 밝다.
+by all means | baɪ ɔːl miːnz | 물론, 반드시, 어떻게든 | certainly, absolutely | by no means | By all means, go ahead. | 물론, 하세요. | Achieve your goal by all means. | 어떻게든 목표를 달성해라.
+face to face | feɪs tuː feɪs | 직접 대면하여 | in person | remotely | They met face to face. | 직접 만났다. | Discuss it face to face. | 직접 대면해서 논의해라.
+side by side | saɪd baɪ saɪd | 나란히, 함께 | together, alongside | separately | They walked side by side. | 나란히 걸었다. | We worked side by side. | 함께 일했다.
+not to mention | nɑːt tuː ˈmɛnʃən | ~은 말할 것도 없이 | let alone, besides | - | She speaks Korean, not to mention English. | 영어는 말할 것도 없이 한국어를 한다. | She is smart, not to mention hardworking. | 근면한 것은 말할 것도 없이 똑똑하다.
+to be frank | tuː biː fræŋk | 솔직히 말하면 | honestly, to be honest | - | To be frank, I disagree. | 솔직히 말하면 동의하지 않는다. | To be frank, it was a bad idea. | 솔직히 말하면 나쁜 생각이었다.
+as far as | æz fɑːr æz | ~하는 한, ~까지 | to the extent that | - | As far as I know, she is fine. | 내가 아는 한 그녀는 괜찮다. | As far as possible, be on time. | 가능한 한 제시간에 와라.
+
+=== Day 24 ===
+appetite | ˈæpɪtaɪt | 식욕, 욕구 | hunger, desire | aversion | She has a good appetite. | 식욕이 좋다. | He lost his appetite after the news. | 소식 후 식욕을 잃었다.
+grain | ɡreɪn | 곡물, 낟알 | cereal, seed | - | Rice is an important grain. | 쌀은 중요한 곡물이다. | She planted grain in the field. | 밭에 곡물을 심었다.
+cultivate | ˈkʌltɪveɪt | 경작하다, 재배하다, 기르다 | grow, develop | neglect | She cultivated vegetables. | 채소를 재배했다. | Cultivate good habits. | 좋은 습관을 기르라.
+harvest | ˈhɑːrvɪst | 수확하다, 수확 | crop, gather | plant, sow | They harvested wheat in autumn. | 가을에 밀을 수확했다. | The harvest was plentiful. | 수확이 풍성했다.
+fertile | ˈfɜːrtaɪl | 비옥한, 다산의 | productive, rich | barren | The soil is very fertile. | 토양이 매우 비옥하다. | She has a fertile imagination. | 풍부한 상상력이 있다.
+drought | draʊt | 가뭄, 한발 | dry spell | flood | The drought destroyed the crops. | 가뭄이 작물을 파괴했다. | Drought affects millions of people. | 가뭄이 수백만 명에 영향을 미친다.
+irrigation | ˌɪrɪˈɡeɪʃən | 관개, 관수 | watering | drainage | Irrigation systems help farming. | 관개 시스템이 농업을 돕는다. | She designed an irrigation plan. | 관개 계획을 설계했다.
+livestock | ˈlaɪvstɑːk | 가축 | cattle, animals | - | She raises livestock. | 가축을 기른다. | Livestock farming is common. | 축산업이 흔하다.
+pasture | ˈpæstʃər | 목초지, 방목하다 | meadow, grassland | - | Cows graze on the pasture. | 소가 목초지에서 풀을 뜯는다. | The pasture was green and wide. | 목초지가 푸르고 넓었다.
+famine | ˈfæmɪn | 기근, 대기근 | starvation, hunger | plenty | The famine killed millions. | 기근으로 수백만 명이 죽었다. | Famine is a global concern. | 기근이 세계적 관심사이다.
+pesticide | ˈpɛstɪsaɪd | 살충제, 농약 | insecticide | - | Reduce the use of pesticides. | 농약 사용을 줄여라. | Organic food avoids pesticides. | 유기농 식품은 농약을 피한다.
+staple | ˈsteɪpl | 주요한, 주식, 필수품 | basic, essential | luxury | Rice is a staple food. | 쌀이 주식이다. | Bread is a staple in Europe. | 빵이 유럽의 주식이다.
+plow | plaʊ | 쟁기질하다, 쟁기 | till, cultivate | - | She plowed the field. | 밭을 갈았다. | The farmer used a plow. | 농부가 쟁기를 사용했다.
+vegetation | ˌvɛdʒɪˈteɪʃən | 초목, 식물 | plants, greenery | bare land | The forest has dense vegetation. | 숲에 빽빽한 초목이 있다. | Vegetation covers the hillside. | 초목이 언덕을 덮고 있다.
+yield | jiːld | 산출하다, 양보하다, 수확량 | produce, give way | resist | The farm yielded a good crop. | 농장이 좋은 수확을 냈다. | Yield to oncoming traffic. | 다가오는 차량에 양보해라.
+nourish | ˈnɜːrɪʃ | 영양을 주다, 양육하다 | feed, sustain | starve | Healthy food nourishes the body. | 건강한 음식이 몸에 영양을 준다. | She nourished her children well. | 아이들을 잘 양육했다.
+dietary | ˈdaɪɪtɛri | 식이의, 음식물의 | nutritional, food | - | Follow a healthy dietary plan. | 건강한 식이 계획을 따라라. | Dietary habits affect health. | 식습관이 건강에 영향을 미친다.
+abundant | əˈbʌndənt | 풍부한, 많은 | plentiful, ample | scarce | Natural resources are abundant here. | 여기 천연자원이 풍부하다. | She has abundant energy. | 에너지가 넘친다.
+barren | ˈbærən | 척박한, 불모의 | infertile, sterile | fertile | The land is barren. | 땅이 척박하다. | Nothing grows in this barren desert. | 이 불모의 사막에서는 아무것도 자라지 않는다.
+decay | dɪˈkeɪ | 썩다, 부패하다, 부패 | rot, decompose | grow | The food started to decay. | 음식이 썩기 시작했다. | Tooth decay is preventable. | 충치는 예방 가능하다.
+stale | steɪl | 상한, 신선하지 않은, 진부한 | old, outdated | fresh | The bread went stale. | 빵이 상했다. | Stale ideas need updating. | 진부한 아이디어는 갱신이 필요하다.
+thirst | θɜːrst | 갈증, 갈망 | dehydration, craving | satisfaction | She quenched her thirst. | 갈증을 해소했다. | A thirst for knowledge. | 지식에 대한 갈망.
+contaminate | kənˈtæmɪneɪt | 오염시키다 | pollute, infect | purify | Chemicals contaminated the water. | 화학물질이 물을 오염시켰다. | Don't contaminate the food. | 음식을 오염시키지 마.
+brew | bruː | 양조하다, 끓이다, 양조주 | ferment, make | - | She brewed a cup of tea. | 차 한 잔을 끓였다. | The company brews craft beer. | 회사가 수제 맥주를 양조한다.
+raw | rɔː | 날것의, 원래의, 가공되지 않은 | uncooked, natural | cooked, processed | She eats raw fish. | 날생선을 먹는다. | Raw materials are imported. | 원자재가 수입된다.
+feast | fiːst | 잔치, 만찬, 진수성찬 | banquet, celebration | famine | They held a grand feast. | 성대한 잔치를 열었다. | It was a feast for the eyes. | 눈이 즐거운 광경이었다.
+ingredient | ɪnˈɡriːdiənt | 재료, 성분 | component, element | - | Fresh ingredients make better food. | 신선한 재료가 더 좋은 음식을 만든다. | List all ingredients. | 모든 재료를 나열해라.
+ripe | raɪp | 익은, 무르익은 | mature, ready | unripe | The fruit is ripe. | 과일이 익었다. | The time is ripe for change. | 변화의 시기가 무르익었다.
+sow | soʊ | 씨를 뿌리다, 파종하다 | plant, seed | reap | She sowed seeds in spring. | 봄에 씨를 뿌렸다. | You reap what you sow. | 뿌린 대로 거둔다.
+be used to ~ing | biː juːzd tuː | ~하는 것에 익숙하다 | be accustomed to | - | She is used to waking up early. | 일찍 일어나는 것에 익숙하다. | He is used to cold weather. | 추운 날씨에 익숙하다.
+a number of | ə ˈnʌmbər ɑːv | 다수의, 여러 개의 | several, many | few | A number of students participated. | 다수의 학생이 참가했다. | She visited a number of countries. | 여러 나라를 방문했다.
+above all | əˈbʌv ɔːl | 무엇보다도 | most importantly | - | Above all, be kind. | 무엇보다도 친절해라. | Above all, safety comes first. | 무엇보다도 안전이 우선이다.
+keep in mind | kiːp ɪn maɪnd | ~을 명심하다 | remember, consider | forget | Keep in mind the deadline. | 마감일을 명심해라. | Keep this advice in mind. | 이 충고를 명심해라.
+once in a while | wʌns ɪn ə waɪl | 때때로, 가끔 | occasionally, sometimes | always, never | She visits once in a while. | 가끔 방문한다. | We eat out once in a while. | 가끔 외식한다.
+now that | naʊ ðæt | ~이므로, ~이니까 | since, because | - | Now that you are here, let's start. | 와 있으니 시작하자. | Now that I think about it, you're right. | 생각해보니 네가 맞다.
+
+=== Day 25 ===
+ecosystem | ˈiːkoʊsɪstəm | 생태계 | environment, habitat | - | The ecosystem is fragile. | 생태계가 취약하다. | Protect the marine ecosystem. | 해양 생태계를 보호해라.
+deforestation | ˌdiːfɔːrɪˈsteɪʃən | 산림 벌채, 삼림 파괴 | logging, clearing | reforestation | Deforestation destroys habitats. | 산림 벌채가 서식지를 파괴한다. | Stop deforestation now. | 지금 삼림 파괴를 멈춰라.
+extinction | ɪkˈstɪŋkʃən | 멸종, 소멸 | disappearance, dying out | survival | Many species face extinction. | 많은 종이 멸종 위기에 있다. | Prevent the extinction of wildlife. | 야생동물의 멸종을 방지해라.
+conservation | ˌkɑːnsərˈveɪʃən | 보존, 보호 | preservation, protection | destruction | Wildlife conservation is urgent. | 야생동물 보호가 시급하다. | Energy conservation saves money. | 에너지 절약이 돈을 아낀다.
+pollute | pəˈluːt | 오염시키다, 더럽히다 | contaminate, dirty | clean, purify | Factories pollute the air. | 공장이 공기를 오염시킨다. | Don't pollute the ocean. | 바다를 오염시키지 마.
+renewable | rɪˈnuːəbl | 재생 가능한, 갱신 가능한 | sustainable, green | nonrenewable | Use renewable energy sources. | 재생 에너지원을 사용해라. | Solar power is renewable. | 태양 에너지는 재생 가능하다.
+greenhouse | ˈɡriːnhaʊs | 온실, 온실의 | hothouse | - | The greenhouse effect warms the Earth. | 온실 효과가 지구를 따뜻하게 한다. | She grows plants in a greenhouse. | 온실에서 식물을 기른다.
+ozone | ˈoʊzoʊn | 오존 | - | - | The ozone layer protects us. | 오존층이 우리를 보호한다. | Ozone depletion is a concern. | 오존 파괴가 걱정이다.
+recycle | ˌriːˈsaɪkəl | 재활용하다 | reuse, repurpose | waste | Recycle plastic bottles. | 플라스틱 병을 재활용해라. | Recycling reduces waste. | 재활용이 쓰레기를 줄인다.
+erosion | ɪˈroʊʒən | 침식, 부식 | wearing away, decay | buildup | Soil erosion damages farmland. | 토양 침식이 농지를 손상시킨다. | Water causes erosion. | 물이 침식을 일으킨다.
+dump | dʌmp | 버리다, 쓰레기장 | dispose, discard | keep | Don't dump trash here. | 여기에 쓰레기를 버리지 마. | The dump was full. | 쓰레기장이 가득 찼다.
+fossil | ˈfɑːsəl | 화석, 화석의 | remains, relic | - | They found a dinosaur fossil. | 공룡 화석을 발견했다. | Fossil fuels cause pollution. | 화석 연료가 오염을 일으킨다.
+contaminate | kənˈtæmɪneɪt | 오염시키다 | pollute, infect | purify | Oil contaminated the river. | 기름이 강을 오염시켰다. | Contaminated water is dangerous. | 오염된 물은 위험하다.
+exhaust | ɪɡˈzɔːst | 소모하다, 배기가스 | deplete, fume | replenish | She exhausted all resources. | 모든 자원을 소모했다. | Car exhaust pollutes the air. | 자동차 배기가스가 공기를 오염시킨다.
+dispose of | dɪˈspoʊz ɑːv | ~을 처분하다, 버리다 | discard, throw away | keep | Dispose of waste properly. | 쓰레기를 올바르게 처분해라. | She disposed of old furniture. | 오래된 가구를 처분했다.
+radiate | ˈreɪdieɪt | 발산하다, 방사하다 | emit, spread | absorb | The sun radiates heat. | 태양이 열을 발산한다. | She radiates confidence. | 자신감을 발산한다.
+diminish | dɪˈmɪnɪʃ | 줄다, 감소하다, 축소하다 | decrease, reduce | increase | Her influence has diminished. | 그녀의 영향력이 줄었다. | The supply diminished rapidly. | 공급이 빠르게 감소했다.
+deteriorate | dɪˈtɪriəreɪt | 악화하다, 쇠퇴하다 | worsen, decline | improve | Her health deteriorated. | 건강이 악화되었다. | The situation continued to deteriorate. | 상황이 계속 악화되었다.
+catastrophe | kəˈtæstrəfi | 대재앙, 참사 | disaster, calamity | blessing | The flood was a catastrophe. | 홍수가 대재앙이었다. | We must prevent a climate catastrophe. | 기후 재앙을 막아야 한다.
+deplete | dɪˈpliːt | 고갈시키다, 소모하다 | exhaust, drain | replenish | Natural resources are being depleted. | 천연자원이 고갈되고 있다. | The ozone layer is depleted. | 오존층이 고갈되고 있다.
+sustainability | səˌsteɪnəˈ비리티 | 지속 가능성 | durability, viability | unsustainability | Sustainability is key for the future. | 지속 가능성이 미래의 열쇠이다. | Focus on environmental sustainability. | 환경적 지속 가능성에 집중해라.
+abundance | əˈbʌndəns | 풍부, 다량 | plenty, wealth | scarcity | There is an abundance of water. | 물이 풍부하다. | Nature shows an abundance of life. | 자연이 생명의 풍요를 보여준다.
+to a certain extent | tuː ə ˈsɜːrtən ɪkˈstɛnt | 어느 정도까지는 | partially, somewhat | completely | To a certain extent, he is right. | 어느 정도 그가 맞다. | I agree to a certain extent. | 어느 정도 동의한다.
+so as to | soʊ æz tuː | ~하기 위해 | in order to | - | She studied hard so as to pass. | 합격하기 위해 열심히 공부했다. | He left early so as to avoid traffic. | 교통 체증을 피하기 위해 일찍 떠났다.
+aside from | əˈsaɪd frɑːm | ~을 제외하고, ~외에도 | besides, apart from | - | Aside from English, she speaks French. | 영어 외에 불어도 한다. | Aside from that, everything is fine. | 그것을 제외하면 다 괜찮다.
+=== Day 26 ===
+enterprise | ˈɛntərpraɪz | 기업, 사업, 모험심 | business, venture | - | She runs a small enterprise. | 작은 기업을 운영한다. | The enterprise was successful. | 사업이 성공적이었다.
+revenue | ˈrɛvənjuː | 수입, 세입, 매출 | income, earnings | expense | The company's revenue increased. | 회사 매출이 증가했다. | Government revenue comes from taxes. | 정부 세입이 세금에서 나온다.
+transaction | trænˈzækʃən | 거래, 처리 | deal, exchange | - | She completed the transaction. | 거래를 완료했다. | Online transactions are convenient. | 온라인 거래가 편리하다.
+tariff | ˈtærɪf | 관세, 요금표 | duty, tax | - | The government raised tariffs. | 정부가 관세를 올렸다. | Tariffs affect trade. | 관세가 무역에 영향을 미친다.
+deficit | ˈdɛfɪsɪt | 적자, 부족 | shortage, loss | surplus | The country has a trade deficit. | 나라에 무역 적자가 있다. | The budget deficit grew. | 재정 적자가 커졌다.
+surplus | ˈsɜːrpləs | 잉여, 과잉, 흑자 | excess, extra | deficit | There is a food surplus. | 식량 잉여가 있다. | The country has a trade surplus. | 무역 흑자가 있다.
+recession | rɪˈsɛʃən | 불경기, 경기 침체 | downturn, slump | boom | The economy is in recession. | 경제가 불경기이다. | The recession affected everyone. | 불경기가 모두에게 영향을 미쳤다.
+inflation | ɪnˈfleɪʃən | 인플레이션, 물가 상승 | price rise | deflation | Inflation is increasing. | 인플레이션이 증가하고 있다. | Inflation erodes purchasing power. | 인플레이션이 구매력을 약화시킨다.
+currency | ˈkɜːrənsi | 통화, 화폐 | money, cash | - | The local currency is the won. | 현지 통화가 원화이다. | Currency exchange rates fluctuate. | 통화 환율이 변동한다.
+bankruptcy | ˈbæŋkrʌptsi | 파산, 도산 | insolvency, failure | prosperity | The company filed for bankruptcy. | 회사가 파산 신청을 했다. | Bankruptcy destroyed his business. | 파산이 사업을 망쳤다.
+monopoly | məˈnɑːpəli | 독점, 전매 | control, dominance | competition | The company has a monopoly. | 회사가 독점을 가지고 있다. | Break the monopoly. | 독점을 깨라.
+dividend | ˈdɪvɪdɛnd | 배당금, 이익 | payout, share | - | She received dividends. | 배당금을 받았다. | The company paid a dividend. | 회사가 배당금을 지급했다.
+speculate | ˈ스펙큘레이트 | 투기하다, 추측하다 | guess, gamble | know | He speculated in real estate. | 부동산에 투기했다. | Don't speculate about the future. | 미래를 추측하지 마.
+audit | ˈɔːdɪt | 감사하다, 감사 | inspect, examine | - | The company was audited. | 회사가 감사를 받았다. | An annual audit is required. | 연간 감사가 필요하다.
+subsidiary | səbˈsɪdiɛri | 자회사, 보조의 | branch, affiliate | parent company | The subsidiary operates independently. | 자회사가 독립적으로 운영된다. | She works at a subsidiary. | 자회사에서 일한다.
+quota | ˈkwoʊtə | 할당량, 쿼터 | limit, share | - | The import quota was set. | 수입 할당량이 설정되었다. | She met her sales quota. | 판매 할당량을 달성했다.
+accumulate | əˈkjuːmjuleɪt | 축적하다, 모으다 | gather, collect | spend, disperse | She accumulated wealth over time. | 시간이 지남에 따라 부를 축적했다. | Dust accumulates on the shelf. | 선반에 먼지가 쌓인다.
+fluctuate | ˈ플럭츄에이트 | 변동하다, 오르내리다 | vary, change | stabilize | Prices fluctuate daily. | 가격이 매일 변동한다. | The temperature fluctuates. | 온도가 오르내린다.
+offset | ˈɑːfsɛt | 상쇄하다, 벌충하다 | balance, compensate | - | Gains offset the losses. | 이점이 손실을 상쇄했다. | She offset expenses with income. | 수입으로 지출을 상쇄했다.
+thrift | θrɪft | 절약, 검소 | frugality, saving | waste | Thrift is a good habit. | 절약은 좋은 습관이다. | She shops at thrift stores. | 중고품 가게에서 쇼핑한다.
+liquidate | ˈlɪkwɪdeɪt | 청산하다, 정리하다 | sell off, settle | invest | The company liquidated its assets. | 회사가 자산을 청산했다. | She liquidated her investments. | 투자를 정리했다.
+lucrative | ˈluːkrətɪv | 수익성이 높은 | profitable, rewarding | unprofitable | It was a lucrative deal. | 수익성이 높은 거래였다. | She found a lucrative career. | 수익성 있는 직업을 찾았다.
+amount to | əˈmaʊnt tuː | 총 ~이 되다, ~에 이르다 | total, equal | - | The bill amounted to $500. | 청구서가 500달러가 되었다. | His savings amounted to a lot. | 저축이 상당한 양에 달했다.
+at the expense of | æt ðə ɪkˈspɛns ɑːv | ~을 희생하고, ~의 비용으로 | at the cost of | - | She succeeded at the expense of her health. | 건강을 희생하고 성공했다. | Don't grow at the expense of quality. | 품질을 희생하고 성장하지 마.
+
+=== Day 27 ===
+nutrition | njuːˈtrɪʃən | 영양, 영양 섭취 | nourishment, diet | malnutrition | Good nutrition keeps you healthy. | 좋은 영양이 건강을 유지한다. | She studied nutrition. | 영양학을 공부했다.
+metabolism | mɪˈtæbəlɪzəm | 신진대사, 대사 | body process | - | Exercise boosts metabolism. | 운동이 신진대사를 높인다. | Her metabolism is fast. | 신진대사가 빠르다.
+digest | daɪˈdʒɛst | 소화하다, 이해하다 | absorb, process | - | She couldn't digest the meal. | 식사를 소화할 수 없었다. | Digest the information slowly. | 정보를 천천히 소화해라.
+calories | ˈkæləriːz | 칼로리, 열량 | energy, joules | - | Watch your calorie intake. | 칼로리 섭취를 주의해라. | She burns calories by running. | 달리기로 칼로리를 태운다.
+protein | ˈproʊtiːn | 단백질 | nutrient | - | Eat enough protein. | 충분한 단백질을 먹어라. | Protein builds muscle. | 단백질이 근육을 만든다.
+vitamin | ˈvaɪtəmɪn | 비타민 | nutrient, supplement | - | She takes vitamin C daily. | 매일 비타민 C를 먹는다. | Vitamins are essential for health. | 비타민이 건강에 필수이다.
+mineral | ˈmɪnərəl | 광물, 무기질 | element, nutrient | - | Iron is an important mineral. | 철분은 중요한 무기질이다. | Mineral water is popular. | 미네랄 워터가 인기이다.
+fiber | ˈfaɪbər | 섬유, 섬유질 | thread, roughage | - | Eat foods rich in fiber. | 섬유질이 풍부한 음식을 먹어라. | Optical fiber carries data. | 광섬유가 데이터를 전달한다.
+edible | ˈɛdɪbl | 먹을 수 있는, 식용의 | eatable, safe to eat | inedible | These berries are edible. | 이 열매는 먹을 수 있다. | Not all mushrooms are edible. | 모든 버섯이 식용은 아니다.
+allergen | ˈælərdʒən | 알레르기 유발 물질 | irritant | - | Check for allergens in food. | 음식에서 알레르기 유발 물질을 확인해라. | Peanuts are a common allergen. | 땅콩은 흔한 알레르기 유발 물질이다.
+
+=== Day 28 ===
+hemisphere | ˈhɛmɪsfɪr | 반구 | half | - | Korea is in the northern hemisphere. | 한국은 북반구에 있다. | The southern hemisphere has opposite seasons. | 남반구는 계절이 반대이다.
+latitude | ˈlætɪtuːd | 위도, 자유 | parallel | longitude | Seoul is at 37 degrees latitude. | 서울은 위도 37도에 있다. | The latitude affects the climate. | 위도가 기후에 영향을 미친다.
+longitude | ˈlɑːndʒɪtuːd | 경도 | meridian | latitude | She measured the longitude. | 경도를 측정했다. | Longitude runs north-south. | 경도가 남북으로 이어진다.
+altitude | ˈæltɪtuːd | 고도, 해발 | height, elevation | depth | The plane flew at high altitude. | 비행기가 높은 고도에서 날았다. | The altitude affects breathing. | 고도가 호흡에 영향을 미친다.
+terrain | təˈreɪn | 지형, 지대 | landscape, ground | - | The terrain is mountainous. | 지형이 산악이다. | The vehicle handles rough terrain. | 차량이 거친 지형을 잘 다룬다.
+peninsula | pəˈnɪnsələ | 반도 | cape | island | Korea is a peninsula. | 한국은 반도이다. | The peninsula is surrounded by water. | 반도가 물로 둘러싸여 있다.
+continent | ˈkɑːntɪnənt | 대륙 | mainland | island | Asia is the largest continent. | 아시아가 가장 큰 대륙이다. | She traveled across the continent. | 대륙을 가로질러 여행했다.
+offshore | ˈɔːfʃɔːr | 연안의, 근해의, 해외의 | coastal, overseas | onshore | Offshore drilling is risky. | 연안 시추가 위험하다. | She works at an offshore company. | 해외 회사에서 일한다.
+navigate | ˈnævɪɡeɪt | 항해하다, 길을 찾다 | steer, guide | - | She navigated through the city. | 도시를 누볐다. | Use GPS to navigate. | GPS를 사용해 길을 찾아라.
+expedition | ˌɛkspɪˈdɪʃən | 탐험, 원정 | journey, exploration | - | They went on an expedition. | 탐험을 떠났다. | The expedition reached the summit. | 원정대가 정상에 도달했다.
+
+=== Day 29 ===
+ethnic | ˈɛθnɪk | 민족의, 인종의 | racial, cultural | - | Ethnic diversity enriches society. | 민족 다양성이 사회를 풍요롭게 한다. | She studied ethnic cuisines. | 민족 요리를 공부했다.
+council | ˈkaʊnsəl | 의회, 위원회 | committee, board | - | The city council met today. | 시의회가 오늘 만났다. | She was elected to the council. | 의회에 선출되었다.
+counsel | ˈkaʊnsəl | 상담하다, 조언, 변호사 | advise, guide | - | She counseled troubled youth. | 어려운 청소년을 상담했다. | Seek legal counsel. | 법률 자문을 구해라.
+hospitality | ˌhɑːspɪˈtæləti | 환대, 접대 | welcome, friendliness | hostility | Korean hospitality is famous. | 한국의 환대는 유명하다. | She works in the hospitality industry. | 접객업에서 일한다.
+hostility | hɑːˈ스틸러티 | 적대감, 적의 | aggression, animosity | friendliness | She faced hostility at work. | 직장에서 적대감에 직면했다. | The hostility between them grew. | 사이의 적대감이 커졌다.
+constant | ˈkɑːnstənt | 끊임없는, 불변의 | continuous, steady | variable | She faces constant pressure. | 끊임없는 압박에 직면한다. | The speed remained constant. | 속도가 일정하게 유지되었다.
+consistent | kənˈsɪstənt | 일관된, 한결같은 | steady, uniform | inconsistent | She was consistent in her work. | 일에 일관됐다. | Consistent effort pays off. | 일관된 노력은 보상받는다.
+interpret | ɪnˈtɜːrprɪt | 통역하다, 해석하다 | translate, explain | misinterpret | She interpreted the speech. | 연설을 통역했다. | How do you interpret this data? | 이 데이터를 어떻게 해석하나?
+interrupt | ˌɪntəˈrʌpt | 방해하다, 중단시키다 | disturb, cut in | continue | Don't interrupt while I'm speaking. | 말하는 중에 방해하지 마. | The meeting was interrupted. | 회의가 중단되었다.
+moral | ˈmɔːrəl | 도덕의, 교훈 | ethical, lesson | immoral | She has high moral standards. | 높은 도덕 기준이 있다. | The moral of the story is clear. | 이야기의 교훈이 명확하다.
+
+=== Day 30 ===
+precede | prɪˈsiːd | 선행하다, 앞서다 | come before | follow | Spring precedes summer. | 봄이 여름 앞에 온다. | The speech preceded the ceremony. | 연설이 의식에 앞서 행해졌다.
+proceed | prəˈsiːd | 진행하다, 나아가다 | continue, advance | stop | She proceeded with the plan. | 계획을 진행했다. | Please proceed to Gate 5. | 5번 게이트로 진행하십시오.
+desert | ˈdɛzərt | 사막, 버리다 | wasteland, abandon | oasis | The Sahara is a vast desert. | 사하라는 광대한 사막이다. | He deserted his family. | 가족을 버렸다.
+dessert | dɪˈzɜːrt | 후식, 디저트 | sweet, pudding | appetizer | She ordered chocolate dessert. | 초콜릿 디저트를 주문했다. | What is for dessert? | 디저트가 무엇인가?
+addition | əˈdɪʃən | 추가, 덧셈 | extra, supplement | subtraction | In addition, she speaks French. | 또한 불어를 한다. | The addition of a new wing. | 새로운 건물 동의 추가.
+addiction | əˈdɪkʃən | 중독, 탐닉 | dependency, obsession | recovery | Phone addiction is growing. | 폰 중독이 증가하고 있다. | He overcame his addiction. | 중독을 극복했다.
+substitute | ˈsʌbstɪtuːt | 대체하다, 대용품 | replace, alternative | original | She substituted honey for sugar. | 설탕 대신 꿀로 대체했다. | He played as a substitute. | 대체 선수로 출전했다.
+constitute | ˈkɑːnstɪtuːt | 구성하다, ~이 되다 | compose, form | - | Women constitute 50% of the population. | 여성이 인구의 50%를 구성한다. | This constitutes a violation. | 이것은 위반에 해당한다.
+affect | əˈfɛkt | 영향을 미치다, 감동시키다 | influence, impact | - | Climate change affects everyone. | 기후 변화가 모두에게 영향을 미친다. | She was deeply affected. | 깊이 감동받았다.
+effect | ɪˈfɛkt | 효과, 결과, 영향 | result, consequence | cause | The medicine had no effect. | 약의 효과가 없었다. | Side effects are common. | 부작용이 흔하다.
+mediate | ˈmiːdieɪt | 중재하다, 조정하다 | negotiate, arbitrate | - | She mediated the dispute. | 분쟁을 중재했다. | A third party mediated between them. | 제3자가 중재했다.
+meditate | ˈmɛdɪteɪt | 명상하다, 숙고하다 | reflect, contemplate | act | She meditates every morning. | 매일 아침 명상한다. | Meditate on your future goals. | 미래 목표를 숙고해라.
+simultaneously | ˌsaɪməlˈteɪniəsli | 동시에 | at the same time, concurrently | separately | She can do two tasks simultaneously. | 두 가지 일을 동시에 할 수 있다. | The events occurred simultaneously. | 사건들이 동시에 발생했다.
+spontaneously | spɑːnˈteɪniəsli | 자발적으로, 즉흥적으로 | naturally, impulsively | deliberately | She acted spontaneously. | 즉흥적으로 행동했다. | The audience spontaneously applauded. | 관객이 자발적으로 박수를 쳤다.
+comparative | kəmˈpærətɪv | 비교의, 상대적인 | relative, corresponding | absolute | She took a comparative study. | 비교 연구를 했다. | English comparative grammar. | 영어 비교 문법.
+competitive | kəmˈpɛtɪtɪv | 경쟁적인, 경쟁력 있는 | ambitious, aggressive | cooperative | The market is very competitive. | 시장이 매우 경쟁적이다. | She is highly competitive. | 매우 경쟁심이 강하다.
+be engaged in | biː ɪnˈɡeɪdʒd ɪn | ~에 종사하다, 참여하다 | be involved in | withdraw from | She is engaged in research. | 연구에 종사한다. | He is engaged in charity work. | 자선 활동에 참여한다.
+be engaged to | biː ɪnˈɡeɪdʒd tuː | ~와 약혼하다 | be betrothed to | - | She is engaged to her boyfriend. | 남자친구와 약혼했다. | They got engaged last month. | 지난달에 약혼했다.
+make up | meɪk ʌp | 구성하다, 화해하다, 화장하다 | compose, reconcile | break up | Women make up 40% of the team. | 여성이 팀의 40%를 구성한다. | They made up after the fight. | 싸운 후 화해했다.
+make up for | meɪk ʌp fɔːr | ~을 보상하다, 벌충하다 | compensate for | - | She made up for lost time. | 잃어버린 시간을 보상했다. | Nothing can make up for the loss. | 아무것도 그 손실을 벌충할 수 없다.
