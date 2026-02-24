@@ -134,6 +134,7 @@ export const LEVEL_INFO: Record<Level, LevelInfo> = {
         totalDays: 30,
         wordsPerDay: 30,
         totalWords: 900,
+        isComingSoon: true,
     },
     high_1: {
         id: 'high_1',
