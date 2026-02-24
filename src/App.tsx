@@ -57,9 +57,23 @@ function useRouteSessionGuard() {
   }, [location.pathname, user?.role]);
 }
 
+const SELECTED_LEVEL_KEY = 'vocamaster-selected-level';
+
 // Student App Component
 function StudentApp() {
-  const [currentLevel, setCurrentLevel] = useState<Level>('middle_1');
+  const { user, logout } = useAuthStore();
+
+  // Initialize currentLevel from localStorage or user's start_level
+  const [currentLevel, setCurrentLevel] = useState<Level>(() => {
+    // Try localStorage first
+    const stored = localStorage.getItem(SELECTED_LEVEL_KEY);
+    if (stored && ['middle_1', 'middle_2', 'high_1', 'high_2', 'csat'].includes(stored)) {
+      return stored as Level;
+    }
+    // Fall back to user's start_level or default
+    return (user?.startLevel as Level) || 'middle_1';
+  });
+
   const [currentView, setCurrentView] = useState<StudentView>('home');
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
   const [quizState, setQuizState] = useState<QuizState | null>(null);
@@ -68,7 +82,6 @@ function StudentApp() {
   // Login Modal State
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
-  const { user, logout } = useAuthStore();
   const isGuest = !user;
 
   // Sync local quiz results when user logs in (학생만)
@@ -82,6 +95,7 @@ function StudentApp() {
 
   const handleLevelChange = (level: Level) => {
     setCurrentLevel(level);
+    localStorage.setItem(SELECTED_LEVEL_KEY, level); // Save to localStorage
     setCurrentView('home');
     setSelectedDay(null);
     setSelectedCategory(null);
