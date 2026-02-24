@@ -96,10 +96,8 @@ export function StudyPage({ level, day, category, onBack, onQuizStart }: StudyPa
         if (loadedWords.length > 0) {
             setWords(loadedWords);
             if (!category) {
-                const currentStatus = getStatus(level, day);
-                if (currentStatus === 'not-started') {
-                    setStatus(level, day, 'in-progress');
-                }
+                // Removed eager 'in-progress' setting
+                // to prevent untouched days from showing as "학습중"
 
                 // 암기한 단어 ID 목록 비동기 로드
                 (async () => {
