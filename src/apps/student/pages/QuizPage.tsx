@@ -92,8 +92,10 @@ export function QuizPage({ level, day, words, initialQuizType, onBack }: QuizPag
     };
 
     const handleClose = async () => {
-        // 1. 퀴즈 결과 저장 (Quiz History)
-        await saveResult(level, day);
+        // 1. 퀴즈 결과 저장 (Quiz History) - 완료된 경우에만 저장
+        if (isComplete) {
+            await saveResult(level, day);
+        }
 
         // 2. 학습 진도 저장 완료 대기 (Student Progress)
         if (progressUpdatePromise.current) {

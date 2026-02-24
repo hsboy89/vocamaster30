@@ -1,5 +1,5 @@
 import { supabase } from '../lib';
-import { DbUser, dbUserToUser, User } from '../types';
+import { DbUser, dbUserToUser, User, Level, LEVEL_INFO } from '../types';
 
 // 전체 통계 타입
 export interface DashboardStats {
@@ -386,23 +386,24 @@ export async function getStudentList(academyId?: string): Promise<StudentListIte
 // Day별 진행률 조회 (전체 학생 대상)
 export async function getDayProgressStats(level: string = 'middle_1', academyId?: string): Promise<DayProgress[]> {
     try {
-        // 전체 학생 수 + 학생별 goal_duration 조회
-        let studentQuery = supabase
-            .from('users')
-            .select('id, goal_duration')
-            .eq('role', 'student');
+        // 1. 해당 레벨에 진도가 있는 고유 학생 수 조회 (진축도 계산의 분모)
+        let activeStudentsQuery = supabase
+            .from('student_progress')
+            .select('user_id')
+            .eq('level', level);
 
         if (academyId) {
-            studentQuery = studentQuery.eq('academy_id', academyId);
+            activeStudentsQuery = activeStudentsQuery.eq('academy_id', academyId);
         }
 
-        const { data: students } = await studentQuery;
-        const totalStudents = students?.length || 0;
+        const { data: activeStudentsData } = await activeStudentsQuery;
+        const activeUserIds = new Set(activeStudentsData?.map(s => s.user_id));
+        const effectiveTotalStudents = activeUserIds.size || 1; // 0으로 나누기 방지
 
-        // 학생들의 최대 goal_duration 으로 차트 범위 결정
-        const maxDays = students?.reduce((max, s) => Math.max(max, s.goal_duration || 30), 0) || 30;
+        // 2. 전체 학생 목록 대신 LEVEL_INFO의 totalDays 사용
+        const maxDays = LEVEL_INFO[level as Level]?.totalDays || 30;
 
-        // 완료된 진도 데이터
+        // 3. 완료된 진도 데이터
         let progressQuery = supabase
             .from('student_progress')
             .select('day, status')
@@ -426,8 +427,8 @@ export async function getDayProgressStats(level: string = 'middle_1', academyId?
             result.push({
                 day,
                 completedCount,
-                totalStudents: totalStudents || 0,
-                percentage: totalStudents ? Math.round((completedCount / totalStudents) * 100) : 0,
+                totalStudents: effectiveTotalStudents,
+                percentage: Math.min(100, Math.round((completedCount / effectiveTotalStudents) * 100)),
             });
         }
 
@@ -737,7 +738,9 @@ export async function getRankingByGoalPlan(
 
         const scoreMap = new Map<string, { total: number; count: number }>();
         quizzes?.forEach(q => {
-            if (q.total_questions > 0) {
+            // total_questions가 0이거나, abandoned 세션(correct_answers=0)은 제외하여 데이터 오염 방지
+            // (학생이 실력이 없어서 0점 맞을 확률보다 학습 중도 이탈로 0점이 나올 확률이 압도적으로 높은 구조적 문제 해결)
+            if (q.total_questions > 0 && q.correct_answers > 0) {
                 let correctCount = q.correct_answers;
 
                 // 레거시 데이터 호환: 이전에 score(=correctCount*5)가 correct_answers로 저장된 경우

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Level } from '../../../shared/types';
+import { Level, LEVEL_INFO } from '../../../shared/types';
 import { useAuthStore } from '../../../stores';
 import { useDarkMode } from '../../../shared/hooks';
 import {
@@ -213,13 +213,7 @@ export function AdminDashboard() {
         return date.toLocaleDateString('ko-KR');
     };
 
-    const levelNames: Record<Level, string> = {
-        middle_1: '중등 필수',
-        middle_2: '중등 심화',
-        high_1: '고등 필수',
-        high_2: '고등 심화',
-        csat: '수능완성',
-    };
+    // Using LEVEL_INFO instead of hardcoded levelNames
 
     // Only show loading if we have a user and are actually fetching
     if (isLoading && user && !stats) {
@@ -441,7 +435,7 @@ export function AdminDashboard() {
                                             : 'bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-slate-400 hover:bg-gray-200 dark:hover:bg-white/10'
                                             }`}
                                     >
-                                        {levelNames[level].split(' ')[0]}
+                                        {LEVEL_INFO[level].nameKo}
                                     </button>
                                 ))}
                             </div>

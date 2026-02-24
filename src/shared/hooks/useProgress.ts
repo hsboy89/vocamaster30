@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Level, StudyStatus, UserProgress } from '../types';
 import * as storage from '../services/storage';
+import { useAuthStore } from '../../stores';
 
 interface UseProgressReturn {
     progress: UserProgress[];
@@ -16,16 +17,18 @@ interface UseProgressReturn {
 export function useProgress(): UseProgressReturn {
     const [progress, setProgress] = useState<UserProgress[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    const { user } = useAuthStore();
 
-    // 초기 로드
+    // 초기 로드 및 인증상태 변경 시
     useEffect(() => {
         const loadProgress = async () => {
+            setIsLoading(true);
             const loaded = await storage.getAllProgress();
             setProgress(loaded);
             setIsLoading(false);
         };
         loadProgress();
-    }, []);
+    }, [user?.id]);
 
     const getStatus = useCallback(
         (level: Level, day: number): StudyStatus => {
