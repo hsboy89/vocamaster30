@@ -218,7 +218,7 @@ export function AdminDashboard() {
         middle_2: '중등 심화',
         high_1: '고등 필수',
         high_2: '고등 심화',
-        csat: '수능 빈출',
+        csat: '수능완성',
     };
 
     // Only show loading if we have a user and are actually fetching
