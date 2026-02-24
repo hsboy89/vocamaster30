@@ -153,7 +153,6 @@ export const LEVEL_INFO: Record<Level, LevelInfo> = {
         totalDays: 30,
         wordsPerDay: 40,
         totalWords: 1200,
-        isComingSoon: true,
     },
     csat: {
         id: 'csat',
