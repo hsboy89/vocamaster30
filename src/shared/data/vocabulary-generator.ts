@@ -2,7 +2,7 @@ import { Word, DayVocabulary, Level } from '../types';
 import vocabularyDb from './vocabulary-db.json';
 
 // Use data from JSON database
-const db = vocabularyDb.data;
+const db = vocabularyDb.data as any;
 
 export function generateVocabularyData(level: Level, totalDays?: number): DayVocabulary[] {
     const levelData = db[level] || [];
@@ -10,12 +10,12 @@ export function generateVocabularyData(level: Level, totalDays?: number): DayVoc
 
     return Array.from({ length: days }, (_, i) => {
         const dayNum = i + 1;
-        const dayEntry = levelData.find(d => d.day === dayNum);
+        const dayEntry = levelData.find((d: any) => d.day === dayNum);
 
         let words: Word[] = [];
 
         if (dayEntry && dayEntry.words.length > 0) {
-            words = dayEntry.words.map(w => ({
+            words = dayEntry.words.map((w: any) => ({
                 ...w,
                 examples: w.examples || [],
                 isMemorized: false,

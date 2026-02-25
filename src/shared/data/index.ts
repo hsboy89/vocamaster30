@@ -8,6 +8,8 @@ export const allVocabulary: Record<Level, DayVocabulary[]> = {
     high_1: generateVocabularyData('high_1'),
     high_2: generateVocabularyData('high_2'),
     csat: generateVocabularyData('csat'),
+    csat_basic: generateVocabularyData('csat_basic'),
+    csat_advanced: generateVocabularyData('csat_advanced'),
 };
 
 export function getVocabulary(level: Level, day: number): DayVocabulary | undefined {
