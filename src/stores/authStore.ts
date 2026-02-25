@@ -351,6 +351,15 @@ export const useAuthStore = create<AuthStore>()(
                 set({ user: null, academy: null, isAuthenticated: false, isGuest: false, error: null });
                 localStorage.removeItem('vocamaster-auth');
                 sessionStorage.removeItem('vocamaster-auth');
+
+                // Clear all local study data when logging out so guests/next user don't see previous user's data
+                localStorage.removeItem('vocamaster_progress');
+                localStorage.removeItem('vocamaster_wrong_answers');
+                localStorage.removeItem('vocamaster_quiz_results');
+                localStorage.removeItem('vocamaster_settings');
+                localStorage.removeItem('vocamaster-study-goal');
+                localStorage.removeItem('vocamaster-study-plan');
+                localStorage.removeItem('vocamaster-last-user-id');
             },
 
             setLoading: (loading: boolean) => set({ isLoading: loading }),

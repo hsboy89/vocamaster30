@@ -123,6 +123,7 @@ function StudentApp() {
 
   const handleLogout = () => {
     logout();
+    window.location.reload();
   };
 
   // Promotion Test Handlers
