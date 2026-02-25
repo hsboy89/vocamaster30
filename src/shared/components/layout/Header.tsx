@@ -10,7 +10,7 @@ interface HeaderProps {
 }
 
 export function Header({ currentLevel, onLevelChange, userName, academyName, onLogout, onLogin }: HeaderProps) {
-    const levels: Level[] = ['middle_1', 'middle_2', 'high_1', 'high_2', 'csat'];
+    const levels: Level[] = ['middle_1', 'middle_2', 'high_2', 'high_1', 'csat_basic', 'csat', 'csat_advanced'];
 
     return (
         <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100">

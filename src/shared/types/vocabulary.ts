@@ -1,6 +1,6 @@
 // Vocabulary Types
 
-export type Level = 'middle_1' | 'middle_2' | 'high_1' | 'high_2' | 'csat';
+export type Level = 'middle_1' | 'middle_2' | 'high_1' | 'high_2' | 'csat_basic' | 'csat' | 'csat_advanced';
 export type StudyStatus = 'not-started' | 'in-progress' | 'completed';
 export type QuizType = 'choice' | 'matching' | 'spelling';
 export type Category = 'society' | 'economy' | 'nature' | 'science' | 'culture' | 'education' | 'health' | 'global';
@@ -163,10 +163,30 @@ export const LEVEL_INFO: Record<Level, LevelInfo> = {
         wordsPerDay: 21, // Actual average across 45 days
         totalWords: 965,
     },
+    csat_basic: {
+        id: 'csat_basic',
+        name: 'CSAT Basic',
+        nameKo: '수능 필수',
+        description: '수능 대비 필수 영단어',
+        totalDays: 30,
+        wordsPerDay: 40,
+        totalWords: 1200,
+        isComingSoon: true,
+    },
+    csat_advanced: {
+        id: 'csat_advanced',
+        name: 'CSAT Advanced',
+        nameKo: '수능 심화',
+        description: '수능 대비 최고난도 영단어',
+        totalDays: 30,
+        wordsPerDay: 40,
+        totalWords: 1200,
+        isComingSoon: true,
+    },
 };
 
 // 레벨 순서 (진급 순서)
-export const LEVEL_ORDER: Level[] = ['middle_1', 'middle_2', 'high_2', 'high_1', 'csat'];
+export const LEVEL_ORDER: Level[] = ['middle_1', 'middle_2', 'high_2', 'high_1', 'csat_basic', 'csat', 'csat_advanced'];
 
 // 레벨 완료 기록 (랭킹 산정용)
 export interface LevelCompletion {

@@ -67,7 +67,7 @@ function StudentApp() {
   const [currentLevel, setCurrentLevel] = useState<Level>(() => {
     // Try localStorage first
     const stored = localStorage.getItem(SELECTED_LEVEL_KEY);
-    if (stored && ['middle_1', 'middle_2', 'high_1', 'high_2', 'csat'].includes(stored)) {
+    if (stored && ['middle_1', 'middle_2', 'high_2', 'high_1', 'csat_basic', 'csat', 'csat_advanced'].includes(stored)) {
       return stored as Level;
     }
     // Fall back to user's start_level or default
@@ -133,8 +133,8 @@ function StudentApp() {
 
   const handlePromotionPass = () => {
     // 다음 레벨로 이동 (준비중인 레벨은 제외)
-    const levelOrder = ['middle_1', 'middle_2', 'high_1', 'high_2', 'csat'] as const;
-    const currentIndex = levelOrder.indexOf(currentLevel);
+    const levelOrder = ['middle_1', 'middle_2', 'high_2', 'high_1', 'csat_basic', 'csat', 'csat_advanced'] as const;
+    const currentIndex = levelOrder.indexOf(currentLevel as any);
 
     if (currentIndex < levelOrder.length - 1) {
       const nextLevel = levelOrder[currentIndex + 1];

@@ -832,7 +832,7 @@ export async function isLevelUnlocked(level: Level): Promise<boolean> {
     const userId = getUserId();
     if (!userId) return true; // 게스트는 모두 접근 가능
 
-    const levelOrder: Level[] = ['middle_1', 'middle_2', 'high_1', 'high_2', 'csat'];
+    const levelOrder: Level[] = ['middle_1', 'middle_2', 'high_2', 'high_1', 'csat_basic', 'csat', 'csat_advanced'];
     const levelIndex = levelOrder.indexOf(level);
 
     try {

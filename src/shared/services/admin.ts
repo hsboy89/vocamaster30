@@ -709,7 +709,7 @@ export async function getStudentDetail(userId: string): Promise<StudentDetail | 
             .select('level, status')
             .eq('user_id', userId);
 
-        const levels = ['middle_1', 'middle_2', 'high_1', 'high_2', 'csat'];
+        const levels = ['middle_1', 'middle_2', 'high_2', 'high_1', 'csat_basic', 'csat', 'csat_advanced'];
         const progressByLevel = levels.map(level => {
             const levelProgress = progress?.filter(p => p.level === level) || [];
             const completedDays = levelProgress.filter(p => p.status === 'completed').length;
