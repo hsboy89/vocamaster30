@@ -56,13 +56,16 @@ export function SuperAdminDashboard() {
 
     const loadData = async () => {
         setIsLoading(true);
-        const [statsData, academyData] = await Promise.all([
-            getSuperAdminStats(),
-            getAcademyList(),
-        ]);
-        setStats(statsData);
-        setAcademies(academyData);
-        setIsLoading(false);
+        try {
+            const statsData = await getSuperAdminStats();
+            const academyData = await getAcademyList();
+            setStats(statsData);
+            setAcademies(academyData);
+        } catch (error) {
+            console.error('loadData error:', error);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const handleLogout = () => {
@@ -130,8 +133,14 @@ export function SuperAdminDashboard() {
             setNewAdminId('');
             setNewAdminName('');
             setNewAdminPassword('');
-            loadData();
-            alert('학원과 초기 관리자가 성공적으로 등록되었습니다.');
+
+            // Wait for data to load BEFORE firing a blocking alert
+            await loadData();
+
+            // Re-enable React updates with a short delay before alert blocks the thread
+            setTimeout(() => {
+                alert('학원과 초기 관리자가 성공적으로 등록되었습니다.');
+            }, 100);
 
         } catch (error) {
             const message = error instanceof Error ? error.message : '알 수 없는 오류가 발생했습니다.';
@@ -148,7 +157,10 @@ export function SuperAdminDashboard() {
 
         const result = await deleteAcademy(academyId);
         if (result.success) {
-            loadData();
+            await loadData();
+            setTimeout(() => {
+                alert('학원이 성공적으로 삭제되었습니다.');
+            }, 100);
         } else {
             alert(result.error || '학원 삭제에 실패했습니다.');
         }
@@ -200,7 +212,7 @@ export function SuperAdminDashboard() {
             setShowEditModal(false);
             setEditAcademyId(null);
             setEditAcademyPassword('');
-            loadData();
+            await loadData();
         } else {
             setEditError(result.error || '학원 수정에 실패했습니다.');
         }
@@ -251,7 +263,10 @@ export function SuperAdminDashboard() {
             setNewAdminName('');
             setNewAdminPassword('');
             setSelectedAcademyId(null);
-            alert('관리자 계정이 생성되었습니다.');
+            await loadData();
+            setTimeout(() => {
+                alert('관리자 계정이 생성되었습니다.');
+            }, 100);
         } else {
             setAdminError(result.error || '관리자 생성에 실패했습니다.');
         }
