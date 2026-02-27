@@ -18,7 +18,7 @@ interface UseQuizReturn {
     isComplete: boolean;
     checkAnswer: (answer: string) => boolean;
     nextQuestion: () => void;
-    startQuiz: (words: Word[], type: QuizType) => void;
+    startQuiz: (words: Word[], type: QuizType, allWordsForOptions?: Word[]) => void;
     resetQuiz: () => void;
     saveResult: (level: Level, day: number) => Promise<void>;
 }
@@ -84,15 +84,16 @@ export function useQuiz(): UseQuizReturn {
     // 점수는 맞춘 개수 * 5 (기존 UI 호환성)
     const score = correctCount * 5;
 
-    const startQuiz = useCallback((words: Word[], type: QuizType) => {
+    const startQuiz = useCallback((words: Word[], type: QuizType, allWordsForOptions?: Word[]) => {
         const shuffledWords = shuffleArray(words);
+        const optionPool = allWordsForOptions || words;
 
         let generatedQuestions: QuizQuestion[];
 
         switch (type) {
             case 'choice':
                 generatedQuestions = shuffledWords.map((word) =>
-                    generateChoiceQuestion(word, words)
+                    generateChoiceQuestion(word, optionPool)
                 );
                 break;
             case 'spelling':

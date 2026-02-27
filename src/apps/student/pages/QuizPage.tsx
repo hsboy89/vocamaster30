@@ -14,6 +14,7 @@ interface QuizPageProps {
 export function QuizPage({ level, day, words, initialQuizType, onBack }: QuizPageProps) {
     const [quizType, setQuizType] = useState<QuizType>(initialQuizType);
     const [isStarted, setIsStarted] = useState(false);
+    const [isReviewMode, setIsReviewMode] = useState(false);
     const { progress, updateProgress } = useProgress();
 
     const {
@@ -47,7 +48,7 @@ export function QuizPage({ level, day, words, initialQuizType, onBack }: QuizPag
     const didSave = useRef(false);
 
     useEffect(() => {
-        if (isComplete && !didSave.current) {
+        if (isComplete && !didSave.current && !isReviewMode) {
             didSave.current = true;
 
             const updateQuizProgress = async () => {
@@ -86,14 +87,15 @@ export function QuizPage({ level, day, words, initialQuizType, onBack }: QuizPag
     const handleReviewWrong = () => {
         if (wrongWords.length > 0) {
             resetQuiz();
-            startQuiz(wrongWords, quizType);
+            setIsReviewMode(true);
+            startQuiz(wrongWords, quizType, words);
             setIsStarted(true);
         }
     };
 
     const handleClose = async () => {
-        // 1. 퀴즈 결과 저장 (Quiz History) - 완료된 경우에만 저장
-        if (isComplete) {
+        // 1. 퀴즈 결과 저장 (Quiz History) - 완료된 경우에만 저장 (오답 복습 모드에서는 저장하지 않음)
+        if (isComplete && !isReviewMode) {
             await saveResult(level, day);
         }
 
