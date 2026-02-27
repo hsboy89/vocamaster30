@@ -168,10 +168,9 @@ export const LEVEL_INFO: Record<Level, LevelInfo> = {
         name: 'CSAT Basic',
         nameKo: '수능 필수',
         description: '수능 대비 필수 영단어',
-        totalDays: 30,
+        totalDays: 50,
         wordsPerDay: 40,
-        totalWords: 1200,
-        isComingSoon: true,
+        totalWords: 1994,
     },
     csat_advanced: {
         id: 'csat_advanced',
