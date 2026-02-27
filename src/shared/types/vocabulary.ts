@@ -177,10 +177,9 @@ export const LEVEL_INFO: Record<Level, LevelInfo> = {
         name: 'CSAT Advanced',
         nameKo: '수능 심화',
         description: '수능 대비 최고난도 영단어',
-        totalDays: 30,
-        wordsPerDay: 40,
-        totalWords: 1200,
-        isComingSoon: true,
+        totalDays: 50,
+        wordsPerDay: 29,
+        totalWords: 1456,
     },
 };
 
