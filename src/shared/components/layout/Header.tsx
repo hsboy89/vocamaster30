@@ -21,24 +21,8 @@ export function Header({ currentLevel, onLevelChange, userName, academyName, onL
                         className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
                         onClick={() => window.location.href = '/'}
                     >
-                        <div className="w-12 h-12 flex items-center justify-center">
-                            <img
-                                src="https://agkovuemnjiagmvyohtb.supabase.co/storage/v1/object/public/images/IMG_7061.png"
-                                alt="Voca Master Logo"
-                                className="w-full h-full object-contain"
-                                onError={(e) => {
-                                    // Fallback to emoji if image fails to load
-                                    e.currentTarget.style.display = 'none';
-                                    const fallback = document.createElement('span');
-                                    fallback.className = 'text-white text-xl';
-                                    fallback.textContent = '📚';
-                                    e.currentTarget.parentElement?.classList.add('gradient-primary');
-                                    e.currentTarget.parentElement?.appendChild(fallback);
-                                }}
-                            />
-                        </div>
                         <div>
-                            <h1 className="text-xl font-bold text-slate-900">The First Voca Master</h1>
+                            <h1 className="text-xl font-bold text-slate-900">고단백 Voca Master</h1>
                             <p className="text-sm font-medium text-slate-600">하루 10분, 30일 완성</p>
                         </div>
                     </div>

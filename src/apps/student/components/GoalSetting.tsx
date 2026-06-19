@@ -450,32 +450,32 @@ export function GoalSetting({ level, onGoalChange, onPromotionTest }: GoalSettin
                     </div>
                 </button>
             ) : (
-                <div className="rounded-2xl border border-white/10 bg-slate-800/90 backdrop-blur-sm p-6 shadow-xl animate-in fade-in zoom-in-95 duration-200 space-y-6">
+                <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm animate-in fade-in zoom-in-95 duration-200 space-y-6">
                     {/* 신규 학생 환영 메시지 */}
                     {isNewStudent && (
-                        <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-blue-600/20 to-emerald-600/20 border border-blue-500/20 p-5 text-center">
+                        <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-blue-50 to-emerald-50 border border-blue-100 p-5 text-center">
                             <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full -mr-10 -mt-10 blur-2xl" />
                             <div className="relative z-10">
                                 <span className="text-3xl mb-2 block">🎉</span>
-                                <h3 className="font-black text-white text-lg mb-1">환영합니다, {user?.studentName}님!</h3>
-                                <p className="text-slate-300 text-sm">학습 목표를 설정하면 맞춤 학습 플랜이 만들어져요</p>
+                                <h3 className="font-black text-slate-900 text-lg mb-1">환영합니다, {user?.studentName}님!</h3>
+                                <p className="text-slate-600 text-sm">학습 목표를 설정하면 맞춤 학습 플랜이 만들어져요</p>
                             </div>
                         </div>
                     )}
 
                     <div className="flex items-center justify-between">
                         <div>
-                            <h3 className="font-bold text-white text-lg flex items-center gap-2">
+                            <h3 className="font-bold text-slate-900 text-lg flex items-center gap-2">
                                 <span>🎯</span> {isNewStudent ? '첫 학습 목표를 설정하세요' : '학습 플랜 설정'}
                             </h3>
-                            <p className="text-slate-400 text-sm mt-1">
-                                총 <span className="text-white font-bold">{availableCount}</span>단어를 {isNewStudent ? '내 속도에 맞춰 학습해보세요' : '학습을 위한 계획을 세웁니다'}.
+                            <p className="text-slate-500 text-sm mt-1">
+                                총 <span className="text-slate-900 font-bold">{availableCount}</span>단어를 {isNewStudent ? '내 속도에 맞춰 학습해보세요' : '학습을 위한 계획을 세웁니다'}.
                             </p>
                         </div>
                         {!isNewStudent && (
                             <button
                                 onClick={() => setIsSettingGoal(false)}
-                                className="text-gray-400 hover:text-white p-1.5 hover:bg-white/10 rounded-lg transition-all"
+                                className="text-slate-400 hover:text-slate-700 p-1.5 hover:bg-slate-100 rounded-lg transition-all"
                             >
                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -486,7 +486,7 @@ export function GoalSetting({ level, onGoalChange, onPromotionTest }: GoalSettin
 
                     {/* Step 1: 하루 목표량 선택 */}
                     <div className="space-y-3">
-                        <label className="text-sm font-bold text-slate-300 block">하루 학습량 목표</label>
+                        <label className="text-sm font-bold text-slate-700 block">하루 학습량 목표</label>
                         <div className="grid grid-cols-4 gap-2">
                             {DAILY_OPTIONS.map((count) => (
                                 <button
@@ -494,7 +494,7 @@ export function GoalSetting({ level, onGoalChange, onPromotionTest }: GoalSettin
                                     onClick={() => setDailyCount(count)}
                                     className={`py-2 px-1 rounded-xl text-sm font-bold transition-all border ${dailyCount === count
                                         ? 'bg-blue-600 text-white border-blue-500 shadow-lg scale-105'
-                                        : 'bg-slate-700/50 text-slate-400 border-white/5 hover:bg-slate-700 hover:text-white'
+                                        : 'bg-slate-100 text-slate-500 border-slate-200 hover:bg-slate-200 hover:text-slate-700'
                                         }`}
                                 >
                                     {count}개
@@ -503,11 +503,11 @@ export function GoalSetting({ level, onGoalChange, onPromotionTest }: GoalSettin
                         </div>
                     </div>
 
-                    <div className="h-px bg-white/10" />
+                    <div className="h-px bg-slate-200" />
 
                     {/* Step 2: 기간 선택 */}
                     <div className="space-y-3">
-                        <label className="text-sm font-bold text-slate-300 block">이번 회차 학습 기간</label>
+                        <label className="text-sm font-bold text-slate-700 block">이번 회차 학습 기간</label>
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                             {GOAL_OPTIONS.map((option) => {
                                 // 예상 학습량 계산
@@ -517,15 +517,15 @@ export function GoalSetting({ level, onGoalChange, onPromotionTest }: GoalSettin
                                     <button
                                         key={option.duration}
                                         onClick={() => handleConfirmGoal(option.duration)}
-                                        className="group relative rounded-xl border border-white/10 bg-white/5 hover:bg-blue-600/20 hover:border-blue-500/50 p-4 text-center transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
+                                        className="group relative rounded-xl border border-slate-200 bg-slate-50 hover:bg-blue-50 hover:border-blue-300 p-4 text-center transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
                                     >
-                                        <p className="text-xl font-bold text-white group-hover:text-blue-400 mb-1 transition-colors">
+                                        <p className="text-xl font-bold text-slate-900 group-hover:text-blue-600 mb-1 transition-colors">
                                             {option.label}
                                         </p>
-                                        <p className="text-xs text-slate-400 group-hover:text-slate-300 mb-2 transition-colors">
+                                        <p className="text-xs text-slate-500 group-hover:text-slate-600 mb-2 transition-colors">
                                             총 {targetTotal}단어 예정
                                         </p>
-                                        <p className="text-[10px] font-medium text-blue-400 bg-blue-500/10 group-hover:bg-blue-500/20 px-2 py-0.5 rounded-full inline-block transition-colors">
+                                        <p className="text-[10px] font-medium text-blue-600 bg-blue-50 group-hover:bg-blue-100 px-2 py-0.5 rounded-full inline-block transition-colors">
                                             {option.duration * dailyCount >= availableCount ? '회독 가능' : '부분 학습'}
                                         </p>
                                     </button>
