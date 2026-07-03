@@ -132,9 +132,8 @@ export const LEVEL_INFO: Record<Level, LevelInfo> = {
         nameKo: '중등 심화',
         description: '중등 고난도 어휘 및 예비 고등 단어',
         totalDays: 30,
-        wordsPerDay: 30,
-        totalWords: 900,
-        isComingSoon: true,
+        wordsPerDay: 33,
+        totalWords: 1000,
     },
     high_1: {
         id: 'high_1',
