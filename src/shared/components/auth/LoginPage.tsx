@@ -140,7 +140,7 @@ export function LoginPage({
                     }}
                 >
                     <h1 className="text-3xl font-bold text-white mb-2">
-                        {currentAcademy ? currentAcademy.name : 'VocaMaster30'}
+                        {currentAcademy ? currentAcademy.name : '고단백 Voca Master'}
                     </h1>
                     <p className="text-white/80 text-sm">
                         {currentAcademy ? '학생 관리 대시보드' : '하루 10분, 완벽한 어휘 루틴'}
